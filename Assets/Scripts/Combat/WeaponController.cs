@@ -104,8 +104,12 @@ public class WeaponController : MonoBehaviour
         for (int i = 0; i < shotCount; i++)
         {
             float spread = shotCount == 1 ? 0f : Mathf.Lerp(-6f, 6f, shotCount == 1 ? 0f : i / (float)(shotCount - 1));
-            Vector3 direction = Quaternion.AngleAxis(spread, Vector3.up) * GetAimDirection();
             Vector3 origin = GetMuzzlePosition() + transform.right * ((i - (shotCount - 1) * 0.5f) * 0.16f);
+            // The offset muzzle must converge on the cursor target, not fire parallel to the torso.
+            Vector3 aim = playerController != null && playerController.HasAimPoint
+                ? playerController.AimPoint - origin
+                : GetAimDirection();
+            Vector3 direction = Quaternion.AngleAxis(spread, Vector3.up) * aim.normalized;
             CreateBeamProjectile(origin, direction, baseDamage * GetDamageMultiplier(), pierce, explosionRadius);
         }
 

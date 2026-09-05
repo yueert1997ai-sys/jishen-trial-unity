@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
     public PlayerStats stats;
     public WeaponController weaponController;
     public Vector3 AimDirection { get; private set; }
+    public Vector3 AimPoint { get; private set; }
+    public bool HasAimPoint { get; private set; }
     public Vector3 MoveDirection { get; private set; }
     public float DashCooldownRemaining { get { return Mathf.Max(0f, nextDashTime - Time.time); } }
     public bool IsDashReady { get { return DashCooldownRemaining <= 0f; } }
@@ -34,13 +36,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         bool canControl = GameManager.Instance == null || GameManager.Instance.CanPlayerControl;
-        UpdateAim();
         if (!canControl)
         {
             MoveDirection = Vector3.zero;
             return;
         }
 
+        UpdateAim();
         Move();
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -91,21 +93,38 @@ public class PlayerController : MonoBehaviour
         }
 
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, camera.farClipPlane, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        {
+            Damageable target = hit.collider.GetComponentInParent<Damageable>();
+            if (target != null && target != damageable && !target.IsDead)
+            {
+                AimAt(hit.collider.bounds.center);
+                return;
+            }
+        }
+
+        Plane groundPlane = new Plane(Vector3.up, Vector3.up * 0.75f);
         float distance;
         if (!groundPlane.Raycast(ray, out distance))
         {
             return;
         }
 
-        Vector3 target = ray.GetPoint(distance);
-        Vector3 direction = target - transform.position;
+        AimAt(ray.GetPoint(distance));
+    }
+
+    public void AimAt(Vector3 worldPoint)
+    {
+        Vector3 direction = worldPoint - transform.position;
         direction.y = 0f;
         if (direction.sqrMagnitude < 0.01f)
         {
             return;
         }
 
+        AimPoint = worldPoint;
+        HasAimPoint = true;
         AimDirection = direction.normalized;
         transform.rotation = Quaternion.LookRotation(AimDirection, Vector3.up);
     }

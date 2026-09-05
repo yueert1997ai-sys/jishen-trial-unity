@@ -81,7 +81,11 @@ public static class ProjectAudit
             float hp = target.CurrentHealth;
             Vector3 origin = weapon.muzzle.position;
             Record("SHOT_GEOMETRY mode=" + mode + " muzzle=" + origin + " enemy_bounds=" + bounds + " hp=" + hp);
-            if (mode == "weapon") weapon.TryFireBeam();
+            if (mode == "weapon")
+            {
+                gm.playerController.AimAt(bounds.center);
+                weapon.TryFireBeam();
+            }
             else
             {
                 if (mode == "centered_x") origin.x = 0;
@@ -94,8 +98,30 @@ public static class ProjectAudit
             float until = Time.time + 0.7f;
             while (Time.time < until) yield return null;
             Record("SHOT_RESULT mode=" + mode + " before=" + hp + " after=" + target.CurrentHealth);
+            if (mode == "weapon" && Mathf.Abs(hp - target.CurrentHealth - 18f) > 0.01f)
+                throw new Exception("Weapon did not deal one 18 HP hit.");
             Object.Destroy(enemy);
             foreach (var p in Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None)) Object.Destroy(p.gameObject);
+            yield return null;
+        }
+
+        foreach (float distance in new[] { 2f, 8f, 18f })
+        foreach (float angle in new[] { 0f, 90f, 180f, 270f })
+        {
+            Vector3 point = Quaternion.Euler(0, angle, 0) * Vector3.forward * distance;
+            var enemy = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Enemy_Melee.prefab"), point, Quaternion.identity);
+            enemy.GetComponent<EnemyBase>().enabled = false;
+            var target = enemy.GetComponent<Damageable>();
+            Physics.SyncTransforms();
+            gm.playerController.AimAt(enemy.GetComponent<Collider>().bounds.center);
+            float before = target.CurrentHealth;
+            weapon.TryFireBeam();
+            float until = Time.time + 0.9f;
+            while (Time.time < until) yield return null;
+            if (Mathf.Abs(before - target.CurrentHealth - 18f) > 0.01f)
+                throw new Exception("Aim regression distance=" + distance + " angle=" + angle);
+            Record("AIM_PASS distance=" + distance + " angle=" + angle + " damage=" + (before - target.CurrentHealth));
+            Object.Destroy(enemy);
             yield return null;
         }
     }
@@ -187,7 +213,6 @@ public static class ProjectAudit
         var frameTimes = new List<float>();
         int shots = 0;
         gm.playerController.weaponController.BeamFired += () => shots++;
-        var aim = typeof(PlayerController).GetProperty("AimDirection");
         while (Time.time - started < 150f && gm.Phase != GamePhase.Result)
         {
             if (progress.Add(gm.ProgressText)) Record("FLOW " + gm.ProgressText + " hp=" + gm.playerStats.CurrentHp + " kills=" + gm.Kills);
@@ -214,10 +239,8 @@ public static class ProjectAudit
                     .OrderBy(d => (d.transform.position - gm.playerController.transform.position).sqrMagnitude).FirstOrDefault();
                 if (target != null)
                 {
-                    Vector3 direction = target.transform.position - gm.playerController.transform.position;
-                    direction.y = 0;
-                    aim.SetValue(gm.playerController, direction.normalized);
-                    gm.playerController.transform.rotation = Quaternion.LookRotation(direction.normalized);
+                    var collider = target.GetComponent<Collider>();
+                    gm.playerController.AimAt(collider != null ? collider.bounds.center : target.transform.position + Vector3.up * 0.75f);
                     gm.playerController.weaponController.TryFireBeam();
                 }
             }
