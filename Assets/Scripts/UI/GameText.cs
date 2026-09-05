@@ -2,12 +2,15 @@ using System.Collections.Generic;
 
 public static class GameText
 {
+    public const string Credits = "Yue / AI-assisted game development\nHero / Rigged robot by joney_lol (CC BY 3.0)\nModified rig motion, materials and attachments\nMotion / Quaternius (CC0)\nSound / Kenney (CC0)\nMusic / Subspace by Vitalezzz (CC0)\nFont / Noto Sans CJK (OFL)\nHero source: poly.pizza/m/BwjA6Thdzd\nLicense: creativecommons.org/licenses/by/3.0/";
     public static IEnumerable<string> Translations => chinese.Values;
     private static readonly Dictionary<string, string> chinese = new Dictionary<string, string>
     {
         { "MECH TRIAL", "\u673a\u795e\u8bd5\u70bc" },
         { "SORTIE 01", "\u51fa\u51fb\u4efb\u52a1 01" },
         { "ROSE GOLD\nSENTINEL", "\u73ab\u7470\u91d1\n\u54e8\u5175" },
+        { "SWIFT\nSENTINEL", "\u8f7b\u88c5\n\u54e8\u5175" },
+        { Credits, "Yue / AI \u8f85\u52a9\u6e38\u620f\u5f00\u53d1\n\u4e3b\u89d2 / joney_lol\uff1aRigged robot (CC BY 3.0)\n\u6539\u52a8\uff1a\u52a8\u4f5c\u3001\u6750\u8d28\u548c\u6b66\u5668\u6302\u70b9\n\u52a8\u4f5c / Quaternius (CC0)\n\u97f3\u6548 / Kenney (CC0)\n\u97f3\u4e50 / Vitalezzz\uff1aSubspace (CC0)\n\u5b57\u4f53 / Noto Sans CJK (OFL)\n\u6765\u6e90\uff1apoly.pizza/m/BwjA6Thdzd\n\u6388\u6743\uff1acreativecommons.org/licenses/by/3.0/" },
         { "OUTER DECK  /  REACTOR  /  BOSS", "\u5916\u90e8\u7532\u677f / \u53cd\u5e94\u5806 / \u5b88\u536b\u8005" },
         { "DEPLOY", "\u5f00\u59cb\u4efb\u52a1" },
         { "DEMO", "\u5c55\u793a" },

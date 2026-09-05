@@ -804,7 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b39c639c54fd6f4d95af73adfb8d198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMechLoader
-  defaultMechPrefab: {fileID: 214363802124914357, guid: 89cb6f9139b1a7247949c8343c619fa9, type: 3}
+  defaultMechPrefab: {fileID: 5696659448509389360, guid: f19ce592cb4fe974fa42bb6ff934703e, type: 3}
   editorCustomPrefabPath: Assets/UserContent/PlayerMech/PlayerMech.prefab
 --- !u!114 &4148473797485524122
 MonoBehaviour:
@@ -839,6 +839,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   stats: {fileID: 4148473797485524122}
   weaponController: {fileID: 3570538421483383881}
+  acceleration: 42
+  braking: 65
+  dashDuration: 0.2
+  automaticFire: 1
 --- !u!114 &3570538421483383881
 MonoBehaviour:
   m_ObjectHideFlags: 0

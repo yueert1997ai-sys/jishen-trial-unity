@@ -1,0 +1,21 @@
+Rigged robot by joney_lol
+Source: https://poly.pizza/m/BwjA6Thdzd
+License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+License URL: https://creativecommons.org/licenses/by/3.0/
+Legal code: https://creativecommons.org/licenses/by/3.0/legalcode
+Retrieved: 2026-09-05
+Original download: https://static.poly.pizza/d6a9c09f-5e0f-46af-9ec0-577e91dda457.glb
+
+Modified for MECH TRIAL by Yue / Codex:
+Normalized units/grounding; removed an unweighted helper sphere; converted GLB
+to FBX; recolored materials; retargeted CC0 Quaternius motions onto the existing
+48-bone rig; added project-authored blade/cannon attachments and animation binding.
+The original creator does not endorse this adaptation or project.
+
+This asset and adaptations retain their CC BY 3.0 rights; no additional legal
+or technological restrictions are imposed on the licensed material.
+Keep this attribution and license link with public displays/distributions.
+
+Motion source: Quaternius, Animated Mech Pack, Stan.fbx (CC0 1.0).
+https://quaternius.com/packs/animatedmech.html
+See Quaternius-Animated-Mech.txt for the original pack license.

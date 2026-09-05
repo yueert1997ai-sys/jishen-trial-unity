@@ -20,8 +20,10 @@ WASD / 左侧摇杆移动，自动瞄准射击；空格冲刺，E 发射导弹�
 
 ## Scope And Credits
 
-Gameplay/code/layout and geometric environment: Yue with AI assistance. Hero: user-supplied Meshy Rose Gold Sentinel, retained here as a temporary model; it is not a newly hand-modeled or rigged hero. Enemy animation is procedural motion, not a finished skeletal animation set.
+Gameplay/code/layout and geometric environment: Yue with AI assistance. Hero: **Rigged robot by joney_lol (CC BY 3.0)**, adapted with normalized units, repaired skin weights, recolored materials, CC0 Quaternius motions and project-authored weapon attachments. Source: https://poly.pizza/m/BwjA6Thdzd . License: https://creativecommons.org/licenses/by/3.0/ . This is not a newly hand-modeled character. Enemy animation remains procedural.
+
+The hero now has skeletal idle, running, dash pose, left-arm cannon and death motion. This gameplay revision remains an automatic-shooting Survivor-like; the carried blade has an editor diagnostic slash animation, but no player melee/combo damage system. Do not present the visual slash diagnostic as playable melee.
 
 Sound: Kenney (CC0). Music: Vitalezzz, Subspace (CC0). Font: Noto Sans CJK SC (SIL OFL 1.1). Full notices and source details are in `Licenses/`.
 
-This private review build is not cleared for public distribution of the user-supplied hero: its generation-service rights must be confirmed first. Mobile device performance, physical multi-touch and subjective sound/feel still need human testing. Keyboard and synthetic touch tests are not substitutes for that review.
+Keep the included hero attribution and license notices with distribution. The old user-supplied Meshy files remain in the source project for rollback and have unresolved generation-service redistribution rights; this caveat still applies to older builds using them. Mobile device performance, physical multi-touch and subjective sound/feel still need human testing. Keyboard and synthetic touch tests are not substitutes for that review.

@@ -6,18 +6,22 @@ Unity 6 上帝视角机甲 Roguelite 作品原型。2026-09-05 当前源码已�
 
 现有内容包括原生绕障导航、分批增援、动态火花烟尘、池化弹药、成品音效和流式配乐。中英文、音量/震动/画质设置已通过 Play Mode 验证。真实手机多点触控、真人难度和人耳听感仍待评审。测试证据分别位于 `mobile-01`、`maintenance-02`、`progression-03`、`presentation-04`，素材来源见 `docs/ASSET_PROVENANCE.md`。
 
+本轮只替换主角和适配动画：现用 joney_lol 的 Rigged robot（CC BY 3.0）及 Quaternius CC0 动作，旧 Meshy 模型保留回退。详见 [主角交接](docs/HERO_MODEL_HANDOFF.md) 和 [真实动作截图](docs/HERO_ACTION_EVIDENCE.md)。当前战斗仍是自动炮击，**没有可玩的挥刀伤害或连击系统**；挥刀片段只通过了独立动画预览，不能把它当成刀战验收。
+
 ## 直接试玩 Windows 版
 
 运行：
 
-`Builds/Windows/MECH_TRIAL_20260905.054835/MECH_TRIAL.exe`
+`Builds/Windows/MECH_TRIAL_20260905.095954/MECH_TRIAL.exe`
 
-这是本轮新版，压缩包同名位于 `Builds/Windows/`。保留完整目录即可运行，详见包内 `START_HERE.md`。旧 `MECH_TRIAL_20260905` 和 `MECH_ROUGE_Demo` 均未覆盖。新版发布构建及 Player 回放日志在 `docs/audit-evidence/2026-09-05/player-04/`：
+这是新主角版，压缩包同名位于 `Builds/Windows/`，约 48.3 MiB。保留完整目录即可运行，详见包内 `START_HERE.md`。构建与最终 Player 回放均为 0 Error / 0 Warning；正常速度实弹通关 **622.88 秒、六次强化、500 次击破、Boss 两阶段、三次重开**。模型专项 Play Mode 证据在 `hero-01/`，最终发布版证据在 `hero-player-02/`。这是后台自动输入、完整场景/UI 离屏持续渲染测试，不等于真人试玩或手机性能验收。
+
+早上版本 `MECH_TRIAL_20260905.054835`、旧 `MECH_TRIAL_20260905` 和 `MECH_ROUGE_Demo` 均未覆盖。以下数字属于早上基线 `docs/audit-evidence/2026-09-05/player-04/`，不是本轮新主角的通关或性能结论：
 
 - 实弹自动移动通关 **623.74 秒、六次强化、501 次击破、Boss 61.63 秒**，无强制清敌、加速或续关。
 - 1920x1080 完整 Player 离屏持续渲染，均值/P95 **16.74/17.02 ms**，运行 **0 Error / 0 Warning**，三次重开无持续内存增长。
 - 记录 32 次 GC 回收；本机发布版的逐帧 GC 字节计数器不可用，不能把报告的零字段理解为零分配。
-- 这不是物理手机或桌面呈现延迟测试。方法和边界见 [Player 验证](docs/PLAYER_VALIDATION.md)。用户主角模型公开分发授权仍需确认，目前按私下评审构建处理。
+- 这不是物理手机或桌面呈现延迟测试。方法和边界见 [Player 验证](docs/PLAYER_VALIDATION.md)。早上版本包含的用户主角模型公开分发授权仍需确认；新主角的署名和授权见 `docs/ASSET_PROVENANCE.md`。
 
 下列为手机改版前的历史验证，不能混同新版：
 
@@ -68,17 +72,19 @@ DEMO（代码枚举 Cadet）是默认推荐档：敌人生命为 78%，玩家承
 
 ## 主角模型
 
-原始用户模型保留在：
+当前角色使用 `Assets/Prefabs/Player/RiggedSentinelVisual.prefab`：48 骨骼蒙皮、约 1.8 万三角面和重定向动作，由现有 `PlayerMechLoader` 加载，不需要运行时 GLB 导入器。来源、授权、动画边界和可重复 Blender/Unity 管线见 [主角交接](docs/HERO_MODEL_HANDOFF.md)。
+
+旧用户模型仅作为回退，原始文件保留在：
 
 `Assets/UserContent/PlayerMech/Meshy_AI_Rose_Gold_Sentinel_0618172915_texture.glb`
 
-由于 Unity 默认不能直接实例化该 GLB，当前可玩角色由其离线转换出的 OBJ 网格驱动，并保留原始 PBR 贴图：
+旧 `RoseGoldSentinelVisual.prefab` 使用该 GLB 离线转换出的 OBJ 网格，并保留原始 PBR 贴图：
 
 - High：116,398 三角面
 - Medium：32,942 三角面
 - Low：8,646 三角面
 
-三档网格已接入交叉淡化 `LODGroup`。正常上帝视角主要使用 Medium 档，近景使用 High 档，远景使用 Low 档。
+旧模型的三档网格保留原有交叉淡化 `LODGroup`，不是新主角的 LOD 配置。旧资产不在本轮新版试玩包的场景/Resources 依赖中，未删除或覆盖。
 
 ## 验证
 

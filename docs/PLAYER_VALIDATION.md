@@ -19,9 +19,27 @@ Without `-sliceAudit`, the diagnostic GameObject is never created. Normal game f
 
 ## Evidence
 
+### Latest Hero Release: 20260905.095954
+
+`audit-evidence/2026-09-05/hero-player-02/player-report.json` and `Player.log` are the final new-hero run, using the unchanged full replay described above. Build and Player each have **0 errors / 0 warnings**. Detailed model/animation tests and known melee/combo gap: [HERO_MODEL_HANDOFF.md](HERO_MODEL_HANDOFF.md).
+
+| Measurement | Result |
+| --- | --- |
+| Full live-fire victory | 622.882 seconds, 6 choices, 500 kills, HP163.252 |
+| Boss | 61.324 seconds, both phases |
+| Build from offered cards | AMP1 / RATE3 / PIERCE1 / REPAIR1 |
+| Frame intervals | 36,741 samples; mean16.743 / P9517.018 / max47.883 ms |
+| Render/capture checks | 37,682 rendered frames; 17 nonblank PNG captures |
+| GC | 30 collection-count increments; allocation bytes unavailable |
+| Three scene reloads after return | Unity allocated90,909,687 ->90,827,775 bytes; managed2,187,264 ->2,375,680 bytes |
+
+Rendering remains 1920x1080, RTX4070Ti/D3D12, 4xMSAA, 60fps cap, hidden Player with no OS presentation cost. These are not mobile performance or human-playfeel results. New build size before packaging is 113,237,224 bytes; the ZIP is 50,663,387 bytes. Asset-license texts are packaged and the old Meshy fallback is excluded from the final scene/Resources dependencies.
+
+### Earlier Morning Baseline: 20260905.054835
+
 Presentation: `audit-evidence/2026-09-05/presentation-04/PlayMode.log` with bilingual, settings, safe-area and text-fit checks. Button raycasts are real uGUI routing; slider/toggle assignments are synthetic, not physical touch.
 
-`audit-evidence/2026-09-05/player-04/player-report.json` and `Player.log` are the accepted release run, version **20260905.054835**. Build and Player both report **0 errors/warnings**. The source build is 205,223,576 bytes before packaging.
+`audit-evidence/2026-09-05/player-04/player-report.json` and `Player.log` are the earlier morning baseline, version **20260905.054835**, not new-hero evidence. Build and Player both report **0 errors/warnings**. The source build is 205,223,576 bytes before packaging.
 
 | Measurement | Result |
 | --- | --- |

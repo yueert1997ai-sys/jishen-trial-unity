@@ -40,7 +40,7 @@ public class HangarDeploymentUI : MonoBehaviour
         var band = RuntimeUIFactory.CreatePanel(safe, "DeploymentBand", Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.045f, 0.075f, 0.09f, 1f));
         RuntimeUIFactory.Place(band, new Vector2(1, 0.5f), new Vector2(-210, 0), new Vector2(380, 440));
         RuntimeUIFactory.MenuText(band, "Eyebrow", "SORTIE 01", 14, new Vector2(190, -32), new Vector2(324, 28));
-        RuntimeUIFactory.MenuText(band, "MechTitle", "ROSE GOLD\nSENTINEL", 28, new Vector2(190, -92), new Vector2(324, 90));
+        RuntimeUIFactory.MenuText(band, "MechTitle", "SWIFT\nSENTINEL", 28, new Vector2(190, -92), new Vector2(324, 90));
         RuntimeUIFactory.MenuText(band, "MissionRoute", "OUTER DECK  /  REACTOR  /  BOSS", 14, new Vector2(190, -154), new Vector2(324, 28));
         string[] labels = { "CADET", "STANDARD", "VETERAN" };
         for (int i = 0; i < 3; i++)

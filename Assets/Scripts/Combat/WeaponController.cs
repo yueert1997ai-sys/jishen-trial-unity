@@ -14,6 +14,7 @@ public class WeaponController : MonoBehaviour
     public float beamFireInterval = 0.18f;
     public float missileFireInterval = 1.2f;
     public event Action BeamFired;
+    public event Action SkillFired;
     public float SkillCooldownRemaining => Mathf.Max(0f, nextSkillTime - Time.time);
     private float nextSkillTime;
 
@@ -155,6 +156,7 @@ public class WeaponController : MonoBehaviour
             CreateMissileProjectile(origin, direction, 18f * GetDamageMultiplier(), 1.6f, target);
         }
         GameAudio.Play(GameAudioCue.Missile, 0.35f);
+        SkillFired?.Invoke();
         return true;
     }
 

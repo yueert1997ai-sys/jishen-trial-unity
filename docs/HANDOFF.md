@@ -1,5 +1,13 @@
 # MECH ROUGE Handoff Status
 
+## Latest Hero-Only Update: 2026-09-05
+
+Continue from today's `9cc9513` mobile slice, not the historical setup below. The active player visual is now joney_lol's rigged robot with retargeted Quaternius CC0 animation, selected through the existing `PlayerMechLoader` prefab field. Detailed model changes, reproducible pipeline, test evidence and limits: [HERO_MODEL_HANDOFF.md](HERO_MODEL_HANDOFF.md). Old Meshy assets and visual prefab are retained unchanged.
+
+Important mismatch: this checkout has automatic beams, salvo and dash, **no player melee/combo gameplay**. A slash animation is provided and visually tested via an explicit diagnostic, not connected to damage. Do not add gameplay or claim that melee/combo acceptance passed without locating the user's referenced melee revision.
+
+Final hero release `20260905.095954` passed 622.88 seconds of normal-speed live fire, six choices, both Boss phases, victory and three restarts with 0 Player errors/warnings. Actual motion sequences: `HERO_ACTION_EVIDENCE.md`; final full replay: `audit-evidence/2026-09-05/hero-player-02/`. Existing Editor SearchDatabase startup exception remains separately documented.
+
 > Historical implementation log, frozen before the mobile-first redesign. Current source-of-truth: `MOBILE_SLICE_PLAN.md`, `ACCEPTANCE_CHECKLIST.md` and README. `AUDIT_2026-09-05.md` records the pre-redesign baseline. Earlier full-flow passes below use forced enemy kills; visual/performance claims are not blanket acceptance. Do not repeat old setup steps by default.
 
 Last updated: 2026-08-01

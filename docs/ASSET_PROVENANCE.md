@@ -2,7 +2,15 @@
 
 ## Existing user hero
 
-Rose Gold Sentinel GLB and converted OBJ/PBR files remain user-provided assets. The project does not establish their generation-service redistribution terms. Confirm those before public submission/distribution. No new hero geometry or Blender output was created in this iteration.
+Rose Gold Sentinel GLB and converted OBJ/PBR files remain untouched as a rollback option, no longer the active player visual after the 2026-09-05 hero pass. The project does not establish their generation-service redistribution terms. Confirm those before distributing these fallback source assets or older builds containing them.
+
+## Active rigged hero (2026-09-05)
+
+- **Rigged robot**, by **joney_lol**: https://poly.pizza/m/BwjA6Thdzd . Creator listing and its CC BY 3.0 link verified; actual 1,551,944-byte GLB downloaded and inspected in Blender. 48-bone skin, six material slots, no source animations. License: https://creativecommons.org/licenses/by/3.0/ . Attribution, source, changes and license URL are in `docs/licenses/Rigged-Robot-Attribution.txt` and the in-game credits.
+- Adaptation: GLB -> normalized FBX; eight missing vertex weights repaired from nearest weighted surface vertex; existing rig retained; palette changed to white/graphite/cyan with copper accents; right-hand grip and feet corrected. New blade/cannon are small project-authored attachments, not a replacement character made from primitives.
+- Motions: **Quaternius Animated Mech Pack**, `Stan.fbx`, CC0 1.0: https://quaternius.com/packs/animatedmech.html . Actual FBX contains 18 actions including SwordSlash. Nine motions retargeted to the chosen rig. `Shoot` is mirrored to the left arm. Source pack license copied verbatim to `docs/licenses/Quaternius-Animated-Mech.txt`.
+- Sources and reproducible Blender pipeline: `tools/hero/source/` and `tools/hero/prepare_hero.py`. Unity output: `Assets/Art/Hero/`, `RiggedSentinelVisual.prefab`. No new runtime model importer or paid service.
+- This choice permits reuse under the stated attribution conditions; the uploader's license is not an independent warranty of all third-party rights. Keep attribution with portfolio screenshots and distributed builds. Do not imply these third-party models were modeled from scratch by Yue.
 
 ## Maintenance platform
 

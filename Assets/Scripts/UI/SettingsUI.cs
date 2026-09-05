@@ -97,7 +97,7 @@ public class SettingsUI : MonoBehaviour
         high = RuntimeUIFactory.MenuButton(fields, "HighButton", "High", new Vector2(546, -358), new Vector2(184, 48));
         balanced.onClick.AddListener(() => { GamePreferences.SetQuality(0); Refresh(); });
         high.onClick.AddListener(() => { GamePreferences.SetQuality(1); Refresh(); });
-        RuntimeUIFactory.MenuText(credits, "CreditsText", "Yue / AI-assisted game development\nHero / user-provided Meshy asset\nSound / Kenney (CC0)\nMusic / Subspace by Vitalezzz (CC0)\nFont / Noto Sans CJK (OFL)\nEngine / Unity 6", 19,
+        RuntimeUIFactory.MenuText(credits, "CreditsText", GameText.Credits, 17,
             new Vector2(340, -232), new Vector2(596, 290), TextAnchor.UpperLeft);
         creditsButton = RuntimeUIFactory.MenuButton(panel, "CreditsButton", "Credits", new Vector2(145, -434), new Vector2(206, 52));
         creditsButton.onClick.AddListener(() =>

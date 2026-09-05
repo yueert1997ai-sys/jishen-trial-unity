@@ -19,3 +19,4 @@ sysinfo.txt
 /Unity*.log
 /AuditEvidence/
 __pycache__/
+/tools/hero/source/*.blend1
