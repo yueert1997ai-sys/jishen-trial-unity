@@ -1,6 +1,6 @@
 # 机神试炼 / MECH ROUGE
 
-Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 实测发现命中与阶段收尾问题；旧流程测试通过不等于真人完整试玩验收。当前审计与后续优先级见 [项目审计](docs/AUDIT_2026-09-05.md)。已有流程骨架：
+Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 已修复实测发现的枪口偏射、强化受伤、结算刷怪与重开交互问题，并在 Play Mode 用真实子弹自动跑通胜负流程。尚未达到真人手感、Build 深度与完整性能验收。详情见 [项目审计](docs/AUDIT_2026-09-05.md)。当前流程：
 
 `机库开始任务 -> 第一关三波敌人 -> 三选一强化 -> 第二关 -> Boss -> 胜负结算 -> 重新开始`
 
@@ -8,12 +8,13 @@ Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 实测发现命中与�
 
 运行：
 
-`Builds/Windows/MECH_ROUGE_Demo/MECH_ROUGE.exe`
+`Builds/Windows/MECH_TRIAL_20260905/MECH_ROUGE.exe`
 
-以下为历史构建验证，使用自动清敌，不代表当前源码的实弹与性能验收。历史日志：
+这是本轮新构建，旧 `MECH_ROUGE_Demo` 目录保留不覆盖。验证日志：
 
-- `UnityStage11_WindowsBuild.log`
-- `UnityStage11_StandaloneSmoke.log`
+- `docs/audit-evidence/2026-09-05/P0LivePlay.log`：Editor 实弹通关与阶段保护，自动瞄准，不使用清敌作弊。
+- `docs/audit-evidence/2026-09-05/P0WindowsBuild.log`：Windows64 构建成功。
+- `docs/audit-evidence/2026-09-05/P0Standalone.log`：独立播放器流程冒烟，仍使用强制清敌；不是独立播放器自然通关或性能验收。
 
 ## 在 Unity 中运行
 
@@ -69,11 +70,12 @@ Cadet 是默认推荐档：敌人生命为 78%，玩家承受敌方伤害为 65%
 
 ## 验证
 
-- 编辑器完整流程：`Assets/Editor/DemoPlayModeSmoke.cs`
-- 1080p 压力渲染：`Assets/Editor/DemoPerformanceSmoke.cs`
+- 实弹与阶段保护：`Assets/Editor/ProjectAudit.cs`，入口 `ProjectAudit.Run`；枪口回归入口 `ProjectAudit.RunShotDiagnostics`。
+- 编辑器流程冒烟（强制清敌）：`Assets/Editor/DemoPlayModeSmoke.cs`
+- 局部压力渲染（不代表完整游戏性能）：`Assets/Editor/DemoPerformanceSmoke.cs`
 - Windows 构建：`Assets/Editor/DemoBuildPipeline.cs`
 - 独立播放器完整流程：`Assets/Scripts/Core/StandaloneRuntimeSmoke.cs`
 - 详细交接记录：`docs/HANDOFF.md`
 - 验收清单：`docs/ACCEPTANCE_CHECKLIST.md`
 
-验证副本偶尔会在 Unity 6 启动索引阶段记录一条 `UnityEditor.Search.SearchDatabase` 异常。它不来自项目程序集，项目自有错误检查和完整流程测试均通过。
+验证副本的 Unity 6 启动索引阶段重复记录 `UnityEditor.Search.SearchDatabase` 异常。堆栈不来自游戏程序集，未阻断本轮编译与运行，但 Console 不能标记为完全无错误。完整限制见审计报告。

@@ -30,11 +30,10 @@ public class ResultUI : MonoBehaviour
         builder.AppendLine(victory ? "Victory" : "Mission failed");
         builder.AppendLine("");
         builder.AppendLine("Kills: " + gameManager.Kills);
-        builder.AppendLine("Coins: " + gameManager.Coins);
+        builder.AppendLine("Salvage: " + gameManager.Coins);
         builder.AppendLine("Difficulty: " + gameManager.DifficultyDisplayName);
-        builder.AppendLine("Clear time: " + Mathf.CeilToInt(gameManager.GetRunTime()) + "s");
+        builder.AppendLine("Mission time: " + Mathf.CeilToInt(gameManager.GetRunTime()) + "s");
         builder.AppendLine("");
-        builder.AppendLine("Upgrades:");
         if (gameManager.upgradeSystem != null)
         {
             builder.AppendLine(gameManager.upgradeSystem.GetSummary());
@@ -50,8 +49,6 @@ public class ResultUI : MonoBehaviour
             }
         }
 
-        builder.AppendLine("");
-        builder.AppendLine("Press R to restart");
         resultText.text = builder.ToString();
     }
 
@@ -71,12 +68,21 @@ public class ResultUI : MonoBehaviour
         }
 
         canvas = RuntimeUIFactory.CreateCanvas("ResultCanvas");
+        canvas.sortingOrder = 30;
         panel = RuntimeUIFactory.CreatePanel(canvas.transform, "ResultPanel", new Vector2(0.28f, 0.18f), new Vector2(0.72f, 0.84f), Vector2.zero, Vector2.zero, new Color(0.02f, 0.04f, 0.07f, 0.96f));
         resultText = RuntimeUIFactory.CreateText(panel, "ResultText", "", 30, TextAnchor.UpperLeft, Color.white);
         RectTransform textRect = resultText.GetComponent<RectTransform>();
-        textRect.anchorMin = new Vector2(0.08f, 0.08f);
+        textRect.anchorMin = new Vector2(0.08f, 0.24f);
         textRect.anchorMax = new Vector2(0.92f, 0.92f);
         textRect.offsetMin = Vector2.zero;
         textRect.offsetMax = Vector2.zero;
+
+        Button back = RuntimeUIFactory.CreateButton(panel, "ReturnHangarButton", "Return to hangar");
+        RectTransform backRect = back.GetComponent<RectTransform>();
+        backRect.anchorMin = new Vector2(0.08f, 0.08f);
+        backRect.anchorMax = new Vector2(0.92f, 0.18f);
+        backRect.offsetMin = Vector2.zero;
+        backRect.offsetMax = Vector2.zero;
+        back.onClick.AddListener(() => gameManager.RestartRun());
     }
 }

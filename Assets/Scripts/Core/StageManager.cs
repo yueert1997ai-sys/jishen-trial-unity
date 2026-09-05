@@ -39,6 +39,17 @@ public class StageManager : MonoBehaviour
         enemiesAlive++;
     }
 
+    public void StopStage()
+    {
+        StopAllCoroutines();
+        stageRoutine = null;
+        if (enemySpawner != null) enemySpawner.CancelPendingSpawns();
+        // Destroy is deferred; cancel attack routines immediately at the phase boundary.
+        foreach (var enemy in FindObjectsByType<EnemyBase>(FindObjectsSortMode.None)) enemy.StopAllCoroutines();
+        foreach (var boss in FindObjectsByType<BossController>(FindObjectsSortMode.None)) boss.StopAllCoroutines();
+        ClearEnemies();
+    }
+
     public void NotifyEnemyKilled()
     {
         enemiesAlive = Mathf.Max(0, enemiesAlive - 1);

@@ -60,6 +60,7 @@ public class Damageable : MonoBehaviour
 
     public void TakeDamage(float amount, DamageInfo info)
     {
+        if (GameManager.Instance != null && !GameManager.Instance.IsCombatActive) return;
         if (IsDead || IsInvulnerable || amount <= 0f)
         {
             return;
@@ -109,6 +110,8 @@ public class Damageable : MonoBehaviour
         }
 
         IsDead = true;
+        CurrentHealth = 0f;
+        if (playerStats != null) playerStats.SyncHealthFromDamageable(0f);
         if (OnDied != null)
         {
             OnDied.Invoke(this);

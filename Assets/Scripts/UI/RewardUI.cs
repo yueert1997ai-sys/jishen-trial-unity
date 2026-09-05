@@ -56,6 +56,7 @@ public class RewardUI : MonoBehaviour
 
     private void Choose(int index)
     {
+        if (gameManager == null || gameManager.Phase != GamePhase.Reward || panel == null || !panel.gameObject.activeSelf) return;
         if (index < 0 || index >= options.Count)
         {
             return;

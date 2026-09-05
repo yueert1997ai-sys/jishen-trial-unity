@@ -213,6 +213,7 @@ public class GameManager : MonoBehaviour
     {
         SetPaused(false);
         Phase = GamePhase.Combat;
+        if (combatHUD != null) combatHUD.SetVisible(true);
         SetProgress("Stage " + stageIndex);
         if (stageManager != null)
         {
@@ -239,8 +240,11 @@ public class GameManager : MonoBehaviour
 
     public void EnterReward()
     {
+        if (Phase != GamePhase.Combat) return;
         SetPaused(false);
         Phase = GamePhase.Reward;
+        StopCombat();
+        if (combatHUD != null) combatHUD.SetVisible(false);
         ProgressText = "Stage 1 cleared";
         GameAudio.Play(GameAudioCue.Reward, 0.45f, 1f);
         if (rewardUI != null)
@@ -251,6 +255,7 @@ public class GameManager : MonoBehaviour
 
     public void FinishReward()
     {
+        if (Phase != GamePhase.Reward) return;
         if (rewardUI != null)
         {
             rewardUI.Hide();
@@ -281,8 +286,13 @@ public class GameManager : MonoBehaviour
 
     public void EnterResult(bool victory)
     {
+        if (Phase == GamePhase.Result) return;
         SetPaused(false);
         Phase = GamePhase.Result;
+        StopCombat();
+        if (combatHUD != null) combatHUD.SetVisible(false);
+        if (rewardUI != null) rewardUI.Hide();
+        if (shopUI != null) shopUI.Hide();
         GameAudio.Play(victory ? GameAudioCue.Victory : GameAudioCue.Defeat, 0.55f, 1f);
         if (runManager != null)
         {
@@ -297,6 +307,7 @@ public class GameManager : MonoBehaviour
 
     public void RegisterKill(int rewardCoins)
     {
+        if (Phase != GamePhase.Combat) return;
         Kills++;
         if (rewardCoins > 0)
         {
@@ -306,6 +317,16 @@ public class GameManager : MonoBehaviour
         if (upgradeSystem != null && upgradeSystem.KillHeal > 0f && playerStats != null)
         {
             playerStats.Heal(upgradeSystem.KillHeal);
+        }
+    }
+
+    private void StopCombat()
+    {
+        if (stageManager != null) stageManager.StopStage();
+        foreach (var projectile in FindObjectsByType<Projectile>(FindObjectsSortMode.None))
+        {
+            projectile.gameObject.SetActive(false);
+            Destroy(projectile.gameObject);
         }
     }
 

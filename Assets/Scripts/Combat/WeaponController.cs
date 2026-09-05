@@ -87,6 +87,7 @@ public class WeaponController : MonoBehaviour
 
     public void TryFireBeam()
     {
+        if (!CanFire()) return;
         float fireRate = GetFireRateMultiplier();
         if (Time.time < nextBeamTime)
         {
@@ -123,6 +124,7 @@ public class WeaponController : MonoBehaviour
 
     public void TryFireMissiles()
     {
+        if (!CanFire()) return;
         int missileLevel = equipmentManager != null ? equipmentManager.GetHighestShoulderMissileLevel() : 0;
         if (missileLevel <= 0 || Time.time < nextMissileTime)
         {
@@ -144,6 +146,12 @@ public class WeaponController : MonoBehaviour
         }
 
         GameAudio.Play(GameAudioCue.Missile, 0.3f, UnityEngine.Random.Range(0.93f, 1.02f));
+    }
+
+    private bool CanFire()
+    {
+        return (damageable == null || !damageable.IsDead)
+            && (GameManager.Instance == null || GameManager.Instance.IsCombatActive);
     }
 
     private Vector3 GetAimDirection()

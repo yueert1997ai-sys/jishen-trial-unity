@@ -197,6 +197,12 @@ public class CombatHUD : MonoBehaviour
 
     public void SetVisible(bool value)
     {
+        if (!value)
+        {
+            damageFlash = 0f;
+            announcementTimer = 0f;
+            if (announcementText != null) announcementText.gameObject.SetActive(false);
+        }
         if (canvas != null)
         {
             canvas.gameObject.SetActive(value);
@@ -212,7 +218,7 @@ public class CombatHUD : MonoBehaviour
 
         canvas = RuntimeUIFactory.CreateCanvas("CombatHUDCanvas");
 
-        panel = RuntimeUIFactory.CreatePanel(canvas.transform, "StatusPanel", new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(24f, -294f), new Vector2(500f, -24f), new Color(0.02f, 0.035f, 0.05f, 0.82f));
+        panel = RuntimeUIFactory.CreatePanel(canvas.transform, "StatusPanel", new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(24f, -354f), new Vector2(500f, -24f), new Color(0.02f, 0.035f, 0.05f, 0.82f));
 
         RectTransform objectivePanel = RuntimeUIFactory.CreatePanel(canvas.transform, "ObjectivePanel", new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(-310f, -82f), new Vector2(310f, -24f), new Color(0.02f, 0.035f, 0.05f, 0.78f));
         objectiveText = RuntimeUIFactory.CreateText(objectivePanel, "ObjectiveText", "Hangar ready", 26, TextAnchor.MiddleCenter, Color.white);

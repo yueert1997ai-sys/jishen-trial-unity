@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -19,6 +18,7 @@ public static class ProjectAudit
     private static IEnumerator routine;
     private static int lastFrame;
     private static double deadline;
+    private static bool projectError;
     private static readonly List<string> evidence = new List<string>();
     private static string Output => Path.GetFullPath("AuditEvidence");
 
@@ -29,6 +29,8 @@ public static class ProjectAudit
             if (state == PlayModeStateChange.EnteredPlayMode && SessionState.GetBool(Active, false))
             {
                 evidence.Clear();
+                projectError = false;
+                UnityEngine.Random.InitState(5092026);
                 deadline = EditorApplication.timeSinceStartup + 220;
                 lastFrame = -1;
                 routine = SessionState.GetBool(Active + ".Shots", false) ? ShotDiagnostics() : RunScenarios();
@@ -202,6 +204,10 @@ public static class ProjectAudit
         Capture("01_hangar");
         Click("DeployButton");
         gm.playerController.enabled = false;
+        gm.SetPaused(true);
+        VerifyBlockedCombat(gm);
+        gm.SetPaused(false);
+        Record("PAUSE_RESUME active=" + gm.IsCombatActive);
         gm.playerStats.GetComponent<Damageable>().OnDamaged += (d, info) => Record("PLAYER_HIT hp=" + d.CurrentHealth + " phase=" + gm.Phase + " damage=" + info.Amount);
         int startFrame = Time.frameCount;
         float started = Time.time;
@@ -221,12 +227,14 @@ public static class ProjectAudit
             if (boss != null)
             {
                 if (!bossSeen) { Capture("04_boss"); bossSeen = true; }
+                if (!phaseTwoSeen && boss.IsPhaseTwo) Capture("04b_boss_phase2");
                 phaseTwoSeen |= boss.IsPhaseTwo;
             }
             if (gm.Phase == GamePhase.Reward)
             {
                 yield return null;
                 Capture("03_reward");
+                VerifyBlockedCombat(gm);
                 Record("REWARD cards=" + Object.FindObjectsByType<Button>(FindObjectsSortMode.None).Count(b => b.name == "ChooseButton"));
                 Click("ChooseButton");
                 rewardChoices++;
@@ -251,9 +259,11 @@ public static class ProjectAudit
         yield return null;
         Capture("05_result");
         Record("LIVE_FIRE_RESULT phase=" + gm.Phase + " hp=" + gm.playerStats.CurrentHp + " kills=" + gm.Kills + " shots=" + shots + " choices=" + rewardChoices + " kinds=" + string.Join(",", kinds) + " boss=" + bossSeen + " phase2=" + phaseTwoSeen + " seconds=" + (Time.time - started));
+        bool liveVictory = gm.Phase == GamePhase.Result && gm.playerStats.CurrentHp > 0 && rewardChoices == 1 && bossSeen && phaseTwoSeen;
+        VerifyBlockedCombat(gm);
         frameTimes.Sort();
         if (frameTimes.Count > 0) Record("FRAME_OBSERVATION samples=" + frameTimes.Count + " avg_ms=" + frameTimes.Average() * 1000 + " p95_ms=" + frameTimes[(int)(frameTimes.Count * 0.95f)] * 1000 + " note=editor+audit_logic+uncapped_not_benchmark");
-        gm.RestartRun();
+        Click("ReturnHangarButton");
         yield return null;
         yield return null;
         gm = GameManager.Instance;
@@ -267,10 +277,12 @@ public static class ProjectAudit
         shot.transform.position = player.transform.position + Vector3.up + Vector3.forward * 5;
         shot.Init(1, null, Vector3.back, 30, 12, 2, 0, 0);
         gm.EnterReward();
+        VerifyBlockedCombat(gm);
         float hpBefore = player.CurrentHealth;
         float until = Time.time + 1;
         while (Time.time < until) yield return null;
         Record("REWARD_PROTECTION hp_before=" + hpBefore + " hp_after=" + player.CurrentHealth + " phase=" + gm.Phase);
+        if (player.CurrentHealth != hpBefore) throw new Exception("Reward did not protect HP.");
         Capture("06_reward_damage");
         gm.RestartRun();
         yield return null;
@@ -280,32 +292,61 @@ public static class ProjectAudit
         player = gm.playerStats.GetComponent<Damageable>();
         player.TakeDamage(9999, new DamageInfo(null, player.transform.position, null, 9999));
         int before = Object.FindObjectsByType<EnemyBase>(FindObjectsSortMode.None).Length;
-        until = Time.time + 1;
+        int killsAtEnd = gm.Kills;
+        int coinsAtEnd = gm.Coins;
+        gm.RegisterKill(100);
+        gm.EnterResult(true);
+        VerifyBlockedCombat(gm);
+        until = Time.time + 3;
         while (Time.time < until) yield return null;
         Record("DEFEAT phase=" + gm.Phase + " hp=" + gm.playerStats.CurrentHp + " enemies_before=" + before + " enemies_after=" + Object.FindObjectsByType<EnemyBase>(FindObjectsSortMode.None).Length + " hud=" + gm.combatHUD.IsVisible + " result_buttons=" + Object.FindObjectsByType<Button>(FindObjectsSortMode.None).Length);
+        if (Object.FindObjectsByType<EnemyBase>(FindObjectsSortMode.None).Length != 0 || gm.combatHUD.IsVisible || gm.Kills != killsAtEnd || gm.Coins != coinsAtEnd)
+            throw new Exception("Result did not stop combat or freeze score.");
         Capture("07_defeat");
-        gm.RestartRun();
+        Capture("07b_defeat_1280", 1280, 720);
+        Click("ReturnHangarButton");
         yield return null;
         yield return null;
         Record("DEFEAT_RESTART hangar=" + GameManager.Instance.hangarUI.IsVisible);
+        if (!liveVictory) throw new Exception("Natural live-fire run did not reach victory with both Boss phases.");
+    }
+
+    private static void VerifyBlockedCombat(GameManager gm)
+    {
+        float hp = gm.playerStats.CurrentHp;
+        int shots = Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None).Length;
+        gm.playerController.weaponController.TryFireBeam();
+        gm.playerController.weaponController.TryFireMissiles();
+        gm.playerStats.GetComponent<Damageable>().TakeDamage(30, null);
+        if (gm.playerStats.CurrentHp != hp || Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None).Length != shots)
+            throw new Exception("Combat not blocked in " + gm.Phase + " paused=" + gm.IsPaused);
+        Record("COMBAT_BLOCK_PASS phase=" + gm.Phase + " paused=" + gm.IsPaused);
     }
 
     private static void Click(string name)
     {
         var button = Object.FindObjectsByType<Button>(FindObjectsSortMode.None).FirstOrDefault(b => b.name == name);
         if (button == null) throw new Exception("Missing visible button " + name);
-        var pointer = new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left };
-        ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerClickHandler);
+        Canvas.ForceUpdateCanvases();
+        var rect = button.GetComponent<RectTransform>();
+        var canvas = button.GetComponentInParent<Canvas>();
+        var position = RectTransformUtility.WorldToScreenPoint(canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera, rect.TransformPoint(rect.rect.center));
+        var pointer = new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left, position = position };
+        var hits = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointer, hits);
+        if (hits.Count == 0 || hits[0].gameObject.GetComponentInParent<Button>() != button)
+            throw new Exception("UI raycast blocked for " + name + " by " + (hits.Count == 0 ? "nothing" : hits[0].gameObject.name));
+        ExecuteEvents.ExecuteHierarchy(hits[0].gameObject, pointer, ExecuteEvents.pointerClickHandler);
         Record("UI_CLICK " + name);
     }
 
-    private static void Capture(string name)
+    private static void Capture(string name, int width = 1920, int height = 1080)
     {
         if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null) return;
         var camera = Camera.main;
         var canvases = Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None).Where(c => c.renderMode != RenderMode.WorldSpace).ToArray();
         var modes = canvases.Select(c => c.renderMode).ToArray();
-        var texture = new RenderTexture(1920, 1080, 24);
+        var texture = new RenderTexture(width, height, 24);
         var previousTarget = camera.targetTexture;
         var previousActive = RenderTexture.active;
         camera.targetTexture = texture;
@@ -318,8 +359,8 @@ public static class ProjectAudit
         Canvas.ForceUpdateCanvases();
         camera.Render();
         RenderTexture.active = texture;
-        var frame = new Texture2D(1920, 1080, TextureFormat.RGB24, false);
-        frame.ReadPixels(new Rect(0, 0, 1920, 1080), 0, 0);
+        var frame = new Texture2D(width, height, TextureFormat.RGB24, false);
+        frame.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         frame.Apply();
         File.WriteAllBytes(Path.Combine(Output, name + ".png"), frame.EncodeToPNG());
         Record("CAPTURE " + name + " colors=" + frame.GetPixels32().Where((p, i) => i % 997 == 0).Distinct().Count());
@@ -335,6 +376,8 @@ public static class ProjectAudit
     {
         if (type == LogType.Warning || type == LogType.Error || type == LogType.Exception || type == LogType.Assert)
             evidence.Add("CONSOLE " + type + " " + condition + " " + stack);
+        if ((type == LogType.Error || type == LogType.Exception || type == LogType.Assert) && (stack.Contains("Assets/") || stack.Contains("Assembly-CSharp")))
+            projectError = true;
     }
 
     private static void Record(string value)
@@ -345,6 +388,7 @@ public static class ProjectAudit
 
     private static void Finish(int code)
     {
+        if (projectError) code = 1;
         File.WriteAllLines(Path.Combine(Output, "runtime.txt"), evidence);
         SessionState.SetBool(Active, false);
         EditorApplication.update -= Tick;
