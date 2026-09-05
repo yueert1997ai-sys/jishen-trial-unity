@@ -1,0 +1,76 @@
+Unity=6000.3.18f1
+Target=StandaloneWindows64
+Pipeline=Built-in
+Backend=Mono2x
+Graphics=Direct3D12,Direct3D11
+BuildScenes=Assets/Scenes/Demo_Main.unity
+SCENE_COMPONENT PlayerMechRoot Damageable
+SCENE_COMPONENT PlayerMechRoot CombatFeedback
+SCENE_COMPONENT PlayerMechRoot MechHardpointManager
+SCENE_COMPONENT PlayerMechRoot PlayerMechLoader
+SCENE_COMPONENT PlayerMechRoot PlayerStats
+SCENE_COMPONENT PlayerMechRoot PlayerController
+SCENE_COMPONENT PlayerMechRoot WeaponController
+SCENE_COMPONENT PlayerMechRoot MechMotionAnimator
+SCENE_COMPONENT PlayerMechRoot EquipmentManager
+SCENE_COMPONENT Main Camera CameraFollow
+SCENE_COMPONENT EnemySpawner EnemySpawner
+SCENE_COMPONENT GameManager GameAudio
+SCENE_COMPONENT GameManager StandaloneRuntimeSmoke
+SCENE_COMPONENT GameManager RunManager
+SCENE_COMPONENT GameManager StageManager
+SCENE_COMPONENT GameManager RunUpgradeSystem
+SCENE_COMPONENT GameManager GameManager
+SCENE_COMPONENT CombatHUD CombatHUD
+SCENE_COMPONENT PauseUI PauseUI
+SCENE_COMPONENT HangarDeploymentUI HangarDeploymentUI
+SCENE_COMPONENT RewardUI RewardUI
+SCENE_COMPONENT ResultUI ResultUI
+NOT_SCENE_DEPENDENCY Assets/Materials/MR_FrameGrey.mat
+NOT_SCENE_DEPENDENCY Assets/Materials/MR_ArmorWhite.mat
+NOT_SCENE_DEPENDENCY Assets/Editor/ProjectAudit.cs
+NOT_SCENE_DEPENDENCY Assets/ScriptableObjects/Equipment/BeamRifle.asset
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/BeamRifle_Lv3.prefab
+NOT_SCENE_DEPENDENCY Assets/Materials/MR_DarkMetal.mat
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/MissilePod_Lv1.prefab
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/Shield_Lv1.prefab
+NOT_SCENE_DEPENDENCY Assets/UserContent/PlayerMech/Decimated/RoseGoldSentinel_LOD.mtl
+NOT_SCENE_DEPENDENCY Assets/Scripts/Equipment/EquipmentData.cs
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/BeamRifle_Lv2.prefab
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/Shield_Lv2.prefab
+NOT_SCENE_DEPENDENCY Assets/Scripts/UI/FloatingCombatText.cs
+NOT_SCENE_DEPENDENCY Assets/UserContent/PlayerMech/Meshy_AI_Rose_Gold_Sentinel_0618172915_texture.glb
+NOT_SCENE_DEPENDENCY Assets/Editor/DemoAutomationBridge.cs
+NOT_SCENE_DEPENDENCY Assets/Editor/DemoBuildPipeline.cs
+NOT_SCENE_DEPENDENCY Assets/Scripts/Equipment/EquipmentShop.cs
+NOT_SCENE_DEPENDENCY Assets/ScriptableObjects/Equipment/MissilePod.asset
+NOT_SCENE_DEPENDENCY Assets/UserContent/PlayerMech/Decimated/RoseGoldSentinel_LOD_Medium.mtl
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/BeamRifle_Lv1.prefab
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Player/PlayerMech_Default.prefab
+NOT_SCENE_DEPENDENCY Assets/Scripts/UI/RuntimeUIFactory.cs
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Player/PlayerMechRoot.prefab
+NOT_SCENE_DEPENDENCY Assets/Scripts/Combat/MissileProjectile.cs
+NOT_SCENE_DEPENDENCY Assets/Materials/MR_GoldPlaceholder.mat
+NOT_SCENE_DEPENDENCY Assets/ScriptableObjects/Equipment/Shield.asset
+NOT_SCENE_DEPENDENCY Assets/Scripts/Equipment/EquipmentRewardSystem.cs
+NOT_SCENE_DEPENDENCY Assets/Scripts/UI/ShopUI.cs
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/MissilePod_Lv2.prefab
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/BoosterPack_Lv2.prefab
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/Shield_Lv3.prefab
+NOT_SCENE_DEPENDENCY Assets/Editor/DemoPerformanceSmoke.cs
+NOT_SCENE_DEPENDENCY Assets/Materials/MR_WingNavy.mat
+NOT_SCENE_DEPENDENCY Assets/UserContent/PlayerMech/README_CustomMechImport.md
+NOT_SCENE_DEPENDENCY Assets/Materials/MR_AntennaYellow.mat
+NOT_SCENE_DEPENDENCY Assets/Editor/DemoPlayModeSmoke.cs
+NOT_SCENE_DEPENDENCY Assets/Scripts/Combat/ProjectileVisuals.cs
+NOT_SCENE_DEPENDENCY Assets/Editor/PackageInstallUtility.cs
+NOT_SCENE_DEPENDENCY Assets/Scripts/Combat/Projectile.cs
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/BoosterPack_Lv3.prefab
+NOT_SCENE_DEPENDENCY Assets/Editor/DemoSceneBuilder.cs
+NOT_SCENE_DEPENDENCY Assets/Editor/DemoVisualCapture.cs
+NOT_SCENE_DEPENDENCY Assets/Scripts/Equipment/EquipmentInstance.cs
+NOT_SCENE_DEPENDENCY Assets/UserContent/PlayerMech/Decimated/RoseGoldSentinel_LOD_High.mtl
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/MissilePod_Lv3.prefab
+NOT_SCENE_DEPENDENCY Assets/Materials/MR_RoseGoldPlaceholder.mat
+NOT_SCENE_DEPENDENCY Assets/Prefabs/Equipment/BoosterPack_Lv1.prefab
+NOT_SCENE_DEPENDENCY Assets/ScriptableObjects/Equipment/BoosterPack.asset

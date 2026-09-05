@@ -1,6 +1,6 @@
-# MECH ROUGE
+# 机神试炼 / MECH ROUGE
 
-Unity 6 上帝视角机甲肉鸽射击 Demo。当前版本已经能完整试玩：
+Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 实测发现命中与阶段收尾问题；旧流程测试通过不等于真人完整试玩验收。当前审计与后续优先级见 [项目审计](docs/AUDIT_2026-09-05.md)。已有流程骨架：
 
 `机库开始任务 -> 第一关三波敌人 -> 三选一强化 -> 第二关 -> Boss -> 胜负结算 -> 重新开始`
 
@@ -10,7 +10,7 @@ Unity 6 上帝视角机甲肉鸽射击 Demo。当前版本已经能完整试玩�
 
 `Builds/Windows/MECH_ROUGE_Demo/MECH_ROUGE.exe`
 
-Windows 构建已通过独立播放器全流程自测。验证日志见：
+以下为历史构建验证，使用自动清敌，不代表当前源码的实弹与性能验收。历史日志：
 
 - `UnityStage11_WindowsBuild.log`
 - `UnityStage11_StandaloneSmoke.log`
@@ -23,7 +23,7 @@ Windows 构建已通过独立播放器全流程自测。验证日志见：
 4. 进入 Play Mode。
 5. 在机库按 `E` 开始任务。
 
-需要重建场景时，运行菜单 `MECH ROUGE > Build Phase 1 Demo`。
+不要在普通启动时运行 `MECH ROUGE > Build Phase 1 Demo`：它会重建/覆盖生成的场景、Prefab 和材质。只有明确需要重新生成且已保护改动时才使用。
 
 需要生成 Windows 64 位试玩包时，运行菜单 `MECH ROUGE > Build Windows Demo`。
 

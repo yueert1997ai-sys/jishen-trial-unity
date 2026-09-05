@@ -1,5 +1,7 @@
 # MECH ROUGE Handoff Status
 
+> Historical implementation log. Current source-of-truth: `AUDIT_2026-09-05.md`. Earlier full-flow passes use forced enemy kills; visual/performance claims are not blanket acceptance. Preserve this history, but do not repeat the old setup steps by default.
+
 Last updated: 2026-08-01
 
 ## Current playable loop

@@ -16,3 +16,6 @@
 sysinfo.txt
 .vs/
 .idea/
+/Unity*.log
+/AuditEvidence/
+__pycache__/
