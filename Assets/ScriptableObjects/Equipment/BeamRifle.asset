@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a8481a065191245a4b283b2707e473, type: 3}
+  m_Name: BeamRifle
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentData
+  equipmentId: BeamRifle
+  displayName: Beam Rifle
+  equipmentType: 0
+  targetSocketName: RightHandSocket
+  level: 1
+  maxLevel: 3
+  price: 60
+  damageBonus: 8
+  fireRateBonus: 7
+  hpBonus: 0
+  energyBonus: 0
+  dashBonus: 0
+  prefabLevel1: {fileID: 25077298530028501, guid: e512600b4325ab842af017486cef6daf, type: 3}
+  prefabLevel2: {fileID: 7094928447561032531, guid: 03213fd4d54c4664586465982f4844e0, type: 3}
+  prefabLevel3: {fileID: 588090241411040042, guid: 225b2f765b71a0f498cc1e6a85cd0783, type: 3}
+  description: Default beam rifle. Lv2 fires twin shots. Lv3 fires triple piercing
+    shots.

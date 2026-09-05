@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a8481a065191245a4b283b2707e473, type: 3}
+  m_Name: MissilePod
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentData
+  equipmentId: MissilePod
+  displayName: Shoulder Missile Pod
+  equipmentType: 3
+  targetSocketName: RightShoulderSocket
+  level: 1
+  maxLevel: 3
+  price: 85
+  damageBonus: 5
+  fireRateBonus: 0
+  hpBonus: 0
+  energyBonus: 0
+  dashBonus: 0
+  prefabLevel1: {fileID: 8319165705669841613, guid: 920b03e7936caa2448ec3ce7c9e9ad32, type: 3}
+  prefabLevel2: {fileID: 2500441621700084108, guid: a885e5a6865dcc04a931a2cbad6df5a2, type: 3}
+  prefabLevel3: {fileID: 5232672303563820480, guid: 0f8b9da6c514b1b40ac0527391781651, type: 3}
+  description: Homing missiles for clearing groups. Higher levels add tubes and blast
+    radius.
