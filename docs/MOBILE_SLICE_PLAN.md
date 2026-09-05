@@ -18,7 +18,7 @@ Approved 2026-09-05. Start from commit 65ca4d9, never rebuild the game from scra
 - [x] 1. Unified input, collision-aware motor, mobile controls/HUD, safe-area layout, automatic targeting and camera framing. Real Play Mode tests.
 - [x] 2. Maintenance-platform implementation and automated gate: motion, impacts, particles, licensed audio, environment, navigation and pooling. Visual review done; subjective polish/listening remain review items.
 - [x] 3. Reactor sector, six ranked choices, Boss telegraph correctness, pacing and one-time checkpoint continue. Full-speed automated combat and regression passed; human/device feel remains unverified.
-- [ ] 4. Bilingual presentation/settings, licensing, real Player performance/GC/restart checks, versioned Windows build, evidence and known limitations.
+- [x] 4. Bilingual presentation/settings, licensing, continuous offscreen Player frame/GC-collection/restart checks, versioned Windows build and evidence. Per-frame allocation bytes and physical-device/display performance remain explicitly unavailable/unverified.
 
 Every gate: inspect runtime/Console, fix regressions, update this record, inspect diff, commit separately. Work in the isolated Unity audit copy, never control the user's desktop. Preserve all old builds and unrelated files.
 
@@ -66,7 +66,19 @@ Tuning observations: first full-speed replay won with six upgrades in 595.67s, b
 
 `presentation-04/PlayMode.log` exits 0. Bundled Noto font glyph coverage, English/Chinese live labels and reload persistence, settings pause/input blocking, master/music/effects live mixing, shake toggle, 2x/4x AA quality and 60fps cap, credits, closing settings from an existing pause, reward/result/hangar restart passed. Buttons use real uGUI raycast routing; sliders/toggle use synthetic value changes. Original preferences are restored in a finally block.
 
-Text height checks and captures cover 1280x720, 2400x1080 with simulated notch, and 1024x768 letterboxing. Fixed Noto title height, toggle glyph height and HUD line spacing. Captures include Chinese combat HUD. No physical-phone or subjective listening claim. Gate 4B Player validation is separate and still pending.
+Text height checks and captures cover 1280x720, 2400x1080 with simulated notch, and 1024x768 letterboxing. Fixed Noto title height, toggle glyph height and HUD line spacing. Captures include Chinese combat HUD. Final `FinalPlayMode.log` reruns the suite after the complete Player test and exits 0. No physical-phone or subjective listening claim.
+
+## Gate 4B: release Player (2026-09-05)
+
+Version `20260905.054835`, Windows x64 Mono release, StrictMode build: 0 errors/warnings. New portable output `Builds/Windows/MECH_TRIAL_20260905.054835/MECH_TRIAL.exe`; old builds retained. Source and isolated-copy C# hashes and saved main scene were compared before delivery.
+
+`player-04/player-report.json` and `Player.log` pass: **623.74 seconds, six choices, 501 kills, HP164.45, Boss61.63 seconds, both phases, victory and three restarts**. Actual offered build: AMP1/RATE3/PIERCE1/REPAIR1. No forced kills, health cheats, acceleration or continue. All 17 captured frames pass nonblank color checks; hangar, combat, Boss and result visually inspected.
+
+On RTX4070Ti/D3D12, 1920x1080/4xMSAA/60fps cap, complete Player simulation plus continuous offscreen scene/UI rendering: **36,790 sampled intervals**, mean **16.741ms**, P95 **17.015ms**, max **30.204ms**; **37,731 rendered frames**. Native hidden-window ScreenCapture experiments failed/returned black frames, so they are not accepted performance evidence. The accepted path explicitly renders both cameras every LateUpdate and excludes OS presentation cost. Details: `PLAYER_VALIDATION.md`.
+
+**32 GC collections** during the run; Unity release allocation counter and the probed Mono per-thread counter were unavailable. GC-byte fields are not zero-allocation evidence. After explicit unused-asset unloading/GC, Unity allocations were 86,948,166 -> 86,915,502 bytes across three reloads; managed heap 2,179,072 -> 2,363,392 bytes. One GameManager and no enemies in every hangar. No ongoing growth detected at this scope, not a peak-memory/mobile guarantee.
+
+Remaining next-iteration work: human 10-15-minute playtest/listening, physical phone input/performance, less primitive enemy/hero skeletal animation and more distinctive arena art. Keep the supplied hero unchanged until its separate asset pass is approved; confirm its public redistribution rights. Editor SearchDatabase indexing issue remains known, not fixed by this gate.
 
 Final `progression-03/FullRegression.log` exits 0. Normal-speed moving-input replay, genuine automatic fire/skill: **626.66 seconds**, **six choices**, **502 kills**, **HP172.85**, Boss **66.72 seconds**, both phases and return to hangar. Encounters: **76.69/85.10/102.00/86.96/101.30/101.67s**. No forced kills, health cheats, time acceleration or continues in the successful run. The same process then passes focused checkpoint rollback/revive, Standard restrictions, pause/reward damage protection, frozen result statistics, cancelled spawns and defeat restart tests. Synthetic phase completion is used only in those subsequent contract tests.
 

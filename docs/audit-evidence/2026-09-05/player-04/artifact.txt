@@ -1,0 +1,10 @@
+Release: 20260905.054835
+Executable: Builds/Windows/MECH_TRIAL_20260905.054835/MECH_TRIAL.exe
+Archive: Builds/Windows/MECH_TRIAL_20260905.054835.zip
+Archive bytes: 83438529
+Archive SHA256: F9C4F9DD2E5914B02793DA498B98214145D4181CC15BB6C47ACB41EF3D6D0C0F
+Executable SHA256: 5CF8283E7CB3761B6FCBBA8E2C9F36A298A75883CC65CA7719B008F3A7AA231E
+Assembly-CSharp.dll SHA256: 1CD7B84536127F6BDE64458FEEC58C8AE47189157FFBF6BA61BEAEE407CB7195
+ZIP verification: 157 entries; required executable, assembly, instructions, licenses, validation and report present; archived assembly hash equals tested loose build.
+Full Player process exit: 0
+Final presentation Play Mode exit: 0 (presentation-04/FinalPlayMode.log)

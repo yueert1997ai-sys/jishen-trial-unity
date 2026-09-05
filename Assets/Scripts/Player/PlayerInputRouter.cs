@@ -10,6 +10,10 @@ public struct PlayerCommand
 [DisallowMultipleComponent]
 public class PlayerInputRouter : MonoBehaviour
 {
+    // Opt-in command replay can run in an unfocused Player without touching the desktop.
+    public static bool AllowUnfocusedReplay { get; internal set; }
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetReplay() { AllowUnfocusedReplay = false; }
     public bool readKeyboard = true;
     private Vector2 touchMove;
     private bool dashQueued;
@@ -62,6 +66,6 @@ public class PlayerInputRouter : MonoBehaviour
     private void Suspend()
     {
         Clear();
-        if (GameManager.Instance != null) GameManager.Instance.SetPaused(true);
+        if (!AllowUnfocusedReplay && GameManager.Instance != null) GameManager.Instance.SetPaused(true);
     }
 }

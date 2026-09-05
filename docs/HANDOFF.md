@@ -1,6 +1,6 @@
 # MECH ROUGE Handoff Status
 
-> Historical implementation log. Current source-of-truth: `AUDIT_2026-09-05.md`. Earlier full-flow passes use forced enemy kills; visual/performance claims are not blanket acceptance. Preserve this history, but do not repeat the old setup steps by default.
+> Historical implementation log, frozen before the mobile-first redesign. Current source-of-truth: `MOBILE_SLICE_PLAN.md`, `ACCEPTANCE_CHECKLIST.md` and README. `AUDIT_2026-09-05.md` records the pre-redesign baseline. Earlier full-flow passes below use forced enemy kills; visual/performance claims are not blanket acceptance. Do not repeat old setup steps by default.
 
 Last updated: 2026-08-01
 

@@ -1,18 +1,25 @@
 # 机神试炼 / MECH ROUGE
 
-Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 当前源码已完成手机横屏操作第一阶段：单摇杆/键盘移动、自动锁敌射击、连续冲刺、主动导弹、手机尺寸菜单及 HP/EN HUD。已在 Play Mode 通过触控模拟与实弹流程回归；仍未达到真人手感、Build 深度与完整性能验收。打磨进度见 [手机优先计划](docs/MOBILE_SLICE_PLAN.md)，基线见 [项目审计](docs/AUDIT_2026-09-05.md)。当前流程：
+Unity 6 上帝视角机甲 Roguelite 作品原型。2026-09-05 当前源码已接通手机横屏操作、自动锁敌射击、两战区六场战斗、六次强化、两阶段 Boss 和一次存档续关。完整 Play Mode 实弹回归为 626.66 秒。打磨进度与最新验收以 [手机优先计划](docs/MOBILE_SLICE_PLAN.md) 为准，[项目审计](docs/AUDIT_2026-09-05.md) 保留改版前基线，不代表当前功能缺失。当前流程：
 
-`机库开始任务 -> 第一关三波敌人 -> 三选一强化 -> 第二关 -> Boss -> 胜负结算 -> 重新开始`
+`机库出击 -> 维修区三场（每场三选一）-> 反应堆区三场（每场三选一）-> Boss -> 胜负结算 -> 续关一次或返回机库`
 
-维修平台阶段已接入：首场实测 75.11 秒，带新场景/绕障导航、连续增援、动态火花烟尘、池化弹药和成品音效/流式配乐；接后续旧关卡的自动实弹通关约 103 秒。六次成长与 10–15 分钟完整流程仍在下一阶段，不能把当前版本写成已完成。证据在 `docs/audit-evidence/2026-09-05/maintenance-02/`，素材来源见 `docs/ASSET_PROVENANCE.md`。
+现有内容包括原生绕障导航、分批增援、动态火花烟尘、池化弹药、成品音效和流式配乐。中英文、音量/震动/画质设置已通过 Play Mode 验证。真实手机多点触控、真人难度和人耳听感仍待评审。测试证据分别位于 `mobile-01`、`maintenance-02`、`progression-03`、`presentation-04`，素材来源见 `docs/ASSET_PROVENANCE.md`。
 
 ## 直接试玩 Windows 版
 
 运行：
 
-`Builds/Windows/MECH_TRIAL_20260905/MECH_ROUGE.exe`
+`Builds/Windows/MECH_TRIAL_20260905.054835/MECH_TRIAL.exe`
 
-这是手机操作改版前的历史构建，仍是鼠标瞄准/左键开火。当前新操作须在 Unity Play Mode 体验，下一构建将在完成打磨后另存。旧 `MECH_ROUGE_Demo` 目录也保留不覆盖。验证日志：
+这是本轮新版，压缩包同名位于 `Builds/Windows/`。保留完整目录即可运行，详见包内 `START_HERE.md`。旧 `MECH_TRIAL_20260905` 和 `MECH_ROUGE_Demo` 均未覆盖。新版发布构建及 Player 回放日志在 `docs/audit-evidence/2026-09-05/player-04/`：
+
+- 实弹自动移动通关 **623.74 秒、六次强化、501 次击破、Boss 61.63 秒**，无强制清敌、加速或续关。
+- 1920x1080 完整 Player 离屏持续渲染，均值/P95 **16.74/17.02 ms**，运行 **0 Error / 0 Warning**，三次重开无持续内存增长。
+- 记录 32 次 GC 回收；本机发布版的逐帧 GC 字节计数器不可用，不能把报告的零字段理解为零分配。
+- 这不是物理手机或桌面呈现延迟测试。方法和边界见 [Player 验证](docs/PLAYER_VALIDATION.md)。用户主角模型公开分发授权仍需确认，目前按私下评审构建处理。
+
+下列为手机改版前的历史验证，不能混同新版：
 
 - `docs/audit-evidence/2026-09-05/P0LivePlay.log`：Editor 实弹通关与阶段保护，自动瞄准，不使用清敌作弊。
 - `docs/audit-evidence/2026-09-05/P0WindowsBuild.log`：Windows64 构建成功。
@@ -28,7 +35,7 @@ Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 当前源码已完成�
 
 不要在普通启动时运行 `MECH ROUGE > Build Phase 1 Demo`：它会重建/覆盖生成的场景、Prefab 和材质。只有明确需要重新生成且已保护改动时才使用。
 
-需要生成 Windows 64 位试玩包时，运行菜单 `MECH ROUGE > Build Windows Demo`。
+需要生成新版 Windows 64 位试玩包时，运行菜单 `MECH ROUGE > Build Versioned Mobile Slice (Windows)`，每次输出独立带版本号目录。旧 `Build Windows Demo` 为历史入口，不要用来覆盖旧试玩包。
 
 ## 当前源码操作
 
@@ -44,18 +51,20 @@ Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 当前源码已完成�
 
 ## 当前内容
 
-- 第一关三波普通敌人
-- 关后随机三选一强化
-- 第二关三波敌人，包含精英单位
+- 维修平台、反应堆两战区，各三场有时间编排和存活上限的连续增援
+- 每场结束随机三选一，共六次；八种强化，有等级上限与分裂/爆炸、射速/穿透组合
+- 第二战区加入更多远程/精英压力
 - 两阶段 Boss 战
 - 近战、远程、自爆、精英和 Boss 五类机甲轮廓
 - 玩家 HP、能量、冲刺、目标、敌人数和 Boss 血条 HUD
 - 命中反馈、伤害数字、相机震动、弹道、出生预警和攻击预警
 - 暂停菜单、胜负结算和重新开始
-- 机库部署界面与 Cadet、Standard、Veteran 三档本局难度
+- 机库部署界面与 DEMO、Standard、Veteran 三档本局难度
+- 展示难度一次战区/Boss 入口存档续关，回滚失败段收益
+- 中英文切换、主音量/音乐/音效、震动开关、两档画质和制作名单
 - Kenney CC0 战斗音效与 Vitalezzz《Subspace》流式配乐；人耳听感尚待确认
 
-Cadet 是默认推荐档：敌人生命为 78%，玩家承受敌方伤害为 65%，每波恢复 20% 最大生命。Standard 保持基准战斗数值，Veteran 提高敌人生命和伤害并降低波次维修。
+DEMO（代码枚举 Cadet）是默认推荐档：敌人生命为 78%，玩家承受敌方伤害为 65%，提供一次续关。Standard 保持基准战斗数值，Veteran 提高敌人生命和伤害并降低维修量。
 
 ## 主角模型
 
@@ -78,7 +87,9 @@ Cadet 是默认推荐档：敌人生命为 78%，玩家承受敌方伤害为 65%
 - 编辑器流程冒烟（强制清敌）：`Assets/Editor/DemoPlayModeSmoke.cs`
 - 局部压力渲染（不代表完整游戏性能）：`Assets/Editor/DemoPerformanceSmoke.cs`
 - Windows 构建：`Assets/Editor/DemoBuildPipeline.cs`
-- 独立播放器完整流程：`Assets/Scripts/Core/StandaloneRuntimeSmoke.cs`
+- 旧独立播放器强制清敌冒烟：`Assets/Scripts/Core/StandaloneRuntimeSmoke.cs`
+- 新独立播放器实弹/渲染诊断：`Assets/Scripts/Core/SlicePlayerAudit.cs`，只有 `-sliceAudit` 参数启用，非正常玩法入口
+- 中英文/设置/安全区：`ProjectAudit.RunPresentationTests`
 - 详细交接记录：`docs/HANDOFF.md`
 - 验收清单：`docs/ACCEPTANCE_CHECKLIST.md`
 
