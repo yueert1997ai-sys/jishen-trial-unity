@@ -32,7 +32,7 @@ Synthetic touch events and replay commands are not physical phone testing. Fast 
 
 `Regression.log`: previous live-fire victory/Boss phases, reward protection, defeat cleanup and restart still pass. Both runs exit 0. Unity Editor SearchDatabase startup exception remains an engine-only known issue; no game error observed.
 
-Current source uses automatic aim/fire, WASD or stick, Space/dash, E/salvo. All active menus and HUD use 960x540 logical sizing and safe-area roots. Old archived Windows builds still use their old controls until Gate 4. The previous 26-second battle is intentionally retained until the next pacing gate. Menu polish/localization/settings, graphics, real audio and the 10-15 minute run are NOT complete.
+Gate 1 snapshot: automatic aim/fire, WASD or stick, Space/dash, E/salvo, 960x540 logical sizing and safe-area roots. At that checkpoint the battle was still 26 seconds and presentation/audio/pacing were pending; Gates 2-4 below supersede that snapshot. Archived old Windows builds retain their original controls.
 
 ## Gate 2 evidence (2026-09-05)
 
@@ -52,15 +52,21 @@ The first encounter now lasts **75.11 seconds** in real-time Play Mode, using 23
 
 Six encounter-clear choices now feed the Boss; the eight upgrade kinds have caps/ranks, cached summaries and a separate seeded option RNG. Splitter trades per-shot damage for coverage. Cadet allows one sector/Boss-entry continue restoring saved health, attributes, build, currency and kills; failed-segment gains are discarded. Standard has no continue.
 
-`progression-03/ContractPlayMode.log` exits 0. Actual UI raycast clicks cover six choices, mandatory selection, rank caps, RNG isolation, sector checkpoint rollback, revive, result-time exclusion and one-use/Standard restrictions. Phase completions are synthetic in this focused test: it proves wiring, NOT combat balance or 10-15 minute pacing. Remaining encounter assets/Boss polishing and full-speed testing are still in progress.
+`progression-03/ContractPlayMode.log` exits 0. Actual UI raycast clicks cover six choices, mandatory selection, rank caps, RNG isolation, sector checkpoint rollback, revive, result-time exclusion and one-use/Standard restrictions. Phase completions are synthetic in this focused test: it proves wiring, NOT combat balance or 10-15 minute pacing. Gate 3B below subsequently completed full-speed combat testing.
 
 ## Gate 3B: authored combat (verified 2026-09-05)
 
 All six encounter assets and the switchable reactor layout are now connected. Each sector has its own baked native NavMesh. The Boss uses serialized actions, locked scatter/mortar/charge geometry, cover-limited charge distance, pooled shots and a damageable armor/core-recovery cycle. Melee/ranged enemies now commit to readable windups; drone damage is deduplicated.
 
-`progression-03/BossPlayMode.log` exits 0: 14 focused checks including actual timed warning-to-hit behavior, dodge safety, covered charge, action overlap rejection, exposed core, phase two and result cancellation. Synthetic positions/health are used for those contracts. Full-speed six-encounter pacing run is still underway; no complete-run or difficulty claim yet.
+`progression-03/BossPlayMode.log` exits 0: 14 focused checks including actual timed warning-to-hit behavior, dodge safety, covered charge, action overlap rejection, exposed core, phase two and result cancellation. Synthetic positions/health are used for those contracts. Complete-run evidence is in the final regression below.
 
-Tuning observations: first full-speed replay won with six upgrades in 595.67s, but failed the >=600s acceptance gate. Encounters were 76.69/85.10/102.37/87.08/101.14/101.91s; Boss only 35.16s. Keeping the Boss at the same 6200 base HP, armor/core damage windows and attack follow-through were revised. A subsequent live Boss replay won in 59.61s with 11 completed actions and both phases (HP190.69). Its obsolete >=75s assertion failed; the product target was intentionally revised to 45-100s rather than extending repetition. Final full-run revalidation is pending.
+Tuning observations: first full-speed replay won with six upgrades in 595.67s, but failed the >=600s acceptance gate. Encounters were 76.69/85.10/102.37/87.08/101.14/101.91s; Boss only 35.16s. Keeping the Boss at the same 6200 base HP, armor/core damage windows and attack follow-through were revised. A subsequent live Boss replay won in 59.61s with 11 completed actions and both phases (HP190.69). Its obsolete >=75s assertion failed; the product target was intentionally revised to 45-100s rather than extending repetition. The following full run is the accepted revalidation.
+
+## Gate 4A: presentation (2026-09-05)
+
+`presentation-04/PlayMode.log` exits 0. Bundled Noto font glyph coverage, English/Chinese live labels and reload persistence, settings pause/input blocking, master/music/effects live mixing, shake toggle, 2x/4x AA quality and 60fps cap, credits, closing settings from an existing pause, reward/result/hangar restart passed. Buttons use real uGUI raycast routing; sliders/toggle use synthetic value changes. Original preferences are restored in a finally block.
+
+Text height checks and captures cover 1280x720, 2400x1080 with simulated notch, and 1024x768 letterboxing. Fixed Noto title height, toggle glyph height and HUD line spacing. Captures include Chinese combat HUD. No physical-phone or subjective listening claim. Gate 4B Player validation is separate and still pending.
 
 Final `progression-03/FullRegression.log` exits 0. Normal-speed moving-input replay, genuine automatic fire/skill: **626.66 seconds**, **six choices**, **502 kills**, **HP172.85**, Boss **66.72 seconds**, both phases and return to hangar. Encounters: **76.69/85.10/102.00/86.96/101.30/101.67s**. No forced kills, health cheats, time acceleration or continues in the successful run. The same process then passes focused checkpoint rollback/revive, Standard restrictions, pause/reward damage protection, frozen result statistics, cancelled spawns and defeat restart tests. Synthetic phase completion is used only in those subsequent contract tests.
 

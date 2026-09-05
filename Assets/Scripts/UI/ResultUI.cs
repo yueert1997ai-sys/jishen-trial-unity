@@ -25,12 +25,12 @@ public class ResultUI : MonoBehaviour
         RuntimeUIFactory.Place(returnButton.GetComponent<RectTransform>(), new Vector2(0, 1),
             new Vector2(owner.CanContinue ? 462 : 320, -370), new Vector2(owner.CanContinue ? 276 : 560, 56));
         if (owner.CanContinue)
-            continueButton.GetComponentInChildren<Text>().text = owner.CheckpointEncounter == 6 ? "Retry Boss (1)" : "Retry sector (1)";
-        title.text = victory ? "MISSION COMPLETE" : "MISSION FAILED";
+            continueButton.GetComponentInChildren<Text>().text = GameText.T(owner.CheckpointEncounter == 6 ? "Retry Boss (1)" : "Retry sector (1)");
+        title.text = GameText.T(victory ? "MISSION COMPLETE" : "MISSION FAILED");
         title.color = victory ? new Color(0.3f, 0.95f, 0.73f) : new Color(1f, 0.48f, 0.36f);
         int seconds = Mathf.CeilToInt(gameManager.GetRunTime());
-        resultText.text = "Kills  " + gameManager.Kills + "     Salvage  " + gameManager.Coins
-            + "\n" + gameManager.DifficultyDisplayName + "     Time  " + (seconds / 60).ToString("00") + ":" + (seconds % 60).ToString("00")
+        resultText.text = GameText.T("Kills") + "  " + gameManager.Kills + "     " + GameText.T("Salvage") + "  " + gameManager.Coins
+            + "\n" + gameManager.DifficultyDisplayName + "     " + GameText.T("Time") + "  " + (seconds / 60).ToString("00") + ":" + (seconds % 60).ToString("00")
             + "\n\n" + (gameManager.upgradeSystem != null ? gameManager.upgradeSystem.GetSummary() : "");
     }
 

@@ -16,11 +16,13 @@ public class PauseUI : MonoBehaviour
         if (canvas != null) return;
         canvas = RuntimeUIFactory.CreateCanvas("PauseCanvas", 960);
         canvas.sortingOrder = 120;
-        var panel = RuntimeUIFactory.CreateMenuSurface(canvas, "PausePanel", new Vector2(360, 304));
+        var panel = RuntimeUIFactory.CreateMenuSurface(canvas, "PausePanel", new Vector2(360, 380));
         RuntimeUIFactory.MenuText(panel, "PauseTitle", "MISSION PAUSED", 26, new Vector2(180, -48), new Vector2(320, 44), TextAnchor.MiddleCenter);
         RuntimeUIFactory.MenuButton(panel, "ResumeButton", "Resume", new Vector2(180, -136), new Vector2(280, 56))
             .onClick.AddListener(() => gameManager.SetPaused(false));
-        RuntimeUIFactory.MenuButton(panel, "RestartButton", "Return to hangar", new Vector2(180, -210), new Vector2(280, 56))
+        RuntimeUIFactory.MenuButton(panel, "PauseSettingsButton", "Settings", new Vector2(180, -210), new Vector2(280, 56))
+            .onClick.AddListener(() => gameManager.settingsUI.Show(gameManager));
+        RuntimeUIFactory.MenuButton(panel, "RestartButton", "Return to hangar", new Vector2(180, -286), new Vector2(280, 56))
             .onClick.AddListener(() => gameManager.RestartRun());
     }
 }

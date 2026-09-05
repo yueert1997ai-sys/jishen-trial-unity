@@ -27,7 +27,7 @@ public class CameraFollow : MonoBehaviour
 
     public void AddShake(float strength, float duration)
     {
-        if (!screenShake) return;
+        if (!screenShake || !GamePreferences.Shake) return;
         shakeStrength = Mathf.Max(shakeStrength, Mathf.Min(0.2f, strength));
         shakeTimeRemaining = Mathf.Max(shakeTimeRemaining, duration);
         shakeDuration = Mathf.Max(shakeDuration, Mathf.Max(0.01f, duration));
@@ -61,7 +61,8 @@ public class CameraFollow : MonoBehaviour
         initialized = true;
         view.orthographicSize = Mathf.Lerp(view.orthographicSize, desiredSize, blend);
         Vector3 shake = Vector3.zero;
-        if (screenShake && shakeTimeRemaining > 0f)
+        if (!screenShake || !GamePreferences.Shake) shakeTimeRemaining = shakeStrength = shakeDuration = 0f;
+        if (screenShake && GamePreferences.Shake && shakeTimeRemaining > 0f)
         {
             float strength = shakeStrength * Mathf.Clamp01(shakeTimeRemaining / shakeDuration);
             shake = new Vector3(Mathf.PerlinNoise(Time.time * 37f, 0f) - 0.5f, 0f, Mathf.PerlinNoise(0f, Time.time * 43f) - 0.5f) * strength;

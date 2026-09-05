@@ -10,6 +10,7 @@ public class GameAudio : MonoBehaviour
     private readonly Dictionary<GameAudioCue, AudioClip[]> clips = new Dictionary<GameAudioCue, AudioClip[]>();
     private readonly float[] lastCueTime = new float[10];
     private AudioSource[] voices;
+    private readonly float[] voiceGains = new float[14];
     private AudioSource ambience;
     private readonly AudioSource[] music = new AudioSource[2];
     private int activeMusic;
@@ -45,7 +46,7 @@ public class GameAudio : MonoBehaviour
         ambience = gameObject.AddComponent<AudioSource>();
         ambience.clip = Resources.Load<AudioClip>("Audio/Combat/spaceEngineLow_000");
         ambience.loop = true;
-        ambience.volume = 0.018f;
+        ambience.volume = 0.018f * GamePreferences.Effects;
         ambience.Play();
         var score = Resources.Load<AudioClip>("Audio/Music/Subspace_Loop");
         for (int i = 0; i < music.Length; i++)
@@ -73,7 +74,7 @@ public class GameAudio : MonoBehaviour
 
     private void Update()
     {
-        float level = Time.unscaledTime < duckUntil ? 0.006f : 0.018f;
+        float level = (Time.unscaledTime < duckUntil ? 0.006f : 0.018f) * GamePreferences.Effects;
         ambience.volume = Mathf.MoveTowards(ambience.volume, level, Time.unscaledDeltaTime * 0.08f);
         var gm = GameManager.Instance;
         float targetLevel = gm != null && gm.Phase == GamePhase.Combat ? 0.17f : 0.07f;
@@ -90,8 +91,21 @@ public class GameAudio : MonoBehaviour
         }
         crossfadeRemaining = Mathf.Max(0, crossfadeRemaining - Time.unscaledDeltaTime);
         float fade = crossfadeRemaining / 2.5f;
-        music[activeMusic].volume = musicLevel * (1 - fade);
-        music[1 - activeMusic].volume = musicLevel * fade;
+        ApplyMusicGain(fade);
+    }
+
+    private void ApplyMusicGain(float fade)
+    {
+        music[activeMusic].volume = musicLevel * (1 - fade) * GamePreferences.Music;
+        music[1 - activeMusic].volume = musicLevel * fade * GamePreferences.Music;
+    }
+
+    public void RefreshMix()
+    {
+        if (voices == null) return;
+        for (int i = 0; i < voices.Length; i++) voices[i].volume = voiceGains[i] * GamePreferences.Effects;
+        if (MusicLoaded) ApplyMusicGain(crossfadeRemaining / 2.5f);
+        ambience.volume = (Time.unscaledTime < duckUntil ? 0.006f : 0.018f) * GamePreferences.Effects;
     }
 
     private void OnDestroy() { if (Instance == this) Instance = null; }
@@ -114,7 +128,8 @@ public class GameAudio : MonoBehaviour
         var voice = voices[index];
         voice.Stop();
         voice.clip = options[Random.Range(0, options.Length)];
-        voice.volume = Mathf.Clamp01(volume) * (cue == GameAudioCue.Beam ? 0.42f : 0.72f);
+        voiceGains[index] = Mathf.Clamp01(volume) * (cue == GameAudioCue.Beam ? 0.42f : 0.72f);
+        voice.volume = voiceGains[index] * GamePreferences.Effects;
         voice.pitch = Mathf.Clamp(pitch, 0.8f, 1.2f);
         voice.Play();
         if (priority) duckUntil = Time.unscaledTime + 1.2f;

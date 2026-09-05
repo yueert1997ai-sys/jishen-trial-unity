@@ -38,7 +38,7 @@ public class RewardUI : MonoBehaviour
         upgradeSystem = system;
         BuildUI();
         canvas.gameObject.SetActive(true);
-        title.text = "SELECT UPGRADE   " + owner.CompletedEncounters + " / 6";
+        title.text = GameText.T("SELECT UPGRADE") + "   " + owner.CompletedEncounters + " / 6";
         options.Clear();
         if (upgradeSystem != null)
         {

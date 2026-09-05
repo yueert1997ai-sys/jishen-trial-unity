@@ -60,9 +60,9 @@ public class MobileControls : MonoBehaviour
         nextRefresh = Time.unscaledTime + 0.1f;
         dash.interactable = player.IsDashReady && player.stats.CurrentEnergy >= 25f;
         skill.interactable = player.weaponController.SkillCooldownRemaining <= 0f && player.AutoAim.CurrentTarget != null;
-        dashLabel.text = player.IsDashReady ? "DASH" : player.DashCooldownRemaining.ToString("0.0");
+        dashLabel.text = player.IsDashReady ? GameText.T("DASH") : player.DashCooldownRemaining.ToString("0.0");
         float cooldown = player.weaponController.SkillCooldownRemaining;
-        skillLabel.text = cooldown > 0f ? cooldown.ToString("0.0") : "SALVO";
+        skillLabel.text = cooldown > 0f ? cooldown.ToString("0.0") : GameText.T("SALVO");
     }
 
     public void SetVisible(bool visible)

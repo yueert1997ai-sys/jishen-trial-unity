@@ -62,8 +62,8 @@ public class CombatHUD : MonoBehaviour
         }
         if (gameManager != null)
         {
-            objectiveText.text = gameManager.ProgressText;
-            statusText.text = "Kills " + gameManager.Kills + "    Hostiles " + (gameManager.stageManager != null ? gameManager.stageManager.EnemiesAlive : 0);
+            objectiveText.text = GameText.Progress(gameManager.ProgressText);
+            statusText.text = GameText.T("Kills") + " " + gameManager.Kills + "    " + GameText.T("Hostiles") + " " + (gameManager.stageManager != null ? gameManager.stageManager.EnemiesAlive : 0);
         }
         buildText.text = upgradeSystem != null ? upgradeSystem.GetSummary() : "";
         if (Time.unscaledTime >= nextBossLookup)
@@ -76,7 +76,7 @@ public class CombatHUD : MonoBehaviour
         bossPanel.gameObject.SetActive(showBoss);
         if (showBoss)
         {
-            bossText.text = "REACTOR WARDEN   /   " + (boss.CoreExposed ? "CORE EXPOSED" : boss.IsPhaseTwo ? "ARMORED II" : "ARMORED I");
+            bossText.text = GameText.T("REACTOR WARDEN") + "   /   " + GameText.T(boss.CoreExposed ? "CORE EXPOSED" : boss.IsPhaseTwo ? "ARMORED II" : "ARMORED I");
             bossFill.GetComponent<Image>().color = boss.CoreExposed ? new Color(0.2f, 0.95f, 0.8f) : new Color(1f, 0.26f, 0.17f);
             SetFill(bossFill, bossDamageable.CurrentHealth / bossDamageable.maxHealth);
         }
@@ -91,12 +91,12 @@ public class CombatHUD : MonoBehaviour
         damageOverlay = overlay.GetComponent<Image>();
         damageOverlay.raycastTarget = false;
         safeRoot = SafeAreaLayout.Create(canvas);
-        var plate = Panel(safeRoot, "StatusPanel", new Vector2(0, 1), new Vector2(16, -102), new Vector2(226, -14));
-        hpText = Label(plate, "HpText", 18, new Vector2(10, -25), new Vector2(196, -4));
-        hpFill = Bar(plate, "HpBar", new Vector2(10, -34), new Vector2(196, -29), new Color(0.25f, 0.93f, 0.56f));
-        energyText = Label(plate, "EnergyText", 13, new Vector2(10, -58), new Vector2(196, -39));
-        energyFill = Bar(plate, "EnergyBar", new Vector2(10, -65), new Vector2(196, -62), new Color(0.25f, 0.8f, 1f));
-        statusText = Label(plate, "StatusText", 12, new Vector2(10, -85), new Vector2(198, -67));
+        var plate = Panel(safeRoot, "StatusPanel", new Vector2(0, 1), new Vector2(16, -112), new Vector2(226, -14));
+        hpText = Label(plate, "HpText", 18, new Vector2(10, -29), new Vector2(196, -1));
+        hpFill = Bar(plate, "HpBar", new Vector2(10, -36), new Vector2(196, -31), new Color(0.25f, 0.93f, 0.56f));
+        energyText = Label(plate, "EnergyText", 13, new Vector2(10, -61), new Vector2(196, -40));
+        energyFill = Bar(plate, "EnergyBar", new Vector2(10, -69), new Vector2(196, -66), new Color(0.25f, 0.8f, 1f));
+        statusText = Label(plate, "StatusText", 12, new Vector2(10, -93), new Vector2(198, -73));
         var objectiveBand = Panel(safeRoot, "ObjectiveBand", new Vector2(0.5f, 1), new Vector2(-204, -40), new Vector2(204, -10));
         objectiveText = Label(objectiveBand, "ObjectiveText", 14, new Vector2(8, -28), new Vector2(400, -2), null, TextAnchor.MiddleCenter);
         bossPanel = Panel(safeRoot, "BossPanel", new Vector2(0.5f, 1), new Vector2(-180, -82), new Vector2(180, -43));

@@ -39,6 +39,7 @@ public static class ProjectAudit
                 if (suite == "Slice") routine = SliceScenarios();
                 if (suite == "Builds") routine = BuildScenarios();
                 if (suite == "BossLive") routine = BossLiveScenarios();
+                if (suite == "Presentation") routine = PresentationAudit.Scenarios();
                 Application.logMessageReceived += CaptureLog;
                 EditorApplication.update += Tick;
             }
@@ -109,6 +110,7 @@ public static class ProjectAudit
     public static void RunSliceTests() { StartSuite("Slice"); }
     public static void RunBuildTests() { StartSuite("Builds"); }
     public static void RunBossLiveTests() { StartSuite("BossLive"); }
+    public static void RunPresentationTests() { StartSuite("Presentation"); }
 
     private static void StartSuite(string suite)
     {
@@ -674,7 +676,7 @@ public static class ProjectAudit
         return enemy.GetComponent<Damageable>();
     }
 
-    private static void Check(bool valid, string name)
+    internal static void Check(bool valid, string name)
     {
         if (!valid) throw new Exception("MOBILE_FAIL " + name);
         Record("MOBILE_PASS " + name);
@@ -868,7 +870,7 @@ public static class ProjectAudit
         Record("COMBAT_BLOCK_PASS phase=" + gm.Phase + " paused=" + gm.IsPaused);
     }
 
-    private static void Click(string name)
+    internal static void Click(string name)
     {
         var button = Object.FindObjectsByType<Button>(FindObjectsSortMode.None).FirstOrDefault(b => b.name == name);
         if (button == null) throw new Exception("Missing visible button " + name);
@@ -885,7 +887,7 @@ public static class ProjectAudit
         Record("UI_CLICK " + name);
     }
 
-    private static void Capture(string name, int width = 1920, int height = 1080, Rect? safeArea = null)
+    internal static void Capture(string name, int width = 1920, int height = 1080, Rect? safeArea = null, bool validateUI = false)
     {
         if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null) return;
         var camera = Camera.main;
@@ -925,6 +927,7 @@ public static class ProjectAudit
         }
         foreach (var layout in safeLayouts) layout.Apply(new Vector2(width, height), safeArea ?? new Rect(0, 0, width, height));
         Canvas.ForceUpdateCanvases();
+        if (validateUI) PresentationAudit.CheckTextFits();
         camera.Render();
         uiCamera.Render();
         RenderTexture.active = texture;
@@ -959,7 +962,7 @@ public static class ProjectAudit
             projectError = true;
     }
 
-    private static void Record(string value)
+    internal static void Record(string value)
     {
         evidence.Add(value);
         Debug.Log("AUDIT " + value);

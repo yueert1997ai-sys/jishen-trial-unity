@@ -32,6 +32,7 @@ public class RunUpgradeSystem : MonoBehaviour
     private readonly List<RunUpgradeKind> acquired = new List<RunUpgradeKind>();
     private readonly int[] ranks = new int[8];
     private string summary = "SYSTEMS  0 / 6";
+    private bool summaryChinese;
 
     private void Awake() { FindReferences(); }
     public int Rank(RunUpgradeKind kind) => ranks[(int)kind];
@@ -92,20 +93,25 @@ public class RunUpgradeSystem : MonoBehaviour
         foreach (var kind in saved) ApplyOption(new RunUpgradeOption { kind = kind });
     }
 
-    public string GetSummary() => summary;
+    public string GetSummary()
+    {
+        if (summaryChinese != GamePreferences.Chinese) RefreshSummary();
+        return summary;
+    }
 
     private void RefreshSummary()
     {
         var names = new List<string>();
         string[] shortNames = { "AMP", "RATE", "SPLIT", "PIERCE", "BLAST", "ARMOR", "DASH", "REPAIR" };
-        for (int i = 0; i < ranks.Length; i++) if (ranks[i] > 0) names.Add(shortNames[i] + " " + ranks[i]);
-        summary = "SYSTEMS  " + Count + " / 6" + (names.Count > 0 ? "   |   " + string.Join(" / ", names) : "");
+        summaryChinese = GamePreferences.Chinese;
+        for (int i = 0; i < ranks.Length; i++) if (ranks[i] > 0) names.Add(GameText.T(shortNames[i]) + " " + ranks[i]);
+        summary = GameText.T("SYSTEMS") + "  " + Count + " / 6" + (names.Count > 0 ? "   |   " + string.Join(" / ", names) : "");
     }
 
     private RunUpgradeOption CreateOption(RunUpgradeKind kind)
     {
         int rank = Rank(kind) + 1;
-        return new RunUpgradeOption { kind = kind, rank = rank, title = GetTitle(kind) + "  " + rank + "/" + MaxRank(kind), description = GetDescription(kind, rank) };
+        return new RunUpgradeOption { kind = kind, rank = rank, title = GameText.T(GetTitle(kind)) + "  " + rank + "/" + MaxRank(kind), description = GameText.T(GetDescription(kind, rank)) };
     }
 
     public static string GetTitle(RunUpgradeKind kind)

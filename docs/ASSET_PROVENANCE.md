@@ -25,3 +25,10 @@ These are sound effects/stingers and an engine bed. Automatic load/signal checks
 - Author: Vitalezzz (vitalezzz), **Subspace**. Creator's upload: https://opengameart.org/content/subspace . Page explicitly lists CC0 and the credit "Vitalezzz - Subspace". Verified 2026-09-05.
 - Download: https://opengameart.org/sites/default/files/subspace_loop.mp3 . Converted to 44.1 kHz Vorbis quality 5 with FFmpeg; no composition changes. Runtime uses a 2.5-second crossfade because the author notes the supplied loop is not perfect.
 - Game asset: `Assets/Resources/Audio/Music/Subspace_Loop.ogg`. Provisional electronic/orchestral battle score, lower gain in menus and ducking beneath warnings/rewards. Listening fit remains a human review item.
+
+## Noto Sans CJK SC
+
+- Noto CJK project, Simplified Chinese Regular OTF, SIL Open Font License 1.1. Unmodified font bundled for consistent Chinese/English glyph coverage without depending on installed system fonts.
+- Official source: https://github.com/notofonts/noto-cjk/tree/main/Sans/OTF/SimplifiedChinese ; license: https://github.com/notofonts/noto-cjk/blob/main/Sans/LICENSE . Retrieved 2026-09-05.
+- Asset: `Assets/Resources/Fonts/NotoSansCJKsc-Regular.otf`. SHA-256: `2C76254F6FC379FDDFCE0A7E84FB5385BB135D3E399294F6EEB6680D0365B74B`.
+- Full copyright/license notice: `docs/licenses/Noto-OFL.txt`; copied into every versioned build by the build pipeline.

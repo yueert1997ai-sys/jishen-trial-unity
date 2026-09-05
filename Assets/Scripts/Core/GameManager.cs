@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public ShopUI shopUI;
     public ResultUI resultUI;
     public ArenaSector arenaSector;
+    public SettingsUI settingsUI;
 
     public int Coins { get; private set; }
     public int Kills { get; private set; }
@@ -57,10 +58,10 @@ public class GameManager : MonoBehaviour
         {
             if (Difficulty == RunDifficulty.Veteran)
             {
-                return "Veteran";
+                return GameText.T("Veteran");
             }
 
-            return Difficulty == RunDifficulty.Standard ? "Standard" : "Cadet";
+            return GameText.T(Difficulty == RunDifficulty.Standard ? "Standard" : "Demo");
         }
     }
 
@@ -112,6 +113,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (settingsUI != null && settingsUI.IsVisible && Input.GetKeyDown(KeyCode.Escape))
+        {
+            settingsUI.Hide();
+            return;
+        }
         if ((Phase == GamePhase.Hangar || Phase == GamePhase.Combat) && Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
@@ -467,6 +473,7 @@ public class GameManager : MonoBehaviour
 
     private void FindMissingReferences()
     {
+        if (settingsUI == null) settingsUI = GetComponent<SettingsUI>() ?? gameObject.AddComponent<SettingsUI>();
         if (arenaSector == null) arenaSector = FindFirstObjectByType<ArenaSector>();
         if (runManager == null)
         {

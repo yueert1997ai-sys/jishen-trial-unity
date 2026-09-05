@@ -12,12 +12,12 @@ public static class RuntimeUIFactory
         {
             if (cachedFont == null)
             {
-                cachedFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+                cachedFont = Resources.Load<Font>("Fonts/NotoSansCJKsc-Regular");
             }
 
             if (cachedFont == null)
             {
-                cachedFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
+                cachedFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             }
 
             if (cachedFont == null)
@@ -81,6 +81,7 @@ public static class RuntimeUIFactory
         text.text = value;
         text.horizontalOverflow = HorizontalWrapMode.Wrap;
         text.verticalOverflow = VerticalWrapMode.Overflow;
+        if (!string.IsNullOrEmpty(value)) textObject.AddComponent<LocalizedLabel>().SetKey(value);
         return text;
     }
 
@@ -118,7 +119,7 @@ public static class RuntimeUIFactory
     {
         CreatePanel(canvas.transform, name + "Shade", Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.01f, 0.025f, 0.03f, 0.8f));
         var safe = SafeAreaLayout.Create(canvas);
-        var surface = CreatePanel(safe, name, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.06f, 0.10f, 0.12f, 0.98f));
+        var surface = CreatePanel(safe, name, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.06f, 0.10f, 0.12f, 1f));
         Place(surface, Vector2.one * 0.5f, Vector2.zero, size);
         return surface;
     }
