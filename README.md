@@ -1,6 +1,6 @@
 # 机神试炼 / MECH ROUGE
 
-Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 已修复实测发现的枪口偏射、强化受伤、结算刷怪与重开交互问题，并在 Play Mode 用真实子弹自动跑通胜负流程。尚未达到真人手感、Build 深度与完整性能验收。详情见 [项目审计](docs/AUDIT_2026-09-05.md)。当前流程：
+Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 当前源码已完成手机横屏操作第一阶段：单摇杆/键盘移动、自动锁敌射击、连续冲刺、主动导弹、手机尺寸菜单及 HP/EN HUD。已在 Play Mode 通过触控模拟与实弹流程回归；仍未达到真人手感、Build 深度与完整性能验收。打磨进度见 [手机优先计划](docs/MOBILE_SLICE_PLAN.md)，基线见 [项目审计](docs/AUDIT_2026-09-05.md)。当前流程：
 
 `机库开始任务 -> 第一关三波敌人 -> 三选一强化 -> 第二关 -> Boss -> 胜负结算 -> 重新开始`
 
@@ -10,7 +10,7 @@ Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 已修复实测发现�
 
 `Builds/Windows/MECH_TRIAL_20260905/MECH_ROUGE.exe`
 
-这是本轮新构建，旧 `MECH_ROUGE_Demo` 目录保留不覆盖。验证日志：
+这是手机操作改版前的历史构建，仍是鼠标瞄准/左键开火。当前新操作须在 Unity Play Mode 体验，下一构建将在完成打磨后另存。旧 `MECH_ROUGE_Demo` 目录也保留不覆盖。验证日志：
 
 - `docs/audit-evidence/2026-09-05/P0LivePlay.log`：Editor 实弹通关与阶段保护，自动瞄准，不使用清敌作弊。
 - `docs/audit-evidence/2026-09-05/P0WindowsBuild.log`：Windows64 构建成功。
@@ -22,22 +22,23 @@ Unity 6 上帝视角机甲肉鸽射击原型。2026-09-05 已修复实测发现�
 2. 打开 `Assets/Scenes/Demo_Main.unity`。
 3. 等待脚本与资源导入完成。
 4. 进入 Play Mode。
-5. 在机库按 `E` 开始任务。
+5. 在机库点 `DEPLOY` 开始任务。
 
 不要在普通启动时运行 `MECH ROUGE > Build Phase 1 Demo`：它会重建/覆盖生成的场景、Prefab 和材质。只有明确需要重新生成且已保护改动时才使用。
 
 需要生成 Windows 64 位试玩包时，运行菜单 `MECH ROUGE > Build Windows Demo`。
 
-## 操作
+## 当前源码操作
 
-- `WASD`：移动
-- 鼠标：瞄准
-- 鼠标左键：光束步枪
-- `Space`：冲刺
-- `E`：开始任务
+- `WASD` 或左下摇杆：移动
+- 自动锁定可见、范围内且无遮挡的敌人并射击
+- `Space` 或右侧 DASH：冲刺
+- `E` 或右侧 SALVO：四发追踪导弹，冷却 10 秒，无装备前置
 - `1`、`2`、`3`：选择强化
 - `Esc`：暂停或继续
 - `R`：结算后重新开始
+
+触控验证使用 EventSystem 合成指针，不等于手机真机验收。暂无 Android/iOS 构建。
 
 ## 当前内容
 
@@ -71,6 +72,7 @@ Cadet 是默认推荐档：敌人生命为 78%，玩家承受敌方伤害为 65%
 ## 验证
 
 - 实弹与阶段保护：`Assets/Editor/ProjectAudit.cs`，入口 `ProjectAudit.Run`；枪口回归入口 `ProjectAudit.RunShotDiagnostics`。
+- 手机操作和自动瞄准：`ProjectAudit.RunMobileTests`；证据 `docs/audit-evidence/2026-09-05/mobile-01/`。
 - 编辑器流程冒烟（强制清敌）：`Assets/Editor/DemoPlayModeSmoke.cs`
 - 局部压力渲染（不代表完整游戏性能）：`Assets/Editor/DemoPerformanceSmoke.cs`
 - Windows 构建：`Assets/Editor/DemoBuildPipeline.cs`

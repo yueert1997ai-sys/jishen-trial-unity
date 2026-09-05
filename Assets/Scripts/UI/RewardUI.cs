@@ -12,7 +12,7 @@ public class RewardUI : MonoBehaviour
 
     private void Update()
     {
-        if (panel == null || !panel.gameObject.activeSelf)
+        if (canvas == null || !canvas.gameObject.activeSelf)
         {
             return;
         }
@@ -36,7 +36,7 @@ public class RewardUI : MonoBehaviour
         gameManager = owner;
         upgradeSystem = system;
         BuildUI();
-        panel.gameObject.SetActive(true);
+        canvas.gameObject.SetActive(true);
         options.Clear();
         if (upgradeSystem != null)
         {
@@ -50,13 +50,13 @@ public class RewardUI : MonoBehaviour
     {
         if (panel != null)
         {
-            panel.gameObject.SetActive(false);
+            canvas.gameObject.SetActive(false);
         }
     }
 
     private void Choose(int index)
     {
-        if (gameManager == null || gameManager.Phase != GamePhase.Reward || panel == null || !panel.gameObject.activeSelf) return;
+        if (gameManager == null || gameManager.Phase != GamePhase.Reward || canvas == null || !canvas.gameObject.activeSelf) return;
         if (index < 0 || index >= options.Count)
         {
             return;
@@ -81,14 +81,10 @@ public class RewardUI : MonoBehaviour
             return;
         }
 
-        canvas = RuntimeUIFactory.CreateCanvas("RewardCanvas");
-        panel = RuntimeUIFactory.CreatePanel(canvas.transform, "RewardPanel", new Vector2(0.12f, 0.16f), new Vector2(0.88f, 0.86f), Vector2.zero, Vector2.zero, new Color(0.02f, 0.04f, 0.07f, 0.94f));
-        Text title = RuntimeUIFactory.CreateText(panel, "Title", "Choose an upgrade", 38, TextAnchor.UpperCenter, Color.white);
-        RectTransform titleRect = title.GetComponent<RectTransform>();
-        titleRect.anchorMin = new Vector2(0f, 1f);
-        titleRect.anchorMax = new Vector2(1f, 1f);
-        titleRect.anchoredPosition = new Vector2(0f, -28f);
-        titleRect.sizeDelta = new Vector2(0f, 60f);
+        canvas = RuntimeUIFactory.CreateCanvas("RewardCanvas", 960);
+        canvas.sortingOrder = 30;
+        panel = RuntimeUIFactory.CreateMenuSurface(canvas, "RewardPanel", new Vector2(820, 420));
+        RuntimeUIFactory.MenuText(panel, "Title", "SELECT UPGRADE", 26, new Vector2(410, -42), new Vector2(760, 44));
     }
 
     private void RefreshCards()
@@ -105,20 +101,11 @@ public class RewardUI : MonoBehaviour
         for (int i = 0; i < options.Count; i++)
         {
             RunUpgradeOption option = options[i];
-            RectTransform card = RuntimeUIFactory.CreatePanel(panel, "RewardCard" + i, new Vector2(0.06f + i * 0.31f, 0.15f), new Vector2(0.29f + i * 0.31f, 0.78f), Vector2.zero, Vector2.zero, new Color(0.08f, 0.12f, 0.17f, 0.98f));
-            Text text = RuntimeUIFactory.CreateText(card, "Text", (i + 1) + ". " + option.title + "\n\n" + option.description + "\n\nApplies immediately", 24, TextAnchor.UpperLeft, Color.white);
-            RectTransform textRect = text.GetComponent<RectTransform>();
-            textRect.anchorMin = new Vector2(0.08f, 0.22f);
-            textRect.anchorMax = new Vector2(0.92f, 0.92f);
-            textRect.offsetMin = Vector2.zero;
-            textRect.offsetMax = Vector2.zero;
-
-            Button button = RuntimeUIFactory.CreateButton(card, "ChooseButton", "Install");
-            RectTransform buttonRect = button.GetComponent<RectTransform>();
-            buttonRect.anchorMin = new Vector2(0.12f, 0.06f);
-            buttonRect.anchorMax = new Vector2(0.88f, 0.18f);
-            buttonRect.offsetMin = Vector2.zero;
-            buttonRect.offsetMax = Vector2.zero;
+            RectTransform card = RuntimeUIFactory.CreatePanel(panel, "RewardCard" + i, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.10f, 0.16f, 0.18f));
+            RuntimeUIFactory.Place(card, new Vector2(0, 1), new Vector2(150 + i * 260, -242), new Vector2(244, 300));
+            RuntimeUIFactory.MenuText(card, "UpgradeTitle", option.title, 21, new Vector2(122, -49), new Vector2(208, 68));
+            RuntimeUIFactory.MenuText(card, "Text", option.description, 17, new Vector2(122, -162), new Vector2(208, 132), TextAnchor.UpperLeft);
+            Button button = RuntimeUIFactory.MenuButton(card, "ChooseButton", "Install", new Vector2(122, -258), new Vector2(208, 52));
             int capturedIndex = i;
             button.onClick.AddListener(delegate { Choose(capturedIndex); });
         }

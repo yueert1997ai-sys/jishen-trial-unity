@@ -29,7 +29,7 @@ public static class RuntimeUIFactory
         }
     }
 
-    public static Canvas CreateCanvas(string name)
+    public static Canvas CreateCanvas(string name, float referenceWidth = 1920f)
     {
         EnsureEventSystem();
         GameObject canvasObject = new GameObject(name, typeof(RectTransform));
@@ -37,7 +37,8 @@ public static class RuntimeUIFactory
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         CanvasScaler scaler = canvasObject.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(1920f, 1080f);
+        scaler.referenceResolution = new Vector2(referenceWidth, referenceWidth * 9f / 16f);
+        scaler.matchWidthOrHeight = 1f;
         canvasObject.AddComponent<GraphicRaycaster>();
         return canvas;
     }
@@ -102,6 +103,40 @@ public static class RuntimeUIFactory
         textRect.offsetMin = Vector2.zero;
         textRect.offsetMax = Vector2.zero;
 
+        return button;
+    }
+
+    public static void Place(RectTransform rect, Vector2 anchor, Vector2 position, Vector2 size)
+    {
+        rect.anchorMin = rect.anchorMax = anchor;
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = position;
+        rect.sizeDelta = size;
+    }
+
+    public static RectTransform CreateMenuSurface(Canvas canvas, string name, Vector2 size)
+    {
+        CreatePanel(canvas.transform, name + "Shade", Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.01f, 0.025f, 0.03f, 0.8f));
+        var safe = SafeAreaLayout.Create(canvas);
+        var surface = CreatePanel(safe, name, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.06f, 0.10f, 0.12f, 0.98f));
+        Place(surface, Vector2.one * 0.5f, Vector2.zero, size);
+        return surface;
+    }
+
+    public static Text MenuText(Transform parent, string name, string value, int size, Vector2 position, Vector2 dimensions, TextAnchor alignment = TextAnchor.MiddleLeft)
+    {
+        var text = CreateText(parent, name, value, size, alignment, Color.white);
+        text.raycastTarget = false;
+        text.verticalOverflow = VerticalWrapMode.Truncate;
+        Place(text.rectTransform, new Vector2(0, 1), position, dimensions);
+        return text;
+    }
+
+    public static Button MenuButton(Transform parent, string name, string label, Vector2 position, Vector2 size)
+    {
+        var button = CreateButton(parent, name, label);
+        Place(button.GetComponent<RectTransform>(), new Vector2(0, 1), position, size);
+        button.GetComponentInChildren<Text>().fontSize = 18;
         return button;
     }
 }

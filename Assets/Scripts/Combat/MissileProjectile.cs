@@ -15,8 +15,7 @@ public class MissileProjectile : Projectile
 
         if (target != null)
         {
-            Vector3 desired = target.transform.position + Vector3.up * 0.8f - transform.position;
-            desired.y = 0f;
+            Vector3 desired = target.AimCenter - transform.position;
             if (desired.sqrMagnitude > 0.01f)
             {
                 direction = Vector3.RotateTowards(direction, desired.normalized, turnRate * Time.deltaTime, 0f).normalized;
@@ -28,11 +27,11 @@ public class MissileProjectile : Projectile
 
     private Damageable FindNearestTarget()
     {
-        Damageable[] candidates = FindObjectsByType<Damageable>(FindObjectsSortMode.None);
+        var candidates = Damageable.Active;
         Damageable best = null;
         float bestDistance = searchRadius * searchRadius;
 
-        for (int i = 0; i < candidates.Length; i++)
+        for (int i = 0; i < candidates.Count; i++)
         {
             Damageable candidate = candidates[i];
             if (candidate == null || candidate.team == team || candidate.IsDead)

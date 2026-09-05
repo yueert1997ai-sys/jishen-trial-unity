@@ -3,43 +3,71 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform target;
-    public Vector3 offset = new Vector3(0f, 16f, -12.5f);
+    public Vector3 offset = new Vector3(0f, 18f, -10.4f);
     public float followSpeed = 9f;
+    public float normalSize = 11.5f;
+    public bool screenShake = true;
 
+    private Camera view;
+    private PlayerController controller;
+    private BossController boss;
+    private Vector3 focus;
+    private float nextBossLookup;
     private float shakeStrength;
     private float shakeTimeRemaining;
     private float shakeDuration;
+    private bool initialized;
+
+    private void Awake()
+    {
+        view = GetComponent<Camera>();
+        view.orthographic = true;
+        view.orthographicSize = normalSize;
+    }
 
     public void AddShake(float strength, float duration)
     {
-        shakeStrength = Mathf.Max(shakeStrength, Mathf.Max(0f, strength));
-        shakeTimeRemaining = Mathf.Max(shakeTimeRemaining, Mathf.Max(0f, duration));
+        if (!screenShake) return;
+        shakeStrength = Mathf.Max(shakeStrength, Mathf.Min(0.2f, strength));
+        shakeTimeRemaining = Mathf.Max(shakeTimeRemaining, duration);
         shakeDuration = Mathf.Max(shakeDuration, Mathf.Max(0.01f, duration));
     }
 
     private void LateUpdate()
     {
-        if (target == null)
+        if (target == null) return;
+        if (controller == null) controller = target.GetComponent<PlayerController>();
+        if (Time.unscaledTime >= nextBossLookup)
         {
-            return;
+            nextBossLookup = Time.unscaledTime + 0.25f;
+            boss = FindFirstObjectByType<BossController>();
         }
-
-        Vector3 shakeOffset = Vector3.zero;
-        if (shakeTimeRemaining > 0f)
+        Vector3 desiredFocus = target.position + (controller != null ? controller.MoveDirection * 1.25f : Vector3.zero);
+        float desiredSize = normalSize;
+        if (boss != null && GameManager.Instance != null && GameManager.Instance.IsCombatActive)
         {
-            float fade = Mathf.Clamp01(shakeTimeRemaining / shakeDuration);
-            shakeOffset = Random.insideUnitSphere * shakeStrength * fade;
-            shakeOffset.y *= 0.35f;
+            desiredFocus = Vector3.Lerp(target.position, boss.transform.position, 0.5f);
+            desiredSize = Mathf.Clamp(Vector3.Distance(target.position, boss.transform.position) * 0.5f + 5f, normalSize, 17f);
+        }
+        desiredFocus.x = Mathf.Clamp(desiredFocus.x, -19f, 19f);
+        desiredFocus.z = Mathf.Clamp(desiredFocus.z, -19f, 19f);
+        float blend = 1f - Mathf.Exp(-followSpeed * Time.deltaTime);
+        focus = initialized ? Vector3.Lerp(focus, desiredFocus, blend) : desiredFocus;
+        initialized = true;
+        view.orthographicSize = Mathf.Lerp(view.orthographicSize, desiredSize, blend);
+        Vector3 shake = Vector3.zero;
+        if (screenShake && shakeTimeRemaining > 0f)
+        {
+            float strength = shakeStrength * Mathf.Clamp01(shakeTimeRemaining / shakeDuration);
+            shake = new Vector3(Mathf.PerlinNoise(Time.time * 37f, 0f) - 0.5f, 0f, Mathf.PerlinNoise(0f, Time.time * 43f) - 0.5f) * strength;
             shakeTimeRemaining -= Time.deltaTime;
-            if (shakeTimeRemaining <= 0f)
-            {
-                shakeStrength = 0f;
-                shakeDuration = 0f;
-            }
+            if (shakeTimeRemaining <= 0f) shakeStrength = shakeDuration = 0f;
         }
-
-        Vector3 desired = target.position + offset + shakeOffset;
-        transform.position = Vector3.Lerp(transform.position, desired, followSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(57f, 0f, 0f);
+        // Use a fixed pitch so touch movement and the battlefield stay predictable.
+        transform.rotation = Quaternion.Euler(60f, 0f, 0f);
+        transform.position = focus - transform.forward * 24f + shake;
+        float aspect = Screen.width / (float)Mathf.Max(1, Screen.height);
+        float height = Mathf.Min(1f, aspect / (16f / 9f));
+        view.rect = new Rect(0f, (1f - height) * 0.5f, 1f, height);
     }
 }

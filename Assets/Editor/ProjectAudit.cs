@@ -33,7 +33,7 @@ public static class ProjectAudit
                 UnityEngine.Random.InitState(5092026);
                 deadline = EditorApplication.timeSinceStartup + 220;
                 lastFrame = -1;
-                routine = SessionState.GetBool(Active + ".Shots", false) ? ShotDiagnostics() : RunScenarios();
+                routine = SessionState.GetBool(Active + ".Mobile", false) ? MobileScenarios() : SessionState.GetBool(Active + ".Shots", false) ? ShotDiagnostics() : RunScenarios();
                 Application.logMessageReceived += CaptureLog;
                 EditorApplication.update += Tick;
             }
@@ -42,6 +42,7 @@ public static class ProjectAudit
 
     public static void Run()
     {
+        SessionState.SetBool(Active + ".Mobile", false);
         SessionState.SetBool(Active + ".Shots", false);
         Directory.CreateDirectory(Output);
         Inventory();
@@ -52,11 +53,205 @@ public static class ProjectAudit
 
     public static void RunShotDiagnostics()
     {
+        SessionState.SetBool(Active + ".Mobile", false);
         Directory.CreateDirectory(Output);
         SessionState.SetBool(Active + ".Shots", true);
         SessionState.SetBool(Active, true);
         EditorSceneManager.OpenScene("Assets/Scenes/Demo_Main.unity");
         EditorApplication.EnterPlaymode();
+    }
+
+    public static void RunMobileTests()
+    {
+        Directory.CreateDirectory(Output);
+        SessionState.SetBool(Active + ".Mobile", true);
+        SessionState.SetBool(Active, true);
+        EditorSceneManager.OpenScene("Assets/Scenes/Demo_Main.unity");
+        EditorApplication.EnterPlaymode();
+    }
+
+    private static IEnumerator MobileScenarios()
+    {
+        yield return null;
+        yield return null;
+        var gm = GameManager.Instance;
+        Capture("mobile_00_hangar");
+        Capture("mobile_00_hangar_wide", 2400, 1080, new Rect(90, 35, 2220, 1045));
+        Click("DeployButton");
+        gm.stageManager.StopStage();
+        var player = gm.playerController;
+        player.enabled = false;
+        player.automaticFire = false;
+        player.InputRouter.readKeyboard = false;
+        yield return null;
+        var controls = player.GetComponent<MobileControls>();
+        var joystick = controls.Joystick;
+        Canvas.ForceUpdateCanvases();
+        var pointer = new PointerEventData(EventSystem.current) { pointerId = 31, position = RectTransformUtility.WorldToScreenPoint(null, joystick.transform.TransformPoint(new Vector3(44, 0, 0))) };
+        ExecuteEvents.Execute(joystick.gameObject, pointer, ExecuteEvents.pointerDownHandler);
+        Check(joystick.Value.x > 0.99f, "stick_drag");
+        var second = new PointerEventData(EventSystem.current) { pointerId = 32, position = pointer.position - Vector2.right * 40 };
+        ExecuteEvents.Execute(joystick.gameObject, second, ExecuteEvents.pointerDownHandler);
+        Check(joystick.PointerId == 31 && joystick.Value.x > 0.99f, "stick_pointer_ownership");
+        var dash = GameObject.Find("DashButton");
+        ExecuteEvents.Execute(dash, second, ExecuteEvents.pointerDownHandler);
+        var command = player.InputRouter.ReadCommand();
+        Check(command.Move.x > 0.99f && command.Dash, "two_finger_move_dash");
+        ExecuteEvents.Execute(joystick.gameObject, second, ExecuteEvents.pointerUpHandler);
+        Check(joystick.Value.x > 0.99f, "other_finger_release");
+        ExecuteEvents.Execute(joystick.gameObject, pointer, ExecuteEvents.pointerUpHandler);
+        Check(player.InputRouter.ReadCommand().Move == Vector2.zero, "release_clears_move");
+        ExecuteEvents.Execute(joystick.gameObject, pointer, ExecuteEvents.pointerDownHandler);
+        Click("PauseButton");
+        yield return null;
+        Check(joystick.Value == Vector2.zero && player.InputRouter.ReadCommand().Move == Vector2.zero, "pause_clears_input");
+        Capture("mobile_00_pause", 1280, 720);
+        Click("ResumeButton");
+        yield return null;
+        Check(gm.IsCombatActive, "resume_combat");
+
+        float cardinal = 0f;
+        foreach (Vector2 movement in new[] { Vector2.right, Vector2.one })
+        {
+            Warp(player, Vector3.zero);
+            for (int i = 0; i < 60; i++)
+            {
+                player.Simulate(new PlayerCommand { Move = movement }, 1f / 60f);
+                yield return null;
+            }
+            float distance = new Vector2(player.transform.position.x, player.transform.position.z).magnitude;
+            if (movement == Vector2.right) cardinal = distance;
+            else Check(Mathf.Abs(distance - cardinal) < 0.12f, "diagonal_speed_normalized");
+            Check(distance > 6f && distance < 7.6f, "motor_distance_" + movement);
+            for (int i = 0; i < 20; i++) { player.Simulate(default, 1f / 60f); yield return null; }
+            Check(player.Velocity.magnitude < 0.02f, "motor_brakes");
+        }
+        Warp(player, Vector3.zero);
+        var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        wall.name = "AuditMovementWall";
+        wall.transform.position = new Vector3(2, 1.5f, 0);
+        wall.transform.localScale = new Vector3(0.4f, 3, 8);
+        Physics.SyncTransforms();
+        Vector3 beforeDash = player.transform.position;
+        Check(player.TryDash(Vector2.right), "dash_accepted");
+        Check(player.transform.position == beforeDash, "dash_not_teleport");
+        for (int i = 0; i < 20; i++) { player.Simulate(default, 1f / 60f); yield return null; }
+        Check(player.transform.position.x > 0.4f && player.transform.position.x < 1.15f, "dash_stops_at_wall");
+        Check(!player.TryDash(Vector2.right), "dash_cooldown");
+        Object.Destroy(wall);
+        yield return null;
+        Warp(player, Vector3.zero);
+        float settle = Time.time + 0.5f;
+        while (Time.time < settle) yield return null;
+        var enemy = SpawnStationaryEnemy(new Vector3(0, 0, 6));
+        Physics.SyncTransforms();
+        player.AutoAim.Clear();
+        player.AutoAim.Tick();
+        Check(player.AutoAim.CurrentTarget == enemy, "auto_acquires_visible_target");
+        var farther = SpawnStationaryEnemy(new Vector3(4.5f, 0, 0));
+        Physics.SyncTransforms();
+        settle = Time.time + 0.12f;
+        while (Time.time < settle) yield return null;
+        player.AutoAim.Tick();
+        Check(player.AutoAim.CurrentTarget == enemy, "auto_target_hysteresis");
+        farther.transform.position = new Vector3(3, 0, 0);
+        Physics.SyncTransforms();
+        settle = Time.time + 0.12f;
+        while (Time.time < settle) yield return null;
+        player.AutoAim.Tick();
+        Check(player.AutoAim.CurrentTarget == farther, "auto_switches_closer_target");
+        Object.Destroy(farther.gameObject);
+        var blocker = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        blocker.transform.position = new Vector3(0, 1.5f, 3);
+        blocker.transform.localScale = new Vector3(3, 3, 0.4f);
+        Physics.SyncTransforms();
+        Check(!player.AutoAim.IsValidTarget(enemy), "auto_rejects_occlusion");
+        Object.Destroy(blocker);
+        enemy.transform.position = Vector3.forward * 30;
+        Physics.SyncTransforms();
+        Check(!player.AutoAim.IsValidTarget(enemy), "auto_rejects_far_target");
+        enemy.transform.position = new Vector3(0, 0, 6);
+        enemy.SetMaxHealth(500, true);
+        yield return null;
+        Physics.SyncTransforms();
+        player.AutoAim.Clear();
+        player.AutoAim.Tick();
+        player.AimAt(enemy.AimCenter);
+        float hp = enemy.CurrentHealth;
+        Check(player.weaponController.TryFireSkill(enemy), "skill_without_equipment");
+        Check(!player.weaponController.TryFireSkill(enemy), "skill_cooldown");
+        settle = Time.time + 1.5f;
+        while (Time.time < settle) yield return null;
+        Check(enemy.CurrentHealth < hp, "homing_skill_real_hit");
+        Record("SKILL_DAMAGE " + (hp - enemy.CurrentHealth));
+        var safe = SafeAreaLayout.Calculate(new Vector2(2400, 1080), new Rect(90, 35, 2220, 1045));
+        Check(safe.xMin >= 0.0374f && safe.xMax <= 0.9626f && safe.yMin > 0f, "notch_safe_area");
+        var narrow = SafeAreaLayout.Calculate(new Vector2(1024, 768), new Rect(0, 0, 1024, 768));
+        Check(Mathf.Abs(narrow.yMin - 0.125f) < 0.001f && Mathf.Abs(narrow.height - 0.75f) < 0.001f, "narrow_letterbox");
+        Capture("mobile_01_controls");
+        Capture("mobile_02_wide", 2400, 1080);
+        Record("MOBILE_FOCUSED_PASS");
+
+        gm.RestartRun();
+        yield return null;
+        yield return null;
+        gm = GameManager.Instance;
+        gm.playerController.InputRouter.readKeyboard = false;
+        Click("DeployButton");
+        float started = Time.time;
+        int choices = 0;
+        bool bossSeen = false;
+        bool captured = false;
+        while (gm.Phase != GamePhase.Result && Time.time - started < 150f)
+        {
+            if (gm.Phase == GamePhase.Reward)
+            {
+                Capture("mobile_05_reward", 2400, 1080, new Rect(90, 35, 2220, 1045));
+                Click("ChooseButton");
+                choices++;
+            }
+            if (!captured && Time.time - started > 3f) { Capture("mobile_03_auto_combat"); captured = true; }
+            var bossActor = Object.FindFirstObjectByType<BossController>();
+            if (bossActor != null && !bossSeen)
+            {
+                float cameraSettle = Time.time + 0.7f;
+                while (Time.time < cameraSettle) yield return null;
+                Vector3 bossPoint = Camera.main.WorldToViewportPoint(bossActor.GetComponent<Damageable>().AimCenter);
+                Check(bossPoint.y > 0.12f && bossPoint.y < 0.85f && bossPoint.x > 0.1f && bossPoint.x < 0.9f, "boss_camera_framing");
+                Capture("mobile_04_boss");
+                bossSeen = true;
+            }
+            yield return null;
+        }
+        Record("MOBILE_LIVE_FLOW phase=" + gm.Phase + " hp=" + gm.playerStats.CurrentHp + " kills=" + gm.Kills + " choices=" + choices + " boss=" + bossSeen + " seconds=" + (Time.time - started));
+        Check(gm.Phase == GamePhase.Result && gm.playerStats.CurrentHp > 0 && choices == 1 && bossSeen, "automatic_fire_full_loop");
+        Capture("mobile_06_result", 1280, 720);
+        Click("ReturnHangarButton");
+        yield return null;
+        yield return null;
+        Check(GameManager.Instance.Phase == GamePhase.Hangar, "mobile_restart");
+    }
+
+    private static void Warp(PlayerController player, Vector3 position)
+    {
+        player.CancelMovement();
+        player.Motor.enabled = false;
+        player.transform.position = position;
+        player.Motor.enabled = true;
+        Physics.SyncTransforms();
+    }
+
+    private static Damageable SpawnStationaryEnemy(Vector3 position)
+    {
+        var enemy = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Enemy_Melee.prefab"), position, Quaternion.identity);
+        enemy.GetComponent<EnemyBase>().enabled = false;
+        return enemy.GetComponent<Damageable>();
+    }
+
+    private static void Check(bool valid, string name)
+    {
+        if (!valid) throw new Exception("MOBILE_FAIL " + name);
+        Record("MOBILE_PASS " + name);
     }
 
     private static IEnumerator ShotDiagnostics()
@@ -340,36 +535,70 @@ public static class ProjectAudit
         Record("UI_CLICK " + name);
     }
 
-    private static void Capture(string name, int width = 1920, int height = 1080)
+    private static void Capture(string name, int width = 1920, int height = 1080, Rect? safeArea = null)
     {
         if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null) return;
         var camera = Camera.main;
         var canvases = Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None).Where(c => c.renderMode != RenderMode.WorldSpace).ToArray();
         var modes = canvases.Select(c => c.renderMode).ToArray();
+        var canvasCameras = canvases.Select(c => c.worldCamera).ToArray();
+        var canvasScales = canvases.Select(c => c.scaleFactor).ToArray();
+        var nodes = canvases.SelectMany(c => c.GetComponentsInChildren<Transform>(true)).Distinct().ToArray();
+        var layers = nodes.Select(t => t.gameObject.layer).ToArray();
+        var safeLayouts = canvases.SelectMany(c => c.GetComponentsInChildren<SafeAreaLayout>(true)).ToArray();
         var texture = new RenderTexture(width, height, 24);
         var previousTarget = camera.targetTexture;
         var previousActive = RenderTexture.active;
+        var previousRect = camera.rect;
+        int previousMask = camera.cullingMask;
+        var uiCamera = new GameObject("AuditUICamera").AddComponent<Camera>();
+        uiCamera.enabled = false;
+        uiCamera.orthographic = true;
+        uiCamera.transform.position = new Vector3(0, 10000, 0);
+        uiCamera.clearFlags = CameraClearFlags.Depth;
+        uiCamera.cullingMask = 1 << 5;
+        uiCamera.nearClipPlane = 0.01f;
+        uiCamera.farClipPlane = 10;
+        uiCamera.targetTexture = texture;
+        float viewportHeight = Mathf.Min(1f, width / (float)height * 9f / 16f);
+        camera.rect = new Rect(0, (1f - viewportHeight) * 0.5f, 1, viewportHeight);
+        camera.cullingMask &= ~(1 << 5);
         camera.targetTexture = texture;
+        foreach (var node in nodes) node.gameObject.layer = 5;
         for (int i = 0; i < canvases.Length; i++)
         {
             canvases[i].renderMode = RenderMode.ScreenSpaceCamera;
-            canvases[i].worldCamera = camera;
+            canvases[i].worldCamera = uiCamera;
             canvases[i].planeDistance = 1;
+            var scaler = canvases[i].GetComponent<CanvasScaler>();
+            if (scaler != null) canvases[i].scaleFactor = Mathf.Min(height, width * 9f / 16f) / scaler.referenceResolution.y;
         }
+        foreach (var layout in safeLayouts) layout.Apply(new Vector2(width, height), safeArea ?? new Rect(0, 0, width, height));
         Canvas.ForceUpdateCanvases();
         camera.Render();
+        uiCamera.Render();
         RenderTexture.active = texture;
         var frame = new Texture2D(width, height, TextureFormat.RGB24, false);
         frame.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         frame.Apply();
         File.WriteAllBytes(Path.Combine(Output, name + ".png"), frame.EncodeToPNG());
         Record("CAPTURE " + name + " colors=" + frame.GetPixels32().Where((p, i) => i % 997 == 0).Distinct().Count());
-        for (int i = 0; i < canvases.Length; i++) canvases[i].renderMode = modes[i];
+        for (int i = 0; i < canvases.Length; i++)
+        {
+            canvases[i].renderMode = modes[i];
+            canvases[i].worldCamera = canvasCameras[i];
+            canvases[i].scaleFactor = canvasScales[i];
+        }
+        for (int i = 0; i < nodes.Length; i++) nodes[i].gameObject.layer = layers[i];
+        foreach (var layout in safeLayouts) layout.Apply(new Vector2(Screen.width, Screen.height), Screen.safeArea);
+        camera.rect = previousRect;
+        camera.cullingMask = previousMask;
         camera.targetTexture = previousTarget;
         RenderTexture.active = previousActive;
         texture.Release();
         Object.DestroyImmediate(texture);
         Object.DestroyImmediate(frame);
+        Object.DestroyImmediate(uiCamera.gameObject);
     }
 
     private static void CaptureLog(string condition, string stack, LogType type)

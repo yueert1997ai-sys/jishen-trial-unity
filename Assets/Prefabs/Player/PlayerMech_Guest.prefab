@@ -822,8 +822,8 @@ MonoBehaviour:
   baseEnergy: 100
   energyRegenPerSecond: 34
   baseMoveSpeed: 7.4
-  baseDashDistance: 5.8
-  baseDashCooldown: 0.95
+  baseDashDistance: 5
+  baseDashCooldown: 1.25
   incomingDamageMultiplier: 0.85
 --- !u!114 &612790392898976176
 MonoBehaviour:

@@ -14,6 +14,8 @@ public class WeaponController : MonoBehaviour
     public float beamFireInterval = 0.18f;
     public float missileFireInterval = 1.2f;
     public event Action BeamFired;
+    public float SkillCooldownRemaining => Mathf.Max(0f, nextSkillTime - Time.time);
+    private float nextSkillTime;
 
     private float nextBeamTime;
     private float nextMissileTime;
@@ -59,20 +61,6 @@ public class WeaponController : MonoBehaviour
             }
         }
 
-        if (GameManager.Instance != null && !GameManager.Instance.IsCombatActive)
-        {
-            return;
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            TryFireBeam();
-        }
-
-        if (Input.GetMouseButton(1))
-        {
-            TryFireMissiles();
-        }
     }
 
     public void RefreshEquipment()
@@ -146,6 +134,20 @@ public class WeaponController : MonoBehaviour
         }
 
         GameAudio.Play(GameAudioCue.Missile, 0.3f, UnityEngine.Random.Range(0.93f, 1.02f));
+    }
+
+    public bool TryFireSkill(Damageable target)
+    {
+        if (!CanFire() || Time.time < nextSkillTime || target == null || target.IsDead) return false;
+        nextSkillTime = Time.time + 10f;
+        for (int i = 0; i < 4; i++)
+        {
+            Vector3 origin = GetMuzzlePosition() + Vector3.up * 0.2f + transform.right * (i % 2 == 0 ? -0.4f : 0.4f);
+            Vector3 direction = Quaternion.AngleAxis(Mathf.Lerp(-24f, 24f, i / 3f), Vector3.up) * (target.AimCenter - origin).normalized;
+            CreateMissileProjectile(origin, direction, 18f * GetDamageMultiplier(), 1.6f, target);
+        }
+        GameAudio.Play(GameAudioCue.Missile, 0.35f);
+        return true;
     }
 
     private bool CanFire()

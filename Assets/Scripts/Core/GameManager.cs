@@ -322,12 +322,22 @@ public class GameManager : MonoBehaviour
 
     private void StopCombat()
     {
+        ResetPlayerInput();
         if (stageManager != null) stageManager.StopStage();
         foreach (var projectile in FindObjectsByType<Projectile>(FindObjectsSortMode.None))
         {
             projectile.gameObject.SetActive(false);
             Destroy(projectile.gameObject);
         }
+    }
+
+    private void ResetPlayerInput()
+    {
+        if (playerController == null) return;
+        playerController.CancelMovement();
+        if (playerController.InputRouter != null) playerController.InputRouter.Clear();
+        var controls = playerController.GetComponent<MobileControls>();
+        if (controls != null) controls.SetVisible(false);
     }
 
     public void AddCoins(int amount)
@@ -377,6 +387,7 @@ public class GameManager : MonoBehaviour
         {
             timeScaleBeforePause = Mathf.Max(0.0001f, Time.timeScale);
             IsPaused = true;
+            ResetPlayerInput();
             Time.timeScale = 0f;
             AudioListener.pause = true;
             if (pauseUI != null)

@@ -7,8 +7,8 @@ public class PlayerStats : MonoBehaviour
     public float baseEnergy = 100f;
     public float energyRegenPerSecond = 34f;
     public float baseMoveSpeed = 7.4f;
-    public float baseDashDistance = 5.8f;
-    public float baseDashCooldown = 0.95f;
+    public float baseDashDistance = 5f;
+    public float baseDashCooldown = 1.25f;
     public float incomingDamageMultiplier = 0.85f;
 
     public float CurrentHp { get; private set; }

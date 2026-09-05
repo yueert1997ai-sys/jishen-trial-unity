@@ -1,189 +1,143 @@
 using System;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class PlayerController : MonoBehaviour
 {
     public PlayerStats stats;
     public WeaponController weaponController;
+    public float acceleration = 42f;
+    public float braking = 65f;
+    public float dashDuration = 0.2f;
+    public bool automaticFire = true;
+
+    public PlayerInputRouter InputRouter { get; private set; }
+    public AutoAimController AutoAim { get; private set; }
+    public CharacterController Motor { get; private set; }
     public Vector3 AimDirection { get; private set; }
     public Vector3 AimPoint { get; private set; }
     public bool HasAimPoint { get; private set; }
     public Vector3 MoveDirection { get; private set; }
-    public float DashCooldownRemaining { get { return Mathf.Max(0f, nextDashTime - Time.time); } }
-    public bool IsDashReady { get { return DashCooldownRemaining <= 0f; } }
+    public Vector3 Velocity { get; private set; }
+    public bool IsDashing => dashRemaining > 0f;
+    public float DashCooldownRemaining => Mathf.Max(0f, nextDashTime - Time.time);
+    public bool IsDashReady => DashCooldownRemaining <= 0f;
     public event Action<Vector3> Dashed;
 
-    private float nextDashTime;
     private Damageable damageable;
+    private Vector3 planarVelocity;
+    private Vector3 dashVelocity;
+    private float dashRemaining;
+    private float nextDashTime;
 
     private void Awake()
     {
-        if (stats == null)
-        {
-            stats = GetComponent<PlayerStats>();
-        }
-
-        if (weaponController == null)
-        {
-            weaponController = GetComponent<WeaponController>();
-        }
-
+        if (stats == null) stats = GetComponent<PlayerStats>();
+        if (weaponController == null) weaponController = GetComponent<WeaponController>();
         damageable = GetComponent<Damageable>();
+        InputRouter = GetComponent<PlayerInputRouter>() ?? gameObject.AddComponent<PlayerInputRouter>();
+        AutoAim = GetComponent<AutoAimController>() ?? gameObject.AddComponent<AutoAimController>();
+        Motor = GetComponent<CharacterController>();
+        if (Motor == null)
+        {
+            foreach (var oldCollider in GetComponentsInChildren<Collider>(true))
+                if (oldCollider.GetComponentInParent<Damageable>() == damageable) oldCollider.enabled = false;
+            Motor = gameObject.AddComponent<CharacterController>();
+            Motor.height = 3.25f;
+            Motor.center = new Vector3(0f, 1.65f, 0f);
+            Motor.radius = 0.72f;
+            Motor.stepOffset = 0.25f;
+            Motor.skinWidth = 0.04f;
+            Motor.minMoveDistance = 0f;
+        }
         AimDirection = Vector3.forward;
-        MoveDirection = Vector3.zero;
     }
 
-    private void Update()
+    private void Start()
     {
-        bool canControl = GameManager.Instance == null || GameManager.Instance.CanPlayerControl;
-        if (!canControl)
+        if (GetComponent<MobileControls>() == null) gameObject.AddComponent<MobileControls>();
+    }
+
+    private void Update() { Simulate(InputRouter.ReadCommand(), Time.deltaTime); }
+
+    public void Simulate(PlayerCommand command, float deltaTime)
+    {
+        var gm = GameManager.Instance;
+        if ((gm != null && !gm.CanPlayerControl) || (damageable != null && damageable.IsDead))
         {
-            MoveDirection = Vector3.zero;
+            CancelMovement();
+            AutoAim.Clear();
             return;
         }
+        if (deltaTime <= 0f) return;
+        command.Move = Vector2.ClampMagnitude(command.Move, 1f);
+        if (command.Dash) TryDash(command.Move);
+        float speed = stats != null ? stats.MoveSpeed : 7.4f;
+        Vector3 desired = new Vector3(command.Move.x, 0f, command.Move.y) * speed;
+        planarVelocity = Vector3.MoveTowards(planarVelocity, desired, (desired.sqrMagnitude > 0f ? acceleration : braking) * deltaTime);
+        float dashStep = Mathf.Min(dashRemaining, deltaTime);
+        Vector3 displacement = dashVelocity * dashStep + planarVelocity * (deltaTime - dashStep);
+        dashRemaining = Mathf.Max(0f, dashRemaining - deltaTime);
+        Vector3 before = transform.position;
+        Vector3 bounded = before + displacement;
+        bounded.x = Mathf.Clamp(bounded.x, -27f, 27f);
+        bounded.z = Mathf.Clamp(bounded.z, -27f, 27f);
+        var collision = Motor.Move(bounded - before + Vector3.down * 2f * deltaTime);
+        if ((collision & CollisionFlags.Sides) != 0) dashRemaining = 0f;
+        Velocity = (transform.position - before) / deltaTime;
+        Velocity = new Vector3(Velocity.x, 0f, Velocity.z);
+        MoveDirection = Vector3.ClampMagnitude(Velocity / speed, 1f);
 
-        UpdateAim();
-        Move();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (gm == null || gm.IsCombatActive)
         {
-            TryDash();
-        }
-    }
-
-    private void Move()
-    {
-        Vector3 movement = Vector3.zero;
-        if (Input.GetKey(KeyCode.W))
-        {
-            movement.z += 1f;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            movement.z -= 1f;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            movement.x -= 1f;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            movement.x += 1f;
-        }
-
-        if (movement.sqrMagnitude > 1f)
-        {
-            movement.Normalize();
-        }
-
-        MoveDirection = movement;
-        float speed = stats != null ? stats.MoveSpeed : 7f;
-        transform.position += movement * speed * Time.deltaTime;
-        ClampToArena();
-    }
-
-    private void UpdateAim()
-    {
-        Camera camera = Camera.main;
-        if (camera == null)
-        {
-            return;
-        }
-
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, camera.farClipPlane, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
-        {
-            Damageable target = hit.collider.GetComponentInParent<Damageable>();
-            if (target != null && target != damageable && !target.IsDead)
+            AutoAim.Tick();
+            var target = AutoAim.CurrentTarget;
+            if (target != null)
             {
-                AimAt(hit.collider.bounds.center);
-                return;
+                AimAt(target.AimCenter);
+                if (automaticFire && AutoAim.IsValidTarget(target)) weaponController.TryFireBeam();
+                if (command.Skill && AutoAim.IsValidTarget(target)) weaponController.TryFireSkill(target);
             }
         }
-
-        Plane groundPlane = new Plane(Vector3.up, Vector3.up * 0.75f);
-        float distance;
-        if (!groundPlane.Raycast(ray, out distance))
-        {
-            return;
-        }
-
-        AimAt(ray.GetPoint(distance));
+        else AutoAim.Clear();
+        if (AutoAim.CurrentTarget == null && command.Move.sqrMagnitude > 0.02f)
+            AimAt(transform.position + new Vector3(command.Move.x, 0.1f, command.Move.y) * 10f);
     }
 
     public void AimAt(Vector3 worldPoint)
     {
         Vector3 direction = worldPoint - transform.position;
         direction.y = 0f;
-        if (direction.sqrMagnitude < 0.01f)
-        {
-            return;
-        }
-
+        if (direction.sqrMagnitude < 0.01f) return;
         AimPoint = worldPoint;
         HasAimPoint = true;
         AimDirection = direction.normalized;
         transform.rotation = Quaternion.LookRotation(AimDirection, Vector3.up);
     }
 
-    private void TryDash()
+    public bool TryDash(Vector2 movement)
     {
-        if (Time.time < nextDashTime)
-        {
-            return;
-        }
-
-        if (stats != null && !stats.TrySpendEnergy(25f))
-        {
-            return;
-        }
-
-        Vector3 dashDirection = MoveDirection.sqrMagnitude > 0.01f ? MoveDirection : AimDirection;
-        if (dashDirection.sqrMagnitude < 0.01f)
-        {
-            dashDirection = transform.forward;
-        }
-
-        float dashDistance = stats != null ? stats.DashDistance : 5f;
-        Vector3 dashStart = transform.position;
-        transform.position += dashDirection.normalized * dashDistance;
-        ClampToArena();
-
-        if (damageable != null)
-        {
-            damageable.SetInvulnerable(0.22f);
-        }
-
-        CombatFeedback.SpawnGroundLine(dashStart, dashDirection, dashDistance, 0.5f, 0.18f, new Color(0.08f, 0.78f, 1f, 1f));
-        if (Dashed != null)
-        {
-            Dashed.Invoke(dashDirection.normalized);
-        }
-        GameAudio.Play(GameAudioCue.Dash, 0.42f, UnityEngine.Random.Range(0.95f, 1.05f));
-        CameraFollow cameraFollow = Camera.main != null ? Camera.main.GetComponent<CameraFollow>() : null;
-        if (cameraFollow != null)
-        {
-            cameraFollow.AddShake(0.08f, 0.12f);
-        }
-
-        nextDashTime = Time.time + (stats != null ? stats.DashCooldown : 1.2f);
-
-        EquipmentManager equipmentManager = GetComponent<EquipmentManager>();
-        int boosterLevel = equipmentManager != null ? equipmentManager.GetLevel(EquipmentType.Backpack) : 0;
-        if (boosterLevel >= 3 && weaponController != null)
-        {
-            weaponController.SetTemporaryFireRateBonus(1.45f, 1.25f);
-        }
+        var gm = GameManager.Instance;
+        if ((gm != null && !gm.CanPlayerControl) || (damageable != null && damageable.IsDead) || Time.time < nextDashTime) return false;
+        if (stats != null && !stats.TrySpendEnergy(25f)) return false;
+        Vector3 direction = movement.sqrMagnitude > 0.01f ? new Vector3(movement.x, 0f, movement.y) : AimDirection;
+        if (direction.sqrMagnitude < 0.01f) direction = transform.forward;
+        direction.Normalize();
+        dashRemaining = Mathf.Max(0.05f, dashDuration);
+        dashVelocity = direction * (stats != null ? stats.DashDistance : 5f) / dashRemaining;
+        nextDashTime = Time.time + (stats != null ? stats.DashCooldown : 1.25f);
+        if (damageable != null) damageable.SetInvulnerable(0.16f);
+        Dashed?.Invoke(direction);
+        GameAudio.Play(GameAudioCue.Dash, 0.35f);
+        return true;
     }
 
-    private void ClampToArena()
+    public void CancelMovement()
     {
-        Vector3 position = transform.position;
-        position.x = Mathf.Clamp(position.x, -27f, 27f);
-        position.z = Mathf.Clamp(position.z, -27f, 27f);
-        transform.position = position;
+        planarVelocity = Velocity = MoveDirection = Vector3.zero;
+        dashRemaining = 0f;
+        if (InputRouter != null) InputRouter.Clear();
     }
+
+    private void OnDisable() { CancelMovement(); }
 }

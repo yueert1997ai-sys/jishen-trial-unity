@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageInfo
@@ -19,6 +20,22 @@ public class DamageInfo
 
 public class Damageable : MonoBehaviour
 {
+    private static readonly List<Damageable> active = new List<Damageable>();
+    public static IReadOnlyList<Damageable> Active => active;
+    private Collider aimCollider;
+    public Vector3 AimCenter
+    {
+        get
+        {
+            if (aimCollider == null || !aimCollider.enabled) aimCollider = GetComponent<CharacterController>() as Collider ?? GetComponent<Collider>();
+            return aimCollider != null && aimCollider.enabled ? aimCollider.bounds.center : transform.position + Vector3.up * 0.8f;
+        }
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetRegistry() { active.Clear(); }
+    private void OnEnable() { if (!active.Contains(this)) active.Add(this); }
+    private void OnDisable() { active.Remove(this); }
     public int team = 1;
     public float maxHealth = 50f;
     public bool destroyOnDeath = true;

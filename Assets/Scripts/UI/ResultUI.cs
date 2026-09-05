@@ -1,88 +1,43 @@
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ResultUI : MonoBehaviour
 {
     private Canvas canvas;
-    private RectTransform panel;
+    private Text title;
     private Text resultText;
     private GameManager gameManager;
 
     private void Update()
     {
-        if (panel != null && panel.gameObject.activeSelf && Input.GetKeyDown(KeyCode.R))
-        {
-            if (gameManager != null)
-            {
-                gameManager.RestartRun();
-            }
-        }
+        if (canvas != null && canvas.gameObject.activeSelf && Input.GetKeyDown(KeyCode.R))
+            gameManager.RestartRun();
     }
 
     public void Show(GameManager owner, bool victory)
     {
         gameManager = owner;
         BuildUI();
-        panel.gameObject.SetActive(true);
-
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine(victory ? "Victory" : "Mission failed");
-        builder.AppendLine("");
-        builder.AppendLine("Kills: " + gameManager.Kills);
-        builder.AppendLine("Salvage: " + gameManager.Coins);
-        builder.AppendLine("Difficulty: " + gameManager.DifficultyDisplayName);
-        builder.AppendLine("Mission time: " + Mathf.CeilToInt(gameManager.GetRunTime()) + "s");
-        builder.AppendLine("");
-        if (gameManager.upgradeSystem != null)
-        {
-            builder.AppendLine(gameManager.upgradeSystem.GetSummary());
-        }
-        else if (gameManager.equipmentManager != null)
-        {
-            foreach (EquipmentManager.EquippedItem item in gameManager.equipmentManager.GetEquippedItems())
-            {
-                if (item.data != null)
-                {
-                    builder.AppendLine("- " + item.data.displayName + " Lv" + item.level);
-                }
-            }
-        }
-
-        resultText.text = builder.ToString();
+        canvas.gameObject.SetActive(true);
+        title.text = victory ? "MISSION COMPLETE" : "MISSION FAILED";
+        title.color = victory ? new Color(0.3f, 0.95f, 0.73f) : new Color(1f, 0.48f, 0.36f);
+        int seconds = Mathf.CeilToInt(gameManager.GetRunTime());
+        resultText.text = "Kills  " + gameManager.Kills + "     Salvage  " + gameManager.Coins
+            + "\n" + gameManager.DifficultyDisplayName + "     Time  " + (seconds / 60).ToString("00") + ":" + (seconds % 60).ToString("00")
+            + "\n\n" + (gameManager.upgradeSystem != null ? gameManager.upgradeSystem.GetSummary() : "");
     }
 
-    public void Hide()
-    {
-        if (panel != null)
-        {
-            panel.gameObject.SetActive(false);
-        }
-    }
+    public void Hide() { if (canvas != null) canvas.gameObject.SetActive(false); }
 
     private void BuildUI()
     {
-        if (canvas != null)
-        {
-            return;
-        }
-
-        canvas = RuntimeUIFactory.CreateCanvas("ResultCanvas");
+        if (canvas != null) return;
+        canvas = RuntimeUIFactory.CreateCanvas("ResultCanvas", 960);
         canvas.sortingOrder = 30;
-        panel = RuntimeUIFactory.CreatePanel(canvas.transform, "ResultPanel", new Vector2(0.28f, 0.18f), new Vector2(0.72f, 0.84f), Vector2.zero, Vector2.zero, new Color(0.02f, 0.04f, 0.07f, 0.96f));
-        resultText = RuntimeUIFactory.CreateText(panel, "ResultText", "", 30, TextAnchor.UpperLeft, Color.white);
-        RectTransform textRect = resultText.GetComponent<RectTransform>();
-        textRect.anchorMin = new Vector2(0.08f, 0.24f);
-        textRect.anchorMax = new Vector2(0.92f, 0.92f);
-        textRect.offsetMin = Vector2.zero;
-        textRect.offsetMax = Vector2.zero;
-
-        Button back = RuntimeUIFactory.CreateButton(panel, "ReturnHangarButton", "Return to hangar");
-        RectTransform backRect = back.GetComponent<RectTransform>();
-        backRect.anchorMin = new Vector2(0.08f, 0.08f);
-        backRect.anchorMax = new Vector2(0.92f, 0.18f);
-        backRect.offsetMin = Vector2.zero;
-        backRect.offsetMax = Vector2.zero;
-        back.onClick.AddListener(() => gameManager.RestartRun());
+        var panel = RuntimeUIFactory.CreateMenuSurface(canvas, "ResultPanel", new Vector2(640, 420));
+        title = RuntimeUIFactory.MenuText(panel, "ResultTitle", "", 28, new Vector2(320, -54), new Vector2(560, 48));
+        resultText = RuntimeUIFactory.MenuText(panel, "ResultText", "", 18, new Vector2(320, -220), new Vector2(560, 246), TextAnchor.UpperLeft);
+        RuntimeUIFactory.MenuButton(panel, "ReturnHangarButton", "Return to hangar", new Vector2(320, -370), new Vector2(560, 56))
+            .onClick.AddListener(() => gameManager.RestartRun());
     }
 }
