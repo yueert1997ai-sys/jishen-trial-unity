@@ -42,6 +42,13 @@ public class GameManager : MonoBehaviour
     public string ProgressText { get; private set; }
     public bool IsPaused { get; private set; }
     public RunDifficulty Difficulty { get; private set; } = RunDifficulty.Cadet;
+    public int CompletedEncounters { get; private set; }
+    public bool ContinueUsed { get; private set; }
+    public bool LastResultVictory { get; private set; }
+    public bool CanContinue => Phase == GamePhase.Result && !LastResultVictory && !ContinueUsed
+        && Difficulty == RunDifficulty.Cadet && checkpoint != null;
+    public int CheckpointEncounter => checkpoint != null ? checkpoint.encounter : -1;
+    private RunCheckpoint checkpoint;
 
     public string DifficultyDisplayName
     {
@@ -176,6 +183,9 @@ public class GameManager : MonoBehaviour
 
         Coins = 0;
         Kills = 0;
+        CompletedEncounters = 0;
+        ContinueUsed = false;
+        checkpoint = null;
         if (runManager != null)
         {
             runManager.BeginRun();
@@ -192,7 +202,8 @@ public class GameManager : MonoBehaviour
             upgradeSystem.ResetUpgrades();
         }
 
-        StartStage(1);
+        playerController.GetComponent<Damageable>().RestoreLife(playerStats.MaxHp, playerStats.MaxHp);
+        StartEncounter(0, true);
     }
 
     public void SetDifficulty(RunDifficulty difficulty)
@@ -211,30 +222,40 @@ public class GameManager : MonoBehaviour
 
     public void StartStage(int stageIndex)
     {
+        StartEncounter((stageIndex - 1) * 3, true);
+    }
+
+    private void StartEncounter(int index, bool saveCheckpoint)
+    {
         SetPaused(false);
         Phase = GamePhase.Combat;
         if (combatHUD != null) combatHUD.SetVisible(true);
-        SetProgress("Stage " + stageIndex);
-        if (stageManager != null)
+        if (index == 0 || index == 3 || index == 6)
         {
-            stageManager.StartStage(stageIndex);
+            playerController.RestoreAt(new Vector3(0f, 0.1f, index == 6 ? -6f : -4f));
+            if (saveCheckpoint)
+            {
+                playerStats.Heal(playerStats.MaxHp);
+                checkpoint = new RunCheckpoint { encounter = index, kills = Kills, coins = Coins,
+                    seed = upgradeSystem.Seed, upgrades = new System.Collections.Generic.List<RunUpgradeKind>(upgradeSystem.Acquired).ToArray(),
+                    player = playerStats.Capture() };
+            }
         }
+        stageManager.StartEncounter(index);
+    }
+
+    public void OnEncounterCleared(int index)
+    {
+        if (Phase != GamePhase.Combat || stageManager.CurrentEncounter != index || CompletedEncounters != index) return;
+        CompletedEncounters++;
+        AddCoins(30 + index * 10);
+        EnterReward();
     }
 
     public void OnStageCleared(int stageIndex)
     {
-        if (Phase == GamePhase.Result)
-        {
-            return;
-        }
-
-        AddCoins(stageIndex == 1 ? 90 : 150);
-        if (stageIndex == 1)
-        {
-            EnterReward();
-            return;
-        }
-
+        if (Phase != GamePhase.Combat || stageIndex != 2 || CompletedEncounters != 6) return;
+        AddCoins(150);
         EnterResult(true);
     }
 
@@ -245,7 +266,7 @@ public class GameManager : MonoBehaviour
         Phase = GamePhase.Reward;
         StopCombat();
         if (combatHUD != null) combatHUD.SetVisible(false);
-        ProgressText = "Stage 1 cleared";
+        ProgressText = "ENCOUNTER " + CompletedEncounters + " / 6 CLEARED";
         GameAudio.Play(GameAudioCue.Reward, 0.45f, 1f);
         if (rewardUI != null)
         {
@@ -255,13 +276,13 @@ public class GameManager : MonoBehaviour
 
     public void FinishReward()
     {
-        if (Phase != GamePhase.Reward) return;
+        if (Phase != GamePhase.Reward || upgradeSystem.Count != CompletedEncounters) return;
         if (rewardUI != null)
         {
             rewardUI.Hide();
         }
 
-        StartStage(2);
+        StartEncounter(CompletedEncounters, true);
     }
 
     public void EnterShop()
@@ -289,6 +310,7 @@ public class GameManager : MonoBehaviour
         if (Phase == GamePhase.Result) return;
         SetPaused(false);
         Phase = GamePhase.Result;
+        LastResultVictory = victory;
         StopCombat();
         if (combatHUD != null) combatHUD.SetVisible(false);
         if (rewardUI != null) rewardUI.Hide();
@@ -413,6 +435,22 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         AudioListener.pause = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public bool ContinueRun()
+    {
+        if (!CanContinue) return false;
+        ContinueUsed = true;
+        resultUI.Hide();
+        Kills = checkpoint.kills;
+        Coins = checkpoint.coins;
+        CompletedEncounters = checkpoint.encounter;
+        playerStats.ResetStats();
+        upgradeSystem.Restore(checkpoint.upgrades, checkpoint.seed);
+        playerStats.Restore(checkpoint.player);
+        runManager.ResumeRun();
+        StartEncounter(checkpoint.encounter, false);
+        return true;
     }
 
     private void OnPlayerDied(Damageable playerDamageable)

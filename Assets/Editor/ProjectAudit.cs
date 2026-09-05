@@ -33,7 +33,7 @@ public static class ProjectAudit
                 UnityEngine.Random.InitState(5092026);
                 deadline = EditorApplication.timeSinceStartup + 300;
                 lastFrame = -1;
-                routine = SessionState.GetBool(Active + ".Feedback", false) ? FeedbackScenarios() : SessionState.GetBool(Active + ".Mobile", false) ? MobileScenarios() : SessionState.GetBool(Active + ".Shots", false) ? ShotDiagnostics() : RunScenarios();
+                routine = SessionState.GetBool(Active + ".Progression", false) ? ProgressionScenarios() : SessionState.GetBool(Active + ".Feedback", false) ? FeedbackScenarios() : SessionState.GetBool(Active + ".Mobile", false) ? MobileScenarios() : SessionState.GetBool(Active + ".Shots", false) ? ShotDiagnostics() : RunScenarios();
                 Application.logMessageReceived += CaptureLog;
                 EditorApplication.update += Tick;
             }
@@ -42,6 +42,7 @@ public static class ProjectAudit
 
     public static void Run()
     {
+        SessionState.SetBool(Active + ".Progression", false);
         SessionState.SetBool(Active + ".Feedback", false);
         SessionState.SetBool(Active + ".Mobile", false);
         SessionState.SetBool(Active + ".Shots", false);
@@ -54,6 +55,7 @@ public static class ProjectAudit
 
     public static void RunShotDiagnostics()
     {
+        SessionState.SetBool(Active + ".Progression", false);
         SessionState.SetBool(Active + ".Feedback", false);
         SessionState.SetBool(Active + ".Mobile", false);
         Directory.CreateDirectory(Output);
@@ -65,6 +67,7 @@ public static class ProjectAudit
 
     public static void RunMobileTests()
     {
+        SessionState.SetBool(Active + ".Progression", false);
         SessionState.SetBool(Active + ".Feedback", false);
         Directory.CreateDirectory(Output);
         SessionState.SetBool(Active + ".Mobile", true);
@@ -75,11 +78,115 @@ public static class ProjectAudit
 
     public static void RunFeedbackTests()
     {
+        SessionState.SetBool(Active + ".Progression", false);
         Directory.CreateDirectory(Output);
         SessionState.SetBool(Active + ".Feedback", true);
         SessionState.SetBool(Active, true);
         EditorSceneManager.OpenScene("Assets/Scenes/Demo_Main.unity");
         EditorApplication.EnterPlaymode();
+    }
+
+    public static void RunProgressionTests()
+    {
+        Directory.CreateDirectory(Output);
+        SessionState.SetBool(Active + ".Progression", true);
+        SessionState.SetBool(Active, true);
+        EditorSceneManager.OpenScene("Assets/Scenes/Demo_Main.unity");
+        EditorApplication.EnterPlaymode();
+    }
+
+    private static IEnumerator ProgressionScenarios()
+    {
+        yield return null;
+        yield return null;
+        var gm = GameManager.Instance;
+        Click("DeployButton");
+        gm.stageManager.StopStage();
+        gm.playerController.enabled = false;
+        var upgrades = gm.upgradeSystem;
+        upgrades.ResetUpgrades(5092026);
+        var options = upgrades.GenerateOptions();
+        for (int i = 0; i < 100; i++) UnityEngine.Random.Range(0f, 1f);
+        Check(options.Select(x => x.kind).SequenceEqual(upgrades.GenerateOptions().Select(x => x.kind)), "upgrade_rng_independent_of_effects");
+        for (int i = 0; i < 2; i++) Check(upgrades.ApplyOption(new RunUpgradeOption { kind = RunUpgradeKind.SplitterBeam }), "split_rank_" + (i + 1));
+        Check(!upgrades.ApplyOption(new RunUpgradeOption { kind = RunUpgradeKind.SplitterBeam }), "rank_cap_rejects_overflow");
+        Check(upgrades.BonusBeamProjectiles == 4 && Mathf.Approximately(upgrades.SplitShotMultiplier, 0.4f), "split_build_damage_budget");
+        Check(upgrades.GenerateOptions().All(x => x.kind != RunUpgradeKind.SplitterBeam), "capped_upgrade_not_offered");
+        upgrades.ResetUpgrades(5092026);
+        for (int i = 0; i < 3; i++)
+        {
+            gm.stageManager.StopStage();
+            gm.OnEncounterCleared(i);
+            yield return null;
+            Check(gm.Phase == GamePhase.Reward && gm.CompletedEncounters == i + 1, "reward_transition_" + i);
+            gm.FinishReward();
+            Check(gm.Phase == GamePhase.Reward, "cannot_skip_upgrade_" + i);
+            Click("ChooseButton");
+            Check(upgrades.Count == i + 1 && gm.stageManager.CurrentEncounter == i + 1, "installed_before_next_encounter_" + i);
+            yield return null;
+        }
+        Check(gm.CheckpointEncounter == 3 && upgrades.Count == 3, "sector_two_checkpoint_after_third_choice");
+        gm.stageManager.StopStage();
+        int savedKills = gm.Kills;
+        int savedCoins = gm.Coins;
+        float savedHp = gm.playerStats.CurrentHp;
+        float savedMax = gm.playerStats.MaxHp;
+        var savedBuild = upgrades.Acquired.ToArray();
+        var savedOptions = upgrades.GenerateOptions().Select(x => x.kind).ToArray();
+        gm.OnEncounterCleared(3);
+        yield return null;
+        Click("ChooseButton");
+        gm.stageManager.StopStage();
+        gm.RegisterKill(500);
+        gm.playerStats.AddMaxHealth(100, true);
+        gm.playerController.GetComponent<Damageable>().Kill(null);
+        yield return null;
+        Check(gm.CanContinue, "demo_defeat_offers_continue");
+        Capture("progression_01_continue", 1280, 720);
+        float frozenTime = gm.GetRunTime();
+        float wait = Time.time + 0.4f;
+        while (Time.time < wait) yield return null;
+        Click("ContinueRunButton");
+        gm.stageManager.StopStage();
+        Check(gm.Phase == GamePhase.Combat && gm.ContinueUsed && gm.CompletedEncounters == 3, "continue_restores_sector_entry");
+        Check(gm.Kills == savedKills && gm.Coins == savedCoins, "continue_discards_failed_segment_rewards");
+        Check(upgrades.Acquired.SequenceEqual(savedBuild) && upgrades.GenerateOptions().Select(x => x.kind).SequenceEqual(savedOptions), "continue_restores_build_and_choice_rng");
+        Check(Mathf.Approximately(gm.playerStats.MaxHp, savedMax) && Mathf.Abs(gm.playerStats.CurrentHp - savedHp) < 0.01f, "continue_restores_health_and_stats");
+        Check(!gm.playerController.GetComponent<Damageable>().IsDead && gm.GetRunTime() - frozenTime < 0.1f, "continue_revives_and_excludes_result_wait");
+        for (int i = 3; i < 6; i++)
+        {
+            gm.stageManager.StopStage();
+            gm.OnEncounterCleared(i);
+            yield return null;
+            if (i == 5) Capture("progression_02_sixth_choice", 1280, 720);
+            Click("ChooseButton");
+            Check(gm.Phase == GamePhase.Combat && upgrades.Count == i + 1, "six_choices_contract_" + i);
+            yield return null;
+        }
+        Check(gm.CheckpointEncounter == 6 && gm.CompletedEncounters == 6, "boss_checkpoint_after_sixth_choice");
+        gm.stageManager.StopStage();
+        gm.EnterResult(false);
+        yield return null;
+        Check(!gm.CanContinue && !gm.ContinueRun(), "continue_only_once");
+        Click("ReturnHangarButton");
+        yield return null;
+        yield return null;
+        gm = GameManager.Instance;
+        gm.SetDifficulty(RunDifficulty.Standard);
+        Click("DeployButton");
+        gm.stageManager.StopStage();
+        gm.playerController.GetComponent<Damageable>().Kill(null);
+        yield return null;
+        Check(!gm.CanContinue, "standard_has_no_continue");
+        Click("ReturnHangarButton");
+        yield return null;
+        yield return null;
+        gm = GameManager.Instance;
+        Click("DeployButton");
+        gm.stageManager.StopStage();
+        gm.OnStageCleared(2);
+        Check(gm.Phase == GamePhase.Combat, "victory_cannot_skip_six_encounters");
+        Record("PROGRESSION_CONTRACT_PASS synthetic phase completions; not pacing/combat evidence");
     }
 
     private static IEnumerator FeedbackScenarios()

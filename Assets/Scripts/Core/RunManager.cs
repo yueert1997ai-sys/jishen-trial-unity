@@ -20,7 +20,14 @@ public class RunManager : MonoBehaviour
 
     public void EndRun()
     {
+        if (!IsRunning) return;
         finalElapsedTime = Time.time - StartTime;
         IsRunning = false;
+    }
+
+    public void ResumeRun()
+    {
+        StartTime = Time.time - finalElapsedTime;
+        IsRunning = true;
     }
 }

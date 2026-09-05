@@ -47,3 +47,9 @@ The first encounter now lasts **75.11 seconds** in real-time Play Mode, using 23
 - Current shaders/scene/HUD captured and inspected. Floor z-fighting and low-contrast objective text were corrected. The existing hero's topology/texture style remains a known visual limitation; no replacement model made.
 - No game exception in the final suite. Unity Editor SearchDatabase startup exception still present. These captures are not a full Player performance benchmark.
 - Final regression also exits 0: live-fire victory, reward damage protection, defeat cleanup and return to hangar. Inventory has no missing-script/reference findings; `NOT_SCENE_DEPENDENCY` includes intentionally runtime-created components and Resources-loaded audio, not just unused assets.
+
+## Gate 3A: progression contract (2026-09-05)
+
+Six encounter-clear choices now feed the Boss; the eight upgrade kinds have caps/ranks, cached summaries and a separate seeded option RNG. Splitter trades per-shot damage for coverage. Cadet allows one sector/Boss-entry continue restoring saved health, attributes, build, currency and kills; failed-segment gains are discarded. Standard has no continue.
+
+`progression-03/ContractPlayMode.log` exits 0. Actual UI raycast clicks cover six choices, mandatory selection, rank caps, RNG isolation, sector checkpoint rollback, revive, result-time exclusion and one-use/Standard restrictions. Phase completions are synthetic in this focused test: it proves wiring, NOT combat balance or 10-15 minute pacing. Remaining encounter assets/Boss polishing and full-speed testing are still in progress.

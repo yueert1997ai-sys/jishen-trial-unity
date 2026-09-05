@@ -139,5 +139,17 @@ public class PlayerController : MonoBehaviour
         if (InputRouter != null) InputRouter.Clear();
     }
 
+    public void RestoreAt(Vector3 position)
+    {
+        CancelMovement();
+        nextDashTime = 0f;
+        AutoAim.Clear();
+        HasAimPoint = false;
+        Motor.enabled = false;
+        transform.SetPositionAndRotation(position, Quaternion.identity);
+        Motor.enabled = true;
+        weaponController.ResetCooldowns();
+    }
+
     private void OnDisable() { CancelMovement(); }
 }

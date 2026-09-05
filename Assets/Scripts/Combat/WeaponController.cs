@@ -67,6 +67,13 @@ public class WeaponController : MonoBehaviour
     {
     }
 
+    public void ResetCooldowns()
+    {
+        nextBeamTime = nextMissileTime = nextSkillTime = 0f;
+        temporaryFireRateMultiplier = 1f;
+        temporaryFireRateTimer = 0f;
+    }
+
     public void SetTemporaryFireRateBonus(float multiplier, float duration)
     {
         temporaryFireRateMultiplier = Mathf.Max(1f, multiplier);
@@ -99,7 +106,8 @@ public class WeaponController : MonoBehaviour
                 ? playerController.AimPoint - origin
                 : GetAimDirection();
             Vector3 direction = Quaternion.AngleAxis(spread, Vector3.up) * aim.normalized;
-            CreateBeamProjectile(origin, direction, baseDamage * GetDamageMultiplier(), pierce, explosionRadius);
+            float splitScale = upgradeSystem != null ? upgradeSystem.SplitShotMultiplier : 1f;
+            CreateBeamProjectile(origin, direction, baseDamage * GetDamageMultiplier() * splitScale, pierce, explosionRadius);
         }
 
         if (BeamFired != null)

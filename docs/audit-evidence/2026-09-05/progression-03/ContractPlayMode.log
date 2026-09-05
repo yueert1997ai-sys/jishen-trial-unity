@@ -1,0 +1,1123 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.3/staging' branch; Version is '6000.3.18f1 (5ebeb53e4c07) revision 6209205'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Channel LicenseClient-yue doesn't exist
+OS: 'Windows 11  (10.0.22000) Core' Language: 'zh' Physical Memory: 32614 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-09-05T04:31:28Z
+[Licensing::Module] Successfully launched the LicensingClient (PId: 31444)
+
+COMMAND LINE ARGUMENTS:
+D:\Editor\6000.3.18f1\Editor\Unity.exe
+-batchmode
+-projectPath
+C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905
+-executeMethod
+ProjectAudit.RunProgressionTests
+-logFile
+C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905/Progression02Play.log
+Successfully changed project path to: C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905
+C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+Player connection [35160]  Target information:
+
+Player connection [35160]  * "[IP] 192.168.5.218 [Port] 55504 [Flags] 2 [Guid] 2992065720 [EditorId] 2992065720 [Version] 1048832 [Id] WindowsEditor(7,Marco) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [35160]  * "[IP] 172.22.128.1 [Port] 55504 [Flags] 2 [Guid] 2992065720 [EditorId] 2992065720 [Version] 1048832 [Id] WindowsEditor(7,Marco) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [35160]  * "[IP] 2.0.0.1 [Port] 55504 [Flags] 2 [Guid] 2992065720 [EditorId] 2992065720 [Version] 1048832 [Id] WindowsEditor(7,Marco) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [35160] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [35160] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-yue" at "2026-09-05T04:31:28.9280119Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 31444, path: "D:/Editor/6000.3.18f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Package Manager] Connected to IPC stream "Upm-33400" after 0.2 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              171d88bf81d444b29fad2909f53c93a5
+  Correlation Id:          54a4c3a49b70111fd4cabf747375a98f
+  External correlation Id: 8798730882137530513
+  Machine Id:              XSqKgGWCHqq/Baz2PtSnIVh4W6c=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-yue" (connect: 0.25s, validation: 0.09s, handshake: 0.07s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-yue-notifications" at "2026-09-05T04:31:29.0895027Z"
+[Licensing::Module] Connected to LicensingClient (PId: 31444, launch time: 0.00, total connection time: 0.41s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968449435854-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.01
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.44s
+[Licensing::Module] Licensing is initialized (took 0.12s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.3.18f1 (5ebeb53e4c07)
+[Subsystems] Discovering subsystems at path D:/Editor/6000.3.18f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 4070 Ti (ID=0x2782)
+    Vendor:          NVIDIA
+    VRAM:            11994 MB
+    App VRAM Budget: 11226 MB
+    Driver:          32.0.15.9649
+Initialize mono
+Mono path[0] = 'D:/Editor/6000.3.18f1/Editor/Data/Managed'
+Mono path[1] = 'D:/Editor/6000.3.18f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'D:/Editor/6000.3.18f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56400
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: D:/Editor/6000.3.18f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001644 seconds.
+- Loaded All Assemblies, in  0.303 seconds
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:False
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.240 seconds
+Domain Reload Profiling: 543ms
+	BeginReloadAssembly (132ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (35ms)
+	RebuildCommonClasses (25ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (27ms)
+	LoadAllAssembliesAndSetupDomain (110ms)
+		LoadAssemblies (97ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (108ms)
+			TypeCache.Refresh (106ms)
+				TypeCache.ScanAssembly (97ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (241ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (218ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (30ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (49ms)
+			ProcessInitializeOnLoadAttributes (81ms)
+			ProcessInitializeOnLoadMethodAttributes (55ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 7 packages:
+  Built-in packages:
+    com.unity.ugui@2.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.ugui@2e4da8434a5c)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.ai)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.particlesystem)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.audio)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.physics)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.ui)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.imgui)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.00 seconds
+[ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
+Starting: D:\Editor\6000.3.18f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905
+DisplayProgressbar: Compiling Scripts
+ExitCode: 0 Duration: 0s388ms
+[206/209    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[207/209    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[208/209    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (0.36 seconds), 3 items updated, 209 evaluated
+AssetDatabase: script compilation time: 0.665736s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.443 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Native extension for WindowsStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.281 seconds
+Domain Reload Profiling: 722ms
+	BeginReloadAssembly (243ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (16ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (126ms)
+	RebuildCommonClasses (24ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (11ms)
+	LoadAllAssembliesAndSetupDomain (155ms)
+		LoadAssemblies (222ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (11ms)
+			TypeCache.Refresh (6ms)
+				TypeCache.ScanAssembly (3ms)
+			BuildScriptInfoCaches (2ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (281ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (187ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (72ms)
+			ProcessInitializeOnLoadAttributes (72ms)
+			ProcessInitializeOnLoadMethodAttributes (22ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (24ms)
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=4b2a2ee8b41143b42a0a2a5097c0b5f3): Total: 1.543 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=381 ms
+		Asset DB Callback time: managed=36 ms, native=8 ms
+		Scripting: domain reloads=1, domain reload time=443 ms, compile time=667 ms, other=6 ms
+		Project Asset Count: scripts=142, non-scripts=139
+		Asset File Changes: new=0, changed=1, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 8.509ms
+	ApplyChangesToAssetFolders: 0.396ms
+	Scan: 33.103ms
+	OnSourceAssetsModified: 0.559ms
+	CategorizeAssetsWithTransientArtifact: 0.837ms
+	ProcessAssetsWithTransientArtifactChanges: 4.228ms
+	CategorizeAssets: 1.024ms
+	ImportOutOfDateAssets: 281.421ms (-385.706ms without children)
+		CompileScripts: 666.906ms
+		ReloadNativeAssets: 0.000ms
+		UnloadImportedAssets: 0.065ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.026ms
+		InitializingProgressBar: 0.000ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+		OnDemandSchedulerStart: 0.129ms
+	PostProcessAllAssets: 37.405ms
+	Hotreload: 1.599ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.001ms
+	UnloadStreamsBegin: 0.869ms
+	PersistCurrentRevisions: 0.007ms
+	UnloadStreamsEnd: 0.001ms
+	GenerateScriptTypeHashes: 0.076ms
+	Untracked: 1173.471ms
+
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
+Scanning for USB devices : 4.103ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-MECH ROUGE
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 423 unused Assets / (0.6 MB). Loaded Objects now: 1053.
+Memory consumption went from 95.2 MB to 94.6 MB.
+Total: 2.925800 ms (FindLiveObjects: 0.048900 ms CreateObjectMapping: 0.011700 ms MarkObjects: 2.680600 ms  DeleteObjects: 0.184100 ms)
+
+Opening scene 'Assets/Scenes/Demo_Main.unity'
+Unloading 8 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/Scenes/Demo_Main.unity'
+	Deserialize:            17.527 ms
+	Integration:            71.312 ms
+	Integration of assets:  0.833 ms
+	Thread Wait Time:       0.473 ms
+	Total Operation Time:   90.145 ms
+Unloading 1 unused Assets / (0.5 KB). Loaded Objects now: 3327.
+Memory consumption went from 103.9 MB to 103.9 MB.
+Total: 2.688200 ms (FindLiveObjects: 0.099300 ms CreateObjectMapping: 0.015300 ms MarkObjects: 2.563100 ms  DeleteObjects: 0.010300 ms)
+
+[Project] Loading completed in 3.354 seconds
+	Project init time: 				2.993 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		0.308 seconds
+		Asset Database init time: 		0.162 seconds
+		Global illumination init time: 	0.002 seconds
+		Assemblies load time: 			0.553 seconds
+		Unity extensions init time: 	0.000 seconds
+		Asset Database refresh time: 	1.543 seconds
+	Scene opening time: 			0.164 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1788582692019,"processId":33400,"projectLoad":3.3535333,"projectInit":2.9930944,"templateInit":0.0,"packageManagerInit":0.3078856,"assetDatabaseInit":0.1620866,"globalIlluminationInit":0.0022149,"assembliesLoad":0.5532883,"unityExtensionsInit":0.0004586,"assetDatabaseRefresh":1.5434915,"sceneOpening":0.1644403}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1788582692019,"processId":33400,"editorVersion":"6000.3.18f1 (5ebeb53e4c07)","branch":"6000.3/staging","buildType":"Release","platform":"Windows"}
+Reloading assemblies for play mode.
+Reloading assemblies after forced synchronous recompile.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.197 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Native extension for WindowsStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.310 seconds
+Domain Reload Profiling: 507ms
+	BeginReloadAssembly (139ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (16ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (32ms)
+	RebuildCommonClasses (24ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (11ms)
+	LoadAllAssembliesAndSetupDomain (14ms)
+		LoadAssemblies (82ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (9ms)
+			TypeCache.Refresh (2ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (4ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (311ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (187ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (68ms)
+			ProcessInitializeOnLoadAttributes (67ms)
+			ProcessInitializeOnLoadMethodAttributes (32ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (13ms)
+Asset Pipeline Refresh (id=3921036427a3b0e46b83e1f05c088fc2): Total: 0.539 seconds - Initiated by StopAssetImportingV2(ForceSynchronousImport | ForceDomainReload)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=330 ms
+		Asset DB Callback time: managed=8 ms, native=0 ms
+		Scripting: domain reloads=1, domain reload time=198 ms, compile time=1 ms, other=0 ms
+		Project Asset Count: scripts=142, non-scripts=139
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 2.646ms
+	ApplyChangesToAssetFolders: 0.040ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.001ms
+	ProcessAssetsWithTransientArtifactChanges: 0.082ms
+	CategorizeAssets: 0.863ms
+	ImportOutOfDateAssets: 311.083ms (309.842ms without children)
+		CompileScripts: 1.048ms
+		CollectScriptTypesHashes: 0.012ms
+		ReloadNativeAssets: 0.012ms
+		UnloadImportedAssets: 0.028ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.025ms
+		InitializingProgressBar: 0.000ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+		OnDemandSchedulerStart: 0.116ms
+	PostProcessAllAssets: 8.138ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.011ms
+	UnloadStreamsBegin: 0.091ms
+	PersistCurrentRevisions: 0.006ms
+	UnloadStreamsEnd: 0.001ms
+	GenerateScriptTypeHashes: 0.067ms
+	Untracked: 215.578ms
+
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            7.769 ms
+	Integration:            64.705 ms
+	Integration of assets:  0.029 ms
+	Thread Wait Time:       0.006 ms
+	Total Operation Time:   72.508 ms
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+Start Indexing on Editor startup
+ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+  at System.Collections.Generic.List`1[T].get_Item (System.Int32 index) [0x00009] in <41d29b352f6a475ab1bf7c6628b82790>:0 
+  at UnityEditor.Search.SearchDatabase+<EnumerateAll>d__80.MoveNext () [0x00106] in <8bfcebed71804a0bbd899b4f1cf32116>:0 
+  at System.Linq.Enumerable.TryGetFirst[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Boolean& found) [0x00045] in <80564d689e48448fa2a7101993ee7201>:0 
+  at System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source) [0x00000] in <80564d689e48448fa2a7101993ee7201>:0 
+  at UnityEditor.Search.SearchDatabase.GetDefaultSearchDatabase () [0x00006] in <8bfcebed71804a0bbd899b4f1cf32116>:0 
+  at UnityEditor.Search.SearchInit.IndexationOnStartup () [0x0000c] in <8bfcebed71804a0bbd899b4f1cf32116>:0 
+  at UnityEditor.EditorApplication.Internal_CallDelayFunctions () [0x0002c] in <bc66d607b6974f3a8652f3c90b953d89>:0 
+
+Created GICache directory at C:/Users/yue/AppData/LocalLow/Unity/Caches/GiCache. Took: 0.026s, timestamps: [4.025 - 4.051]
+[Licensing::Client] Successfully resolved entitlement details
+AUDIT UI_CLICK DeployButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:103)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS upgrade_rng_independent_of_effects
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:110)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS split_rank_1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:111)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS split_rank_2
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:111)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS rank_cap_rejects_overflow
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:112)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS split_build_damage_budget
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:113)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS capped_upgrade_not_offered
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:114)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS reward_transition_0
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:121)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS cannot_skip_upgrade_0
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:123)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT UI_CLICK ChooseButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:124)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS installed_before_next_encounter_0
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:125)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS reward_transition_1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:121)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS cannot_skip_upgrade_1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:123)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT UI_CLICK ChooseButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:124)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS installed_before_next_encounter_1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:125)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS reward_transition_2
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:121)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS cannot_skip_upgrade_2
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:123)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT UI_CLICK ChooseButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:124)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS installed_before_next_encounter_2
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:125)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS sector_two_checkpoint_after_third_choice
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:128)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT UI_CLICK ChooseButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:138)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS demo_defeat_offers_continue
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:144)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT CAPTURE progression_01_continue colors=82
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>) (at Assets/Editor/ProjectAudit.cs:797)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:145)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT UI_CLICK ContinueRunButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:149)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS continue_restores_sector_entry
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:151)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS continue_discards_failed_segment_rewards
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:152)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS continue_restores_build_and_choice_rng
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:153)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS continue_restores_health_and_stats
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:154)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS continue_revives_and_excludes_result_wait
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:155)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT UI_CLICK ChooseButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:162)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS six_choices_contract_3
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:163)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT UI_CLICK ChooseButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:162)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS six_choices_contract_4
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:163)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT CAPTURE progression_02_sixth_choice colors=78
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>) (at Assets/Editor/ProjectAudit.cs:797)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:161)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT UI_CLICK ChooseButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:162)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS six_choices_contract_5
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:163)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS boss_checkpoint_after_sixth_choice
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:166)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS continue_only_once
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:170)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT UI_CLICK ReturnHangarButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:171)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+Unloading 39 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.554100 ms
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            3.212 ms
+	Integration:            8.521 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       0.005 ms
+	Total Operation Time:   11.740 ms
+Unloading 68 unused Assets / (329.0 KB). Loaded Objects now: 3472.
+Memory consumption went from 195.5 MB to 195.1 MB.
+Total: 3.240500 ms (FindLiveObjects: 0.130300 ms CreateObjectMapping: 0.025000 ms MarkObjects: 3.038600 ms  DeleteObjects: 0.046100 ms)
+
+AUDIT UI_CLICK DeployButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:176)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS standard_has_no_continue
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:180)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT UI_CLICK ReturnHangarButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:181)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.845300 ms
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            3.792 ms
+	Integration:            6.636 ms
+	Integration of assets:  0.069 ms
+	Thread Wait Time:       0.005 ms
+	Total Operation Time:   10.503 ms
+Unloading 67 unused Assets / (48.9 KB). Loaded Objects now: 3472.
+Memory consumption went from 194.9 MB to 194.9 MB.
+Total: 3.178500 ms (FindLiveObjects: 0.088900 ms CreateObjectMapping: 0.015200 ms MarkObjects: 3.020000 ms  DeleteObjects: 0.053900 ms)
+
+AUDIT UI_CLICK DeployButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:747)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:185)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT MOBILE_PASS victory_cannot_skip_six_encounters
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit:Check (bool,string) (at Assets/Editor/ProjectAudit.cs:466)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:188)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT PROGRESSION_CONTRACT_PASS synthetic phase completions; not pacing/combat evidence
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:827)
+ProjectAudit/<ProgressionScenarios>d__14:MoveNext () (at Assets/Editor/ProjectAudit.cs:189)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 827)
+
+AUDIT_FINISHED code=0
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Finish (int) (at Assets/Editor/ProjectAudit.cs:837)
+ProjectAudit:Tick () (at Assets/Editor/ProjectAudit.cs:597)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 837)
+
+Curl error 42: Callback aborted
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-yue-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-yue channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+Checking for leaked weakptr:
+  Found no leaked weakptrs.
+[Package Manager] Server process was shutdown
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1788582694560,"processId":33400,"allocatedMemory":10269568,"memoryLabels":[{"Default":29313},{"Permanent":15236},{"NewDelete":68635},{"Thread":4238000},{"Manager":36844},{"VertexData":8},{"Geometry":816},{"Texture":296},{"Shader":79333},{"Material":24},{"GfxDevice":59112},{"Animation":392},{"Audio":2664},{"FreeType":8},{"FontEngine":736},{"Physics":2146},{"Physics2D":16},{"Serialization":720},{"Input":14984},{"JobScheduler":33024},{"TextLib":216},{"Mono":32},{"ScriptingNativeRuntime":155060},{"BaseObject":1620208},{"Resource":1336},{"Renderer":3000},{"Transform":4685},{"File":3941},{"WebCam":616},{"Culling":32},{"Terrain":11394},{"Wind":24},{"STL":40},{"String":19185},{"DynamicArray":90397},{"HashMap":47636},{"Utility":2661910},{"Curl":3097},{"PoolAlloc":2056},{"AI":80},{"TypeTree":11341},{"ScriptManager":512},{"RuntimeInitializeOnLoadManager":64},{"SpriteAtlas":112},{"GI":7792},{"Director":8240},{"CloudService":8640},{"WebRequest":848},{"VR":47994},{"SceneManager":504},{"Video":208},{"LazyScriptCache":32},{"Camera":17},{"Secure":2377},{"SerializationCache":1576},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57888},{"StaticSafetyDebugInfo":278528},{"Analytics":384},{"Hierarchy":608},{"CoreStats":13112},{"Identifiers":6480},{"Gui":96},{"EditorUtility":101406},{"VersionControl":4},{"Undo":947},{"AssetDatabase":456352},{"EditorGi":328},{"UnityConnect":29232},{"Upm":1896},{"AssetCompliance":64},{"DrivenProperties":72},{"LocalIPC":209},{"ProfilerEditor":9746},{"CoreBusinessMetrics":2859},{"Licensing":1232},{"AssetReference":32},{"IPCStream":32}]}

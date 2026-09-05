@@ -1,0 +1,54 @@
+CONSOLE Exception ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <41d29b352f6a475ab1bf7c6628b82790>:0)
+UnityEditor.Search.SearchDatabase+<EnumerateAll>d__80.MoveNext () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+System.Linq.Enumerable.TryGetFirst[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Boolean& found) (at <80564d689e48448fa2a7101993ee7201>:0)
+System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <80564d689e48448fa2a7101993ee7201>:0)
+UnityEditor.Search.SearchDatabase.GetDefaultSearchDatabase () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+UnityEditor.Search.SearchInit.IndexationOnStartup () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+UnityEditor.EditorApplication.Internal_CallDelayFunctions () (at <bc66d607b6974f3a8652f3c90b953d89>:0)
+
+UI_CLICK DeployButton
+MOBILE_PASS upgrade_rng_independent_of_effects
+MOBILE_PASS split_rank_1
+MOBILE_PASS split_rank_2
+MOBILE_PASS rank_cap_rejects_overflow
+MOBILE_PASS split_build_damage_budget
+MOBILE_PASS capped_upgrade_not_offered
+MOBILE_PASS reward_transition_0
+MOBILE_PASS cannot_skip_upgrade_0
+UI_CLICK ChooseButton
+MOBILE_PASS installed_before_next_encounter_0
+MOBILE_PASS reward_transition_1
+MOBILE_PASS cannot_skip_upgrade_1
+UI_CLICK ChooseButton
+MOBILE_PASS installed_before_next_encounter_1
+MOBILE_PASS reward_transition_2
+MOBILE_PASS cannot_skip_upgrade_2
+UI_CLICK ChooseButton
+MOBILE_PASS installed_before_next_encounter_2
+MOBILE_PASS sector_two_checkpoint_after_third_choice
+UI_CLICK ChooseButton
+MOBILE_PASS demo_defeat_offers_continue
+CAPTURE progression_01_continue colors=82
+UI_CLICK ContinueRunButton
+MOBILE_PASS continue_restores_sector_entry
+MOBILE_PASS continue_discards_failed_segment_rewards
+MOBILE_PASS continue_restores_build_and_choice_rng
+MOBILE_PASS continue_restores_health_and_stats
+MOBILE_PASS continue_revives_and_excludes_result_wait
+UI_CLICK ChooseButton
+MOBILE_PASS six_choices_contract_3
+UI_CLICK ChooseButton
+MOBILE_PASS six_choices_contract_4
+CAPTURE progression_02_sixth_choice colors=78
+UI_CLICK ChooseButton
+MOBILE_PASS six_choices_contract_5
+MOBILE_PASS boss_checkpoint_after_sixth_choice
+MOBILE_PASS continue_only_once
+UI_CLICK ReturnHangarButton
+UI_CLICK DeployButton
+MOBILE_PASS standard_has_no_continue
+UI_CLICK ReturnHangarButton
+UI_CLICK DeployButton
+MOBILE_PASS victory_cannot_skip_six_encounters
+PROGRESSION_CONTRACT_PASS synthetic phase completions; not pacing/combat evidence

@@ -3,6 +3,31 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    public struct Snapshot
+    {
+        public float hp, maxHp, energy, maxEnergy, speed, dash, cooldown, damage, rate;
+        public int shield;
+    }
+
+    public Snapshot Capture() => new Snapshot { hp = CurrentHp, maxHp = MaxHp, energy = CurrentEnergy,
+        maxEnergy = MaxEnergy, speed = MoveSpeed, dash = DashDistance, cooldown = DashCooldown,
+        damage = DamageMultiplier, rate = FireRateMultiplier, shield = ShieldLevel };
+
+    public void Restore(Snapshot state)
+    {
+        MaxHp = state.maxHp;
+        CurrentHp = Mathf.Clamp(state.hp, 1f, MaxHp);
+        MaxEnergy = state.maxEnergy;
+        CurrentEnergy = state.energy;
+        MoveSpeed = state.speed;
+        DashDistance = state.dash;
+        DashCooldown = state.cooldown;
+        DamageMultiplier = state.damage;
+        FireRateMultiplier = state.rate;
+        ShieldLevel = state.shield;
+        damageable.RestoreLife(MaxHp, CurrentHp);
+        RaiseChanged();
+    }
     public float baseMaxHp = 180f;
     public float baseEnergy = 100f;
     public float energyRegenPerSecond = 34f;

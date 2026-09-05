@@ -9,6 +9,7 @@ public class RewardUI : MonoBehaviour
     private readonly List<RunUpgradeOption> options = new List<RunUpgradeOption>();
     private GameManager gameManager;
     private RunUpgradeSystem upgradeSystem;
+    private Text title;
 
     private void Update()
     {
@@ -37,6 +38,7 @@ public class RewardUI : MonoBehaviour
         upgradeSystem = system;
         BuildUI();
         canvas.gameObject.SetActive(true);
+        title.text = "SELECT UPGRADE   " + owner.CompletedEncounters + " / 6";
         options.Clear();
         if (upgradeSystem != null)
         {
@@ -64,7 +66,7 @@ public class RewardUI : MonoBehaviour
 
         if (upgradeSystem != null)
         {
-            upgradeSystem.ApplyOption(options[index]);
+            if (!upgradeSystem.ApplyOption(options[index])) return;
         }
 
         Hide();
@@ -84,7 +86,7 @@ public class RewardUI : MonoBehaviour
         canvas = RuntimeUIFactory.CreateCanvas("RewardCanvas", 960);
         canvas.sortingOrder = 30;
         panel = RuntimeUIFactory.CreateMenuSurface(canvas, "RewardPanel", new Vector2(820, 420));
-        RuntimeUIFactory.MenuText(panel, "Title", "SELECT UPGRADE", 26, new Vector2(410, -42), new Vector2(760, 44));
+        title = RuntimeUIFactory.MenuText(panel, "Title", "SELECT UPGRADE", 26, new Vector2(410, -42), new Vector2(760, 44));
     }
 
     private void RefreshCards()

@@ -75,6 +75,15 @@ public class Damageable : MonoBehaviour
         CurrentHealth = Mathf.Clamp(value, 0f, maxHealth);
     }
 
+    public void RestoreLife(float maximum, float health)
+    {
+        maxHealth = Mathf.Max(1f, maximum);
+        CurrentHealth = Mathf.Clamp(health, 1f, maxHealth);
+        IsDead = false;
+        invulnerableUntil = 0f;
+        if (playerStats != null) playerStats.SyncHealthFromDamageable(CurrentHealth);
+    }
+
     public void TakeDamage(float amount, DamageInfo info)
     {
         if (GameManager.Instance != null && !GameManager.Instance.IsCombatActive) return;
