@@ -1,0 +1,97 @@
+CONSOLE Exception ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <41d29b352f6a475ab1bf7c6628b82790>:0)
+UnityEditor.Search.SearchDatabase+<EnumerateAll>d__80.MoveNext () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+System.Linq.Enumerable.TryGetFirst[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Boolean& found) (at <80564d689e48448fa2a7101993ee7201>:0)
+System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <80564d689e48448fa2a7101993ee7201>:0)
+UnityEditor.Search.SearchDatabase.GetDefaultSearchDatabase () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+UnityEditor.Search.SearchInit.IndexationOnStartup () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+UnityEditor.EditorApplication.Internal_CallDelayFunctions () (at <bc66d607b6974f3a8652f3c90b953d89>:0)
+
+START hangar=True hud=False equipment=0
+CAPTURE 01_hangar colors=203
+UI_CLICK DeployButton
+COMBAT_BLOCK_PASS phase=Combat paused=True
+PAUSE_RESUME active=True
+FLOW SECURE MAINTENANCE DECK  /  4% hp=180 kills=0
+CAPTURE 02_combat colors=183
+FLOW SECURE MAINTENANCE DECK  /  9% hp=180 kills=2
+FLOW SECURE MAINTENANCE DECK  /  13% hp=180 kills=4
+FLOW SECURE MAINTENANCE DECK  /  17% hp=180 kills=6
+FLOW SECURE MAINTENANCE DECK  /  22% hp=180 kills=8
+FLOW SECURE MAINTENANCE DECK  /  26% hp=180 kills=10
+FLOW SECURE MAINTENANCE DECK  /  30% hp=180 kills=12
+PLAYER_HIT hp=175.0275 phase=Combat damage=4.9725
+FLOW SECURE MAINTENANCE DECK  /  35% hp=175.0275 kills=13
+FLOW SECURE MAINTENANCE DECK  /  39% hp=175.0275 kills=16
+FLOW SECURE MAINTENANCE DECK  /  43% hp=175.0275 kills=19
+FLOW SECURE MAINTENANCE DECK  /  48% hp=175.0275 kills=22
+PLAYER_HIT hp=171.7125 phase=Combat damage=3.315
+PLAYER_HIT hp=168.3975 phase=Combat damage=3.315
+FLOW SECURE MAINTENANCE DECK  /  52% hp=168.3975 kills=25
+PLAYER_HIT hp=165.0825 phase=Combat damage=3.315
+FLOW SECURE MAINTENANCE DECK  /  57% hp=165.0825 kills=28
+FLOW SECURE MAINTENANCE DECK  /  61% hp=165.0825 kills=31
+PLAYER_HIT hp=160.11 phase=Combat damage=4.9725
+FLOW SECURE MAINTENANCE DECK  /  65% hp=160.11 kills=32
+PLAYER_HIT hp=156.795 phase=Combat damage=3.315
+PLAYER_HIT hp=153.48 phase=Combat damage=3.315
+FLOW SECURE MAINTENANCE DECK  /  70% hp=153.48 kills=35
+PLAYER_HIT hp=150.165 phase=Combat damage=3.315
+FLOW SECURE MAINTENANCE DECK  /  74% hp=150.165 kills=38
+FLOW SECURE MAINTENANCE DECK  /  78% hp=150.165 kills=41
+FLOW SECURE MAINTENANCE DECK  /  83% hp=150.165 kills=44
+PLAYER_HIT hp=146.85 phase=Combat damage=3.315
+PLAYER_HIT hp=143.535 phase=Combat damage=3.315
+FLOW SECURE MAINTENANCE DECK  /  87% hp=143.535 kills=47
+PLAYER_HIT hp=140.22 phase=Combat damage=3.315
+FLOW SECURE MAINTENANCE DECK  /  91% hp=140.22 kills=50
+PLAYER_HIT hp=135.2475 phase=Combat damage=4.9725
+FLOW SECURE MAINTENANCE DECK  /  96% hp=135.2475 kills=51
+FLOW SECURE MAINTENANCE DECK  /  100% hp=135.2475 kills=54
+PLAYER_HIT hp=131.9325 phase=Combat damage=3.315
+PLAYER_HIT hp=128.6175 phase=Combat damage=3.315
+FLOW Wave clear // Field repair +37 HP hp=164.6895 kills=57
+FLOW Stage 1 - Wave 2/3 hp=164.6895 kills=57
+PLAYER_HIT hp=161.3745 phase=Combat damage=3.315
+PLAYER_HIT hp=158.0594 phase=Combat damage=3.315
+FLOW Wave clear // Field repair +22 HP hp=180 kills=60
+FLOW Stage 1 - Wave 3/3 hp=180 kills=60
+PLAYER_HIT hp=176.685 phase=Combat damage=3.315
+FLOW Wave clear // Field repair +4 HP hp=180 kills=64
+FLOW Stage 1 cleared hp=180 kills=64
+CAPTURE 03_reward colors=127
+COMBAT_BLOCK_PASS phase=Reward paused=False
+REWARD cards=3
+UI_CLICK ChooseButton
+UPGRADE Upgrades: Splitter Beam
+FLOW Stage 2 - Wave 1/3 hp=180 kills=64
+PLAYER_HIT hp=176.685 phase=Combat damage=3.315
+PLAYER_HIT hp=176.685 phase=Combat damage=3.315
+FLOW Stage 2 - Wave 2/3 hp=176.685 kills=68
+PLAYER_HIT hp=173.37 phase=Combat damage=3.315
+PLAYER_HIT hp=170.055 phase=Combat damage=3.315
+FLOW Wave clear // Field repair +10 HP hp=180 kills=72
+FLOW Stage 2 - Wave 3/3 hp=180 kills=72
+FLOW Boss incoming hp=180 kills=75
+FLOW Boss - Phase 1 hp=180 kills=75
+CAPTURE 04_boss colors=168
+FLOW Boss - Phase 2 hp=180 kills=75
+CAPTURE 04b_boss_phase2 colors=218
+PLAYER_HIT hp=175.0275 phase=Combat damage=4.9725
+CAPTURE 05_result colors=105
+LIVE_FIRE_RESULT phase=Result hp=175.0275 kills=78 shots=310 choices=1 kinds=Melee,Elite,Drone,Ranged boss=True phase2=True seconds=95.30416
+COMBAT_BLOCK_PASS phase=Result paused=False
+FRAME_OBSERVATION samples=467616 avg_ms=0.1995218 p95_ms=0.2774022 note=editor+audit_logic+uncapped_not_benchmark
+UI_CLICK ReturnHangarButton
+RESTART hangar=True hp=180 upgrades=Upgrades: none
+UI_CLICK DeployButton
+COMBAT_BLOCK_PASS phase=Reward paused=False
+REWARD_PROTECTION hp_before=180 hp_after=180 phase=Reward
+CAPTURE 06_reward_damage colors=128
+UI_CLICK DeployButton
+COMBAT_BLOCK_PASS phase=Result paused=False
+DEFEAT phase=Result hp=0 enemies_before=0 enemies_after=0 hud=False result_buttons=1
+CAPTURE 07_defeat colors=104
+CAPTURE 07b_defeat_1280 colors=68
+UI_CLICK ReturnHangarButton
+DEFEAT_RESTART hangar=True

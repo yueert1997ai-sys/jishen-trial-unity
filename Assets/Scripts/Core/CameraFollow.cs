@@ -44,6 +44,11 @@ public class CameraFollow : MonoBehaviour
         }
         Vector3 desiredFocus = target.position + (controller != null ? controller.MoveDirection * 1.25f : Vector3.zero);
         float desiredSize = normalSize;
+        if (GameManager.Instance != null && GameManager.Instance.Phase == GamePhase.Hangar)
+        {
+            desiredFocus = target.position + new Vector3(3.7f, 1f, 0);
+            desiredSize = 4.2f;
+        }
         if (boss != null && GameManager.Instance != null && GameManager.Instance.IsCombatActive)
         {
             desiredFocus = Vector3.Lerp(target.position, boss.transform.position, 0.5f);
@@ -64,7 +69,8 @@ public class CameraFollow : MonoBehaviour
             if (shakeTimeRemaining <= 0f) shakeStrength = shakeDuration = 0f;
         }
         // Use a fixed pitch so touch movement and the battlefield stay predictable.
-        transform.rotation = Quaternion.Euler(60f, 0f, 0f);
+        float pitch = GameManager.Instance != null && GameManager.Instance.Phase == GamePhase.Hangar ? 38f : 60f;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(pitch, 0f, 0f), initialized ? blend : 1f);
         transform.position = focus - transform.forward * 24f + shake;
         float aspect = Screen.width / (float)Mathf.Max(1, Screen.height);
         float height = Mathf.Min(1f, aspect / (16f / 9f));

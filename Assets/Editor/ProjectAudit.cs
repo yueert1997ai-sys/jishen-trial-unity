@@ -31,9 +31,9 @@ public static class ProjectAudit
                 evidence.Clear();
                 projectError = false;
                 UnityEngine.Random.InitState(5092026);
-                deadline = EditorApplication.timeSinceStartup + 220;
+                deadline = EditorApplication.timeSinceStartup + 300;
                 lastFrame = -1;
-                routine = SessionState.GetBool(Active + ".Mobile", false) ? MobileScenarios() : SessionState.GetBool(Active + ".Shots", false) ? ShotDiagnostics() : RunScenarios();
+                routine = SessionState.GetBool(Active + ".Feedback", false) ? FeedbackScenarios() : SessionState.GetBool(Active + ".Mobile", false) ? MobileScenarios() : SessionState.GetBool(Active + ".Shots", false) ? ShotDiagnostics() : RunScenarios();
                 Application.logMessageReceived += CaptureLog;
                 EditorApplication.update += Tick;
             }
@@ -42,6 +42,7 @@ public static class ProjectAudit
 
     public static void Run()
     {
+        SessionState.SetBool(Active + ".Feedback", false);
         SessionState.SetBool(Active + ".Mobile", false);
         SessionState.SetBool(Active + ".Shots", false);
         Directory.CreateDirectory(Output);
@@ -53,6 +54,7 @@ public static class ProjectAudit
 
     public static void RunShotDiagnostics()
     {
+        SessionState.SetBool(Active + ".Feedback", false);
         SessionState.SetBool(Active + ".Mobile", false);
         Directory.CreateDirectory(Output);
         SessionState.SetBool(Active + ".Shots", true);
@@ -63,6 +65,7 @@ public static class ProjectAudit
 
     public static void RunMobileTests()
     {
+        SessionState.SetBool(Active + ".Feedback", false);
         Directory.CreateDirectory(Output);
         SessionState.SetBool(Active + ".Mobile", true);
         SessionState.SetBool(Active, true);
@@ -70,11 +73,110 @@ public static class ProjectAudit
         EditorApplication.EnterPlaymode();
     }
 
+    public static void RunFeedbackTests()
+    {
+        Directory.CreateDirectory(Output);
+        SessionState.SetBool(Active + ".Feedback", true);
+        SessionState.SetBool(Active, true);
+        EditorSceneManager.OpenScene("Assets/Scenes/Demo_Main.unity");
+        EditorApplication.EnterPlaymode();
+    }
+
+    private static IEnumerator FeedbackScenarios()
+    {
+        var mobile = MobileScenarios();
+        while (mobile.MoveNext()) yield return null;
+        var gm = GameManager.Instance;
+        Click("DeployButton");
+        gm.stageManager.StopStage();
+        var player = gm.playerController;
+        player.enabled = false;
+        player.automaticFire = false;
+        Check(GameAudio.Instance.LoadedCueCount == 10, "audio_all_cues_loaded");
+        Check(GameAudio.Instance.MusicLoaded, "music_loaded");
+        Warp(player, new Vector3(9.4f, 0, 2.5f));
+        var moving = SpawnStationaryEnemy(new Vector3(9.4f, 0, 14));
+        var ai = moving.GetComponent<EnemyBase>();
+        ai.enabled = true;
+        ai.Init(player.transform, gm.stageManager);
+        float until = Time.time + 7;
+        while (Time.time < until)
+        {
+            Vector3 pos = moving.transform.position;
+            if (pos.x > 8 && pos.x < 10.8f && pos.z > 5.8f && pos.z < 10.6f) throw new Exception("Enemy entered repair bank.");
+            yield return null;
+        }
+        Check(Vector3.Distance(moving.transform.position, player.transform.position) < 2.2f, "navmesh_routes_around_bank");
+        Object.Destroy(moving.gameObject);
+        Warp(player, Vector3.zero);
+        var target = SpawnStationaryEnemy(new Vector3(0, 0, 6));
+        target.SetMaxHealth(1000, true);
+        var extra = new GameObject("AuditCompoundCollider");
+        extra.transform.SetParent(target.transform, false);
+        var capsule = extra.AddComponent<CapsuleCollider>();
+        capsule.center = Vector3.up * 0.9f;
+        capsule.height = 1.8f;
+        capsule.radius = 0.5f;
+        Physics.SyncTransforms();
+        int hits = 0;
+        target.OnDamaged += (d, info) => hits++;
+        var shot = ProjectilePool.Spawn(false, "AuditBlast", Vector3.up * 0.9f, Color.cyan);
+        shot.Init(0, null, Vector3.forward, 25, 80, 1, 1.6f, 0);
+        until = Time.time + 0.3f;
+        while (Time.time < until) yield return null;
+        Check(hits == 1 && Mathf.Abs(target.CurrentHealth - 975) < 0.01f, "blast_compound_collider_once_full_direct_damage");
+        Object.Destroy(target.gameObject);
+        yield return null;
+        var bossObject = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Boss_HeavyMech.prefab"), Vector3.forward * 6, Quaternion.identity);
+        bossObject.GetComponent<BossController>().enabled = false;
+        target = bossObject.GetComponent<Damageable>();
+        target.SetMaxHealth(1000, true);
+        hits = 0;
+        target.OnDamaged += (d, info) => hits++;
+        Physics.SyncTransforms();
+        shot = ProjectilePool.Spawn(false, "AuditLargeBossBlast", Vector3.up * 1.4f, Color.cyan);
+        shot.Init(0, null, Vector3.forward, 25, 80, 1, 0.5f, 0);
+        until = Time.time + 0.3f;
+        while (Time.time < until) yield return null;
+        Check(hits == 1 && Mathf.Abs(target.CurrentHealth - 975) < 0.01f, "blast_direct_hit_larger_than_radius");
+        var reuse = ProjectilePool.Spawn(false, "AuditReuse", Vector3.up * 4, Color.cyan);
+        reuse.Init(0, null, Vector3.right, 1, 1, 1, 0, 3);
+        reuse.Despawn();
+        int created = ProjectilePool.Instance.CreatedCount;
+        var again = ProjectilePool.Spawn(false, "AuditReuseAgain", Vector3.up * 4, Color.cyan);
+        again.Init(0, null, Vector3.right, 2, 1, 1, 0, 0);
+        Check(again == reuse && again.pierceCount == 0 && ProjectilePool.Instance.CreatedCount == created, "projectile_pool_reuses_and_resets");
+        again.Despawn();
+        again.Despawn();
+        var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        wall.transform.position = new Vector3(0, 1, 3);
+        wall.transform.localScale = new Vector3(3, 2, 0.1f);
+        Physics.SyncTransforms();
+        hits = 0;
+        shot = ProjectilePool.Spawn(false, "AuditWallShot", Vector3.up * 0.9f, Color.cyan);
+        shot.Init(0, null, Vector3.forward, 25, 200, 1, 0, 2);
+        until = Time.time + 0.2f;
+        while (Time.time < until) yield return null;
+        Check(hits == 0 && !shot.gameObject.activeSelf, "swept_shot_stops_at_thin_wall");
+        Object.Destroy(wall);
+        CombatEffects.Impact(Vector3.up, Color.yellow, 1, true);
+        yield return null;
+        var ps = GameObject.Find("ArmorSparks").GetComponent<ParticleSystem>();
+        Check(ps.particleCount > 0 && ps.isPlaying, "particles_live_simulation");
+        Capture("feedback_07_particles");
+        gm.EnterResult(false);
+        yield return null;
+        Check(Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None).Length == 0 && Object.FindObjectsByType<TelegraphVisual>(FindObjectsSortMode.None).Length == 0, "pool_phase_cleanup");
+        Record("FEEDBACK_SUITE_PASS");
+    }
+
     private static IEnumerator MobileScenarios()
     {
         yield return null;
         yield return null;
         var gm = GameManager.Instance;
+        float opening = Time.time + 0.8f;
+        while (Time.time < opening) yield return null;
         Capture("mobile_00_hangar");
         Capture("mobile_00_hangar_wide", 2400, 1080, new Rect(90, 35, 2220, 1045));
         Click("DeployButton");
@@ -202,6 +304,7 @@ public static class ProjectAudit
         int choices = 0;
         bool bossSeen = false;
         bool captured = false;
+        bool pressureCaptured = false;
         while (gm.Phase != GamePhase.Result && Time.time - started < 150f)
         {
             if (gm.Phase == GamePhase.Reward)
@@ -211,6 +314,7 @@ public static class ProjectAudit
                 choices++;
             }
             if (!captured && Time.time - started > 3f) { Capture("mobile_03_auto_combat"); captured = true; }
+            if (!pressureCaptured && Time.time - started > 45f) { Capture("feedback_03_pressure"); pressureCaptured = true; }
             var bossActor = Object.FindFirstObjectByType<BossController>();
             if (bossActor != null && !bossSeen)
             {
@@ -224,6 +328,7 @@ public static class ProjectAudit
             yield return null;
         }
         Record("MOBILE_LIVE_FLOW phase=" + gm.Phase + " hp=" + gm.playerStats.CurrentHp + " kills=" + gm.Kills + " choices=" + choices + " boss=" + bossSeen + " seconds=" + (Time.time - started));
+        Record("FIRST_ENCOUNTER_SECONDS " + gm.stageManager.FirstEncounterSeconds);
         Check(gm.Phase == GamePhase.Result && gm.playerStats.CurrentHp > 0 && choices == 1 && bossSeen, "automatic_fire_full_loop");
         Capture("mobile_06_result", 1280, 720);
         Click("ReturnHangarButton");

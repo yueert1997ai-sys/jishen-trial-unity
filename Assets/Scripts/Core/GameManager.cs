@@ -323,11 +323,11 @@ public class GameManager : MonoBehaviour
     private void StopCombat()
     {
         ResetPlayerInput();
+        CombatEffects.ClearTelegraphs();
         if (stageManager != null) stageManager.StopStage();
         foreach (var projectile in FindObjectsByType<Projectile>(FindObjectsSortMode.None))
         {
-            projectile.gameObject.SetActive(false);
-            Destroy(projectile.gameObject);
+            projectile.Despawn();
         }
     }
 

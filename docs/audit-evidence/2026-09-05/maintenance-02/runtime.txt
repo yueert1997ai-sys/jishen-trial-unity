@@ -1,0 +1,70 @@
+CONSOLE Exception ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <41d29b352f6a475ab1bf7c6628b82790>:0)
+UnityEditor.Search.SearchDatabase+<EnumerateAll>d__80.MoveNext () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+System.Linq.Enumerable.TryGetFirst[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Boolean& found) (at <80564d689e48448fa2a7101993ee7201>:0)
+System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <80564d689e48448fa2a7101993ee7201>:0)
+UnityEditor.Search.SearchDatabase.GetDefaultSearchDatabase () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+UnityEditor.Search.SearchInit.IndexationOnStartup () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+UnityEditor.EditorApplication.Internal_CallDelayFunctions () (at <bc66d607b6974f3a8652f3c90b953d89>:0)
+
+CAPTURE mobile_00_hangar colors=205
+CAPTURE mobile_00_hangar_wide colors=224
+UI_CLICK DeployButton
+MOBILE_PASS stick_drag
+MOBILE_PASS stick_pointer_ownership
+MOBILE_PASS two_finger_move_dash
+MOBILE_PASS other_finger_release
+MOBILE_PASS release_clears_move
+UI_CLICK PauseButton
+MOBILE_PASS pause_clears_input
+CAPTURE mobile_00_pause colors=91
+UI_CLICK ResumeButton
+MOBILE_PASS resume_combat
+MOBILE_PASS motor_distance_(1.00, 0.00)
+MOBILE_PASS motor_brakes
+MOBILE_PASS diagonal_speed_normalized
+MOBILE_PASS motor_distance_(1.00, 1.00)
+MOBILE_PASS motor_brakes
+MOBILE_PASS dash_accepted
+MOBILE_PASS dash_not_teleport
+MOBILE_PASS dash_stops_at_wall
+MOBILE_PASS dash_cooldown
+MOBILE_PASS auto_acquires_visible_target
+MOBILE_PASS auto_target_hysteresis
+MOBILE_PASS auto_switches_closer_target
+MOBILE_PASS auto_rejects_occlusion
+MOBILE_PASS auto_rejects_far_target
+MOBILE_PASS skill_without_equipment
+MOBILE_PASS skill_cooldown
+MOBILE_PASS homing_skill_real_hit
+SKILL_DAMAGE 72
+MOBILE_PASS notch_safe_area
+MOBILE_PASS narrow_letterbox
+CAPTURE mobile_01_controls colors=181
+CAPTURE mobile_02_wide colors=195
+MOBILE_FOCUSED_PASS
+UI_CLICK DeployButton
+CAPTURE mobile_03_auto_combat colors=186
+CAPTURE feedback_03_pressure colors=181
+CAPTURE mobile_05_reward colors=136
+UI_CLICK ChooseButton
+MOBILE_PASS boss_camera_framing
+CAPTURE mobile_04_boss colors=188
+MOBILE_LIVE_FLOW phase=Result hp=203.4525 kills=79 choices=1 boss=True seconds=102.9905
+FIRST_ENCOUNTER_SECONDS 75.1105
+MOBILE_PASS automatic_fire_full_loop
+CAPTURE mobile_06_result colors=75
+UI_CLICK ReturnHangarButton
+MOBILE_PASS mobile_restart
+UI_CLICK DeployButton
+MOBILE_PASS audio_all_cues_loaded
+MOBILE_PASS music_loaded
+MOBILE_PASS navmesh_routes_around_bank
+MOBILE_PASS blast_compound_collider_once_full_direct_damage
+MOBILE_PASS blast_direct_hit_larger_than_radius
+MOBILE_PASS projectile_pool_reuses_and_resets
+MOBILE_PASS swept_shot_stops_at_thin_wall
+MOBILE_PASS particles_live_simulation
+CAPTURE feedback_07_particles colors=200
+MOBILE_PASS pool_phase_cleanup
+FEEDBACK_SUITE_PASS

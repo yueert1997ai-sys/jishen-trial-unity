@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -18,6 +19,21 @@ public class EnemySpawner : MonoBehaviour
         {
             Vector2 ring = Random.insideUnitCircle.normalized * Random.Range(spawnRadius * 0.65f, spawnRadius);
             QueueEnemy(kind, new Vector3(ring.x, 0f, ring.y), i * 0.08f);
+        }
+    }
+
+    public void SpawnEntry(EnemyKind kind, int count, int entry)
+    {
+        Vector3[] entries = { new Vector3(-21, 0, 0), new Vector3(0, 0, 21), new Vector3(21, 0, 0), new Vector3(0, 0, -21) };
+        Vector3 origin = entries[Mathf.Abs(entry) % entries.Length];
+        Vector3 tangent = Vector3.Cross(origin.normalized, Vector3.up);
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 position = origin + tangent * (i - (count - 1) * 0.5f) * 1.8f;
+            if (player != null && Vector3.Distance(position, player.position) < 7f)
+                position = -origin + tangent * i;
+            if (NavMesh.SamplePosition(position, out var point, 4, NavMesh.AllAreas)) position = point.position;
+            QueueEnemy(kind, position, i * 0.12f);
         }
     }
 
@@ -111,6 +127,7 @@ public class EnemySpawner : MonoBehaviour
 
     private EnemyBase InstantiateEnemy(GameObject prefab, Vector3 position)
     {
+        if (NavMesh.SamplePosition(position, out var point, 5f, NavMesh.AllAreas)) position = point.position;
         GameObject enemyObject = Instantiate(prefab, position, Quaternion.identity);
         EnemyBase enemy = enemyObject.GetComponent<EnemyBase>();
         if (enemy != null)

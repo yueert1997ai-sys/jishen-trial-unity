@@ -6,6 +6,8 @@ public class StageManager : MonoBehaviour
     public EnemySpawner enemySpawner;
     public Transform player;
     public float waveRepairFraction = 0.12f;
+    public EncounterDefinition maintenanceEncounter;
+    public float FirstEncounterSeconds { get; private set; }
 
     private int enemiesAlive;
     private bool bossAlive;
@@ -74,6 +76,7 @@ public class StageManager : MonoBehaviour
 
         for (int wave = 1; wave <= totalWaves; wave++)
         {
+            float waveStarted = Time.time;
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.SetProgress("Stage " + stageIndex + " - Wave " + wave + "/" + totalWaves);
@@ -81,11 +84,14 @@ public class StageManager : MonoBehaviour
 
             GameAudio.Play(GameAudioCue.Wave, 0.34f, 1f + wave * 0.035f);
 
-            SpawnWave(stageIndex, wave);
+            if (stageIndex == 1 && wave == 1 && maintenanceEncounter != null)
+                yield return RunEncounter(maintenanceEncounter);
+            else SpawnWave(stageIndex, wave);
             while (enemiesAlive > 0)
             {
                 yield return null;
             }
+            if (stageIndex == 1 && wave == 1) FirstEncounterSeconds = Time.time - waveStarted;
 
             ApplyWaveRepair();
             yield return new WaitForSeconds(1.1f);
@@ -147,6 +153,19 @@ public class StageManager : MonoBehaviour
         }
 
         GameAudio.Play(GameAudioCue.Reward, 0.2f, 1.25f);
+    }
+
+    private IEnumerator RunEncounter(EncounterDefinition encounter)
+    {
+        float start = Time.time;
+        for (int index = 0; index < encounter.beats.Length; index++)
+        {
+            var beat = encounter.beats[index];
+            while (Time.time - start < beat.at || enemiesAlive + beat.count > encounter.maxAlive) yield return null;
+            if (GameManager.Instance == null || !GameManager.Instance.IsCombatActive) yield break;
+            enemySpawner.SpawnEntry(beat.kind, beat.count, beat.entry);
+            GameManager.Instance.SetProgress(encounter.title + "  /  " + Mathf.RoundToInt((index + 1f) / encounter.beats.Length * 100f) + "%");
+        }
     }
 
     private void SpawnWave(int stageIndex, int wave)

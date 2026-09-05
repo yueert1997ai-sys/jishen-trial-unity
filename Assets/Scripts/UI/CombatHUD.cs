@@ -96,12 +96,14 @@ public class CombatHUD : MonoBehaviour
         energyText = Label(plate, "EnergyText", 13, new Vector2(10, -58), new Vector2(196, -39));
         energyFill = Bar(plate, "EnergyBar", new Vector2(10, -65), new Vector2(196, -62), new Color(0.25f, 0.8f, 1f));
         statusText = Label(plate, "StatusText", 12, new Vector2(10, -85), new Vector2(198, -67));
-        objectiveText = Label(safeRoot, "ObjectiveText", 16, new Vector2(-190, -39), new Vector2(190, -14), new Vector2(0.5f, 1), TextAnchor.MiddleCenter);
+        var objectiveBand = Panel(safeRoot, "ObjectiveBand", new Vector2(0.5f, 1), new Vector2(-204, -40), new Vector2(204, -10));
+        objectiveText = Label(objectiveBand, "ObjectiveText", 14, new Vector2(8, -28), new Vector2(400, -2), null, TextAnchor.MiddleCenter);
         bossPanel = Panel(safeRoot, "BossPanel", new Vector2(0.5f, 1), new Vector2(-180, -82), new Vector2(180, -43));
         bossText = Label(bossPanel, "BossText", 13, new Vector2(10, -24), new Vector2(350, -3), null, TextAnchor.MiddleCenter);
         bossFill = Bar(bossPanel, "BossHealth", new Vector2(10, -33), new Vector2(350, -28), new Color(1f, 0.26f, 0.17f));
         bossPanel.gameObject.SetActive(false);
-        buildText = Label(safeRoot, "BuildText", 13, new Vector2(-230, 15), new Vector2(230, 54), new Vector2(0.5f, 0), TextAnchor.MiddleCenter);
+        var buildBand = Panel(safeRoot, "BuildBand", new Vector2(0.5f, 0), new Vector2(-230, 12), new Vector2(230, 56));
+        buildText = Label(buildBand, "BuildText", 13, new Vector2(8, -42), new Vector2(452, -2), null, TextAnchor.MiddleCenter);
         var pause = RuntimeUIFactory.CreateButton(safeRoot, "PauseButton", "II");
         var pauseRect = pause.GetComponent<RectTransform>();
         pauseRect.anchorMin = pauseRect.anchorMax = new Vector2(1, 1);
@@ -120,7 +122,7 @@ public class CombatHUD : MonoBehaviour
 
     private RectTransform Panel(Transform parent, string name, Vector2 anchor, Vector2 min, Vector2 max)
     {
-        var rect = RuntimeUIFactory.CreatePanel(parent, name, anchor, anchor, min, max, new Color(0.025f, 0.07f, 0.09f, 0.82f));
+        var rect = RuntimeUIFactory.CreatePanel(parent, name, anchor, anchor, min, max, new Color(0.025f, 0.07f, 0.09f, 0.96f));
         rect.GetComponent<Image>().raycastTarget = false;
         return rect;
     }

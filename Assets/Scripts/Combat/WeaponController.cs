@@ -205,49 +205,26 @@ public class WeaponController : MonoBehaviour
 
     private void CreateBeamProjectile(Vector3 origin, Vector3 direction, float damage, int pierce, float explosionRadius)
     {
-        GameObject projectileObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        projectileObject.name = "BeamProjectile";
-        projectileObject.transform.position = origin;
-        projectileObject.transform.localScale = new Vector3(0.16f, 0.16f, 0.45f);
-        Renderer renderer = projectileObject.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            renderer.material.color = new Color(0.15f, 0.75f, 1f, 1f);
-        }
-
-        ProjectileVisuals.AddTrail(projectileObject, new Color(0.65f, 0.95f, 1f, 1f), new Color(0.05f, 0.45f, 1f, 1f), 0.17f, 0.13f);
-        ProjectileVisuals.SpawnMuzzleFlash(origin, new Color(0.2f, 0.85f, 1f, 1f), 0.26f);
-
-        Projectile projectile = projectileObject.AddComponent<Projectile>();
+        Color color = new Color(0.1f, 0.8f, 1f);
+        var projectile = ProjectilePool.Spawn(false, "BeamProjectile", origin, color);
         projectile.Init(team, damageable, direction, damage, 30f, 2.1f, explosionRadius, pierce);
+        ProjectileVisuals.SpawnMuzzleFlash(origin, color, 0.26f);
     }
 
     private void CreateMissileProjectile(Vector3 origin, Vector3 direction, float damage, float explosionRadius, Damageable target)
     {
-        GameObject missileObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-        missileObject.name = "MissileProjectile";
-        missileObject.transform.position = origin;
-        missileObject.transform.localScale = new Vector3(0.22f, 0.22f, 0.55f);
-        Renderer renderer = missileObject.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            renderer.material.color = new Color(1f, 0.32f, 0.12f, 1f);
-        }
-
-        ProjectileVisuals.AddTrail(missileObject, new Color(1f, 0.7f, 0.15f, 1f), new Color(1f, 0.08f, 0.01f, 1f), 0.2f, 0.28f);
-        ProjectileVisuals.SpawnMuzzleFlash(origin, new Color(1f, 0.42f, 0.08f, 1f), 0.3f);
-
-        MissileProjectile missile = missileObject.AddComponent<MissileProjectile>();
+        var missile = (MissileProjectile)ProjectilePool.Spawn(true, "MissileProjectile", origin, new Color(1f, 0.65f, 0.12f), 0.22f);
         missile.target = target;
         missile.Init(team, damageable, direction, damage, 18f, 4.5f, explosionRadius, 0);
+        ProjectileVisuals.SpawnMuzzleFlash(origin, new Color(1f, 0.7f, 0.2f), 0.3f);
     }
 
     private Damageable FindNearestEnemy()
     {
-        Damageable[] candidates = FindObjectsByType<Damageable>(FindObjectsSortMode.None);
+        var candidates = Damageable.Active;
         Damageable best = null;
         float bestDistance = 999999f;
-        for (int i = 0; i < candidates.Length; i++)
+        for (int i = 0; i < candidates.Count; i++)
         {
             Damageable candidate = candidates[i];
             if (candidate == null || candidate.team == team || candidate.IsDead)

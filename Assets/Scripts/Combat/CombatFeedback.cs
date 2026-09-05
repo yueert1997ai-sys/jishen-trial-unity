@@ -122,94 +122,26 @@ public class CombatFeedback : MonoBehaviour
 
     public static void SpawnGroundLine(Vector3 origin, Vector3 direction, float length, float width, float duration, Color color)
     {
-        Vector3 flatDirection = direction;
-        flatDirection.y = 0f;
-        if (flatDirection.sqrMagnitude < 0.01f)
-        {
-            flatDirection = Vector3.forward;
-        }
-
-        flatDirection.Normalize();
-        GameObject line = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        line.name = "CombatGroundLine";
-        line.transform.position = origin + flatDirection * (length * 0.5f) + Vector3.up * 0.035f;
-        line.transform.rotation = Quaternion.LookRotation(flatDirection, Vector3.up);
-        line.transform.localScale = new Vector3(width, 0.025f, length);
-        DisableCollider(line);
-        SetEffectMaterial(line, color);
-        Object.Destroy(line, Mathf.Max(0.05f, duration));
+        CombatEffects.Line(origin, direction, length, width, duration, color);
     }
 
     public static void SpawnWarningDisc(Vector3 position, float radius, float duration, Color color)
     {
-        GameObject disc = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        disc.name = "CombatWarningDisc";
-        disc.transform.position = new Vector3(position.x, 0.045f, position.z);
-        disc.transform.localScale = new Vector3(radius * 2f, 0.018f, radius * 2f);
-        DisableCollider(disc);
-        SetEffectMaterial(disc, color);
-        Object.Destroy(disc, Mathf.Max(0.05f, duration));
+        CombatEffects.Disc(position, radius, duration, color);
     }
 
     public static void SpawnImpactPulse(Vector3 position, Color color, float scale)
     {
-        GameObject pulse = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        pulse.name = "HitPulse";
-        pulse.transform.position = position;
-        pulse.transform.localScale = Vector3.one * scale;
-        DisableCollider(pulse);
-        SetEffectMaterial(pulse, color);
-        Object.Destroy(pulse, 0.1f);
+        CombatEffects.Impact(position, color, scale);
     }
 
     private static void SpawnDamageNumber(Vector3 position, float amount, Color color)
     {
-        GameObject numberObject = new GameObject("FloatingDamageText");
-        numberObject.transform.position = position + Random.insideUnitSphere * 0.12f;
-        FloatingCombatText floatingText = numberObject.AddComponent<FloatingCombatText>();
-        floatingText.Init(amount, color);
+        CombatEffects.Number(position, amount, color);
     }
 
     private static void SpawnDeathBurst(Vector3 position, Color color, float scale)
     {
-        for (int i = 0; i < 6; i++)
-        {
-            GameObject shard = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            shard.name = "DeathBurstShard";
-            Vector3 direction = Random.onUnitSphere;
-            direction.y = Mathf.Abs(direction.y) + 0.2f;
-            shard.transform.position = position + direction * scale * 0.55f;
-            shard.transform.rotation = Random.rotation;
-            shard.transform.localScale = Vector3.one * scale * Random.Range(0.12f, 0.24f);
-            DisableCollider(shard);
-            SetEffectMaterial(shard, color);
-            Object.Destroy(shard, 0.22f);
-        }
-    }
-
-    private static void DisableCollider(GameObject target)
-    {
-        Collider collider = target.GetComponent<Collider>();
-        if (collider != null)
-        {
-            collider.enabled = false;
-            Object.Destroy(collider);
-        }
-    }
-
-    private static void SetEffectMaterial(GameObject target, Color color)
-    {
-        Renderer renderer = target.GetComponent<Renderer>();
-        if (renderer == null)
-        {
-            return;
-        }
-
-        renderer.material.color = color;
-        if (renderer.material.HasProperty("_EmissionColor"))
-        {
-            renderer.material.EnableKeyword("_EMISSION");
-            renderer.material.SetColor("_EmissionColor", color * 1.6f);
-        }
+        CombatEffects.Impact(position, color, scale, true);
     }
 }

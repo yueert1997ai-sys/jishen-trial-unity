@@ -1,0 +1,366 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.3/staging' branch; Version is '6000.3.18f1 (5ebeb53e4c07) revision 6209205'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Channel LicenseClient-yue doesn't exist
+OS: 'Windows 11  (10.0.22000) Core' Language: 'zh' Physical Memory: 32614 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-09-05T04:07:50Z
+[Licensing::Module] Successfully launched the LicensingClient (PId: 34288)
+
+COMMAND LINE ARGUMENTS:
+D:\Editor\6000.3.18f1\Editor\Unity.exe
+-batchmode
+-quit
+-projectPath
+C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905
+-executeMethod
+SliceEnvironmentBuilder.Build
+-logFile
+C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905/Maintenance03Build.log
+Successfully changed project path to: C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905
+C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+Player connection [35604]  Target information:
+
+Player connection [35604]  * "[IP] 192.168.5.218 [Port] 55504 [Flags] 2 [Guid] 3523802613 [EditorId] 3523802613 [Version] 1048832 [Id] WindowsEditor(7,Marco) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [35604]  * "[IP] 172.22.128.1 [Port] 55504 [Flags] 2 [Guid] 3523802613 [EditorId] 3523802613 [Version] 1048832 [Id] WindowsEditor(7,Marco) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [35604]  * "[IP] 2.0.0.1 [Port] 55504 [Flags] 2 [Guid] 3523802613 [EditorId] 3523802613 [Version] 1048832 [Id] WindowsEditor(7,Marco) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [35604] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [35604] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-yue" at "2026-09-05T04:07:50.327218Z"
+[Package Manager] Connected to IPC stream "Upm-30296" after 0.2 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 34288, path: "D:/Editor/6000.3.18f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              eeb0a6248190471d9459ae5efdc475bc
+  Correlation Id:          ad552e80723681f48df8987233e2001a
+  External correlation Id: 2534866313509463880
+  Machine Id:              XSqKgGWCHqq/Baz2PtSnIVh4W6c=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-yue" (connect: 0.25s, validation: 0.10s, handshake: 0.06s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-yue-notifications" at "2026-09-05T04:07:50.4856868Z"
+[Licensing::Module] Connected to LicensingClient (PId: 34288, launch time: 0.00, total connection time: 0.40s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968449435854-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.01
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.43s
+[Licensing::Module] Licensing is initialized (took 0.12s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.3.18f1 (5ebeb53e4c07)
+[Subsystems] Discovering subsystems at path D:/Editor/6000.3.18f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 4070 Ti (ID=0x2782)
+    Vendor:          NVIDIA
+    VRAM:            11994 MB
+    App VRAM Budget: 11226 MB
+    Driver:          32.0.15.9649
+Initialize mono
+Mono path[0] = 'D:/Editor/6000.3.18f1/Editor/Data/Managed'
+Mono path[1] = 'D:/Editor/6000.3.18f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'D:/Editor/6000.3.18f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56296
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: D:/Editor/6000.3.18f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001702 seconds.
+- Loaded All Assemblies, in  0.297 seconds
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:False
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.242 seconds
+Domain Reload Profiling: 538ms
+	BeginReloadAssembly (131ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (35ms)
+	RebuildCommonClasses (24ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (26ms)
+	LoadAllAssembliesAndSetupDomain (107ms)
+		LoadAssemblies (96ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (104ms)
+			TypeCache.Refresh (103ms)
+				TypeCache.ScanAssembly (94ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (242ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (220ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (31ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (49ms)
+			ProcessInitializeOnLoadAttributes (81ms)
+			ProcessInitializeOnLoadMethodAttributes (55ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 7 packages:
+  Built-in packages:
+    com.unity.ugui@2.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.ugui@2e4da8434a5c)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.ai)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.particlesystem)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.audio)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.physics)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.ui)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.imgui)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.00 seconds
+[ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
+Starting: D:\Editor\6000.3.18f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905
+DisplayProgressbar: Compiling Scripts
+ExitCode: 0 Duration: 0s306ms
+[206/209    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[207/209    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[208/209    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (0.28 seconds), 3 items updated, 209 evaluated
+AssetDatabase: script compilation time: 0.586496s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.500 seconds
+Start importing Assets/Resources/Audio/Music using Guid(0bcf56b147e6743489085fafe8c16e3c) (DefaultImporter) -> (artifact id: '17bfa85b6a722566f0d5c9da43cb6cd6') in 0.0170072 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Native extension for WindowsStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.263 seconds
+Domain Reload Profiling: 762ms
+	BeginReloadAssembly (257ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (16ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (139ms)
+	RebuildCommonClasses (22ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (10ms)
+	LoadAllAssembliesAndSetupDomain (202ms)
+		LoadAssemblies (268ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (11ms)
+			TypeCache.Refresh (6ms)
+				TypeCache.ScanAssembly (3ms)
+			BuildScriptInfoCaches (2ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (263ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (175ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (68ms)
+			ProcessInitializeOnLoadAttributes (67ms)
+			ProcessInitializeOnLoadMethodAttributes (21ms)
+			AfterProcessingInitializeOnLoad (2ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (22ms)
+Start importing Assets/Resources/Audio/Combat/computerNoise_000.ogg using Guid(b0bf83e5c03c7404392b5421bcdf341c) (AudioImporter) -> (artifact id: 'dd43b2e68eae93c96b7175c2aca651ad') in 0.0809571 seconds
+Start importing Assets/Resources/Audio/Combat/jingles_HIT04.ogg using Guid(c0437f9da425b254db51b94ada695745) (AudioImporter) -> (artifact id: '14abdfd7463e1368850c635e7fab04a1') in 0.0458122 seconds
+Start importing Assets/Resources/Audio/Music/Subspace_Loop.ogg using Guid(e23b032d30e72ed46a1d52c5dae379ff) (AudioImporter) -> (artifact id: '24240e45d7059623b9c0c1410447921e') in 2.0216163 seconds
+Start importing Assets/Resources/Audio/Combat/laserLarge_001.ogg using Guid(a315ea10999dd434fb02b6bad75b4453) (AudioImporter) -> (artifact id: 'd770e4dd503ddf3649da66436dd584a5') in 0.0460572 seconds
+Start importing Assets/Resources/Audio/Combat/laserLarge_002.ogg using Guid(34e53aa05e60eda439fa539135bb431a) (AudioImporter) -> (artifact id: 'f8af107aad6ff246cbbc16bc59392b66') in 0.0477924 seconds
+Start importing Assets/Resources/Audio/Combat/thrusterFire_002.ogg using Guid(d42ab806ae4021f4e963fe16d3b10304) (AudioImporter) -> (artifact id: '8390ee6323ac8d5be8974032f9988371') in 0.0761054 seconds
+Start importing Assets/Resources/Audio/Combat/jingles_HIT08.ogg using Guid(758e61a987497b341bc9a963b0f908f0) (AudioImporter) -> (artifact id: 'ccf25d33c79186a4a585996fa2b0856d') in 0.0566644 seconds
+Start importing Assets/Resources/Audio/Combat/jingles_HIT00.ogg using Guid(26b307a11b803184594233bb2ccb9181) (AudioImporter) -> (artifact id: 'ad95eb77f2d6bd1753b99fde0c9d7849') in 0.0434114 seconds
+Start importing Assets/Resources/Audio/Combat/impactMetal_heavy_001.ogg using Guid(073aa3e1ce80bcf4093fccac50acbdfe) (AudioImporter) -> (artifact id: '41628f318161fb55dbd5523cd23b7e95') in 0.0432233 seconds
+Start importing Assets/Resources/Audio/Combat/thrusterFire_000.ogg using Guid(5968f63818098a74f99f45f1d449ece7) (AudioImporter) -> (artifact id: '41497f878a95b6a819a8b4bfb521ddca') in 0.0745962 seconds
+Start importing Assets/Resources/Audio/Combat/explosionCrunch_000.ogg using Guid(5baf39173da2da14da29664cd0e935f2) (AudioImporter) -> (artifact id: 'f34696526918a51094cd9fba357adb19') in 0.0457924 seconds
+Start importing Assets/Resources/Audio/Combat/impactMetal_medium_000.ogg using Guid(8b60b2c1d5312404eb42b34f408a1228) (AudioImporter) -> (artifact id: '326861450424acf4c8256f1b61512a8c') in 0.0430495 seconds
+Start importing Assets/Resources/Audio/Combat/jingles_HIT13.ogg using Guid(fba564090f0f12340b48e709462fd515) (AudioImporter) -> (artifact id: '29c2b63447e6dcfa5c9f5309de7b9e4a') in 0.0425436 seconds
+Start importing Assets/Resources/Audio/Combat/forceField_001.ogg using Guid(8df998085fa312e409a7a68403fb2cee) (AudioImporter) -> (artifact id: 'f8c7bc48decc2edfcac127761db3ae0c') in 0.0525334 seconds
+Start importing Assets/Resources/Audio/Combat/explosionCrunch_002.ogg using Guid(2e768e82713ca744189efcabae1e78d6) (AudioImporter) -> (artifact id: 'a671547aa6eb7a070cf99e37cbe97b5a') in 0.057326 seconds
+Start importing Assets/Resources/Audio/Combat/impactMetal_heavy_000.ogg using Guid(0f32b259f1b781f4aadc556ad1bd3698) (AudioImporter) -> (artifact id: '28d49894d91dbc2dc2e63a98454f485e') in 0.0423742 seconds
+Start importing Assets/Resources/Audio/Combat/spaceEngineLow_000.ogg using Guid(4f5ae9e0af9a40541a70e06a9d3f46f4) (AudioImporter) -> (artifact id: '34f3db3d839d890665fbeb44428513f1') in 0.0958501 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=231e09956520acd4798420b1665c1b1c): Total: 4.441 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=18 (actual=18, local cache=0, cache server=0)
+		Asset DB Process Time: managed=4 ms, native=3299 ms
+		Asset DB Callback time: managed=34 ms, native=6 ms
+		Scripting: domain reloads=1, domain reload time=500 ms, compile time=588 ms, other=6 ms
+		Project Asset Count: scripts=142, non-scripts=137
+		Asset File Changes: new=0, changed=1, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 8.174ms
+	ApplyChangesToAssetFolders: 0.398ms
+	Scan: 45.550ms
+	OnSourceAssetsModified: 0.564ms
+	CategorizeAssetsWithTransientArtifact: 0.790ms
+	ProcessAssetsWithTransientArtifactChanges: 3.954ms
+	CategorizeAssets: 0.990ms
+	ImportOutOfDateAssets: 3202.071ms (-324.332ms without children)
+		ImportManagerImport: 2938.515ms (3.174ms without children)
+			ImportInProcess: 2935.276ms
+			UpdateCategorizedAssets: 0.066ms
+		CompileScripts: 587.626ms
+		ReloadNativeAssets: 0.000ms
+		UnloadImportedAssets: 0.099ms
+		ReloadImportedAssets: 0.001ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.027ms
+		InitializingProgressBar: 0.004ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+		OnDemandSchedulerStart: 0.131ms
+	PostProcessAllAssets: 34.624ms
+	Hotreload: 0.687ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.001ms
+	UnloadStreamsBegin: 0.893ms
+	PersistCurrentRevisions: 0.044ms
+	UnloadStreamsEnd: 0.000ms
+	GenerateScriptTypeHashes: 0.071ms
+	Untracked: 1142.578ms
+
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
+Scanning for USB devices : 3.466ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-MECH ROUGE
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 422 unused Assets / (0.6 MB). Loaded Objects now: 1054.
+Memory consumption went from 96.3 MB to 95.7 MB.
+Total: 2.941800 ms (FindLiveObjects: 0.045900 ms CreateObjectMapping: 0.012100 ms MarkObjects: 2.694700 ms  DeleteObjects: 0.188400 ms)
+
+Opening scene 'Assets/Scenes/Demo_Main.unity'
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/Scenes/Demo_Main.unity'
+	Deserialize:            13.078 ms
+	Integration:            72.761 ms
+	Integration of assets:  0.842 ms
+	Thread Wait Time:       0.007 ms
+	Total Operation Time:   86.688 ms
+Unloading 1 unused Assets / (0.5 KB). Loaded Objects now: 2678.
+Memory consumption went from 104.1 MB to 104.1 MB.
+Total: 2.653600 ms (FindLiveObjects: 0.084300 ms CreateObjectMapping: 0.015200 ms MarkObjects: 2.544200 ms  DeleteObjects: 0.009400 ms)
+
+Asset Pipeline Refresh (id=9923dc3f961af414f8610fe2e52d2a87): Total: 0.019 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Start importing Assets/Art/SliceEnvironment/DeckSteel.mat using Guid(3fba2111064594448996561fb92055e3) (NativeFormatImporter) -> (artifact id: '170c20921535cf15e87b92871904b8a1') in 0.0018472 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=7e9368ed02849aa4fb5d82b5583e302a): Total: 0.017 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/Art/SliceEnvironment/DeckSteelAlternate.mat using Guid(a976c100a3395024cb7a37b49bf54ce3) (NativeFormatImporter) -> (artifact id: '9c15399d20d9764b1cded3270d2d62b2') in 0.0017938 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=cb6959597893d4f4abd51b91f1a148f3): Total: 0.015 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/Art/SliceEnvironment/DeckSteelAlternate.mat using Guid(a976c100a3395024cb7a37b49bf54ce3) (NativeFormatImporter) -> (artifact id: '8bd7398c7cf2deb0bc9e705db98b1157') in 0.0020085 seconds
+Start importing Assets/Art/SliceEnvironment/Telemetry.mat using Guid(5da1e38f32062514288a40a28794e1aa) (NativeFormatImporter) -> (artifact id: 'a4ce58585e2be681ec18e0cea0c519e2') in 0.0016192 seconds
+Start importing Assets/Art/SliceEnvironment/DeckSteel.mat using Guid(3fba2111064594448996561fb92055e3) (NativeFormatImporter) -> (artifact id: 'fcf7d075e96fd619a12eab871834e5b5') in 0.0015578 seconds
+Start importing Assets/Art/SliceEnvironment/MaintenanceNavMesh.asset using Guid(e127fac48b453de489cb87a2c607ebac) (NativeFormatImporter)Main Object Name '' does not match filename 'MaintenanceNavMesh'
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+SliceEnvironmentBuilder:Build () (at Assets/Editor/SliceEnvironmentBuilder.cs:114)
+
+[Assets/Editor/SliceEnvironmentBuilder.cs line 114]
+
+ -> (artifact id: '09bf41e747b2912b28b852ba895a2965') in 0.0021296 seconds
+Start importing Assets/Art/SliceEnvironment/MaintenanceEncounter.asset using Guid(ae363bbce33cb78429af5d919e815d66) (NativeFormatImporter) -> (artifact id: '2917eb49e60c9e8a9610d679b8bdf550') in 0.0016012 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=70ab19028fcdaa74fb41f02e5d1116cb): Total: 0.023 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/Scenes/Demo_Main.unity using Guid(8f44937ba19466c40907b57aef208a5f) (DefaultImporter) -> (artifact id: '3b957ab48dd554f8ccae037444b492d9') in 0.0008281 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=be86979d4ecd5ba41aed1e4b8db2e915): Total: 0.015 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+SLICE_ENVIRONMENT_BUILT sources=11 objects=379
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SliceEnvironmentBuilder:Build () (at Assets/Editor/SliceEnvironmentBuilder.cs:116)
+
+(Filename: Assets/Editor/SliceEnvironmentBuilder.cs Line: 116)
+
+Batchmode quit successfully invoked - shutting down!
+Curl error 42: Callback aborted
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-yue-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-yue channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+Exiting batchmode successfully now!
+Exiting without the bug reporter. Application will terminate with return code 0

@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b5ebe7cd84f6654c9d17d383212558e, type: 3}
+  m_Name: MaintenanceEncounter
+  m_EditorClassIdentifier: Assembly-CSharp::EncounterDefinition
+  title: SECURE MAINTENANCE DECK
+  maxAlive: 10
+  beats:
+  - at: 0
+    kind: 0
+    count: 2
+    entry: 0
+  - at: 3.2
+    kind: 0
+    count: 2
+    entry: 1
+  - at: 6.4
+    kind: 0
+    count: 2
+    entry: 2
+  - at: 9.6
+    kind: 0
+    count: 2
+    entry: 3
+  - at: 12.8
+    kind: 0
+    count: 2
+    entry: 0
+  - at: 16
+    kind: 0
+    count: 2
+    entry: 1
+  - at: 19.2
+    kind: 3
+    count: 1
+    entry: 2
+  - at: 22.4
+    kind: 2
+    count: 3
+    entry: 3
+  - at: 25.6
+    kind: 0
+    count: 3
+    entry: 0
+  - at: 28.800001
+    kind: 0
+    count: 3
+    entry: 1
+  - at: 32
+    kind: 1
+    count: 3
+    entry: 2
+  - at: 35.2
+    kind: 2
+    count: 3
+    entry: 3
+  - at: 38.4
+    kind: 0
+    count: 3
+    entry: 0
+  - at: 41.600002
+    kind: 3
+    count: 1
+    entry: 1
+  - at: 44.8
+    kind: 1
+    count: 3
+    entry: 2
+  - at: 48
+    kind: 2
+    count: 3
+    entry: 3
+  - at: 51.2
+    kind: 0
+    count: 3
+    entry: 0
+  - at: 54.4
+    kind: 0
+    count: 3
+    entry: 1
+  - at: 57.600002
+    kind: 1
+    count: 3
+    entry: 2
+  - at: 60.8
+    kind: 2
+    count: 3
+    entry: 3
+  - at: 64
+    kind: 3
+    count: 1
+    entry: 0
+  - at: 67.200005
+    kind: 0
+    count: 3
+    entry: 1
+  - at: 70.4
+    kind: 1
+    count: 3
+    entry: 2

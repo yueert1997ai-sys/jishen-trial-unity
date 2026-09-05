@@ -8,6 +8,7 @@ public class FloatingCombatText : MonoBehaviour
 
     private float remaining;
     private Color baseColor;
+    public System.Action<FloatingCombatText> release;
 
     public void Init(float amount, Color color)
     {
@@ -52,7 +53,8 @@ public class FloatingCombatText : MonoBehaviour
 
         if (remaining <= 0f)
         {
-            Destroy(gameObject);
+            if (release != null) release(this);
+            else Destroy(gameObject);
         }
     }
 }
