@@ -26,6 +26,9 @@ public class EnemyBase : MonoBehaviour
     private bool detonating;
     private NavMeshAgent navigation;
     private float nextPathTime;
+    private bool attacking;
+    private float attackStarted, attackDuration;
+    public float AttackWindup => attacking ? Mathf.Clamp01((Time.time - attackStarted) / attackDuration) : 0f;
 
     public float DifficultyHealthMultiplier { get; private set; } = 1f;
 
@@ -52,6 +55,8 @@ public class EnemyBase : MonoBehaviour
 
     private void OnDisable()
     {
+        StopAllCoroutines();
+        attacking = false;
         if (navigation != null && navigation.isOnNavMesh) navigation.ResetPath();
         if (damageable != null)
         {
@@ -83,6 +88,8 @@ public class EnemyBase : MonoBehaviour
         {
             return;
         }
+
+        if (attacking) return;
 
         Vector3 toTarget = target.position - transform.position;
         toTarget.y = 0f;
@@ -133,13 +140,8 @@ public class EnemyBase : MonoBehaviour
         StopMoving();
         if (Time.time >= nextAttackTime)
         {
-            nextAttackTime = Time.time + 0.85f;
-            Damageable targetDamageable = target.GetComponent<Damageable>();
-            if (targetDamageable != null)
-            {
-                targetDamageable.TakeDamage(contactDamage, new DamageInfo(gameObject, transform.position, damageable, contactDamage));
-            }
-
+            nextAttackTime = Time.time + 1.2f;
+            StartCoroutine(MeleeStrike());
         }
     }
 
@@ -156,14 +158,30 @@ public class EnemyBase : MonoBehaviour
         }
         else StopMoving();
 
-        if (Time.time >= nextAttackTime)
+        if (distance <= 15f && Time.time >= nextAttackTime)
         {
-            nextAttackTime = Time.time + fireInterval;
-            FireAtPlayer(kind == EnemyKind.Elite ? 9f : 6f);
+            nextAttackTime = Time.time + Mathf.Max(1.6f, fireInterval);
+            StopMoving();
+            StartCoroutine(RangedStrike());
         }
     }
 
-    private void FireAtPlayer(float damage)
+    private IEnumerator MeleeStrike()
+    {
+        BeginWindup(0.38f);
+        Vector3 center = transform.position;
+        float radius = Mathf.Max(1.7f, attackRange + 0.2f);
+        CombatEffects.Disc(center, radius, attackDuration, new Color(1f, 0.32f, 0.1f));
+        yield return new WaitForSeconds(attackDuration);
+        Vector3 delta = target.position - center;
+        delta.y = 0;
+        if (!damageable.IsDead && delta.sqrMagnitude <= radius * radius)
+            target.GetComponent<Damageable>().TakeDamage(contactDamage, new DamageInfo(gameObject, center, damageable, contactDamage));
+        CombatEffects.Impact(center + transform.forward, new Color(1f, 0.6f, 0.2f), 0.45f);
+        attacking = false;
+    }
+
+    private IEnumerator RangedStrike()
     {
         Vector3 direction = (target.position - transform.position);
         direction.y = 0f;
@@ -174,23 +192,39 @@ public class EnemyBase : MonoBehaviour
 
         Vector3 origin = transform.position + Vector3.up * 0.9f + direction.normalized * 0.75f;
         Color color = kind == EnemyKind.Elite ? new Color(1f, 0.25f, 0.42f) : new Color(1f, 0.35f, 0.08f);
+        BeginWindup(0.55f);
+        CombatEffects.Line(origin, direction, 18f, 0.24f, attackDuration, color);
+        yield return new WaitForSeconds(attackDuration);
+        if (damageable.IsDead) yield break;
+        float damage = kind == EnemyKind.Elite ? 9f : 6f;
         var projectile = ProjectilePool.Spawn(false, "EnemyProjectile", origin, color, 0.24f);
         ProjectileVisuals.SpawnMuzzleFlash(origin, color, 0.24f);
         projectile.Init(1, damageable, direction.normalized, damage, kind == EnemyKind.Elite ? 12f : 10f, 3f, 0f, 0);
+        attacking = false;
+    }
+
+    private void BeginWindup(float duration)
+    {
+        attacking = true;
+        attackStarted = Time.time;
+        attackDuration = duration;
     }
 
     private void Explode()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 2.2f);
-        for (int i = 0; i < colliders.Length; i++)
+        var actors = Damageable.Active;
+        for (int i = actors.Count - 1; i >= 0; i--)
         {
-            Damageable targetDamageable = colliders[i].GetComponentInParent<Damageable>();
-            if (targetDamageable == null || targetDamageable.team == 1)
+            Damageable targetDamageable = actors[i];
+            if (targetDamageable == null || targetDamageable.team == 1 || targetDamageable.IsDead)
             {
                 continue;
             }
 
-            targetDamageable.TakeDamage(16f, new DamageInfo(gameObject, transform.position, damageable, 16f));
+            Vector3 delta = targetDamageable.transform.position - transform.position;
+            delta.y = 0;
+            if (delta.sqrMagnitude <= 2.2f * 2.2f)
+                targetDamageable.TakeDamage(16f, new DamageInfo(gameObject, transform.position, damageable, 16f));
         }
 
         damageable.Kill(new DamageInfo(gameObject, transform.position, damageable, 999f));

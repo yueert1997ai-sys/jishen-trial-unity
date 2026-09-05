@@ -75,6 +75,7 @@ public class Projectile : MonoBehaviour
             target.TakeDamage(damage, new DamageInfo(gameObject, point, source, damage));
             ApplyExplosionDamage(point);
             CombatFeedback.SpawnImpactPulse(point, new Color(1f, 0.65f, 0.15f), explosionRadius);
+            if (spent || pierceCount-- > 0) return;
             Despawn();
             return;
         }

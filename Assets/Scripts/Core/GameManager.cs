@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public RewardUI rewardUI;
     public ShopUI shopUI;
     public ResultUI resultUI;
+    public ArenaSector arenaSector;
 
     public int Coins { get; private set; }
     public int Kills { get; private set; }
@@ -230,6 +231,7 @@ public class GameManager : MonoBehaviour
         SetPaused(false);
         Phase = GamePhase.Combat;
         if (combatHUD != null) combatHUD.SetVisible(true);
+        if (arenaSector != null) arenaSector.ShowSector(index < 3 ? 1 : 2);
         if (index == 0 || index == 3 || index == 6)
         {
             playerController.RestoreAt(new Vector3(0f, 0.1f, index == 6 ? -6f : -4f));
@@ -465,6 +467,7 @@ public class GameManager : MonoBehaviour
 
     private void FindMissingReferences()
     {
+        if (arenaSector == null) arenaSector = FindFirstObjectByType<ArenaSector>();
         if (runManager == null)
         {
             runManager = GetComponent<RunManager>();

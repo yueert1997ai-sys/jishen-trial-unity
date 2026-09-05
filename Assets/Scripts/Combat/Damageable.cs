@@ -40,6 +40,7 @@ public class Damageable : MonoBehaviour
     public float maxHealth = 50f;
     public bool destroyOnDeath = true;
     public float hitInvulnerabilityDuration;
+    public float IncomingDamageScale { get; set; } = 1f;
 
     public float CurrentHealth { get; private set; }
     public bool IsDead { get; private set; }
@@ -98,7 +99,7 @@ public class Damageable : MonoBehaviour
         }
 
         info.Amount = amount;
-        float finalDamage = playerStats != null ? playerStats.ModifyIncomingDamage(info) : amount;
+        float finalDamage = (playerStats != null ? playerStats.ModifyIncomingDamage(info) : amount) * Mathf.Max(0f, IncomingDamageScale);
         info.Amount = finalDamage;
         CurrentHealth = Mathf.Max(0f, CurrentHealth - finalDamage);
 

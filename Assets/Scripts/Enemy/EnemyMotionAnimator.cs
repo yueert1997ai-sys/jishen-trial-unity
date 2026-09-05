@@ -11,9 +11,13 @@ public class EnemyMotionAnimator : MonoBehaviour
     private Quaternion baseLocalRotation;
     private Vector3 previousWorldPosition;
     private float phase;
+    private EnemyBase enemy;
+    private BossController boss;
 
     private void Awake()
     {
+        enemy = GetComponent<EnemyBase>();
+        boss = GetComponent<BossController>();
         if (visualRoot == null)
         {
             visualRoot = transform.Find("VisualRoot");
@@ -66,6 +70,8 @@ public class EnemyMotionAnimator : MonoBehaviour
         }
 
         visualRoot.localPosition = baseLocalPosition + Vector3.up * bob;
-        visualRoot.localRotation = baseLocalRotation * Quaternion.Euler(pitch, 0f, roll);
+        float windup = enemy != null ? enemy.AttackWindup : boss != null ? boss.AttackWindup : 0f;
+        var desired = baseLocalRotation * Quaternion.Euler(pitch - windup * 9f, 0f, roll);
+        visualRoot.localRotation = Quaternion.Slerp(visualRoot.localRotation, desired, 1f - Mathf.Exp(-18f * Time.deltaTime));
     }
 }

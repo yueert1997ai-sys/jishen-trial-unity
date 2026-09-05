@@ -31,9 +31,14 @@ public static class ProjectAudit
                 evidence.Clear();
                 projectError = false;
                 UnityEngine.Random.InitState(5092026);
-                deadline = EditorApplication.timeSinceStartup + 300;
+                deadline = EditorApplication.timeSinceStartup + 1200;
                 lastFrame = -1;
                 routine = SessionState.GetBool(Active + ".Progression", false) ? ProgressionScenarios() : SessionState.GetBool(Active + ".Feedback", false) ? FeedbackScenarios() : SessionState.GetBool(Active + ".Mobile", false) ? MobileScenarios() : SessionState.GetBool(Active + ".Shots", false) ? ShotDiagnostics() : RunScenarios();
+                string suite = SessionState.GetString(Active + ".Suite", "");
+                if (suite == "Boss") routine = BossScenarios();
+                if (suite == "Slice") routine = SliceScenarios();
+                if (suite == "Builds") routine = BuildScenarios();
+                if (suite == "BossLive") routine = BossLiveScenarios();
                 Application.logMessageReceived += CaptureLog;
                 EditorApplication.update += Tick;
             }
@@ -42,6 +47,7 @@ public static class ProjectAudit
 
     public static void Run()
     {
+        SessionState.SetString(Active + ".Suite", "");
         SessionState.SetBool(Active + ".Progression", false);
         SessionState.SetBool(Active + ".Feedback", false);
         SessionState.SetBool(Active + ".Mobile", false);
@@ -55,6 +61,7 @@ public static class ProjectAudit
 
     public static void RunShotDiagnostics()
     {
+        SessionState.SetString(Active + ".Suite", "");
         SessionState.SetBool(Active + ".Progression", false);
         SessionState.SetBool(Active + ".Feedback", false);
         SessionState.SetBool(Active + ".Mobile", false);
@@ -67,6 +74,7 @@ public static class ProjectAudit
 
     public static void RunMobileTests()
     {
+        SessionState.SetString(Active + ".Suite", "");
         SessionState.SetBool(Active + ".Progression", false);
         SessionState.SetBool(Active + ".Feedback", false);
         Directory.CreateDirectory(Output);
@@ -78,6 +86,7 @@ public static class ProjectAudit
 
     public static void RunFeedbackTests()
     {
+        SessionState.SetString(Active + ".Suite", "");
         SessionState.SetBool(Active + ".Progression", false);
         Directory.CreateDirectory(Output);
         SessionState.SetBool(Active + ".Feedback", true);
@@ -88,11 +97,252 @@ public static class ProjectAudit
 
     public static void RunProgressionTests()
     {
+        SessionState.SetString(Active + ".Suite", "");
         Directory.CreateDirectory(Output);
         SessionState.SetBool(Active + ".Progression", true);
         SessionState.SetBool(Active, true);
         EditorSceneManager.OpenScene("Assets/Scenes/Demo_Main.unity");
         EditorApplication.EnterPlaymode();
+    }
+
+    public static void RunBossTests() { StartSuite("Boss"); }
+    public static void RunSliceTests() { StartSuite("Slice"); }
+    public static void RunBuildTests() { StartSuite("Builds"); }
+    public static void RunBossLiveTests() { StartSuite("BossLive"); }
+
+    private static void StartSuite(string suite)
+    {
+        Directory.CreateDirectory(Output);
+        SessionState.SetString(Active + ".Suite", suite);
+        SessionState.SetBool(Active, true);
+        EditorSceneManager.OpenScene("Assets/Scenes/Demo_Main.unity");
+        EditorApplication.EnterPlaymode();
+    }
+
+    private static IEnumerator BossLiveScenarios()
+    {
+        yield return null;
+        yield return null;
+        var gm = GameManager.Instance;
+        gm.playerController.InputRouter.readKeyboard = false;
+        Click("DeployButton");
+        gm.stageManager.StopStage();
+        gm.arenaSector.ShowSector(2);
+        gm.upgradeSystem.ResetUpgrades(5092026);
+        foreach (var kind in new[] { RunUpgradeKind.FireRate, RunUpgradeKind.FireRate, RunUpgradeKind.FireRate,
+            RunUpgradeKind.PiercingRounds, RunUpgradeKind.ArmorPlating, RunUpgradeKind.DashCapacitor })
+            gm.upgradeSystem.ApplyOption(new RunUpgradeOption { kind = kind });
+        var boss = gm.stageManager.enemySpawner.SpawnBoss();
+        float started = Time.time;
+        bool phaseTwo = false;
+        int waypoint = 0, actions = 0;
+        Vector3[] route = { new Vector3(-4, 0, -5), new Vector3(4, 0, -5), new Vector3(4, 0, 5), new Vector3(-4, 0, 5) };
+        while (boss != null && !boss.GetComponent<Damageable>().IsDead && gm.IsCombatActive && Time.time - started < 180)
+        {
+            var player = gm.playerController;
+            Vector3 delta = route[waypoint] - player.transform.position;
+            delta.y = 0;
+            if (delta.magnitude < 0.8f) waypoint = (waypoint + 1) % route.Length;
+            player.InputRouter.SetTouchMove(new Vector2(delta.x, delta.z).normalized);
+            // Save the active salvo for a genuine core opening.
+            if (boss.CoreExposed) player.InputRouter.QueueSkill();
+            phaseTwo |= boss.IsPhaseTwo;
+            actions = boss.ActionsCompleted;
+            yield return null;
+        }
+        float seconds = Time.time - started;
+        Record("BOSS_LIVE seconds=" + seconds + " hp=" + gm.playerStats.CurrentHp + " phaseTwo=" + phaseTwo + " actions=" + actions + " dead=" + (boss == null || boss.GetComponent<Damageable>().IsDead));
+        Check((boss == null || boss.GetComponent<Damageable>().IsDead) && gm.playerStats.CurrentHp > 0 && phaseTwo, "boss_live_fire_win");
+        Check(seconds >= 45 && seconds <= 100, "boss_live_pacing");
+        gm.EnterResult(true);
+        Capture("boss_live_result", 1280, 720);
+    }
+
+    private static IEnumerator BuildScenarios()
+    {
+        yield return null;
+        yield return null;
+        var gm = GameManager.Instance;
+        Click("DeployButton");
+        gm.stageManager.StopStage();
+        gm.playerController.enabled = false;
+        Warp(gm.playerController, Vector3.zero);
+        var first = SpawnStationaryEnemy(new Vector3(0, 0, 4));
+        var second = SpawnStationaryEnemy(new Vector3(0, 0, 8));
+        var splash = SpawnStationaryEnemy(new Vector3(1, 0, 4));
+        foreach (var actor in new[] { first, second, splash }) actor.SetMaxHealth(1000, true);
+        int firstHits = 0, secondHits = 0, splashHits = 0;
+        first.OnDamaged += (d, info) => firstHits++;
+        second.OnDamaged += (d, info) => secondHits++;
+        splash.OnDamaged += (d, info) => splashHits++;
+        Physics.SyncTransforms();
+        var shot = ProjectilePool.Spawn(false, "AuditPiercingBlast", Vector3.up * 0.9f, Color.cyan);
+        shot.Init(0, null, Vector3.forward, 25, 80, 1, 1.45f, 1);
+        float until = Time.time + 0.3f;
+        while (Time.time < until) yield return null;
+        Check(firstHits == 1 && secondHits == 1 && splashHits == 1, "piercing_blast_hits_both_groups_once");
+        Check(Mathf.Approximately(first.CurrentHealth, 975) && Mathf.Approximately(second.CurrentHealth, 975) && splash.CurrentHealth < 1000, "pierce_keeps_direct_and_splash_damage");
+        foreach (var actor in new[] { first, second, splash }) Object.Destroy(actor.gameObject);
+        yield return null;
+        var upgrades = gm.upgradeSystem;
+        var weapon = gm.playerController.weaponController;
+        var target = SpawnStationaryEnemy(new Vector3(0, 0, 8));
+        target.SetMaxHealth(10000, true);
+        gm.playerController.AimAt(target.AimCenter);
+        RunUpgradeKind[][] builds = {
+            new[] { RunUpgradeKind.FireRate, RunUpgradeKind.FireRate, RunUpgradeKind.PiercingRounds, RunUpgradeKind.PiercingRounds, RunUpgradeKind.BeamDamage, RunUpgradeKind.BeamDamage },
+            new[] { RunUpgradeKind.SplitterBeam, RunUpgradeKind.SplitterBeam, RunUpgradeKind.BurstCore, RunUpgradeKind.BurstCore, RunUpgradeKind.BeamDamage, RunUpgradeKind.BeamDamage }
+        };
+        for (int build = 0; build < builds.Length; build++)
+        {
+            upgrades.ResetUpgrades(100 + build);
+            foreach (var kind in builds[build]) upgrades.ApplyOption(new RunUpgradeOption { kind = kind });
+            weapon.ResetCooldowns();
+            weapon.TryFireBeam();
+            var shots = Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None).Where(p => p.name == "BeamProjectile").ToArray();
+            Check(shots.Length == (build == 0 ? 1 : 5), "build_projectile_count_" + build);
+            Check(build == 0 ? shots[0].pierceCount == 4 && Mathf.Approximately(upgrades.FireRateMultiplier, 1.5f)
+                : shots.All(p => p.explosionRadius > 2 && p.damage < 12f), "build_distinct_combat_payload_" + build);
+            float hp = target.CurrentHealth;
+            until = Time.time + 0.5f;
+            while (Time.time < until) yield return null;
+            Check(target.CurrentHealth < hp, "build_real_target_damage_" + build);
+            Record("BUILD_DAMAGE build=" + build + " loss=" + (hp - target.CurrentHealth) + " config=" + upgrades.GetSummary());
+            foreach (var projectile in Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None)) projectile.Despawn();
+        }
+        gm.EnterResult(true);
+        Record("BUILD_CONTRACT_PASS real projectile payloads/hits, not a human build preference test");
+    }
+
+    private static IEnumerator BossScenarios()
+    {
+        yield return null;
+        yield return null;
+        var gm = GameManager.Instance;
+        Click("DeployButton");
+        gm.stageManager.StopStage();
+        var player = gm.playerController;
+        player.enabled = false;
+        Warp(player, new Vector3(0, 0, -4));
+        gm.arenaSector.ShowSector(2);
+        var boss = gm.stageManager.enemySpawner.SpawnBoss();
+        boss.enabled = false;
+        boss.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(new Vector3(0, 0, 6));
+        yield return null;
+        Check(boss.StartPattern(BossPattern.Scatter), "boss_accepts_single_action");
+        Check(!boss.StartPattern(BossPattern.Charge), "boss_actions_cannot_overlap");
+        Vector3 direction = boss.LockedDirection;
+        Warp(player, new Vector3(6, 0, -4));
+        float until = Time.time + 0.95f;
+        while (Time.time < until) yield return null;
+        var beams = Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None).Where(p => p.name == "BossScatterBeam").ToArray();
+        Check(beams.Length == 7 && beams.Any(p => Vector3.Angle(p.direction, direction) < 0.01f), "scatter_uses_locked_warning_direction");
+        Check(beams.All(p => p.pool != null), "boss_beams_are_pooled");
+        Capture("boss_01_locked_scatter");
+        while (boss.ActionRunning) yield return null;
+        foreach (var shot in Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None)) shot.Despawn();
+        Warp(player, new Vector3(0, 0, -3));
+        float hp = gm.playerStats.CurrentHp;
+        boss.StartPattern(BossPattern.Mortar);
+        Vector3 marked = boss.LockedImpact;
+        Warp(player, marked + Vector3.back * 4f);
+        until = Time.time + 1.8f;
+        while (Time.time < until) yield return null;
+        Check(Mathf.Approximately(gm.playerStats.CurrentHp, hp), "mortar_dodge_outside_mark_is_safe");
+        Check(boss.LockedImpact == marked, "mortar_never_tracks_after_warning");
+        while (boss.ActionRunning) yield return null;
+        boss.StartPattern(BossPattern.Mortar);
+        hp = gm.playerStats.CurrentHp;
+        until = Time.time + 1.2f;
+        while (Time.time < until) yield return null;
+        Check(gm.playerStats.CurrentHp < hp, "mortar_damages_inside_mark");
+        until = Time.time + 2f;
+        while (Time.time < until && !boss.CoreExposed) yield return null;
+        Check(boss.CoreExposed && Mathf.Approximately(boss.GetComponent<Damageable>().IncomingDamageScale, 1f), "boss_recovery_exposes_core");
+        while (boss.ActionRunning) yield return null;
+        Warp(player, new Vector3(0, 0, -7));
+        boss.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(new Vector3(0, 0, 6));
+        var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        wall.name = "AuditChargeCover";
+        wall.transform.position = new Vector3(0, 1.5f, 0);
+        wall.transform.localScale = new Vector3(7, 3, 0.4f);
+        Physics.SyncTransforms();
+        boss.StartPattern(BossPattern.Charge);
+        Check(boss.LockedLength < 5f && boss.LockedLength > 3f, "charge_telegraph_stops_at_cover");
+        Vector3 end = boss.LockedOrigin + boss.LockedDirection * boss.LockedLength;
+        hp = gm.playerStats.CurrentHp;
+        while (boss.ActionRunning) yield return null;
+        Check(Vector3.Distance(boss.transform.position, end) < 0.1f && Mathf.Approximately(hp, gm.playerStats.CurrentHp), "charge_motion_matches_warning_and_cover");
+        Object.Destroy(wall);
+        Check(BossController.InsideSweptDisc(new Vector3(1.9f, 3, 3), Vector3.zero, Vector3.forward * 6, 2), "charge_swept_hit_inside");
+        Check(!BossController.InsideSweptDisc(new Vector3(2.1f, 0, 3), Vector3.zero, Vector3.forward * 6, 2), "charge_swept_hit_outside");
+        boss.enabled = true;
+        boss.GetComponent<Damageable>().SetCurrentHealth(boss.GetComponent<Damageable>().maxHealth * 0.49f);
+        yield return null;
+        Check(boss.IsPhaseTwo, "boss_second_phase_at_half_health");
+        gm.EnterResult(false);
+        yield return null;
+        Check(Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None).Length == 0 && Object.FindObjectsByType<TelegraphVisual>(FindObjectsSortMode.None).Length == 0, "boss_defeat_cancels_attacks");
+        Record("BOSS_CONTRACT_PASS real timed coroutines / synthetic positions, no pacing claim");
+    }
+
+    private static IEnumerator SliceScenarios()
+    {
+        yield return null;
+        yield return null;
+        var gm = GameManager.Instance;
+        gm.playerController.InputRouter.readKeyboard = false;
+        Click("DeployButton");
+        gm.upgradeSystem.ResetUpgrades(5092026);
+        float started = Time.time;
+        float bossStarted = -1;
+        int choices = 0, waypoint = 0;
+        bool phaseTwo = false;
+        bool[] captured = new bool[6];
+        Vector3[] route = { new Vector3(-4, 0, -5), new Vector3(4, 0, -5), new Vector3(4, 0, 5), new Vector3(-4, 0, 5) };
+        while (gm.Phase != GamePhase.Result && Time.time - started < 1000f)
+        {
+            if (gm.Phase == GamePhase.Reward)
+            {
+                yield return null;
+                Capture("slice_reward_" + choices, 1280, 720);
+                Click("ChooseButton");
+                choices++;
+                Record("SLICE_CHOICE count=" + choices + " seconds=" + (Time.time - started) + " build=" + gm.upgradeSystem.GetSummary());
+            }
+            if (gm.IsCombatActive)
+            {
+                var player = gm.playerController;
+                Vector3 delta = route[waypoint] - player.transform.position;
+                delta.y = 0;
+                if (delta.magnitude < 0.8f) waypoint = (waypoint + 1) % route.Length;
+                player.InputRouter.SetTouchMove(new Vector2(delta.x, delta.z).normalized);
+                player.InputRouter.QueueSkill();
+                int index = gm.stageManager.CurrentEncounter;
+                if (index < 6 && !captured[index] && gm.stageManager.EnemiesAlive >= 5)
+                {
+                    captured[index] = true;
+                    Capture("slice_encounter_" + index);
+                }
+                var boss = Object.FindFirstObjectByType<BossController>();
+                if (boss != null)
+                {
+                    if (bossStarted < 0) { bossStarted = Time.time; Capture("slice_boss_1"); }
+                    if (!phaseTwo && boss.IsPhaseTwo) { phaseTwo = true; Capture("slice_boss_2"); }
+                }
+            }
+            yield return null;
+        }
+        Record("SLICE_LIVE_FLOW victory=" + gm.LastResultVictory + " seconds=" + (Time.time - started) + " choices=" + choices + " hp=" + gm.playerStats.CurrentHp + " kills=" + gm.Kills + " bossSeconds=" + (bossStarted < 0 ? -1 : Time.time - bossStarted) + " phaseTwo=" + phaseTwo);
+        Record("SLICE_ENCOUNTERS " + string.Join(",", gm.stageManager.EncounterSeconds.Select(x => x.ToString("0.00"))));
+        Capture("slice_result", 1280, 720);
+        Check(gm.Phase == GamePhase.Result && gm.LastResultVictory && choices == 6 && phaseTwo, "slice_real_fire_complete_loop");
+        Check(Time.time - started >= 600f && Time.time - started <= 900f, "slice_ten_to_fifteen_minutes");
+        Check(gm.stageManager.EncounterSeconds.All(x => x >= 68 && x <= 130), "encounter_pacing_no_runaway_backlog");
+        Click("ReturnHangarButton");
+        yield return null;
+        yield return null;
+        Check(GameManager.Instance.Phase == GamePhase.Hangar, "slice_restart_to_hangar");
     }
 
     private static IEnumerator ProgressionScenarios()
@@ -404,44 +654,8 @@ public static class ProjectAudit
         gm.RestartRun();
         yield return null;
         yield return null;
-        gm = GameManager.Instance;
-        gm.playerController.InputRouter.readKeyboard = false;
-        Click("DeployButton");
-        float started = Time.time;
-        int choices = 0;
-        bool bossSeen = false;
-        bool captured = false;
-        bool pressureCaptured = false;
-        while (gm.Phase != GamePhase.Result && Time.time - started < 150f)
-        {
-            if (gm.Phase == GamePhase.Reward)
-            {
-                Capture("mobile_05_reward", 2400, 1080, new Rect(90, 35, 2220, 1045));
-                Click("ChooseButton");
-                choices++;
-            }
-            if (!captured && Time.time - started > 3f) { Capture("mobile_03_auto_combat"); captured = true; }
-            if (!pressureCaptured && Time.time - started > 45f) { Capture("feedback_03_pressure"); pressureCaptured = true; }
-            var bossActor = Object.FindFirstObjectByType<BossController>();
-            if (bossActor != null && !bossSeen)
-            {
-                float cameraSettle = Time.time + 0.7f;
-                while (Time.time < cameraSettle) yield return null;
-                Vector3 bossPoint = Camera.main.WorldToViewportPoint(bossActor.GetComponent<Damageable>().AimCenter);
-                Check(bossPoint.y > 0.12f && bossPoint.y < 0.85f && bossPoint.x > 0.1f && bossPoint.x < 0.9f, "boss_camera_framing");
-                Capture("mobile_04_boss");
-                bossSeen = true;
-            }
-            yield return null;
-        }
-        Record("MOBILE_LIVE_FLOW phase=" + gm.Phase + " hp=" + gm.playerStats.CurrentHp + " kills=" + gm.Kills + " choices=" + choices + " boss=" + bossSeen + " seconds=" + (Time.time - started));
-        Record("FIRST_ENCOUNTER_SECONDS " + gm.stageManager.FirstEncounterSeconds);
-        Check(gm.Phase == GamePhase.Result && gm.playerStats.CurrentHp > 0 && choices == 1 && bossSeen, "automatic_fire_full_loop");
-        Capture("mobile_06_result", 1280, 720);
-        Click("ReturnHangarButton");
-        yield return null;
-        yield return null;
-        Check(GameManager.Instance.Phase == GamePhase.Hangar, "mobile_restart");
+        var live = SliceScenarios();
+        while (live.MoveNext()) yield return null;
     }
 
     private static void Warp(PlayerController player, Vector3 position)
@@ -605,117 +819,41 @@ public static class ProjectAudit
 
     private static IEnumerator RunScenarios()
     {
-        yield return null;
+        var live = SliceScenarios();
+        while (live.MoveNext()) yield return null;
+        var progression = ProgressionScenarios();
+        while (progression.MoveNext()) yield return null;
         var gm = GameManager.Instance;
-        Record("START hangar=" + gm.hangarUI.IsVisible + " hud=" + gm.combatHUD.IsVisible + " equipment=" + gm.equipmentManager.GetEquippedItems().Count);
-        Capture("01_hangar");
-        Click("DeployButton");
-        gm.playerController.enabled = false;
         gm.SetPaused(true);
         VerifyBlockedCombat(gm);
         gm.SetPaused(false);
-        Record("PAUSE_RESUME active=" + gm.IsCombatActive);
-        gm.playerStats.GetComponent<Damageable>().OnDamaged += (d, info) => Record("PLAYER_HIT hp=" + d.CurrentHealth + " phase=" + gm.Phase + " damage=" + info.Amount);
-        int startFrame = Time.frameCount;
-        float started = Time.time;
-        int rewardChoices = 0;
-        bool bossSeen = false;
-        bool phaseTwoSeen = false;
-        var kinds = new HashSet<EnemyKind>();
-        var progress = new HashSet<string>();
-        var frameTimes = new List<float>();
-        int shots = 0;
-        gm.playerController.weaponController.BeamFired += () => shots++;
-        while (Time.time - started < 150f && gm.Phase != GamePhase.Result)
-        {
-            if (progress.Add(gm.ProgressText)) Record("FLOW " + gm.ProgressText + " hp=" + gm.playerStats.CurrentHp + " kills=" + gm.Kills);
-            foreach (var e in Object.FindObjectsByType<EnemyBase>(FindObjectsSortMode.None)) kinds.Add(e.kind);
-            var boss = Object.FindFirstObjectByType<BossController>();
-            if (boss != null)
-            {
-                if (!bossSeen) { Capture("04_boss"); bossSeen = true; }
-                if (!phaseTwoSeen && boss.IsPhaseTwo) Capture("04b_boss_phase2");
-                phaseTwoSeen |= boss.IsPhaseTwo;
-            }
-            if (gm.Phase == GamePhase.Reward)
-            {
-                yield return null;
-                Capture("03_reward");
-                VerifyBlockedCombat(gm);
-                Record("REWARD cards=" + Object.FindObjectsByType<Button>(FindObjectsSortMode.None).Count(b => b.name == "ChooseButton"));
-                Click("ChooseButton");
-                rewardChoices++;
-                Record("UPGRADE " + gm.upgradeSystem.GetSummary());
-            }
-            if (gm.IsCombatActive)
-            {
-                var target = Object.FindObjectsByType<Damageable>(FindObjectsSortMode.None)
-                    .Where(d => d.team == 1 && !d.IsDead)
-                    .OrderBy(d => (d.transform.position - gm.playerController.transform.position).sqrMagnitude).FirstOrDefault();
-                if (target != null)
-                {
-                    var collider = target.GetComponent<Collider>();
-                    gm.playerController.AimAt(collider != null ? collider.bounds.center : target.transform.position + Vector3.up * 0.75f);
-                    gm.playerController.weaponController.TryFireBeam();
-                }
-            }
-            if (Time.frameCount == startFrame + 180) Capture("02_combat");
-            if (Time.time - started > 2) frameTimes.Add(Time.unscaledDeltaTime);
-            yield return null;
-        }
-        yield return null;
-        Capture("05_result");
-        Record("LIVE_FIRE_RESULT phase=" + gm.Phase + " hp=" + gm.playerStats.CurrentHp + " kills=" + gm.Kills + " shots=" + shots + " choices=" + rewardChoices + " kinds=" + string.Join(",", kinds) + " boss=" + bossSeen + " phase2=" + phaseTwoSeen + " seconds=" + (Time.time - started));
-        bool liveVictory = gm.Phase == GamePhase.Result && gm.playerStats.CurrentHp > 0 && rewardChoices == 1 && bossSeen && phaseTwoSeen;
-        VerifyBlockedCombat(gm);
-        frameTimes.Sort();
-        if (frameTimes.Count > 0) Record("FRAME_OBSERVATION samples=" + frameTimes.Count + " avg_ms=" + frameTimes.Average() * 1000 + " p95_ms=" + frameTimes[(int)(frameTimes.Count * 0.95f)] * 1000 + " note=editor+audit_logic+uncapped_not_benchmark");
-        Click("ReturnHangarButton");
-        yield return null;
-        yield return null;
-        gm = GameManager.Instance;
-        Record("RESTART hangar=" + gm.hangarUI.IsVisible + " hp=" + gm.playerStats.CurrentHp + " upgrades=" + gm.upgradeSystem.GetSummary());
-
-        Click("DeployButton");
-        gm.playerController.enabled = false;
         var player = gm.playerStats.GetComponent<Damageable>();
-        // An in-flight enemy shot crossing the player after the reward opens.
-        var shot = new GameObject("AuditEnemyShot").AddComponent<Projectile>();
-        shot.transform.position = player.transform.position + Vector3.up + Vector3.forward * 5;
+        var shot = ProjectilePool.Spawn(false, "AuditEnemyShot", player.transform.position + Vector3.up + Vector3.forward * 5, Color.red);
         shot.Init(1, null, Vector3.back, 30, 12, 2, 0, 0);
         gm.EnterReward();
         VerifyBlockedCombat(gm);
-        float hpBefore = player.CurrentHealth;
+        float before = player.CurrentHealth;
         float until = Time.time + 1;
         while (Time.time < until) yield return null;
-        Record("REWARD_PROTECTION hp_before=" + hpBefore + " hp_after=" + player.CurrentHealth + " phase=" + gm.Phase);
-        if (player.CurrentHealth != hpBefore) throw new Exception("Reward did not protect HP.");
-        Capture("06_reward_damage");
+        Check(Mathf.Approximately(before, player.CurrentHealth), "reward_blocks_in_flight_damage");
         gm.RestartRun();
         yield return null;
         yield return null;
         gm = GameManager.Instance;
         Click("DeployButton");
-        player = gm.playerStats.GetComponent<Damageable>();
-        player.TakeDamage(9999, new DamageInfo(null, player.transform.position, null, 9999));
-        int before = Object.FindObjectsByType<EnemyBase>(FindObjectsSortMode.None).Length;
-        int killsAtEnd = gm.Kills;
-        int coinsAtEnd = gm.Coins;
+        gm.playerStats.GetComponent<Damageable>().TakeDamage(99999, null);
+        int kills = gm.Kills, coins = gm.Coins;
         gm.RegisterKill(100);
         gm.EnterResult(true);
         VerifyBlockedCombat(gm);
         until = Time.time + 3;
         while (Time.time < until) yield return null;
-        Record("DEFEAT phase=" + gm.Phase + " hp=" + gm.playerStats.CurrentHp + " enemies_before=" + before + " enemies_after=" + Object.FindObjectsByType<EnemyBase>(FindObjectsSortMode.None).Length + " hud=" + gm.combatHUD.IsVisible + " result_buttons=" + Object.FindObjectsByType<Button>(FindObjectsSortMode.None).Length);
-        if (Object.FindObjectsByType<EnemyBase>(FindObjectsSortMode.None).Length != 0 || gm.combatHUD.IsVisible || gm.Kills != killsAtEnd || gm.Coins != coinsAtEnd)
-            throw new Exception("Result did not stop combat or freeze score.");
-        Capture("07_defeat");
-        Capture("07b_defeat_1280", 1280, 720);
+        Check(!gm.LastResultVictory && gm.Kills == kills && gm.Coins == coins && !gm.combatHUD.IsVisible, "result_freezes_score_and_outcome");
+        Check(Object.FindObjectsByType<EnemyBase>(FindObjectsSortMode.None).Length == 0, "result_stops_delayed_spawns");
         Click("ReturnHangarButton");
         yield return null;
         yield return null;
-        Record("DEFEAT_RESTART hangar=" + GameManager.Instance.hangarUI.IsVisible);
-        if (!liveVictory) throw new Exception("Natural live-fire run did not reach victory with both Boss phases.");
+        Check(GameManager.Instance.Phase == GamePhase.Hangar, "p0_defeat_restart");
     }
 
     private static void VerifyBlockedCombat(GameManager gm)

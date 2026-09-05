@@ -10,7 +10,7 @@ public class StandaloneRuntimeSmoke : MonoBehaviour
     private bool smokeActive;
     private bool pauseVerified;
     private bool lodVerified;
-    private bool rewardApplied;
+    private int rewardsApplied;
     private bool eliteSeen;
     private bool bossSeen;
     private bool difficultyActorVerified;
@@ -145,7 +145,7 @@ public class StandaloneRuntimeSmoke : MonoBehaviour
 
                 KillEnemyTeam();
             }
-            else if (gameManager.Phase == GamePhase.Reward && !rewardApplied)
+            else if (gameManager.Phase == GamePhase.Reward)
             {
                 if (gameManager.upgradeSystem == null)
                 {
@@ -155,12 +155,12 @@ public class StandaloneRuntimeSmoke : MonoBehaviour
 
                 RunUpgradeOption option = gameManager.upgradeSystem.GenerateOptions()[0];
                 gameManager.upgradeSystem.ApplyOption(option);
-                rewardApplied = true;
+                rewardsApplied++;
                 gameManager.FinishReward();
             }
             else if (gameManager.Phase == GamePhase.Result)
             {
-                if (!rewardApplied || !eliteSeen || !bossSeen || !difficultyActorVerified || gameManager.Kills <= 0 || gameManager.playerStats == null || gameManager.playerStats.CurrentHp <= 0f)
+                if (rewardsApplied != 6 || !eliteSeen || !bossSeen || !difficultyActorVerified || gameManager.Kills <= 0 || gameManager.playerStats == null || gameManager.playerStats.CurrentHp <= 0f)
                 {
                     Fail("Built-player result did not satisfy the victory flow contract.");
                     yield break;

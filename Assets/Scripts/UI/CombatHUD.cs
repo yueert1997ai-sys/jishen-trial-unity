@@ -76,7 +76,8 @@ public class CombatHUD : MonoBehaviour
         bossPanel.gameObject.SetActive(showBoss);
         if (showBoss)
         {
-            bossText.text = "HEAVY SENTINEL   /   " + (boss.IsPhaseTwo ? "PHASE II" : "PHASE I");
+            bossText.text = "REACTOR WARDEN   /   " + (boss.CoreExposed ? "CORE EXPOSED" : boss.IsPhaseTwo ? "ARMORED II" : "ARMORED I");
+            bossFill.GetComponent<Image>().color = boss.CoreExposed ? new Color(0.2f, 0.95f, 0.8f) : new Color(1f, 0.26f, 0.17f);
             SetFill(bossFill, bossDamageable.CurrentHealth / bossDamageable.maxHealth);
         }
     }

@@ -1,0 +1,98 @@
+CONSOLE Exception ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <41d29b352f6a475ab1bf7c6628b82790>:0)
+UnityEditor.Search.SearchDatabase+<EnumerateAll>d__80.MoveNext () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+System.Linq.Enumerable.TryGetFirst[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Boolean& found) (at <80564d689e48448fa2a7101993ee7201>:0)
+System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <80564d689e48448fa2a7101993ee7201>:0)
+UnityEditor.Search.SearchDatabase.GetDefaultSearchDatabase () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+UnityEditor.Search.SearchInit.IndexationOnStartup () (at <8bfcebed71804a0bbd899b4f1cf32116>:0)
+UnityEditor.EditorApplication.Internal_CallDelayFunctions () (at <bc66d607b6974f3a8652f3c90b953d89>:0)
+
+UI_CLICK DeployButton
+CAPTURE slice_encounter_0 colors=183
+CAPTURE slice_reward_0 colors=71
+UI_CLICK ChooseButton
+SLICE_CHOICE count=1 seconds=77.49426 build=SYSTEMS  1 / 6   |   AMP 1
+CAPTURE slice_encounter_1 colors=191
+CAPTURE slice_reward_1 colors=87
+UI_CLICK ChooseButton
+SLICE_CHOICE count=2 seconds=163.3924 build=SYSTEMS  2 / 6   |   AMP 1 / RATE 1
+CAPTURE slice_encounter_2 colors=199
+CAPTURE slice_reward_2 colors=88
+UI_CLICK ChooseButton
+SLICE_CHOICE count=3 seconds=266.1986 build=SYSTEMS  3 / 6   |   AMP 1 / RATE 1 / PIERCE 1
+CAPTURE slice_encounter_3 colors=193
+CAPTURE slice_reward_3 colors=95
+UI_CLICK ChooseButton
+SLICE_CHOICE count=4 seconds=353.9638 build=SYSTEMS  4 / 6   |   AMP 1 / RATE 1 / PIERCE 1 / DASH 1
+CAPTURE slice_encounter_4 colors=210
+CAPTURE slice_reward_4 colors=92
+UI_CLICK ChooseButton
+SLICE_CHOICE count=5 seconds=456.0656 build=SYSTEMS  5 / 6   |   AMP 1 / RATE 1 / PIERCE 1 / BLAST 1 / DASH 1
+CAPTURE slice_encounter_5 colors=205
+CAPTURE slice_reward_5 colors=81
+UI_CLICK ChooseButton
+SLICE_CHOICE count=6 seconds=558.5405 build=SYSTEMS  6 / 6   |   AMP 1 / RATE 1 / PIERCE 1 / BLAST 1 / DASH 1 / REPAIR 1
+CAPTURE slice_boss_1 colors=209
+CAPTURE slice_boss_2 colors=258
+SLICE_LIVE_FLOW victory=True seconds=626.6618 choices=6 hp=172.8525 kills=502 bossSeconds=66.72125 phaseTwo=True
+SLICE_ENCOUNTERS 76.69,85.10,102.00,86.96,101.30,101.67
+CAPTURE slice_result colors=93
+MOBILE_PASS slice_real_fire_complete_loop
+MOBILE_PASS slice_ten_to_fifteen_minutes
+MOBILE_PASS encounter_pacing_no_runaway_backlog
+UI_CLICK ReturnHangarButton
+MOBILE_PASS slice_restart_to_hangar
+UI_CLICK DeployButton
+MOBILE_PASS upgrade_rng_independent_of_effects
+MOBILE_PASS split_rank_1
+MOBILE_PASS split_rank_2
+MOBILE_PASS rank_cap_rejects_overflow
+MOBILE_PASS split_build_damage_budget
+MOBILE_PASS capped_upgrade_not_offered
+MOBILE_PASS reward_transition_0
+MOBILE_PASS cannot_skip_upgrade_0
+UI_CLICK ChooseButton
+MOBILE_PASS installed_before_next_encounter_0
+MOBILE_PASS reward_transition_1
+MOBILE_PASS cannot_skip_upgrade_1
+UI_CLICK ChooseButton
+MOBILE_PASS installed_before_next_encounter_1
+MOBILE_PASS reward_transition_2
+MOBILE_PASS cannot_skip_upgrade_2
+UI_CLICK ChooseButton
+MOBILE_PASS installed_before_next_encounter_2
+MOBILE_PASS sector_two_checkpoint_after_third_choice
+UI_CLICK ChooseButton
+MOBILE_PASS demo_defeat_offers_continue
+CAPTURE progression_01_continue colors=67
+UI_CLICK ContinueRunButton
+MOBILE_PASS continue_restores_sector_entry
+MOBILE_PASS continue_discards_failed_segment_rewards
+MOBILE_PASS continue_restores_build_and_choice_rng
+MOBILE_PASS continue_restores_health_and_stats
+MOBILE_PASS continue_revives_and_excludes_result_wait
+UI_CLICK ChooseButton
+MOBILE_PASS six_choices_contract_3
+UI_CLICK ChooseButton
+MOBILE_PASS six_choices_contract_4
+CAPTURE progression_02_sixth_choice colors=83
+UI_CLICK ChooseButton
+MOBILE_PASS six_choices_contract_5
+MOBILE_PASS boss_checkpoint_after_sixth_choice
+MOBILE_PASS continue_only_once
+UI_CLICK ReturnHangarButton
+UI_CLICK DeployButton
+MOBILE_PASS standard_has_no_continue
+UI_CLICK ReturnHangarButton
+UI_CLICK DeployButton
+MOBILE_PASS victory_cannot_skip_six_encounters
+PROGRESSION_CONTRACT_PASS synthetic phase completions; not pacing/combat evidence
+COMBAT_BLOCK_PASS phase=Combat paused=True
+COMBAT_BLOCK_PASS phase=Reward paused=False
+MOBILE_PASS reward_blocks_in_flight_damage
+UI_CLICK DeployButton
+COMBAT_BLOCK_PASS phase=Result paused=False
+MOBILE_PASS result_freezes_score_and_outcome
+MOBILE_PASS result_stops_delayed_spawns
+UI_CLICK ReturnHangarButton
+MOBILE_PASS p0_defeat_restart

@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b5ebe7cd84f6654c9d17d383212558e, type: 3}
+  m_Name: Encounter5
+  m_EditorClassIdentifier: Assembly-CSharp::EncounterDefinition
+  title: CLEAR THE COOLANT RING
+  maxAlive: 12
+  beats:
+  - at: 0
+    kind: 0
+    count: 4
+    entry: 0
+  - at: 3.2333333
+    kind: 0
+    count: 4
+    entry: 1
+  - at: 6.4666667
+    kind: 1
+    count: 2
+    entry: 2
+  - at: 9.7
+    kind: 2
+    count: 4
+    entry: 3
+  - at: 12.933333
+    kind: 0
+    count: 4
+    entry: 0
+  - at: 16.166666
+    kind: 2
+    count: 4
+    entry: 1
+  - at: 19.4
+    kind: 1
+    count: 2
+    entry: 2
+  - at: 22.633333
+    kind: 3
+    count: 1
+    entry: 3
+  - at: 25.866667
+    kind: 0
+    count: 4
+    entry: 0
+  - at: 29.1
+    kind: 0
+    count: 4
+    entry: 1
+  - at: 32.333332
+    kind: 1
+    count: 2
+    entry: 2
+  - at: 35.566666
+    kind: 2
+    count: 4
+    entry: 3
+  - at: 38.8
+    kind: 0
+    count: 4
+    entry: 0
+  - at: 42.033333
+    kind: 2
+    count: 4
+    entry: 1
+  - at: 45.266666
+    kind: 1
+    count: 2
+    entry: 2
+  - at: 48.5
+    kind: 3
+    count: 1
+    entry: 3
+  - at: 51.733334
+    kind: 0
+    count: 4
+    entry: 0
+  - at: 54.966667
+    kind: 0
+    count: 4
+    entry: 1
+  - at: 58.2
+    kind: 1
+    count: 2
+    entry: 2
+  - at: 61.433334
+    kind: 2
+    count: 4
+    entry: 3
+  - at: 64.666664
+    kind: 0
+    count: 4
+    entry: 0
+  - at: 67.9
+    kind: 2
+    count: 4
+    entry: 1
+  - at: 71.13333
+    kind: 1
+    count: 2
+    entry: 2
+  - at: 74.36667
+    kind: 3
+    count: 1
+    entry: 3
+  - at: 77.6
+    kind: 0
+    count: 4
+    entry: 0
+  - at: 80.833336
+    kind: 0
+    count: 4
+    entry: 1
+  - at: 84.066666
+    kind: 1
+    count: 2
+    entry: 2
+  - at: 87.3
+    kind: 2
+    count: 4
+    entry: 3
+  - at: 90.53333
+    kind: 0
+    count: 4
+    entry: 0
+  - at: 93.76667
+    kind: 2
+    count: 4
+    entry: 1
+  - at: 97
+    kind: 1
+    count: 2
+    entry: 2

@@ -1,5 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
+
+public enum BossPattern { Scatter, Mortar, Charge, Reinforcements }
 
 public class BossController : MonoBehaviour
 {
@@ -8,39 +11,46 @@ public class BossController : MonoBehaviour
     public EnemySpawner spawner;
     public float moveSpeed = 2.2f;
     public int killReward = 60;
+    public float encounterHealth = 6200f;
+    public float DifficultyHealthMultiplier { get; private set; } = 1f;
+    public bool IsPhaseTwo { get; private set; }
+    public bool CoreExposed { get; private set; }
+    public bool ActionRunning { get; private set; }
+    public BossPattern CurrentPattern { get; private set; }
+    public int ActionsCompleted { get; private set; }
+    public Vector3 LockedOrigin { get; private set; }
+    public Vector3 LockedDirection { get; private set; }
+    public Vector3 LockedImpact { get; private set; }
+    public float LockedLength { get; private set; }
+    public float AttackWindup => winding ? Mathf.Clamp01((Time.time - windupStart) / windupDuration) : 0f;
 
     private Damageable damageable;
-    private float nextActionTime;
+    private NavMeshAgent navigation;
+    private readonly RaycastHit[] coverHits = new RaycastHit[32];
+    private float nextActionTime, nextPathTime, windupStart, windupDuration;
+    private bool winding;
     private int actionIndex;
-    private bool phaseTwoTriggered;
-    private bool charging;
-
-    public float DifficultyHealthMultiplier { get; private set; } = 1f;
-
-    public bool IsPhaseTwo
-    {
-        get { return phaseTwoTriggered; }
-    }
+    private static readonly Color warning = new Color(1f, 0.27f, 0.08f);
 
     private void Awake()
     {
         damageable = GetComponent<Damageable>();
+        navigation = gameObject.AddComponent<NavMeshAgent>();
+        navigation.radius = 1.35f;
+        navigation.height = 3.5f;
+        navigation.speed = moveSpeed;
+        navigation.acceleration = 10;
+        navigation.stoppingDistance = 9;
+        navigation.updateRotation = false;
     }
 
-    private void OnEnable()
-    {
-        if (damageable != null)
-        {
-            damageable.OnDied += OnDied;
-        }
-    }
-
+    private void OnEnable() { damageable.OnDied += OnDied; }
     private void OnDisable()
     {
-        if (damageable != null)
-        {
-            damageable.OnDied -= OnDied;
-        }
+        StopAllCoroutines();
+        winding = ActionRunning = false;
+        damageable.OnDied -= OnDied;
+        if (navigation != null && navigation.isOnNavMesh) navigation.ResetPath();
     }
 
     public void Init(Transform targetTransform, StageManager ownerStage, EnemySpawner ownerSpawner)
@@ -48,239 +58,214 @@ public class BossController : MonoBehaviour
         target = targetTransform;
         stageManager = ownerStage;
         spawner = ownerSpawner;
-        if (damageable != null && GameManager.Instance != null)
-        {
-            DifficultyHealthMultiplier = GameManager.Instance.EnemyHealthMultiplier;
-            damageable.SetMaxHealth(damageable.maxHealth * DifficultyHealthMultiplier, true);
-        }
+        DifficultyHealthMultiplier = GameManager.Instance != null ? GameManager.Instance.EnemyHealthMultiplier : 1f;
+        damageable.SetMaxHealth(encounterHealth * DifficultyHealthMultiplier, true);
+        damageable.IncomingDamageScale = 0.12f;
+        nextActionTime = Time.time + 1.8f;
     }
 
     private void Update()
     {
-        if (target == null || damageable == null || damageable.IsDead)
+        bool active = target != null && !damageable.IsDead && (GameManager.Instance == null || GameManager.Instance.IsCombatActive);
+        if (navigation.isOnNavMesh) navigation.isStopped = !active || ActionRunning;
+        if (!active) return;
+        if (!IsPhaseTwo && damageable.CurrentHealth <= damageable.maxHealth * 0.5f)
         {
-            return;
+            IsPhaseTwo = true;
+            GameAudio.Play(GameAudioCue.Warning, 0.55f, 0.72f);
+            SetStatus("PHASE 2");
         }
-
-        if (GameManager.Instance != null && !GameManager.Instance.IsCombatActive)
-        {
-            return;
-        }
-
-        FaceTarget();
-        if (!charging)
-        {
-            MoveTowardPreferredRange();
-        }
-
-        if (!phaseTwoTriggered && damageable.CurrentHealth <= damageable.maxHealth * 0.5f)
-        {
-            phaseTwoTriggered = true;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.SetProgress("Boss - Phase 2");
-            }
-
-            CombatFeedback.SpawnWarningDisc(transform.position, 4.2f, 0.75f, new Color(1f, 0.02f, 0.3f, 1f));
-            GameAudio.Play(GameAudioCue.Warning, 0.58f, 0.72f);
-            SummonMinions(4);
-        }
-
-        if (Time.time >= nextActionTime)
-        {
-            nextActionTime = Time.time + (phaseTwoTriggered ? 2.1f : 2.7f);
-            RunNextAction();
-        }
-    }
-
-    private void FaceTarget()
-    {
+        if (ActionRunning) return;
         Vector3 direction = target.position - transform.position;
-        direction.y = 0f;
-        if (direction.sqrMagnitude > 0.01f)
+        direction.y = 0;
+        if (direction.sqrMagnitude > 0.01f) transform.rotation = Quaternion.LookRotation(direction);
+        if (navigation.isOnNavMesh && Time.time >= nextPathTime)
         {
-            transform.rotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
+            nextPathTime = Time.time + 0.25f;
+            navigation.SetDestination(target.position);
         }
+        if (Time.time >= nextActionTime) StartPattern((BossPattern)(actionIndex++ % 4));
     }
 
-    private void MoveTowardPreferredRange()
+    public bool StartPattern(BossPattern pattern)
     {
-        Vector3 direction = target.position - transform.position;
-        direction.y = 0f;
-        float distance = direction.magnitude;
-        if (distance > 10f)
-        {
-            transform.position += direction.normalized * moveSpeed * Time.deltaTime;
-        }
+        if (ActionRunning || target == null || damageable.IsDead || (GameManager.Instance != null && !GameManager.Instance.IsCombatActive)) return false;
+        ActionRunning = true;
+        CurrentPattern = pattern;
+        if (navigation.isOnNavMesh) navigation.ResetPath();
+        StartCoroutine(ActionCycle(pattern));
+        return true;
     }
 
-    private void RunNextAction()
+    private IEnumerator ActionCycle(BossPattern pattern)
     {
-        actionIndex++;
-        int pattern = actionIndex % 4;
-        if (pattern == 1)
+        CoreExposed = false;
+        damageable.IncomingDamageScale = 0.12f;
+        switch (pattern)
         {
-            StartCoroutine(TelegraphScatterBeams());
+            case BossPattern.Scatter: yield return Scatter(); break;
+            case BossPattern.Mortar: yield return Mortar(); break;
+            case BossPattern.Charge: yield return Charge(); break;
+            default:
+                SetStatus("REINFORCEMENTS");
+                if (spawner != null && (stageManager == null || stageManager.EnemiesAlive < 5))
+                {
+                    spawner.SpawnEntry(EnemyKind.Melee, IsPhaseTwo ? 3 : 2, actionIndex % 4);
+                    spawner.SpawnEntry(EnemyKind.Ranged, 1, (actionIndex + 2) % 4);
+                }
+                yield return new WaitForSeconds(1.2f);
+                break;
         }
-        else if (pattern == 2)
-        {
-            StartCoroutine(TelegraphMissileVolley());
-        }
-        else if (pattern == 3)
-        {
-            StartCoroutine(Charge());
-        }
-        else
-        {
-            SummonMinions(phaseTwoTriggered ? 3 : 2);
-        }
+        winding = false;
+        CoreExposed = true;
+        damageable.IncomingDamageScale = 1f;
+        SetStatus("CORE EXPOSED");
+        CombatEffects.Impact(transform.position + Vector3.up * 2, Color.cyan, 0.6f);
+        yield return new WaitForSeconds(IsPhaseTwo ? 2f : 2.5f);
+        CoreExposed = false;
+        damageable.IncomingDamageScale = 0.12f;
+        ActionsCompleted++;
+        ActionRunning = false;
+        nextActionTime = Time.time + (IsPhaseTwo ? 0.5f : 0.8f);
+        SetStatus(IsPhaseTwo ? "PHASE 2" : "PHASE 1");
     }
 
-    private IEnumerator TelegraphScatterBeams()
+    private IEnumerator Scatter()
     {
-        GameAudio.Play(GameAudioCue.Warning, 0.32f, 1.05f);
-        Vector3 forward = transform.forward;
-        int count = phaseTwoTriggered ? 9 : 7;
+        LockDirection();
+        LockedOrigin = transform.position + Vector3.up * 1.2f + LockedDirection * 1.6f;
+        LockedLength = 18f;
+        int count = IsPhaseTwo ? 9 : 7;
+        SetStatus("FAN VOLLEY");
+        BeginWindup(0.85f);
         for (int i = 0; i < count; i++)
         {
-            float spread = Mathf.Lerp(-38f, 38f, i / (float)(count - 1));
-            Vector3 direction = Quaternion.AngleAxis(spread, Vector3.up) * forward;
-            CombatFeedback.SpawnGroundLine(transform.position, direction, 16f, 0.12f, 0.5f, new Color(1f, 0.16f, 0.03f));
+            Vector3 direction = Quaternion.AngleAxis(Mathf.Lerp(-48, 48, i / (float)(count - 1)), Vector3.up) * LockedDirection;
+            CombatEffects.Line(LockedOrigin, direction, LockedLength, 0.25f, windupDuration, warning);
         }
-
-        yield return new WaitForSeconds(0.5f);
-        FireScatterBeams();
-    }
-
-    private IEnumerator TelegraphMissileVolley()
-    {
-        GameAudio.Play(GameAudioCue.Warning, 0.35f, 0.9f);
-        Vector3 targetPosition = target != null ? target.position : transform.position + transform.forward * 6f;
-        CombatFeedback.SpawnWarningDisc(targetPosition, phaseTwoTriggered ? 2.4f : 1.9f, 0.65f, new Color(1f, 0.28f, 0.02f));
-        yield return new WaitForSeconds(0.65f);
-        FireMissileVolley();
-    }
-
-    private void FireScatterBeams()
-    {
-        Vector3 forward = transform.forward;
-        int count = phaseTwoTriggered ? 9 : 7;
-        for (int i = 0; i < count; i++)
+        yield return new WaitForSeconds(windupDuration);
+        winding = false;
+        int bursts = IsPhaseTwo ? 4 : 3;
+        for (int burst = 0; burst < bursts; burst++)
         {
-            float spread = Mathf.Lerp(-38f, 38f, i / (float)(count - 1));
-            Vector3 direction = Quaternion.AngleAxis(spread, Vector3.up) * forward;
-            CreateProjectile("BossScatterBeam", direction, 9f, 15f, 0f);
-        }
-    }
-
-    private void FireMissileVolley()
-    {
-        Damageable playerDamageable = target.GetComponent<Damageable>();
-        int count = phaseTwoTriggered ? 8 : 5;
-        for (int i = 0; i < count; i++)
-        {
-            float spread = Mathf.Lerp(-55f, 55f, i / (float)(count - 1));
-            Vector3 direction = Quaternion.AngleAxis(spread, Vector3.up) * transform.forward;
-            GameObject missileObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-            missileObject.name = "BossMissile";
-            missileObject.transform.position = transform.position + Vector3.up * 1.3f + direction * 1.1f;
-            missileObject.transform.localScale = new Vector3(0.28f, 0.28f, 0.65f);
-            Renderer renderer = missileObject.GetComponent<Renderer>();
-            if (renderer != null)
+            for (int i = 0; i < count; i++)
             {
-                renderer.material.color = new Color(1f, 0.18f, 0.05f);
+                Vector3 direction = Quaternion.AngleAxis(Mathf.Lerp(-48, 48, i / (float)(count - 1)), Vector3.up) * LockedDirection;
+                var shot = ProjectilePool.Spawn(false, "BossScatterBeam", LockedOrigin, warning, 0.25f);
+                shot.Init(1, damageable, direction, 11f, 12f, LockedLength / 12f, 0, 0);
             }
+            GameAudio.Play(GameAudioCue.Beam, 0.35f, 0.7f);
+            yield return new WaitForSeconds(0.52f);
+        }
+    }
 
-            ProjectileVisuals.AddTrail(missileObject, new Color(1f, 0.7f, 0.1f, 1f), new Color(0.9f, 0.02f, 0.01f, 1f), 0.23f, 0.32f);
-
-            MissileProjectile missile = missileObject.AddComponent<MissileProjectile>();
-            missile.target = playerDamageable;
-            missile.Init(1, damageable, direction, 12f, 12f, 5f, phaseTwoTriggered ? 2.1f : 1.6f, 0);
+    private IEnumerator Mortar()
+    {
+        LockedImpact = target.position;
+        LockedImpact = new Vector3(LockedImpact.x, 0, LockedImpact.z);
+        int count = IsPhaseTwo ? 3 : 2;
+        Vector3[] impacts = new Vector3[count];
+        impacts[0] = LockedImpact;
+        for (int i = 1; i < count; i++) impacts[i] = LockedImpact + Vector3.right * (i == 1 ? -4.5f : 4.5f);
+        SetStatus("ARTILLERY STRIKE");
+        BeginWindup(1.05f);
+        for (int i = 0; i < impacts.Length; i++) CombatEffects.Disc(impacts[i], 2.4f, windupDuration + i * 0.6f, warning);
+        yield return new WaitForSeconds(windupDuration);
+        winding = false;
+        foreach (var center in impacts)
+        {
+            DamageDisc(center, 2.4f, 22f);
+            CombatEffects.Impact(center + Vector3.up * 0.5f, warning, 2.4f, true);
+            GameAudio.Play(GameAudioCue.Death, 0.45f, 0.85f);
+            yield return new WaitForSeconds(0.6f);
         }
     }
 
     private IEnumerator Charge()
     {
-        charging = true;
-        Vector3 direction = target != null ? target.position - transform.position : transform.forward;
-        direction.y = 0f;
-        if (direction.sqrMagnitude < 0.01f)
+        LockDirection();
+        LockedOrigin = transform.position;
+        LockedLength = 13f;
+        if (NavMesh.Raycast(LockedOrigin, LockedOrigin + LockedDirection * LockedLength, out var edge, NavMesh.AllAreas))
+            LockedLength = Mathf.Max(0, edge.distance - 0.8f);
+        int count = Physics.SphereCastNonAlloc(LockedOrigin + Vector3.up * 1.4f, 1.25f, LockedDirection, coverHits, LockedLength, ~0, QueryTriggerInteraction.Ignore);
+        for (int i = 0; i < count; i++)
+            if (coverHits[i].collider.GetComponentInParent<Damageable>() == null)
+                LockedLength = Mathf.Min(LockedLength, Mathf.Max(0, coverHits[i].distance - 0.15f));
+        SetStatus("RAM CHARGE");
+        BeginWindup(0.95f);
+        CombatEffects.Line(LockedOrigin, LockedDirection, LockedLength, 4f, windupDuration, warning);
+        CombatEffects.Disc(LockedOrigin, 2, windupDuration, warning);
+        CombatEffects.Disc(LockedOrigin + LockedDirection * LockedLength, 2, windupDuration, warning);
+        yield return new WaitForSeconds(windupDuration);
+        winding = false;
+        bool hit = false;
+        float traveled = 0;
+        while (traveled < LockedLength)
         {
-            direction = transform.forward;
-        }
-
-        direction.Normalize();
-        GameAudio.Play(GameAudioCue.Warning, 0.48f, 0.76f);
-        CombatFeedback.SpawnGroundLine(transform.position, direction, 18f, 1.35f, 0.6f, new Color(1f, 0.08f, 0.025f));
-        yield return new WaitForSeconds(0.6f);
-
-        Damageable playerDamageable = target != null ? target.GetComponent<Damageable>() : null;
-        bool playerHit = false;
-        float timer = 0.65f;
-        while (timer > 0f)
-        {
-            transform.position += direction * 11f * Time.deltaTime;
-            if (!playerHit && playerDamageable != null && !playerDamageable.IsDead && Vector3.Distance(transform.position, playerDamageable.transform.position) <= 2.8f)
+            Vector3 before = transform.position;
+            traveled = Mathf.Min(LockedLength, traveled + 17f * Time.deltaTime);
+            Vector3 next = LockedOrigin + LockedDirection * traveled;
+            if (navigation.isOnNavMesh) navigation.Warp(next);
+            else transform.position = next;
+            if (!hit && InsideSweptDisc(target.position, before, next, 2f))
             {
-                playerDamageable.TakeDamage(18f, new DamageInfo(gameObject, transform.position, damageable, 18f));
-                playerHit = true;
+                target.GetComponent<Damageable>().TakeDamage(24f, new DamageInfo(gameObject, before, damageable, 24f));
+                hit = true;
             }
-
-            timer -= Time.deltaTime;
+            CombatEffects.Thrust(transform.position + Vector3.up, -LockedDirection, true);
             yield return null;
         }
-
-        if (!playerHit && playerDamageable != null && !playerDamageable.IsDead && Vector3.Distance(transform.position, playerDamageable.transform.position) <= 2.8f)
-        {
-            playerDamageable.TakeDamage(18f, new DamageInfo(gameObject, transform.position, damageable, 18f));
-        }
-
-        charging = false;
+        Vector3 landing = transform.position;
+        CombatEffects.Disc(landing, 2.8f, 0.7f, warning);
+        yield return new WaitForSeconds(0.7f);
+        DamageDisc(landing, 2.8f, 18f);
+        CombatEffects.Impact(landing + Vector3.up, warning, 2.8f, true);
     }
 
-    private void SummonMinions(int count)
+    public static bool InsideSweptDisc(Vector3 point, Vector3 start, Vector3 end, float radius)
     {
-        if (spawner == null)
-        {
-            return;
-        }
+        point.y = start.y = end.y = 0;
+        Vector3 segment = end - start;
+        float t = segment.sqrMagnitude > 0.001f ? Mathf.Clamp01(Vector3.Dot(point - start, segment) / segment.sqrMagnitude) : 0;
+        return (point - start - segment * t).sqrMagnitude <= radius * radius;
+    }
 
-        for (int i = 0; i < count; i++)
+    private void DamageDisc(Vector3 center, float radius, float amount)
+    {
+        var actors = Damageable.Active;
+        for (int i = actors.Count - 1; i >= 0; i--)
         {
-            Vector2 offset = Random.insideUnitCircle.normalized * Random.Range(4f, 8f);
-            spawner.SpawnEnemy(i % 2 == 0 ? EnemyKind.Melee : EnemyKind.Ranged, transform.position + new Vector3(offset.x, 0f, offset.y));
+            var actor = actors[i];
+            if (actor.team != 0 || actor.IsDead || !InsideSweptDisc(actor.transform.position, center, center, radius)) continue;
+            actor.TakeDamage(amount, new DamageInfo(gameObject, transform.position, damageable, amount));
         }
     }
 
-    private void CreateProjectile(string projectileName, Vector3 direction, float damage, float speed, float explosionRadius)
+    private void LockDirection()
     {
-        GameObject projectileObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        projectileObject.name = projectileName;
-        projectileObject.transform.position = transform.position + Vector3.up * 1.2f + direction.normalized * 1.2f;
-        projectileObject.transform.localScale = Vector3.one * 0.3f;
-        Renderer renderer = projectileObject.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            renderer.material.color = new Color(1f, 0.1f, 0.18f);
-        }
+        Vector3 direction = target.position - transform.position;
+        direction.y = 0;
+        LockedDirection = direction.sqrMagnitude > 0.01f ? direction.normalized : transform.forward;
+        transform.rotation = Quaternion.LookRotation(LockedDirection);
+    }
 
-        ProjectileVisuals.AddTrail(projectileObject, new Color(1f, 0.42f, 0.18f, 1f), new Color(0.75f, 0.01f, 0.08f, 1f), 0.2f, 0.22f);
-        ProjectileVisuals.SpawnMuzzleFlash(projectileObject.transform.position, new Color(1f, 0.2f, 0.08f, 1f), 0.32f);
+    private void BeginWindup(float duration)
+    {
+        winding = true;
+        windupStart = Time.time;
+        windupDuration = duration;
+        GameAudio.Play(GameAudioCue.Warning, 0.4f, IsPhaseTwo ? 0.85f : 1f);
+    }
 
-        Projectile projectile = projectileObject.AddComponent<Projectile>();
-        projectile.Init(1, damageable, direction.normalized, damage, speed, 3.4f, explosionRadius, 0);
+    private void SetStatus(string action)
+    {
+        if (GameManager.Instance != null) GameManager.Instance.SetProgress("REACTOR WARDEN  /  " + action);
     }
 
     private void OnDied(Damageable dead)
     {
-        if (stageManager != null)
-        {
-            stageManager.NotifyBossKilled();
-        }
-
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.RegisterKill(killReward);
-        }
+        if (stageManager != null) stageManager.NotifyBossKilled();
+        if (GameManager.Instance != null) GameManager.Instance.RegisterKill(killReward);
     }
 }
