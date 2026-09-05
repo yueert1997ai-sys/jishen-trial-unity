@@ -1,5 +1,7 @@
 # Hero Model Pass / 2026-09-05
 
+Historical hero-only pass. Current manual shooting and playable slash supersede its automatic-fire/no-melee scope: see [MANUAL_COMBAT_HANDOFF.md](MANUAL_COMBAT_HANDOFF.md). The model itself remains unchanged.
+
 ## Scope And Starting Point
 
 Based on `9cc951339f6054fb28c2795e101fda5ec816a6e2`, today's latest saved checkout. No scene rebuild, gameplay rule, damage/cooldown/stat, input or camera-system change. Unity's prefab save additionally serializes the existing movement defaults (42 acceleration, 65 braking, 0.2 dash duration, automatic fire true); these match the unchanged PlayerController defaults. Work is isolated on `codex/rigged-hero-20260905`; no merge or push. Existing unrelated untracked files are not part of this work.

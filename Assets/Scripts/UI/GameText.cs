@@ -42,6 +42,7 @@ public static class GameText
         { "Retry sector (1)", "\u91cd\u8bd5\u6218\u533a\uff081\uff09" },
         { "Retry Boss (1)", "\u91cd\u8bd5\u9996\u9886\uff081\uff09" },
         { "DASH", "\u51b2\u523a" },
+        { "SLASH", "\u6325\u5200" },
         { "SALVO", "\u9f50\u5c04" },
         { "Kills", "\u51fb\u7834" },
         { "Hostiles", "\u654c\u673a" },

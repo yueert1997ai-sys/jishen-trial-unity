@@ -451,7 +451,7 @@ public static class ProjectAudit
         var player = gm.playerController;
         player.enabled = false;
         player.automaticFire = false;
-        Check(GameAudio.Instance.LoadedCueCount == 10, "audio_all_cues_loaded");
+        Check(GameAudio.Instance.LoadedCueCount == System.Enum.GetValues(typeof(GameAudioCue)).Length, "audio_all_cues_loaded");
         Check(GameAudio.Instance.MusicLoaded, "music_loaded");
         Warp(player, new Vector3(9.4f, 0, 2.5f));
         var moving = SpawnStationaryEnemy(new Vector3(9.4f, 0, 14));

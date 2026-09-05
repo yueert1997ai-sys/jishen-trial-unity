@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameAudioCue { Beam, Missile, Hit, Death, Dash, Warning, Wave, Reward, Victory, Defeat }
+public enum GameAudioCue { Beam, Missile, Hit, Death, Dash, Warning, Wave, Reward, Victory, Defeat, Slash }
 
 [DisallowMultipleComponent]
 public class GameAudio : MonoBehaviour
 {
     public static GameAudio Instance { get; private set; }
     private readonly Dictionary<GameAudioCue, AudioClip[]> clips = new Dictionary<GameAudioCue, AudioClip[]>();
-    private readonly float[] lastCueTime = new float[10];
+    private readonly float[] lastCueTime = new float[11];
     private AudioSource[] voices;
     private readonly float[] voiceGains = new float[14];
     private AudioSource ambience;
@@ -31,13 +31,14 @@ public class GameAudio : MonoBehaviour
             voices[i].playOnAwake = false;
             voices[i].spatialBlend = 0;
             voices[i].dopplerLevel = 0;
-            lastCueTime[i % 10] = -100;
+            lastCueTime[i % lastCueTime.Length] = -100;
         }
         Load(GameAudioCue.Beam, "laserLarge_001", "laserLarge_002");
         Load(GameAudioCue.Missile, "thrusterFire_002");
         Load(GameAudioCue.Hit, "impactMetal_heavy_000", "impactMetal_heavy_001", "impactMetal_medium_000");
         Load(GameAudioCue.Death, "explosionCrunch_000", "explosionCrunch_002");
         Load(GameAudioCue.Dash, "thrusterFire_000");
+        Load(GameAudioCue.Slash, "forceField_001");
         Load(GameAudioCue.Warning, "computerNoise_000");
         Load(GameAudioCue.Wave, "jingles_HIT00");
         Load(GameAudioCue.Reward, "jingles_HIT04");
@@ -118,7 +119,7 @@ public class GameAudio : MonoBehaviour
     private void PlayInternal(GameAudioCue cue, float volume, float pitch)
     {
         if (!clips.TryGetValue(cue, out var options) || options.Length == 0) return;
-        bool priority = cue >= GameAudioCue.Warning;
+        bool priority = cue >= GameAudioCue.Warning && cue != GameAudioCue.Slash;
         float spacing = priority ? 0.18f : cue == GameAudioCue.Hit ? 0.055f : 0.035f;
         if (Time.unscaledTime - lastCueTime[(int)cue] < spacing) return;
         lastCueTime[(int)cue] = Time.unscaledTime;

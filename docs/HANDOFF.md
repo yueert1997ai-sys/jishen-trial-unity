@@ -1,5 +1,9 @@
 # MECH ROUGE Handoff Status
 
+## Latest Manual Combat / Palette Update: 2026-09-05
+
+Continue from [MANUAL_COMBAT_HANDOFF.md](MANUAL_COMBAT_HANDOFF.md). Beams now use explicit mouse/right-stick aim and held fire, with a separate playable slash button and actual bone animation/damage. Environment colors are muted and large colored floor panels use existing textured deck material. Hero modeling work is untouched. Earlier automatic-fire/no-melee statements below describe historical revisions only.
+
 ## Latest Industrial Scene / Dash / FPS Update: 2026-09-05
 
 The hero-only revision below is now the baseline, not the latest scope. Continue from [INDUSTRIAL_DASH_HANDOFF.md](INDUSTRIAL_DASH_HANDOFF.md): industrial buildings and solid cover, rebuilt sector navigation, launch-heavy dash with gimballed twin thrusters, desktop framerate uncapped. Main hero FBX/controller/prefabs, encounter data and upgrades remain unchanged. Separate `art_prototypes/` work is untouched. New scene/boost screenshots are indexed in `INDUSTRIAL_DASH_EVIDENCE.md`.
@@ -8,7 +12,7 @@ The hero-only revision below is now the baseline, not the latest scope. Continue
 
 Continue from today's `9cc9513` mobile slice, not the historical setup below. The active player visual is now joney_lol's rigged robot with retargeted Quaternius CC0 animation, selected through the existing `PlayerMechLoader` prefab field. Detailed model changes, reproducible pipeline, test evidence and limits: [HERO_MODEL_HANDOFF.md](HERO_MODEL_HANDOFF.md). Old Meshy assets and visual prefab are retained unchanged.
 
-Important mismatch: this checkout has automatic beams, salvo and dash, **no player melee/combo gameplay**. A slash animation is provided and visually tested via an explicit diagnostic, not connected to damage. Do not add gameplay or claim that melee/combo acceptance passed without locating the user's referenced melee revision.
+At the hero-only baseline, beams were automatic and slash was diagnostic-only. This historical limitation has been superseded by the user-requested manual combat update above; there is still no combo system.
 
 Final hero release `20260905.095954` passed 622.88 seconds of normal-speed live fire, six choices, both Boss phases, victory and three restarts with 0 Player errors/warnings. Actual motion sequences: `HERO_ACTION_EVIDENCE.md`; final full replay: `audit-evidence/2026-09-05/hero-player-02/`. Existing Editor SearchDatabase startup exception remains separately documented.
 

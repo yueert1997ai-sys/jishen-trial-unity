@@ -93,9 +93,9 @@ public class CombatHUD : MonoBehaviour
         safeRoot = SafeAreaLayout.Create(canvas);
         var plate = Panel(safeRoot, "StatusPanel", new Vector2(0, 1), new Vector2(16, -112), new Vector2(226, -14));
         hpText = Label(plate, "HpText", 18, new Vector2(10, -29), new Vector2(196, -1));
-        hpFill = Bar(plate, "HpBar", new Vector2(10, -36), new Vector2(196, -31), new Color(0.25f, 0.93f, 0.56f));
+        hpFill = Bar(plate, "HpBar", new Vector2(10, -36), new Vector2(196, -31), new Color(0.58f, 0.72f, 0.62f));
         energyText = Label(plate, "EnergyText", 13, new Vector2(10, -61), new Vector2(196, -40));
-        energyFill = Bar(plate, "EnergyBar", new Vector2(10, -69), new Vector2(196, -66), new Color(0.25f, 0.8f, 1f));
+        energyFill = Bar(plate, "EnergyBar", new Vector2(10, -69), new Vector2(196, -66), new Color(0.58f, 0.7f, 0.76f));
         statusText = Label(plate, "StatusText", 12, new Vector2(10, -93), new Vector2(198, -73));
         var objectiveBand = Panel(safeRoot, "ObjectiveBand", new Vector2(0.5f, 1), new Vector2(-204, -40), new Vector2(204, -10));
         objectiveText = Label(objectiveBand, "ObjectiveText", 14, new Vector2(8, -28), new Vector2(400, -2), null, TextAnchor.MiddleCenter);
@@ -116,14 +116,14 @@ public class CombatHUD : MonoBehaviour
         lockRing.anchorMin = lockRing.anchorMax = new Vector2(0.5f, 0.5f);
         lockRing.sizeDelta = new Vector2(28, 28);
         var graphic = lockRing.GetComponent<ControlRingGraphic>();
-        graphic.color = new Color(0.2f, 0.92f, 1f, 0.9f);
+        graphic.color = new Color(0.8f, 0.9f, 0.88f, 0.9f);
         graphic.thickness = 1.5f;
         graphic.raycastTarget = false;
     }
 
     private RectTransform Panel(Transform parent, string name, Vector2 anchor, Vector2 min, Vector2 max)
     {
-        var rect = RuntimeUIFactory.CreatePanel(parent, name, anchor, anchor, min, max, new Color(0.025f, 0.07f, 0.09f, 0.96f));
+        var rect = RuntimeUIFactory.CreatePanel(parent, name, anchor, anchor, min, max, new Color(0.045f, 0.055f, 0.055f, 0.94f));
         rect.GetComponent<Image>().raycastTarget = false;
         return rect;
     }
@@ -150,10 +150,9 @@ public class CombatHUD : MonoBehaviour
 
     private void UpdateLock()
     {
-        var target = player != null && player.AutoAim != null ? player.AutoAim.CurrentTarget : null;
-        lockRing.gameObject.SetActive(target != null && Camera.main != null && !gameManager.IsPaused);
+        lockRing.gameObject.SetActive(player != null && player.HasAimPoint && Camera.main != null && !gameManager.IsPaused);
         if (!lockRing.gameObject.activeSelf) return;
-        Vector3 screen = Camera.main.WorldToScreenPoint(target.AimCenter);
+        Vector3 screen = Camera.main.WorldToScreenPoint(player.AimPoint);
         Camera uiCamera = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(safeRoot, screen, uiCamera, out Vector2 point))
             lockRing.anchoredPosition = point;

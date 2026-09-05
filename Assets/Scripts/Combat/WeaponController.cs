@@ -163,6 +163,7 @@ public class WeaponController : MonoBehaviour
     private bool CanFire()
     {
         return (damageable == null || !damageable.IsDead)
+            && (playerController == null || playerController.Melee == null || !playerController.Melee.IsAttacking)
             && (GameManager.Instance == null || GameManager.Instance.IsCombatActive);
     }
 

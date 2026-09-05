@@ -1,5 +1,9 @@
 # Windows Player Validation
 
+## Manual Combat Revision
+
+From release `20260905.144944`, the replay explicitly injects right-stick aim/held-fire commands toward its diagnostic target and queues melee in close range. Normal gameplay does not auto-fire or use this replay selection. ManualCombatAudit separately checks no-input idle, firing/release, actual slash damage and animation. This full run overlaps short Editor regression tests, so its frame timings are not a clean performance benchmark. Physical phone multitouch and human desktop mouse testing remain separate.
+
 ## Reproduce
 
 Build with `DemoBuildPipeline.BuildMobileSlice` in Unity 6000.3.18f1. It creates a new `Builds/Windows/MECH_TRIAL_<UTC version>` directory, using the existing saved main scene, Windows x64 Mono, release and StrictMode. No scene/model rebuild runs. Licenses and `START_HERE.md` are copied into the build.

@@ -60,6 +60,8 @@ public sealed class RiggedMechAnimator : MonoBehaviour
         weapon.muzzle = muzzle;
         weapon.BeamFired += OnBeam;
         weapon.SkillFired += OnSkill;
+        player.Melee.AttackStarted += PreviewSlash;
+        player.Melee.AttackCancelled += CancelSlash;
         if (health != null) health.OnDamaged += OnHit;
         var hardpoints = player.GetComponent<MechHardpointManager>();
         if (hardpoints != null)
@@ -95,6 +97,8 @@ public sealed class RiggedMechAnimator : MonoBehaviour
             if (weapon.muzzle == muzzle) weapon.muzzle = previousMuzzle;
         }
         if (health != null) health.OnDamaged -= OnHit;
+        player.Melee.AttackStarted -= PreviewSlash;
+        player.Melee.AttackCancelled -= CancelSlash;
         if (legacyMotion != null) legacyMotion.enabled = legacyWasEnabled;
         foreach (var item in sockets)
             if (item.socket != null) item.socket.SetLocalPositionAndRotation(item.position, item.rotation);
@@ -166,7 +170,9 @@ public sealed class RiggedMechAnimator : MonoBehaviour
     private void OnSkill() { firingUntil = Time.time + 0.65f; recoil = 1.6f; }
     private void OnHit(Damageable target, DamageInfo damage) { hitRecoil = 1; }
 
-    // No input binding or damage: the current gameplay revision has no melee attack event.
+    private void CancelSlash() { slashUntil = 0; if (bladeTrail != null) { bladeTrail.emitting = false; bladeTrail.Clear(); } }
+
+    // Damage authority remains in PlayerMeleeController; the context menu is visual-only.
     [ContextMenu("Preview slash (visual only)")]
     public void PreviewSlash()
     {

@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
     public float acceleration = 42f;
     public float braking = 65f;
     public float dashDuration = 0.2f;
-    public bool automaticFire = true;
+    // Retained for serialized compatibility only. All live beam input is manual.
+    [HideInInspector] public bool automaticFire;
+    public PlayerMeleeController Melee { get; private set; }
 
     public PlayerInputRouter InputRouter { get; private set; }
     public AutoAimController AutoAim { get; private set; }
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private float dashRemaining;
     private float dashTotalDuration;
     private float nextDashTime;
+    private readonly RaycastHit[] aimHits = new RaycastHit[32];
 
     private void Awake()
     {
@@ -52,6 +55,7 @@ public class PlayerController : MonoBehaviour
             Motor.minMoveDistance = 0f;
         }
         AimDirection = Vector3.forward;
+        Melee = GetComponent<PlayerMeleeController>() ?? gameObject.AddComponent<PlayerMeleeController>();
     }
 
     private void Start()
@@ -98,20 +102,23 @@ public class PlayerController : MonoBehaviour
         Velocity = new Vector3(Velocity.x, 0f, Velocity.z);
         MoveDirection = Vector3.ClampMagnitude(Velocity / speed, 1f);
 
+        if (!Melee.IsAttacking && command.HasAim) AimAt(ResolveManualAim(command.AimPoint));
+        else if (!Melee.IsAttacking && HasAimPoint)
+            AimAt(transform.position + AimDirection * 14f + Vector3.up * 1.1f);
+        else if (!Melee.IsAttacking && !HasAimPoint && command.Move.sqrMagnitude > 0.02f)
+            AimAt(transform.position + new Vector3(command.Move.x, 0f, command.Move.y) * 14f + Vector3.up * 1.1f);
         if (gm == null || gm.IsCombatActive)
         {
             AutoAim.Tick();
             var target = AutoAim.CurrentTarget;
             if (target != null)
             {
-                AimAt(target.AimCenter);
-                if (automaticFire && AutoAim.IsValidTarget(target)) weaponController.TryFireBeam();
                 if (command.Skill && AutoAim.IsValidTarget(target)) weaponController.TryFireSkill(target);
             }
+            if (command.Melee) Melee.TryAttack();
+            if (command.Fire && command.HasAim && !Melee.IsAttacking) weaponController.TryFireBeam();
         }
         else AutoAim.Clear();
-        if (AutoAim.CurrentTarget == null && command.Move.sqrMagnitude > 0.02f)
-            AimAt(transform.position + new Vector3(command.Move.x, 0.1f, command.Move.y) * 10f);
     }
 
     public void AimAt(Vector3 worldPoint)
@@ -125,11 +132,29 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(AimDirection, Vector3.up);
     }
 
+    private Vector3 ResolveManualAim(Vector3 point)
+    {
+        // Converge the offset hand cannon on what the manual sight ray actually touches.
+        // This does not select or turn toward nearby targets outside that ray.
+        Vector3 origin = transform.position + Vector3.up * 1.1f;
+        Vector3 ray = point - origin;
+        float nearest = ray.magnitude;
+        int count = Physics.RaycastNonAlloc(origin, ray.normalized, aimHits, nearest, ~0, QueryTriggerInteraction.Ignore);
+        for (int i = 0; i < count; i++)
+        {
+            if (aimHits[i].collider.GetComponentInParent<Damageable>() == damageable || aimHits[i].distance >= nearest) continue;
+            nearest = aimHits[i].distance;
+            point = aimHits[i].point;
+        }
+        return point;
+    }
+
     public bool TryDash(Vector2 movement)
     {
         var gm = GameManager.Instance;
         if ((gm != null && !gm.CanPlayerControl) || (damageable != null && damageable.IsDead) || Time.time < nextDashTime) return false;
         if (stats != null && !stats.TrySpendEnergy(25f)) return false;
+        Melee.CancelAttack();
         Vector3 direction = movement.sqrMagnitude > 0.01f ? new Vector3(movement.x, 0f, movement.y) : AimDirection;
         if (direction.sqrMagnitude < 0.01f) direction = transform.forward;
         direction.Normalize();
@@ -148,6 +173,7 @@ public class PlayerController : MonoBehaviour
         planarVelocity = Velocity = MoveDirection = Vector3.zero;
         dashRemaining = 0f;
         if (InputRouter != null) InputRouter.Clear();
+        if (Melee != null) Melee.CancelAttack();
     }
 
     public void RestoreAt(Vector3 position)
@@ -156,10 +182,12 @@ public class PlayerController : MonoBehaviour
         nextDashTime = 0f;
         AutoAim.Clear();
         HasAimPoint = false;
+        AimDirection = Vector3.forward;
         Motor.enabled = false;
         transform.SetPositionAndRotation(position, Quaternion.identity);
         Motor.enabled = true;
         weaponController.ResetCooldowns();
+        Melee.ResetCooldown();
     }
 
     private void OnDisable() { CancelMovement(); }

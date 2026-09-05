@@ -1,0 +1,21 @@
+PASS no_automatic_fire
+FIRE beams=6 front=6 back=0 phase=Combat aim=(0.00, 1.07, -1.95)
+PASS held_manual_direction_hits_only_front
+PASS release_stops_fire
+PASS independent_move_and_aim
+PASS second_pointer_cannot_release_aim
+PASS pointer_release_clears_fire
+PASS slash_has_windup
+PASS real_slash_front_damage_once_no_rear_hit
+PASS slash_excludes_distant_and_friendly_actors
+PASS actual_arm_animation_deforms_108.7711
+PASS slash_not_disguised_shooting
+PASS dash_cancels_slash
+PASS no_pending_slash_after_dash
+PASS solid_wall_blocks_slash
+PASS pause_clears_attack_and_fire
+PASS resume_has_no_delayed_slash
+PASS salvo_still_connected
+PASS desktop_still_uncapped
+PASS all_audio_cues_including_slash_loaded
+MANUAL_AUDIT code=0 errors=0 warnings=0 knownEditorErrors=1

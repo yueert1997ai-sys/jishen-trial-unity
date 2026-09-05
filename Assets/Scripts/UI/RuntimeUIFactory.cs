@@ -90,11 +90,11 @@ public static class RuntimeUIFactory
         GameObject buttonObject = new GameObject(name, typeof(RectTransform));
         buttonObject.transform.SetParent(parent, false);
         Image image = buttonObject.AddComponent<Image>();
-        image.color = new Color(0.1f, 0.18f, 0.25f, 0.94f);
+        image.color = new Color(0.18f, 0.2f, 0.2f, 0.94f);
         Button button = buttonObject.AddComponent<Button>();
         ColorBlock colors = button.colors;
-        colors.highlightedColor = new Color(0.2f, 0.35f, 0.48f, 1f);
-        colors.pressedColor = new Color(0.05f, 0.1f, 0.16f, 1f);
+        colors.highlightedColor = new Color(0.65f, 0.71f, 0.7f, 1f);
+        colors.pressedColor = new Color(0.3f, 0.35f, 0.34f, 1f);
         button.colors = colors;
 
         Text text = CreateText(buttonObject.transform, "Label", label, 24, TextAnchor.MiddleCenter, Color.white);
@@ -119,7 +119,7 @@ public static class RuntimeUIFactory
     {
         CreatePanel(canvas.transform, name + "Shade", Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.01f, 0.025f, 0.03f, 0.8f));
         var safe = SafeAreaLayout.Create(canvas);
-        var surface = CreatePanel(safe, name, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.06f, 0.10f, 0.12f, 1f));
+        var surface = CreatePanel(safe, name, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.075f, 0.085f, 0.085f, 1f));
         Place(surface, Vector2.one * 0.5f, Vector2.zero, size);
         return surface;
     }

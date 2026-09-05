@@ -1,5 +1,7 @@
 # Hero Action Evidence
 
+These are historical hero-only captures. Current playable slash damage and continuous action screenshots are documented in [MANUAL_COMBAT_HANDOFF.md](MANUAL_COMBAT_HANDOFF.md), under `audit-evidence/2026-09-05/manual-01/`.
+
 Captured from the running Unity scene in Play Mode, not Blender renders. Closeups use a diagnostic camera; the gameplay camera is unchanged. Click an image for its full-size PNG. Complete pose samples and checks: [report](audit-evidence/2026-09-05/hero-01/report.txt).
 
 ## Model

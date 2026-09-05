@@ -1,0 +1,83 @@
+Mono path[0] = 'C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905/Builds/Windows/MECH_TRIAL_20260905.144944/MECH_TRIAL_Data/Managed'
+Mono config path = 'C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905/Builds/Windows/MECH_TRIAL_20260905.144944/MonoBleedingEdge/etc'
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Initialize engine version: 6000.3.18f1 (5ebeb53e4c07)
+[Subsystems] Discovering subsystems at path C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905/Builds/Windows/MECH_TRIAL_20260905.144944/MECH_TRIAL_Data/UnitySubsystems
+[D3D12 Device Filter] Vendor Name: NVIDIA
+[D3D12 Device Filter] Device Name: NVIDIA GeForce RTX 4070 Ti
+[D3D12 Device Filter] Driver Version: 32.0.15.9649
+[D3D12 Device Filter] Feature Level: 12.2
+[D3D12 Device Filter] Graphics Memory: 11994 MB
+[D3D12 Device Filter] Processor Count: 24
+[D3D12 Device Filter] Device Type: Discrete
+GfxDevice: creating device client; kGfxThreadingModeSplitJobs
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 4070 Ti (ID=0x2782)
+    Vendor:          NVIDIA
+    VRAM:            11994 MB
+    App VRAM Budget: 11226 MB
+    Driver:          32.0.15.9649
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  2.523 seconds
+- Finished resetting the current domain, in  0.002 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+<RI> Initializing input.
+<RI> Input initialized.
+UnloadTime: 0.522700 ms
+PLAYER_CHOICE 1 SYSTEMS  1 / 6   |   AMP 1
+PLAYER_CHOICE 2 SYSTEMS  2 / 6   |   AMP 1 / RATE 1
+PLAYER_CHOICE 3 SYSTEMS  3 / 6   |   AMP 1 / RATE 1 / PIERCE 1
+PLAYER_CHOICE 4 SYSTEMS  4 / 6   |   AMP 1 / RATE 2 / PIERCE 1
+PLAYER_CHOICE 5 SYSTEMS  5 / 6   |   AMP 1 / RATE 3 / PIERCE 1
+PLAYER_CHOICE 6 SYSTEMS  6 / 6   |   AMP 1 / RATE 3 / PIERCE 1 / REPAIR 1
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.156600 ms
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 3659.
+Total: 0.798700 ms (FindLiveObjects: 0.179100 ms CreateObjectMapping: 0.016800 ms MarkObjects: 0.586600 ms  DeleteObjects: 0.016100 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 3860.
+Total: 0.505400 ms (FindLiveObjects: 0.080900 ms CreateObjectMapping: 0.015300 ms MarkObjects: 0.407000 ms  DeleteObjects: 0.002100 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.693700 ms
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 3659.
+Total: 0.463600 ms (FindLiveObjects: 0.059500 ms CreateObjectMapping: 0.014600 ms MarkObjects: 0.377600 ms  DeleteObjects: 0.011900 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 3860.
+Total: 0.503300 ms (FindLiveObjects: 0.076900 ms CreateObjectMapping: 0.014800 ms MarkObjects: 0.409000 ms  DeleteObjects: 0.002400 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.682000 ms
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 3659.
+Total: 0.467800 ms (FindLiveObjects: 0.058400 ms CreateObjectMapping: 0.013700 ms MarkObjects: 0.383900 ms  DeleteObjects: 0.011400 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 3860.
+Total: 0.497600 ms (FindLiveObjects: 0.078800 ms CreateObjectMapping: 0.015700 ms MarkObjects: 0.400500 ms  DeleteObjects: 0.002500 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.733800 ms
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 3659.
+Total: 0.505200 ms (FindLiveObjects: 0.061300 ms CreateObjectMapping: 0.015100 ms MarkObjects: 0.410200 ms  DeleteObjects: 0.018500 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 3860.
+Total: 0.602600 ms (FindLiveObjects: 0.120500 ms CreateObjectMapping: 0.031400 ms MarkObjects: 0.448500 ms  DeleteObjects: 0.002100 ms)
+
+SLICE_PLAYER_AUDIT PASS 
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.

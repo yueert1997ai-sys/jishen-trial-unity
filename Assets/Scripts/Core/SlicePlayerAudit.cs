@@ -244,6 +244,11 @@ public sealed class SlicePlayerAudit : MonoBehaviour
                 delta.y = 0;
                 if (delta.magnitude < 0.8f) waypoint = (waypoint + 1) % route.Length;
                 gm.playerController.InputRouter.SetTouchMove(new Vector2(delta.x, delta.z).normalized);
+                var aimTarget = gm.playerController.AutoAim.CurrentTarget;
+                Vector3 aim = aimTarget != null ? aimTarget.AimCenter - gm.playerController.transform.position : Vector3.zero;
+                gm.playerController.InputRouter.SetTouchAim(new Vector2(aim.x, aim.z).normalized, aimTarget != null);
+                if (aimTarget != null && new Vector2(aim.x, aim.z).magnitude < 3.3f)
+                    gm.playerController.InputRouter.QueueMelee();
                 gm.playerController.InputRouter.QueueSkill();
                 if (dashReplay && delta.magnitude > 5.7f && gm.playerController.IsDashReady)
                     gm.playerController.InputRouter.QueueDash();

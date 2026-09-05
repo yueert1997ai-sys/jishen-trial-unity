@@ -123,7 +123,7 @@ public static class HeroVisualAudit
         hero.PreviewSlash();
         var slash = Sequence("slash_PREVIEW_NOT_DAMAGE", 7, .07f, .1f);
         while (slash.MoveNext()) yield return null;
-        report.Add("LIMITATION: Slash above is an explicit visual diagnostic. This gameplay revision has no player melee/combo event; no slash damage or combo acceptance is claimed.");
+        report.Add("LIMITATION: This sequence is visual-only. Playable slash damage is verified separately by ManualCombatAudit.");
         settle = Time.time + .5f;
         while (Time.time < settle) yield return null;
         cameraOffset.x = -4.5f;
@@ -135,7 +135,7 @@ public static class HeroVisualAudit
         player.weaponController.BeamFired += () => beams++;
         player.weaponController.SkillFired += () => skills++;
         target.OnDamaged += (d, info) => hits++;
-        player.automaticFire = true;
+        player.InputRouter.SetTouchAim(Vector2.up, true);
         var fire = Sequence("cannon", 5, .16f, .02f);
         while (fire.MoveNext()) yield return null;
         player.InputRouter.QueueSkill();
@@ -143,7 +143,7 @@ public static class HeroVisualAudit
         while (skill.MoveNext()) yield return null;
         report.Add("COMBAT beams=" + beams + " hits=" + hits + " skills=" + skills + " targetHP=" + target.CurrentHealth);
         Check(beams >= 3 && hits >= 1 && skills == 1, "real_beam_hits_and_missile_skill");
-        player.automaticFire = false;
+        player.InputRouter.SetTouchAim(Vector2.zero, false);
         Object.Destroy(enemyObject);
         settle = Time.time + .4f;
         while (Time.time < settle) yield return null;
