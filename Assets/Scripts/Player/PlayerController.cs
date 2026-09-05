@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 planarVelocity;
     private Vector3 dashVelocity;
     private float dashRemaining;
+    private float dashTotalDuration;
     private float nextDashTime;
 
     private void Awake()
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         if (GetComponent<MobileControls>() == null) gameObject.AddComponent<MobileControls>();
+        if (GetComponent<MechDashPresentation>() == null) gameObject.AddComponent<MechDashPresentation>();
     }
 
     private void Update() { Simulate(InputRouter.ReadCommand(), Time.deltaTime); }
@@ -76,7 +78,15 @@ public class PlayerController : MonoBehaviour
         Vector3 desired = new Vector3(command.Move.x, 0f, command.Move.y) * speed;
         planarVelocity = Vector3.MoveTowards(planarVelocity, desired, (desired.sqrMagnitude > 0f ? acceleration : braking) * deltaTime);
         float dashStep = Mathf.Min(dashRemaining, deltaTime);
-        Vector3 displacement = dashVelocity * dashStep + planarVelocity * (deltaTime - dashStep);
+        // Integrate the launch-heavy speed curve over the frame, preserving distance at any FPS.
+        float dashTravelTime = 0;
+        if (dashStep > 0)
+        {
+            float from = 1 - dashRemaining / dashTotalDuration;
+            float to = Mathf.Min(1, from + dashStep / dashTotalDuration);
+            dashTravelTime = dashTotalDuration * ((2 * to - to * to) - (2 * from - from * from));
+        }
+        Vector3 displacement = dashVelocity * dashTravelTime + planarVelocity * (deltaTime - dashStep);
         dashRemaining = Mathf.Max(0f, dashRemaining - deltaTime);
         Vector3 before = transform.position;
         Vector3 bounded = before + displacement;
@@ -124,6 +134,7 @@ public class PlayerController : MonoBehaviour
         if (direction.sqrMagnitude < 0.01f) direction = transform.forward;
         direction.Normalize();
         dashRemaining = Mathf.Max(0.05f, dashDuration);
+        dashTotalDuration = dashRemaining;
         dashVelocity = direction * (stats != null ? stats.DashDistance : 5f) / dashRemaining;
         nextDashTime = Time.time + (stats != null ? stats.DashCooldown : 1.25f);
         if (damageable != null) damageable.SetInvulnerable(0.16f);

@@ -1,5 +1,9 @@
 # MECH ROUGE Handoff Status
 
+## Latest Industrial Scene / Dash / FPS Update: 2026-09-05
+
+The hero-only revision below is now the baseline, not the latest scope. Continue from [INDUSTRIAL_DASH_HANDOFF.md](INDUSTRIAL_DASH_HANDOFF.md): industrial buildings and solid cover, rebuilt sector navigation, launch-heavy dash with gimballed twin thrusters, desktop framerate uncapped. Main hero FBX/controller/prefabs, encounter data and upgrades remain unchanged. Separate `art_prototypes/` work is untouched. New scene/boost screenshots are indexed in `INDUSTRIAL_DASH_EVIDENCE.md`.
+
 ## Latest Hero-Only Update: 2026-09-05
 
 Continue from today's `9cc9513` mobile slice, not the historical setup below. The active player visual is now joney_lol's rigged robot with retargeted Quaternius CC0 animation, selected through the existing `PlayerMechLoader` prefab field. Detailed model changes, reproducible pipeline, test evidence and limits: [HERO_MODEL_HANDOFF.md](HERO_MODEL_HANDOFF.md). Old Meshy assets and visual prefab are retained unchanged.

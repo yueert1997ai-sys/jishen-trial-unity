@@ -10,6 +10,7 @@ using UnityEngine.Profiling;
 using UnityEngine.UI;
 
 // Dormant in normal play. Release-Player verification: -sliceAudit <output directory> [-sliceAuditSmoke].
+[DefaultExecutionOrder(1000)]
 public sealed class SlicePlayerAudit : MonoBehaviour
 {
     [Serializable]
@@ -24,10 +25,12 @@ public sealed class SlicePlayerAudit : MonoBehaviour
         public int gcPositiveFrames;
         public long[] restartAllocatedBytes, restartManagedBytes;
         public int renderedFrames, captures;
+        public int targetFrameRate, vSyncCount, dashes;
     }
 
     private static string output;
     private static bool smoke;
+    private static bool dashReplay;
     private readonly Report report = new Report();
     private readonly List<float> frames = new List<float>(60000);
     private readonly Vector3[] route = { new Vector3(-4, 0, -5), new Vector3(4, 0, -5), new Vector3(4, 0, 5), new Vector3(-4, 0, 5) };
@@ -54,6 +57,7 @@ public sealed class SlicePlayerAudit : MonoBehaviour
         output = Path.GetFullPath(args[index + 1]);
         Directory.CreateDirectory(output);
         smoke = Array.IndexOf(args, "-sliceAuditSmoke") >= 0;
+        dashReplay = Array.IndexOf(args, "-sliceAuditDash") >= 0;
         PlayerInputRouter.AllowUnfocusedReplay = true;
         Application.runInBackground = true;
         DontDestroyOnLoad(new GameObject("OptInPlayerAudit").AddComponent<SlicePlayerAudit>());
@@ -67,7 +71,10 @@ public sealed class SlicePlayerAudit : MonoBehaviour
         report.gpu = SystemInfo.graphicsDeviceName;
         report.renderer = SystemInfo.graphicsDeviceType.ToString();
         report.build = Application.version;
+        report.targetFrameRate = Application.targetFrameRate;
+        report.vSyncCount = QualitySettings.vSyncCount;
         report.mode = smoke ? "95-second smoke" : "complete live-fire replay";
+        if (dashReplay) report.mode += " / repeated dash";
         report.renderMethod = "Complete Player simulation + scene/UI Camera.Render every LateUpdate to 1920x1080 RT; hidden window, no OS presentation cost";
         target = new RenderTexture(1920, 1080, 24) { antiAliasing = 4, name = "PlayerAudit1080p" };
         target.Create();
@@ -160,6 +167,8 @@ public sealed class SlicePlayerAudit : MonoBehaviour
         finally { RenderTexture.active = previous; Destroy(texture); }
     }
 
+    private void OnAuditedDash(Vector3 direction) { report.dashes++; }
+
     private void Update()
     {
         if (finished || scenario == null) return;
@@ -204,6 +213,7 @@ public sealed class SlicePlayerAudit : MonoBehaviour
         yield return null;
         var gm = GameManager.Instance;
         gm.playerController.InputRouter.readKeyboard = false;
+        if (dashReplay) gm.playerController.Dashed += OnAuditedDash;
         Click("DeployButton");
         gm.upgradeSystem.ResetUpgrades(5092026);
         float started = Time.time, bossStarted = -1;
@@ -235,6 +245,8 @@ public sealed class SlicePlayerAudit : MonoBehaviour
                 if (delta.magnitude < 0.8f) waypoint = (waypoint + 1) % route.Length;
                 gm.playerController.InputRouter.SetTouchMove(new Vector2(delta.x, delta.z).normalized);
                 gm.playerController.InputRouter.QueueSkill();
+                if (dashReplay && delta.magnitude > 5.7f && gm.playerController.IsDashReady)
+                    gm.playerController.InputRouter.QueueDash();
                 int encounter = gm.stageManager.CurrentEncounter;
                 if (encounter < 6 && !captured[encounter] && gm.stageManager.EnemiesAlive >= 5)
                 {

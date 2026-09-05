@@ -1,0 +1,1114 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.3/staging' branch; Version is '6000.3.18f1 (5ebeb53e4c07) revision 6209205'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Channel LicenseClient-yue doesn't exist
+OS: 'Windows 11  (10.0.22000) Core' Language: 'zh' Physical Memory: 32614 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-09-05T13:32:42Z
+[Licensing::Module] Successfully launched the LicensingClient (PId: 30756)
+
+COMMAND LINE ARGUMENTS:
+D:\Editor\6000.3.18f1\Editor\Unity.exe
+-batchmode
+-projectPath
+C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905
+-executeMethod
+HeroVisualAudit.Run
+-logFile
+C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\IndustrialHeroRegression.log
+Successfully changed project path to: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905
+C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+Player connection [42568]  Target information:
+
+Player connection [42568]  * "[IP] 192.168.5.218 [Port] 55504 [Flags] 2 [Guid] 3687507536 [EditorId] 3687507536 [Version] 1048832 [Id] WindowsEditor(7,Marco) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [42568]  * "[IP] 172.22.128.1 [Port] 55504 [Flags] 2 [Guid] 3687507536 [EditorId] 3687507536 [Version] 1048832 [Id] WindowsEditor(7,Marco) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [42568]  * "[IP] 2.0.0.1 [Port] 55504 [Flags] 2 [Guid] 3687507536 [EditorId] 3687507536 [Version] 1048832 [Id] WindowsEditor(7,Marco) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [42568] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [42568] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-yue" at "2026-09-05T13:32:42.6522363Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 30756, path: "D:/Editor/6000.3.18f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Package Manager] Connected to IPC stream "Upm-14636" after 0.2 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              29a201aa49d14de0aa723198a8ec9c65
+  Correlation Id:          64afef4ed8b17bb65a90b087d2c676e3
+  External correlation Id: 8621570799923139729
+  Machine Id:              XSqKgGWCHqq/Baz2PtSnIVh4W6c=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-yue" (connect: 0.25s, validation: 0.20s, handshake: 0.08s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-yue-notifications" at "2026-09-05T13:32:42.9337854Z"
+[Licensing::Module] Connected to LicensingClient (PId: 30756, launch time: 0.00, total connection time: 0.53s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968449435854-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.01
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.56s
+[Licensing::Module] Licensing is initialized (took 0.18s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.3.18f1 (5ebeb53e4c07)
+[Subsystems] Discovering subsystems at path D:/Editor/6000.3.18f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 4070 Ti (ID=0x2782)
+    Vendor:          NVIDIA
+    VRAM:            11994 MB
+    App VRAM Budget: 11226 MB
+    Driver:          32.0.15.9649
+Initialize mono
+Mono path[0] = 'D:/Editor/6000.3.18f1/Editor/Data/Managed'
+Mono path[1] = 'D:/Editor/6000.3.18f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'D:/Editor/6000.3.18f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56636
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: D:/Editor/6000.3.18f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001651 seconds.
+- Loaded All Assemblies, in  0.300 seconds
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:False
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.278 seconds
+Domain Reload Profiling: 578ms
+	BeginReloadAssembly (105ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (5ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (32ms)
+	LoadAllAssembliesAndSetupDomain (124ms)
+		LoadAssemblies (100ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (122ms)
+			TypeCache.Refresh (120ms)
+				TypeCache.ScanAssembly (110ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (279ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (248ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (33ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (57ms)
+			ProcessInitializeOnLoadAttributes (89ms)
+			ProcessInitializeOnLoadMethodAttributes (66ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 10 packages:
+  Built-in packages:
+    com.unity.modules.animation@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.animation)
+    com.unity.ugui@2.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.ugui@2e4da8434a5c)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.ai)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.particlesystem)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.audio)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.physics)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.jsonserialize)
+    com.unity.modules.imageconversion@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.imageconversion)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.ui)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\yue\.codex\visualizations\2026\06\18\019edb7d-a82a-7601-b667-1e85d8cb52f0\unity-audit-20260905\Library\PackageCache\com.unity.modules.imgui)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+Starting: D:\Editor\6000.3.18f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/yue/.codex/visualizations/2026/06/18/019edb7d-a82a-7601-b667-1e85d8cb52f0/unity-audit-20260905
+DisplayProgressbar: Compiling Scripts
+ExitCode: 0 Duration: 0s60ms
+*** Tundra build success (0.04 seconds), 0 items updated, 209 evaluated
+AssetDatabase: script compilation time: 0.381612s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.315 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Native extension for WindowsStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.315 seconds
+Domain Reload Profiling: 629ms
+	BeginReloadAssembly (251ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (18ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (131ms)
+	RebuildCommonClasses (24ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (11ms)
+	LoadAllAssembliesAndSetupDomain (18ms)
+		LoadAssemblies (87ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (12ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (4ms)
+			BuildScriptInfoCaches (2ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (316ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (194ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (17ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (74ms)
+			ProcessInitializeOnLoadAttributes (75ms)
+			ProcessInitializeOnLoadMethodAttributes (25ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (23ms)
+Asset Pipeline Refresh (id=f9bdd0e11d06a6e439e7175f85b9b49b): Total: 1.202 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=480 ms
+		Asset DB Callback time: managed=8 ms, native=6 ms
+		Scripting: domain reloads=1, domain reload time=315 ms, compile time=383 ms, other=7 ms
+		Project Asset Count: scripts=151, non-scripts=176
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 9.729ms
+	ApplyChangesToAssetFolders: 0.402ms
+	Scan: 90.649ms
+	OnSourceAssetsModified: 0.002ms
+	CategorizeAssetsWithTransientArtifact: 0.834ms
+	ProcessAssetsWithTransientArtifactChanges: 4.945ms
+	CategorizeAssets: 1.205ms
+	ImportOutOfDateAssets: 316.275ms (-66.794ms without children)
+		CompileScripts: 382.805ms
+		ReloadNativeAssets: 0.000ms
+		UnloadImportedAssets: 0.065ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.029ms
+		InitializingProgressBar: 0.000ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+		OnDemandSchedulerStart: 0.169ms
+	PostProcessAllAssets: 8.299ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.001ms
+	UnloadStreamsBegin: 0.877ms
+	PersistCurrentRevisions: 0.010ms
+	UnloadStreamsEnd: 0.002ms
+	GenerateScriptTypeHashes: 0.100ms
+	Untracked: 768.360ms
+
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
+Scanning for USB devices : 3.405ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-MECH TRIAL
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 436 unused Assets / (0.6 MB). Loaded Objects now: 1065.
+Memory consumption went from 95.3 MB to 94.7 MB.
+Total: 3.021000 ms (FindLiveObjects: 0.050100 ms CreateObjectMapping: 0.013000 ms MarkObjects: 2.756600 ms  DeleteObjects: 0.200600 ms)
+
+Opening scene 'Assets/Scenes/Demo_Main.unity'
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/Scenes/Demo_Main.unity'
+	Deserialize:            25.259 ms
+	Integration:            85.895 ms
+	Integration of assets:  0.988 ms
+	Thread Wait Time:       0.012 ms
+	Total Operation Time:   112.153 ms
+Unloading 1 unused Assets / (0.5 KB). Loaded Objects now: 4198.
+Memory consumption went from 100.9 MB to 100.9 MB.
+Total: 3.470200 ms (FindLiveObjects: 0.131400 ms CreateObjectMapping: 0.025600 ms MarkObjects: 3.301000 ms  DeleteObjects: 0.011700 ms)
+
+[Project] Loading completed in 3.259 seconds
+	Project init time: 				2.892 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		0.408 seconds
+		Asset Database init time: 		0.177 seconds
+		Global illumination init time: 	0.003 seconds
+		Assemblies load time: 			0.590 seconds
+		Unity extensions init time: 	0.001 seconds
+		Asset Database refresh time: 	1.202 seconds
+	Scene opening time: 			0.201 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1788615165646,"processId":14636,"projectLoad":3.2588018,"projectInit":2.8924104,"templateInit":0.0,"packageManagerInit":0.4084114,"assetDatabaseInit":0.1769954,"globalIlluminationInit":0.0029073,"assembliesLoad":0.5895004,"unityExtensionsInit":0.0013819,"assetDatabaseRefresh":1.2016765,"sceneOpening":0.2006466}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1788615165646,"processId":14636,"editorVersion":"6000.3.18f1 (5ebeb53e4c07)","branch":"6000.3/staging","buildType":"Release","platform":"Windows"}
+Reloading assemblies for play mode.
+Reloading assemblies after forced synchronous recompile.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.212 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Native extension for WindowsStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.325 seconds
+Domain Reload Profiling: 536ms
+	BeginReloadAssembly (147ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (17ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (32ms)
+	RebuildCommonClasses (28ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (11ms)
+	LoadAllAssembliesAndSetupDomain (16ms)
+		LoadAssemblies (89ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (10ms)
+			TypeCache.Refresh (3ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (4ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (325ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (204ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (18ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (74ms)
+			ProcessInitializeOnLoadAttributes (72ms)
+			ProcessInitializeOnLoadMethodAttributes (35ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (15ms)
+Asset Pipeline Refresh (id=986cf5be3c115934c9969e6808225827): Total: 0.571 seconds - Initiated by StopAssetImportingV2(ForceSynchronousImport | ForceDomainReload)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=346 ms
+		Asset DB Callback time: managed=8 ms, native=0 ms
+		Scripting: domain reloads=1, domain reload time=213 ms, compile time=1 ms, other=0 ms
+		Project Asset Count: scripts=151, non-scripts=176
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 2.824ms
+	ApplyChangesToAssetFolders: 0.061ms
+	Scan: 0.001ms
+	OnSourceAssetsModified: 0.001ms
+	CategorizeAssetsWithTransientArtifact: 0.002ms
+	ProcessAssetsWithTransientArtifactChanges: 0.106ms
+	CategorizeAssets: 1.015ms
+	ImportOutOfDateAssets: 325.819ms (324.481ms without children)
+		CompileScripts: 1.096ms
+		CollectScriptTypesHashes: 0.016ms
+		ReloadNativeAssets: 0.020ms
+		UnloadImportedAssets: 0.030ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.030ms
+		InitializingProgressBar: 0.001ms
+		OnDemandSchedulerStart: 0.144ms
+	PostProcessAllAssets: 8.405ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.012ms
+	UnloadStreamsBegin: 0.130ms
+	PersistCurrentRevisions: 0.008ms
+	UnloadStreamsEnd: 0.001ms
+	GenerateScriptTypeHashes: 0.091ms
+	Untracked: 232.279ms
+
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            11.411 ms
+	Integration:            88.671 ms
+	Integration of assets:  0.538 ms
+	Thread Wait Time:       0.009 ms
+	Total Operation Time:   100.629 ms
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+Start Indexing on Editor startup
+ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+  at System.Collections.Generic.List`1[T].get_Item (System.Int32 index) [0x00009] in <41d29b352f6a475ab1bf7c6628b82790>:0 
+  at UnityEditor.Search.SearchDatabase+<EnumerateAll>d__80.MoveNext () [0x00106] in <8bfcebed71804a0bbd899b4f1cf32116>:0 
+  at System.Linq.Enumerable.TryGetFirst[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Boolean& found) [0x00045] in <80564d689e48448fa2a7101993ee7201>:0 
+  at System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source) [0x00000] in <80564d689e48448fa2a7101993ee7201>:0 
+  at UnityEditor.Search.SearchDatabase.GetDefaultSearchDatabase () [0x00006] in <8bfcebed71804a0bbd899b4f1cf32116>:0 
+  at UnityEditor.Search.SearchInit.IndexationOnStartup () [0x0000c] in <8bfcebed71804a0bbd899b4f1cf32116>:0 
+  at UnityEditor.EditorApplication.Internal_CallDelayFunctions () [0x0002c] in <bc66d607b6974f3a8652f3c90b953d89>:0 
+
+Created GICache directory at C:/Users/yue/AppData/LocalLow/Unity/Caches/GiCache. Took: 0.027s, timestamps: [4.005 - 4.032]
+[Licensing::Client] Successfully resolved entitlement details
+AUDIT CAPTURE hero/01_hangar_game_camera colors=206
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:88)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT UI_CLICK DeployButton
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Click (string) (at Assets/Editor/ProjectAudit.cs:887)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:89)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/02_game_camera colors=264
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:98)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/idle_00 colors=368
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:103)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/idle_01 colors=362
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:103)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/idle_02 colors=364
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:103)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/idle_03 colors=366
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:103)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/idle_front colors=371
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:109)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/run_00 colors=360
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:113)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/run_01 colors=395
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:113)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/run_02 colors=395
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:113)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/run_03 colors=417
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:113)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/run_04 colors=401
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:113)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/run_05 colors=401
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:113)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/dash_00 colors=407
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:117)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/dash_01 colors=413
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:117)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/dash_02 colors=430
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:117)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/dash_03 colors=427
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:117)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/slash_PREVIEW_NOT_DAMAGE_00 colors=375
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:125)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/slash_PREVIEW_NOT_DAMAGE_01 colors=374
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:125)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/slash_PREVIEW_NOT_DAMAGE_02 colors=374
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:125)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/slash_PREVIEW_NOT_DAMAGE_03 colors=371
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:125)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/slash_PREVIEW_NOT_DAMAGE_04 colors=362
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:125)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/slash_PREVIEW_NOT_DAMAGE_05 colors=361
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:125)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/slash_PREVIEW_NOT_DAMAGE_06 colors=369
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:125)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/cannon_00 colors=389
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:140)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/cannon_01 colors=381
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:140)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/cannon_02 colors=382
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:140)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/cannon_03 colors=382
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:140)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/cannon_04 colors=381
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:140)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/salvo_00 colors=387
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:143)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/salvo_01 colors=389
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:143)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/salvo_02 colors=395
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:143)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/salvo_03 colors=398
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:143)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/hit_00 colors=333
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:152)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/hit_01 colors=328
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:152)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/hit_02 colors=350
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:152)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/death_00 colors=356
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:178)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/death_01 colors=358
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:178)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/death_02 colors=355
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:178)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+AUDIT CAPTURE hero/death_03 colors=356
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ProjectAudit:Record (string) (at Assets/Editor/ProjectAudit.cs:968)
+ProjectAudit:Capture (string,int,int,System.Nullable`1<UnityEngine.Rect>,bool) (at Assets/Editor/ProjectAudit.cs:938)
+HeroVisualAudit:Capture (string) (at Assets/Editor/HeroVisualAudit.cs:236)
+HeroVisualAudit/<Sequence>d__22:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:199)
+HeroVisualAudit/<Scenarios>d__21:MoveNext () (at Assets/Editor/HeroVisualAudit.cs:178)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/ProjectAudit.cs Line: 968)
+
+HERO_AUDIT_FINISHED code=0 runtimeErrors=0 existingEditorSearchErrors=1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+HeroVisualAudit:Finish (string) (at Assets/Editor/HeroVisualAudit.cs:271)
+HeroVisualAudit:Tick () (at Assets/Editor/HeroVisualAudit.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+(Filename: Assets/Editor/HeroVisualAudit.cs Line: 271)
+
+Request timed out while processing request "https://public-cdn.cloud.unity3d.com/config/production", HTTP error code 0
+.[UnityConnect] Request timed out.
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-yue-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-yue channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+Checking for leaked weakptr:
+  Found no leaked weakptrs.
+[Package Manager] Server process was shutdown
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1788615170699,"processId":14636,"allocatedMemory":10286212,"memoryLabels":[{"Default":29313},{"Permanent":15236},{"NewDelete":68769},{"Thread":4237960},{"Manager":36844},{"VertexData":8},{"Geometry":816},{"Texture":296},{"Shader":79333},{"Material":24},{"GfxDevice":59832},{"Animation":392},{"Audio":2664},{"FreeType":8},{"FontEngine":736},{"Physics":2146},{"Physics2D":16},{"Serialization":720},{"Input":14984},{"JobScheduler":33024},{"TextLib":216},{"Mono":32},{"ScriptingNativeRuntime":155060},{"BaseObject":1620208},{"Resource":1336},{"Renderer":3000},{"Transform":4685},{"File":3941},{"WebCam":616},{"Culling":32},{"Terrain":11394},{"Wind":24},{"STL":40},{"String":14706},{"DynamicArray":93477},{"HashMap":49762},{"Utility":2661910},{"Curl":1712},{"PoolAlloc":2056},{"AI":80},{"TypeTree":5341},{"ScriptManager":512},{"RuntimeInitializeOnLoadManager":64},{"SpriteAtlas":112},{"GI":7792},{"Director":8240},{"CloudService":8640},{"WebRequest":808},{"VR":47994},{"SceneManager":504},{"Video":208},{"LazyScriptCache":32},{"Camera":17},{"Secure":2377},{"SerializationCache":1576},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57888},{"StaticSafetyDebugInfo":278528},{"Analytics":384},{"Hierarchy":608},{"CoreStats":13112},{"Identifiers":6480},{"Gui":96},{"EditorUtility":105502},{"VersionControl":4},{"Undo":947},{"AssetDatabase":474784},{"EditorGi":328},{"UnityConnect":29232},{"Upm":1896},{"AssetCompliance":64},{"DrivenProperties":72},{"LocalIPC":209},{"ProfilerEditor":9746},{"CoreBusinessMetrics":2859},{"Licensing":1232},{"AssetReference":32},{"IPCStream":32}]}

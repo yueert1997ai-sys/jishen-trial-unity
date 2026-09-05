@@ -8,6 +8,7 @@ Open `MECH_TRIAL.exe`. Keep the accompanying `_Data`, `MonoBleedingEdge`, DLLs a
 
 - Move: WASD or the on-screen left stick. Aim/fire are automatic at visible targets.
 - Dash: Space or the right dash control. Missile salvo: E or the salvo control.
+- Current polish: desktop FPS is uncapped (including after quality changes). Dash now launches quickly and eases out over the same distance, with body lean, gimballed twin thrusters and short boost wakes. Both sectors contain solid industrial buildings, pumps and cargo cover.
 - Pause: Escape or the pause control. Upgrades: click a card's Install button, or keys 1/2/3.
 - Settings: gear in the hangar, or Settings while paused. English/Chinese, master/music/effects volume, shake and quality are saved locally.
 - DEMO allows one sector/Boss-entry continue after defeat. Standard/Veteran do not. Return to hangar starts fresh.

@@ -1,20 +1,24 @@
 # 机神试炼 / MECH ROUGE
 
+最新一轮：工业建筑/泵站/货箱等实体场景模块、前快后缓的冲刺、身体前倾与双推进器喷流，桌面版取消 60fps 上限。主角模型、Build 强化和敌人数值未在此轮改动。见 [场景与冲刺交接](docs/INDUSTRIAL_DASH_HANDOFF.md)。本轮不是难度、Build 深度或最终美术品质验收。
+
 Unity 6 上帝视角机甲 Roguelite 作品原型。2026-09-05 当前源码已接通手机横屏操作、自动锁敌射击、两战区六场战斗、六次强化、两阶段 Boss 和一次存档续关。完整 Play Mode 实弹回归为 626.66 秒。打磨进度与最新验收以 [手机优先计划](docs/MOBILE_SLICE_PLAN.md) 为准，[项目审计](docs/AUDIT_2026-09-05.md) 保留改版前基线，不代表当前功能缺失。当前流程：
 
 `机库出击 -> 维修区三场（每场三选一）-> 反应堆区三场（每场三选一）-> Boss -> 胜负结算 -> 续关一次或返回机库`
 
 现有内容包括原生绕障导航、分批增援、动态火花烟尘、池化弹药、成品音效和流式配乐。中英文、音量/震动/画质设置已通过 Play Mode 验证。真实手机多点触控、真人难度和人耳听感仍待评审。测试证据分别位于 `mobile-01`、`maintenance-02`、`progression-03`、`presentation-04`，素材来源见 `docs/ASSET_PROVENANCE.md`。
 
-本轮只替换主角和适配动画：现用 joney_lol 的 Rigged robot（CC BY 3.0）及 Quaternius CC0 动作，旧 Meshy 模型保留回退。详见 [主角交接](docs/HERO_MODEL_HANDOFF.md) 和 [真实动作截图](docs/HERO_ACTION_EVIDENCE.md)。当前战斗仍是自动炮击，**没有可玩的挥刀伤害或连击系统**；挥刀片段只通过了独立动画预览，不能把它当成刀战验收。
+主角替换阶段：现用 joney_lol 的 Rigged robot（CC BY 3.0）及 Quaternius CC0 动作，旧 Meshy 模型保留回退。详见 [主角交接](docs/HERO_MODEL_HANDOFF.md) 和 [真实动作截图](docs/HERO_ACTION_EVIDENCE.md)。当前战斗仍是自动炮击，**没有可玩的挥刀伤害或连击系统**；挥刀片段只通过了独立动画预览，不能把它当成刀战验收。
 
 ## 直接试玩 Windows 版
 
 运行：
 
-`Builds/Windows/MECH_TRIAL_20260905.095954/MECH_TRIAL.exe`
+`Builds/Windows/MECH_TRIAL_20260905.133754/MECH_TRIAL.exe`
 
-这是新主角版，压缩包同名位于 `Builds/Windows/`，约 48.3 MiB。保留完整目录即可运行，详见包内 `START_HERE.md`。构建与最终 Player 回放均为 0 Error / 0 Warning；正常速度实弹通关 **622.88 秒、六次强化、500 次击破、Boss 两阶段、三次重开**。模型专项 Play Mode 证据在 `hero-01/`，最终发布版证据在 `hero-player-02/`。这是后台自动输入、完整场景/UI 离屏持续渲染测试，不等于真人试玩或手机性能验收。
+这是场景/冲刺/不限帧版，压缩包同名位于 `Builds/Windows/`，约 50.7 MiB。构建与最终 Player 回放均为 0 Error / 0 Warning；正常速度实弹通关 **608.77 秒、324 次冲刺、六次强化、498 次击破、Boss 两阶段、三次重开**。专项证据在 `industrial-01/`，最终发布版证据在 `industrial-player-02/`。桌面 `targetFrameRate=-1`、`vSyncCount=0`；后台 1080p 连续离屏渲染均值/P95 为 **1.245/1.505 ms**，最长帧 **56.096 ms**。这不是桌面呈现 FPS、手机性能或真人手感验收，不能宣称稳定 800fps 或完全无卡顿。见 [场景/冲刺动作截图](docs/INDUSTRIAL_DASH_EVIDENCE.md)。
+
+上一版主角构建 `MECH_TRIAL_20260905.095954` 和 48.3 MiB 压缩包保留；其 622.88 秒通关证据仍在 `hero-player-02/`，不是本轮不限帧性能结果。
 
 早上版本 `MECH_TRIAL_20260905.054835`、旧 `MECH_TRIAL_20260905` 和 `MECH_ROUGE_Demo` 均未覆盖。以下数字属于早上基线 `docs/audit-evidence/2026-09-05/player-04/`，不是本轮新主角的通关或性能结论：
 

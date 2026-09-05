@@ -1,0 +1,61 @@
+PASS desktop_uncapped_quality_0
+PASS desktop_uncapped_quality_1
+PASS four_active_buildings
+PASS building_geometry_upright_and_grounded_(-20.00, 0.00, -12.00)
+PASS building_geometry_upright_and_grounded_(-20.00, 0.00, 12.00)
+PASS building_geometry_upright_and_grounded_(20.00, 0.00, -12.00)
+PASS building_geometry_upright_and_grounded_(20.00, 0.00, 12.00)
+PASS drain_geometry_flat_(-4.40, 0.03, -18.00)
+PASS drain_geometry_flat_(-4.40, 0.03, -12.00)
+PASS drain_geometry_flat_(-4.40, 0.03, -6.00)
+PASS drain_geometry_flat_(-4.40, 0.03, 0.00)
+PASS drain_geometry_flat_(-4.40, 0.03, 6.00)
+PASS drain_geometry_flat_(-4.40, 0.03, 12.00)
+PASS drain_geometry_flat_(-4.40, 0.03, 18.00)
+PASS drain_geometry_flat_(4.40, 0.03, -18.00)
+PASS drain_geometry_flat_(4.40, 0.03, -12.00)
+PASS drain_geometry_flat_(4.40, 0.03, -6.00)
+PASS drain_geometry_flat_(4.40, 0.03, 0.00)
+PASS drain_geometry_flat_(4.40, 0.03, 6.00)
+PASS drain_geometry_flat_(4.40, 0.03, 12.00)
+PASS drain_geometry_flat_(4.40, 0.03, 18.00)
+PASS entry_on_nav_1_(-21.00, 0.00, 0.00)
+PASS entry_reaches_center_1_(-21.00, 0.00, 0.00)
+PASS entry_on_nav_1_(21.00, 0.00, 0.00)
+PASS entry_reaches_center_1_(21.00, 0.00, 0.00)
+PASS entry_on_nav_1_(0.00, 0.00, -21.00)
+PASS entry_reaches_center_1_(0.00, 0.00, -21.00)
+PASS entry_on_nav_1_(0.00, 0.00, 21.00)
+PASS entry_reaches_center_1_(0.00, 0.00, 21.00)
+PASS entry_on_nav_2_(-21.00, 0.00, 0.00)
+PASS entry_reaches_center_2_(-21.00, 0.00, 0.00)
+PASS entry_on_nav_2_(21.00, 0.00, 0.00)
+PASS entry_reaches_center_2_(21.00, 0.00, 0.00)
+PASS entry_on_nav_2_(0.00, 0.00, -21.00)
+PASS entry_reaches_center_2_(0.00, 0.00, -21.00)
+PASS entry_on_nav_2_(0.00, 0.00, 21.00)
+PASS entry_reaches_center_2_(0.00, 0.00, 21.00)
+PASS pump_blocks_fire
+PASS pump_has_route_around
+PASS dash_toward_cover_accepted
+PASS dash_stops_before_solid_pump
+PASS dash_presentation_attached
+PASS open_dash_accepted
+DASH_SAMPLE 3 pulse=0.9934139 chestLocal=(0.00, 2.05, 0.20)
+DASH_SAMPLE 9 pulse=1 chestLocal=(0.00, 1.92, 0.22)
+DASH_SAMPLE 18 pulse=1 chestLocal=(0.00, 1.92, 0.22)
+DASH_SAMPLE 32 pulse=0.2785715 chestLocal=(0.00, 2.02, 0.07)
+DASH_SAMPLE 47 pulse=0 chestLocal=(0.00, 2.29, 0.01)
+PASS body_action_and_twin_boost_wakes
+PASS dash_distance_unchanged_5m
+PASS dash_recovers_without_stuck_pose
+PASS cooldown_preserved
+PASS paused_bones_do_not_accumulate_offsets
+PASS dash_at_rate_30
+PASS same_5m_at_rate_30
+PASS dash_at_rate_60
+PASS same_5m_at_rate_60
+PASS dash_at_rate_240
+PASS same_5m_at_rate_240
+METHOD: actual Unity Play Mode; 1/120 fixed pose capture, not FPS evidence. Full uncapped Player replay is separate.
+INDUSTRIAL_AUDIT code=0 runtimeErrors=0 knownEditorErrors=1

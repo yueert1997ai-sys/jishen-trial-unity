@@ -6,6 +6,8 @@ Build with `DemoBuildPipeline.BuildMobileSlice` in Unity 6000.3.18f1. It creates
 
 Launch the executable with `-screen-fullscreen 0 -screen-width 1920 -screen-height 1080 -sliceAudit <absolute output directory>`. Add `-sliceAuditSmoke` for a 95-second first-sector smoke. `Start-Process -WindowStyle Hidden` keeps these automated runs off the user's desktop. Do not add `-nographics`.
 
+The industrial/dash revision additionally accepts `-sliceAuditDash`: queues real dash input on long route segments and counts successful dash events. Its diagnostic renderer has execution order 1000, after camera/rig/boost LateUpdate; regular gameplay does not instantiate the diagnostic. Reports record `targetFrameRate` and `vSyncCount`. Desktop is now uncapped, while older baseline reports below used a 60fps cap; they are not a controlled before/after speedup comparison.
+
 Without `-sliceAudit`, the diagnostic GameObject is never created. Normal game focus loss still clears input and pauses. The diagnostic explicitly opts into unfocused command replay, mutes only its in-memory master volume and does not save preferences. It does not send OS input.
 
 ## Measurement Boundaries
@@ -13,11 +15,17 @@ Without `-sliceAudit`, the diagnostic GameObject is never created. Normal game f
 - The full replay uses the same movement router, real auto-aim/automatic weapon/skill damage and uGUI raycast buttons as gameplay. Seed 5092026, rectangular movement route. No forced enemy kills, health cheats, time acceleration or continue in the full victory run. Only offered cards can be selected.
 - The hidden Windows window does not present a usable backbuffer on this machine. D3D12 `ScreenCapture` failed; D3D11 produced black PNGs. Those experiments are NOT rendering/performance passes.
 - The accepted renderer explicitly calls the actual scene camera and a screen-space UI camera every LateUpdate in the release Player, at 1920x1080, 4x MSAA. This runs the complete simulation and rendering workload continuously, not just isolated screenshot frames. Readback occurs after both cameras render. Every captured PNG must contain more than 100 sampled colors. No OS composition/presentation cost or physical display latency is measured.
-- `Time.unscaledDeltaTime` samples the full Player frame interval at a 60fps cap. Initial five combat seconds, transition setup, screenshot encoding and eight surrounding frames are excluded. The additional diagnostic camera/UI force-update work is included; these numbers are not a phone estimate or GPU-only time.
+- `Time.unscaledDeltaTime` samples the full Player frame interval. Older baselines used a 60fps cap; the new industrial/dash release is uncapped. Initial five combat seconds, transition setup, screenshot encoding and eight surrounding frames are excluded. The additional diagnostic camera/UI force-update work is included; these numbers are not a phone estimate or GPU-only time.
 - Unity's release `GC Allocated In Frame` ProfilerRecorder is unavailable in the tested build. The final harness probes Mono's `GC.GetAllocatedBytesForCurrentThread` with a known 4096-byte allocation before using it. The fallback measures main-thread deltas, including diagnostic work, excluding worker threads. An unavailable metric is never interpreted as zero allocation. `GC.CollectionCount(0)` is recorded separately.
 - Restart memory is sampled after explicit `Resources.UnloadUnusedAssets` and `GC.Collect`, first after combat return, then after three fresh scene reloads. This detects persistent accumulation, not natural-GC behavior or peak device memory. Tolerances: <16 MiB additional Unity allocations and <4 MiB additional managed heap across those three reloads; also require one GameManager and no enemies in the hangar.
 
 ## Evidence
+
+### Latest Industrial/Dash Release: 20260905.133754
+
+`audit-evidence/2026-09-05/industrial-player-02/player-report.json` / `Player.log`: successful full normal-speed live-fire replay **with repeated dash**, 608.766s, 324 dashes, six choices, 498 kills, both Boss phases, victory and three reloads; **0 errors / warnings**. Desktop policy is `targetFrameRate=-1`, `vSyncCount=0`. The build also reports zero errors/warnings. See [industrial handoff](INDUSTRIAL_DASH_HANDOFF.md) for reproducibility, package hash and focused collision/body-pose tests.
+
+484,140 timing samples, mean1.244583 / P951.504606 / max56.095806ms; 496,194 rendered frames, 17 nonblank screenshots. Rendering remains RTX4070Ti/D3D12, 1920x1080, 4xMSAA, continuously offscreen without OS presentation. This is not an 800fps display guarantee or a controlled speedup comparison against capped earlier builds. Max56ms means occasional long frames remain; no cause has been established. GC57 collections; allocated-byte counters unavailable. Reload memory stayed within existing tolerances. Physical-phone performance and human playfeel remain unverified.
 
 ### Latest Hero Release: 20260905.095954
 

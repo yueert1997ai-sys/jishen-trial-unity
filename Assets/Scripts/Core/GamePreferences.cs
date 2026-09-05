@@ -49,7 +49,9 @@ public static class GamePreferences
         QualitySettings.shadowDistance = Quality == 1 ? 65f : 35f;
         QualitySettings.lodBias = Quality == 1 ? 1.35f : 0.85f;
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
+        // Desktop is uncapped; phones follow their display refresh instead of Unity's 30fps default.
+        Application.targetFrameRate = Application.isMobilePlatform
+            ? Mathf.Max(60, Mathf.RoundToInt((float)Screen.currentResolution.refreshRateRatio.value)) : -1;
     }
 
     public static void Save()
