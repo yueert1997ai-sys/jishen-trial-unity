@@ -1,0 +1,17 @@
+{
+  "master": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\JishenTrial_ASSEMBLED_MASTER.blend",
+  "sha256": "f05388a289f682cf7d95d5e2b98970259c8127214dfcf235c6e76caaba4a3d7e",
+  "source_sha256": "dd743a9f7a3bca5c42d208ad7ec2b8e5822c4a028e0dbb526d84c84b2081dbce",
+  "design_iteration": "V3",
+  "mass_revision": 11,
+  "master_reopened": true,
+  "head_meshes_unchanged": 141,
+  "weapon_meshes_unchanged": 838,
+  "unchanged_objects_errors": [],
+  "knee_enclosures_preserved": true,
+  "new_thigh_meshes": 178,
+  "geometry_issues": [],
+  "game_candidate_unchanged": true,
+  "exports_run": false,
+  "validation_scope": "Static design, real front/side/detail renders and native geometry; full motion clearance not tested."
+}

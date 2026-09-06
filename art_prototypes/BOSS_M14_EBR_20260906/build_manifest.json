@@ -1,0 +1,28 @@
+{
+  "master": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\BOSS_M14_EBR_20260906\\BOSS_M14_EBR_MASTER.blend",
+  "mesh_objects": 564,
+  "separate_parts": 566,
+  "materials": [
+    "Gunmetal",
+    "Steel",
+    "DarkSteel",
+    "Chassis",
+    "Kydex",
+    "Polymer",
+    "GripRubber",
+    "Recess",
+    "Lettering"
+  ],
+  "scale_datum_m": 1.1252199999999999,
+  "reference_sha256": "cf27990732358053d5caf24e540afa2c2bb195c833109a5c4ccf655ec16cf2ef",
+  "editable_subassemblies": [
+    "EBR_RECEIVER",
+    "EBR_HANDGUARD",
+    "EBR_BARREL_EXTERIOR",
+    "EBR_IRON_SIGHTS",
+    "EBR_MAGAZINE",
+    "EBR_STOCK",
+    "EBR_GRIP"
+  ],
+  "boss_fit_status": "Pending target BOSS identification; unscaled native human-reference model."
+}

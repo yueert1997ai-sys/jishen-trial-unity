@@ -1,0 +1,18 @@
+{
+  "model": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE_E01_ELITE_20260906\\stage_01\\TYPE_E01_ELITE_STAGE01.blend",
+  "model_sha256": "ef4ad850c5b3df9886f4c5717822b8a67db47d2b12100c95ba15c7ef5c3c6d21",
+  "scene": "01 ELITE - editable corruption assembly",
+  "mesh_parts": 1304,
+  "missing_images": [],
+  "packed_images": 1,
+  "min_z": -0.0029999837279319763,
+  "max_z": 5.539673328399658,
+  "height_ratio": [
+    1.5,
+    1.5,
+    1.5
+  ],
+  "rigged": false,
+  "game_integrated": false,
+  "readback_passed": true
+}

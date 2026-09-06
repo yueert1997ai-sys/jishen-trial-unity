@@ -1,0 +1,20 @@
+{
+  "model_sha256": "fe94061e455d7a2653f0d622a78895bfc47dc91d95df44e0fe9569b346f2a2bc",
+  "renders": [
+    "3Q.png",
+    "BACK.png",
+    "FRONT.png",
+    "HEAD_3Q.png",
+    "HEAD_FRONT.png",
+    "HEAD_SIDE.png",
+    "LEFT.png",
+    "RIGHT.png"
+  ],
+  "review_sheets": [
+    "STAGE01_FOUR_VIEWS.jpg",
+    "STAGE01_HEAD_REVIEW.jpg",
+    "STAGE01_REFERENCE_COMPARISON.jpg"
+  ],
+  "status": "awaiting_user_approval",
+  "image_processing": "layout and resize only; Blender renders unretouched"
+}

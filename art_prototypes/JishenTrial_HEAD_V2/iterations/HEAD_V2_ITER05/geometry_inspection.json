@@ -1,0 +1,548 @@
+{
+  "file_reopened": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_HEAD_V2\\HEAD_V2.blend",
+  "primary_mesh_count": 22,
+  "materials": 1,
+  "raw_meshes": [
+    {
+      "object": "01_Crown_Central_Keel",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.00040428340435028076
+    },
+    {
+      "object": "02_Forehead_Armored_Wedge",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.00026837727637030184
+    },
+    {
+      "object": "03_Helmet_FrontoTemporal.R",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.00025696936063468456
+    },
+    {
+      "object": "03_Helmet_FrontoTemporal.L",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.000256969389738515
+    },
+    {
+      "object": "04_Rear_Head_Occipital_Armor",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.00040492339758202434
+    },
+    {
+      "object": "05_Inner_Chassis_Cranium_And_Cheek_Bearings",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.00020835288160014898
+    },
+    {
+      "object": "06_Outer_Armor_Brow.R",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.00015035882825031877
+    },
+    {
+      "object": "07_Orbital_Bed_With_Recessed_Cavity.R",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 4.596876533469185e-05
+    },
+    {
+      "object": "08_Inner_Optic_Clay_NoEmission.R",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 6.527139248646563e-06
+    },
+    {
+      "object": "06_Outer_Armor_Brow.L",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.000150358842802234
+    },
+    {
+      "object": "07_Orbital_Bed_With_Recessed_Cavity.L",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 4.596876897267066e-05
+    },
+    {
+      "object": "08_Inner_Optic_Clay_NoEmission.L",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 6.527139248646563e-06
+    },
+    {
+      "object": "09_Face_Mask_Independent_Faceted_Shield",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.00013493279402609915
+    },
+    {
+      "object": "10_Outer_Cheek_Armor.R",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.0001827250816859305
+    },
+    {
+      "object": "10_Outer_Cheek_Armor.L",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.0001827250816859305
+    },
+    {
+      "object": "11_Jaw_Chin_Armored_Cradle",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.001141244312748313
+    },
+    {
+      "object": "12_Short_Sensor_Fin_With_Keyed_Mount.R",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 4.158883530180901e-05
+    },
+    {
+      "object": "12_Short_Sensor_Fin_With_Keyed_Mount.L",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 4.158883530180901e-05
+    },
+    {
+      "object": "13_Central_Neck_Pitch_Joint",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.00018245317914988846
+    },
+    {
+      "object": "14_Low_Profile_Neck_Yaw_Ring",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 4.862360219703987e-05
+    },
+    {
+      "object": "15_Neck_Twin_Pitch_Supports",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.00020427191338967532
+    },
+    {
+      "object": "16_Neck_Armor_Collar",
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "min_face_area_m2": 0.00040472327964380383
+    }
+  ],
+  "evaluated_meshes": [
+    {
+      "object": "01_Crown_Central_Keel",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "02_Forehead_Armored_Wedge",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "03_Helmet_FrontoTemporal.R",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "03_Helmet_FrontoTemporal.L",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "04_Rear_Head_Occipital_Armor",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "05_Inner_Chassis_Cranium_And_Cheek_Bearings",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "06_Outer_Armor_Brow.R",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "07_Orbital_Bed_With_Recessed_Cavity.R",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "08_Inner_Optic_Clay_NoEmission.R",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "06_Outer_Armor_Brow.L",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "07_Orbital_Bed_With_Recessed_Cavity.L",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "08_Inner_Optic_Clay_NoEmission.L",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "09_Face_Mask_Independent_Faceted_Shield",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "10_Outer_Cheek_Armor.R",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "10_Outer_Cheek_Armor.L",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "11_Jaw_Chin_Armored_Cradle",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "12_Short_Sensor_Fin_With_Keyed_Mount.R",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "12_Short_Sensor_Fin_With_Keyed_Mount.L",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "13_Central_Neck_Pitch_Joint",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "14_Low_Profile_Neck_Yaw_Ring",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "15_Neck_Twin_Pitch_Supports",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    },
+    {
+      "object": "16_Neck_Armor_Collar",
+      "nonmanifold_edges": 0,
+      "zero_area_faces": 0
+    }
+  ],
+  "front_surface_probes": {
+    "FOREHEAD_CENTER": [
+      {
+        "object": "02_Forehead_Armored_Wedge",
+        "y_design_units": -0.33339,
+        "distance_m": 1.9133198261260986
+      },
+      {
+        "object": "05_Inner_Chassis_Cranium_And_Cheek_Bearings",
+        "y_design_units": -0.25339,
+        "distance_m": 1.9341174364089966
+      },
+      {
+        "object": "04_Rear_Head_Occipital_Armor",
+        "y_design_units": 0.3391,
+        "distance_m": 2.0881662368774414
+      }
+    ],
+    "FOREHEAD_R": [
+      {
+        "object": "03_Helmet_FrontoTemporal.R",
+        "y_design_units": -0.2252,
+        "distance_m": 1.9414479732513428
+      },
+      {
+        "object": "05_Inner_Chassis_Cranium_And_Cheek_Bearings",
+        "y_design_units": -0.15207,
+        "distance_m": 1.960460901260376
+      },
+      {
+        "object": "04_Rear_Head_Occipital_Armor",
+        "y_design_units": 0.29335,
+        "distance_m": 2.0762720108032227
+      }
+    ],
+    "OPTIC_R_INNER": [
+      {
+        "object": "08_Inner_Optic_Clay_NoEmission.R",
+        "y_design_units": -0.36327,
+        "distance_m": 1.905549168586731
+      },
+      {
+        "object": "07_Orbital_Bed_With_Recessed_Cavity.R",
+        "y_design_units": -0.35258,
+        "distance_m": 1.9083298444747925
+      },
+      {
+        "object": "05_Inner_Chassis_Cranium_And_Cheek_Bearings",
+        "y_design_units": 0.18837,
+        "distance_m": 2.0489768981933594
+      },
+      {
+        "object": "04_Rear_Head_Occipital_Armor",
+        "y_design_units": 0.32998,
+        "distance_m": 2.08579421043396
+      }
+    ],
+    "OPTIC_R_OUTER": [
+      {
+        "object": "08_Inner_Optic_Clay_NoEmission.R",
+        "y_design_units": -0.328,
+        "distance_m": 1.9147210121154785
+      },
+      {
+        "object": "07_Orbital_Bed_With_Recessed_Cavity.R",
+        "y_design_units": -0.31248,
+        "distance_m": 1.918756127357483
+      },
+      {
+        "object": "05_Inner_Chassis_Cranium_And_Cheek_Bearings",
+        "y_design_units": 0.14377,
+        "distance_m": 2.037381172180176
+      },
+      {
+        "object": "04_Rear_Head_Occipital_Armor",
+        "y_design_units": 0.33106,
+        "distance_m": 2.086076259613037
+      }
+    ],
+    "OPTIC_L_INNER": [
+      {
+        "object": "08_Inner_Optic_Clay_NoEmission.L",
+        "y_design_units": -0.36327,
+        "distance_m": 1.9055492877960205
+      },
+      {
+        "object": "07_Orbital_Bed_With_Recessed_Cavity.L",
+        "y_design_units": -0.35258,
+        "distance_m": 1.908329725265503
+      },
+      {
+        "object": "05_Inner_Chassis_Cranium_And_Cheek_Bearings",
+        "y_design_units": 0.14665,
+        "distance_m": 2.0381298065185547
+      },
+      {
+        "object": "04_Rear_Head_Occipital_Armor",
+        "y_design_units": 0.32998,
+        "distance_m": 2.08579421043396
+      }
+    ],
+    "OPTIC_L_OUTER": [
+      {
+        "object": "08_Inner_Optic_Clay_NoEmission.L",
+        "y_design_units": -0.328,
+        "distance_m": 1.9147212505340576
+      },
+      {
+        "object": "07_Orbital_Bed_With_Recessed_Cavity.L",
+        "y_design_units": -0.31248,
+        "distance_m": 1.9187562465667725
+      },
+      {
+        "object": "05_Inner_Chassis_Cranium_And_Cheek_Bearings",
+        "y_design_units": 0.05352,
+        "distance_m": 2.0139148235321045
+      },
+      {
+        "object": "04_Rear_Head_Occipital_Armor",
+        "y_design_units": 0.33106,
+        "distance_m": 2.086076259613037
+      }
+    ],
+    "MASK_RIDGE": [
+      {
+        "object": "09_Face_Mask_Independent_Faceted_Shield",
+        "y_design_units": -0.43646,
+        "distance_m": 1.8865211009979248
+      },
+      {
+        "object": "04_Rear_Head_Occipital_Armor",
+        "y_design_units": 0.22863,
+        "distance_m": 2.0594444274902344
+      }
+    ],
+    "BROW_CENTER": [
+      {
+        "object": "06_Outer_Armor_Brow.L",
+        "y_design_units": -0.50905,
+        "distance_m": 1.8676466941833496
+      },
+      {
+        "object": "06_Outer_Armor_Brow.R",
+        "y_design_units": -0.50905,
+        "distance_m": 1.8676468133926392
+      },
+      {
+        "object": "05_Inner_Chassis_Cranium_And_Cheek_Bearings",
+        "y_design_units": 0.14057,
+        "distance_m": 2.036548614501953
+      },
+      {
+        "object": "04_Rear_Head_Occipital_Armor",
+        "y_design_units": 0.33049,
+        "distance_m": 2.0859272480010986
+      }
+    ]
+  },
+  "landmarks_pixels": {
+    "HEAD_FRONT": {
+      "TOP": [
+        720.0,
+        249.88
+      ],
+      "ANTENNA ROOT": [
+        525.5,
+        407.43
+      ],
+      "FOREHEAD": [
+        720.0,
+        520.94
+      ],
+      "EYE LINE": [
+        592.52,
+        722.66
+      ],
+      "CHEEK WIDTH": [
+        415.5,
+        664.94
+      ],
+      "MASK TIP": [
+        720.0,
+        936.86
+      ],
+      "CHIN": [
+        720.0,
+        1026.04
+      ],
+      "REAR HEAD": [
+        720.0,
+        648.0
+      ]
+    },
+    "HEAD_SIDE": {
+      "TOP": [
+        618.35,
+        249.88
+      ],
+      "ANTENNA ROOT": [
+        731.01,
+        407.44
+      ],
+      "FOREHEAD": [
+        1001.22,
+        520.94
+      ],
+      "EYE LINE": [
+        1013.08,
+        722.66
+      ],
+      "CHEEK WIDTH": [
+        832.66,
+        664.94
+      ],
+      "MASK TIP": [
+        1062.21,
+        936.86
+      ],
+      "CHIN": [
+        1043.58,
+        1026.04
+      ],
+      "REAR HEAD": [
+        395.58,
+        648.0
+      ]
+    },
+    "HEAD_BACK": {
+      "TOP": [
+        720.0,
+        249.88
+      ],
+      "ANTENNA ROOT": [
+        914.5,
+        407.43
+      ],
+      "FOREHEAD": [
+        720.0,
+        520.94
+      ],
+      "EYE LINE": [
+        847.48,
+        722.66
+      ],
+      "CHEEK WIDTH": [
+        1024.5,
+        664.94
+      ],
+      "MASK TIP": [
+        720.0,
+        936.86
+      ],
+      "CHIN": [
+        720.0,
+        1026.04
+      ],
+      "REAR HEAD": [
+        720.0,
+        648.0
+      ]
+    },
+    "HEAD_3Q": {
+      "TOP": [
+        665.91,
+        243.95
+      ],
+      "ANTENNA ROOT": [
+        561.19,
+        448.79
+      ],
+      "FOREHEAD": [
+        869.66,
+        591.56
+      ],
+      "EYE LINE": [
+        768.04,
+        806.74
+      ],
+      "CHEEK WIDTH": [
+        522.15,
+        735.51
+      ],
+      "MASK TIP": [
+        902.11,
+        1006.2
+      ],
+      "CHIN": [
+        892.2,
+        1087.96
+      ],
+      "REAR HEAD": [
+        547.35,
+        577.44
+      ]
+    }
+  },
+  "note": "Ray probes and manifold checks are mechanical evidence; aesthetic review remains visual."
+}

@@ -1,0 +1,26 @@
+{
+  "model_sha256": "e46d656120e32de59e979fb99377bee719aecfadec4b68575d3330fe4560100f",
+  "raw_renders": [
+    "3Q.png",
+    "BACK.png",
+    "BACKPACK_DETAIL.png",
+    "BODY_DETAIL.png",
+    "FRONT.png",
+    "HEAD_3Q.png",
+    "HEAD_FRONT.png",
+    "HEAD_SIDE.png",
+    "LEFT.png",
+    "RIFLE_3Q.png",
+    "RIFLE_SIDE.png",
+    "RIGHT.png"
+  ],
+  "review_boards": [
+    "STAGE02_ASSEMBLY_REVIEW.jpg",
+    "STAGE02_EQUIPMENT_REVIEW.jpg",
+    "STAGE02_FOUR_VIEWS.jpg",
+    "STAGE02_HEAD_COMPARISON.jpg",
+    "STAGE02_HEAD_REVIEW.jpg"
+  ],
+  "status": "awaiting user approval at stage 02",
+  "image_processing": "layout, resize and crop only; no retouching of rendered geometry"
+}

@@ -1,0 +1,19 @@
+{
+  "source_master": "stage_09/ASSEMBLED.blend",
+  "before_lod_triangles": 211916,
+  "collapse_ratio_mechanics": 0.5303163165452998,
+  "protected_armor_optics_and_thin_details_triangles": 54542,
+  "triangles": 137706,
+  "meshes": 108,
+  "by_family": {
+    "Armor": 23666,
+    "Mechanics": 105602,
+    "Weapon": 6270,
+    "Sensor": 1288,
+    "Beam": 880
+  },
+  "topology_issues": [],
+  "microscopic_triangulation_cleanup": [
+    "LOD0_Backpack_Outer_Fold_Pivot.L_Armor"
+  ]
+}

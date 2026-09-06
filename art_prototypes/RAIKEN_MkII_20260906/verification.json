@@ -1,0 +1,96 @@
+{
+  "native_game": {
+    "meshes": 12,
+    "triangles": 69724,
+    "min": [
+      -3.2839438915252686,
+      -0.0930665135383606,
+      -0.3715515434741974
+    ],
+    "max": [
+      0.23579230904579163,
+      0.0930665135383606,
+      0.3824443519115448
+    ],
+    "materials": [
+      "RAIKEN_01_Cobalt_Armor",
+      "RAIKEN_02_Deep_Navy",
+      "RAIKEN_03_Gunmetal_Panels",
+      "RAIKEN_04_Machined_Titanium",
+      "RAIKEN_05_Inner_Frame",
+      "RAIKEN_06_Recess_And_Grip",
+      "RAIKEN_07_Brass_Fasteners",
+      "RAIKEN_08_Cyan_Emitter",
+      "RAIKEN_09_Beam_Sheath",
+      "RAIKEN_10_Beam_Core",
+      "RAIKEN_11_Identification"
+    ]
+  },
+  "beam_switch": {
+    "beam_hidden_when_off": true,
+    "solid_visible_when_off": true,
+    "beam_meshes": 2,
+    "solid_meshes": 10
+  },
+  "fbx": {
+    "meshes": 12,
+    "triangles": 69724,
+    "min": [
+      -3.2839438915252686,
+      -0.09306652843952179,
+      -0.3715515434741974
+    ],
+    "max": [
+      0.23579230904579163,
+      0.09306652843952179,
+      0.3824443519115448
+    ],
+    "materials": [
+      "RAIKEN_01_Cobalt_Armor.001",
+      "RAIKEN_02_Deep_Navy.001",
+      "RAIKEN_03_Gunmetal_Panels.001",
+      "RAIKEN_04_Machined_Titanium.001",
+      "RAIKEN_05_Inner_Frame.001",
+      "RAIKEN_06_Recess_And_Grip.001",
+      "RAIKEN_07_Brass_Fasteners.001",
+      "RAIKEN_08_Cyan_Emitter.001",
+      "RAIKEN_09_Beam_Sheath.001",
+      "RAIKEN_10_Beam_Core.001",
+      "RAIKEN_11_Identification.001"
+    ],
+    "bounds_error_m": 1.4901161193847656e-08,
+    "has_beam_group": true,
+    "has_tip_socket": true
+  },
+  "glb": {
+    "meshes": 12,
+    "triangles": 69724,
+    "min": [
+      -3.2839438915252686,
+      -0.0930665135383606,
+      -0.3715515434741974
+    ],
+    "max": [
+      0.23579230904579163,
+      0.0930665135383606,
+      0.3824443519115448
+    ],
+    "materials": [
+      "RAIKEN_01_Cobalt_Armor.001",
+      "RAIKEN_02_Deep_Navy.001",
+      "RAIKEN_03_Gunmetal_Panels.001",
+      "RAIKEN_04_Machined_Titanium.001",
+      "RAIKEN_05_Inner_Frame.001",
+      "RAIKEN_06_Recess_And_Grip.001",
+      "RAIKEN_07_Brass_Fasteners.001",
+      "RAIKEN_08_Cyan_Emitter.001",
+      "RAIKEN_09_Beam_Sheath.001",
+      "RAIKEN_10_Beam_Core.001",
+      "RAIKEN_11_Identification.001"
+    ],
+    "bounds_error_m": 0.0,
+    "has_beam_group": true,
+    "has_tip_socket": true
+  },
+  "passed": true
+}

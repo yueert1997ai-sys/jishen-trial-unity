@@ -1,0 +1,329 @@
+{
+  "file_sha256": {
+    "VALKYR_GAME_DEMO.blend": "6ba3ae6d8521b19a11cf08dad4bfc915d65bd599aebc66fbd96389a7aa13ae33",
+    "exports\\VALKYR_GAME_DEMO.fbx": "58ee5aff40006360fe4a721a680e148404b9d8e7de9cbcb24f1d69ff1a6972f0",
+    "exports\\VALKYR_GAME_DEMO.glb": "ebf4cdc4eeff36df6dbeef273e33bd88265998502f3ef79ba5c3809b4ef8f8e8"
+  },
+  "master_control_mesh": {
+    "meshes": 2021,
+    "triangles": 116166,
+    "polygons": 50659,
+    "materials": [
+      "01_Painted_Military_Navy",
+      "05_Black_Mechanical_Frame",
+      "V3B_beam",
+      "V3B_beam_core",
+      "V3B_edge",
+      "V3B_mark",
+      "V3B_panel",
+      "V3B_titanium",
+      "V3B_white",
+      "V3H_01_Valkyr_Blue",
+      "V3H_02_Deep_Blue",
+      "V3H_04_Gunmetal_Armor",
+      "V3H_05_Machined_Rim",
+      "V3H_06_Inner_Frame",
+      "V3H_07_Optical_Well",
+      "V3H_08_Antenna_Gold",
+      "V3H_09_Cyan_Sensor",
+      "V3H_10_Cyan_Core",
+      "V3H_11_Seals"
+    ],
+    "bounds_m": [
+      [
+        -1.0699940919876099,
+        -0.6404211521148682,
+        0.0
+      ],
+      [
+        1.0426092147827148,
+        0.6580402255058289,
+        3.4956393241882324
+      ]
+    ],
+    "missing_uv": [],
+    "uv_outside_0_1": 0,
+    "topology_issues": []
+  },
+  "master_source_identity": true,
+  "demo_native": {
+    "meshes": 108,
+    "triangles": 137706,
+    "polygons": 137706,
+    "materials": [
+      "VALKYR_DEMO_Armor",
+      "VALKYR_DEMO_Beam",
+      "VALKYR_DEMO_Mechanics",
+      "VALKYR_DEMO_Sensor",
+      "VALKYR_DEMO_Weapon"
+    ],
+    "bounds_m": [
+      [
+        -1.0693670511245728,
+        -0.6383816003799438,
+        0.0
+      ],
+      [
+        1.0402723550796509,
+        0.6576934456825256,
+        3.4954018592834473
+      ]
+    ],
+    "missing_uv": [],
+    "uv_outside_0_1": 0,
+    "topology_issues": []
+  },
+  "demo_images": [
+    {
+      "name": "VALKYR_Armor_BaseColor",
+      "size": [
+        4096,
+        4096
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Armor_Metallic",
+      "size": [
+        4096,
+        4096
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Armor_Normal",
+      "size": [
+        4096,
+        4096
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Armor_Roughness",
+      "size": [
+        4096,
+        4096
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Mechanics_BaseColor",
+      "size": [
+        2048,
+        2048
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Mechanics_Metallic",
+      "size": [
+        2048,
+        2048
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Mechanics_Normal",
+      "size": [
+        2048,
+        2048
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Mechanics_Roughness",
+      "size": [
+        2048,
+        2048
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Weapon_BaseColor",
+      "size": [
+        2048,
+        2048
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Weapon_Metallic",
+      "size": [
+        2048,
+        2048
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Weapon_Normal",
+      "size": [
+        2048,
+        2048
+      ],
+      "packed": true
+    },
+    {
+      "name": "VALKYR_Weapon_Roughness",
+      "size": [
+        2048,
+        2048
+      ],
+      "packed": true
+    }
+  ],
+  "demo_native_beam_switch_pass": true,
+  "fbx_reimport": {
+    "meshes": 108,
+    "triangles": 137706,
+    "polygons": 137706,
+    "materials": [
+      "VALKYR_DEMO_Armor",
+      "VALKYR_DEMO_Beam",
+      "VALKYR_DEMO_Mechanics",
+      "VALKYR_DEMO_Sensor",
+      "VALKYR_DEMO_Weapon"
+    ],
+    "bounds_m": [
+      [
+        -1.0693670511245728,
+        -0.6383816003799438,
+        -7.587513550788572e-08
+      ],
+      [
+        1.0402723550796509,
+        0.6576937437057495,
+        3.4954018592834473
+      ]
+    ],
+    "missing_uv": [],
+    "uv_outside_0_1": 0,
+    "topology_issues": []
+  },
+  "fbx_bounds_max_error_m": 2.980232238769531e-07,
+  "fbx_loaded_images": [
+    {
+      "name": "VALKYR_Armor_BaseColor",
+      "size": [
+        4096,
+        4096
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Armor_Metallic",
+      "size": [
+        4096,
+        4096
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Armor_Normal",
+      "size": [
+        4096,
+        4096
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Armor_Roughness",
+      "size": [
+        4096,
+        4096
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Mechanics_BaseColor",
+      "size": [
+        2048,
+        2048
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Mechanics_Metallic",
+      "size": [
+        2048,
+        2048
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Mechanics_Normal",
+      "size": [
+        2048,
+        2048
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Mechanics_Roughness",
+      "size": [
+        2048,
+        2048
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Weapon_BaseColor",
+      "size": [
+        2048,
+        2048
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Weapon_Metallic",
+      "size": [
+        2048,
+        2048
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Weapon_Normal",
+      "size": [
+        2048,
+        2048
+      ],
+      "available": true
+    },
+    {
+      "name": "VALKYR_Weapon_Roughness",
+      "size": [
+        2048,
+        2048
+      ],
+      "available": true
+    }
+  ],
+  "glb_reimport": {
+    "meshes": 108,
+    "triangles": 137706,
+    "polygons": 137706,
+    "materials": [
+      "VALKYR_DEMO_Armor",
+      "VALKYR_DEMO_Beam",
+      "VALKYR_DEMO_Mechanics",
+      "VALKYR_DEMO_Sensor",
+      "VALKYR_DEMO_Weapon"
+    ],
+    "bounds_m": [
+      [
+        -1.0693670511245728,
+        -0.6383816003799438,
+        0.0
+      ],
+      [
+        1.0402723550796509,
+        0.6576933860778809,
+        3.4954018592834473
+      ]
+    ],
+    "missing_uv": [],
+    "uv_outside_0_1": 0,
+    "topology_issues": []
+  },
+  "glb_bounds_max_error_m": 5.960464477539063e-08
+}

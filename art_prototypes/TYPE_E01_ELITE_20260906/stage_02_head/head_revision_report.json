@@ -1,0 +1,12 @@
+{
+  "model": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE_E01_ELITE_20260906\\stage_02_head\\TYPE_E01_ELITE_HEAD_R02.blend",
+  "base": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE_E01_ELITE_20260906\\stage_01\\TYPE_E01_ELITE_STAGE01.blend",
+  "base_sha256": "ef4ad850c5b3df9886f4c5717822b8a67db47d2b12100c95ba15c7ef5c3c6d21",
+  "base_unchanged": true,
+  "other_geometry_unchanged": true,
+  "head_meshes": 191,
+  "removed_head_objects": 99,
+  "rigged": false,
+  "game_integrated": false,
+  "user_feedback": "Head looked unnatural, too white, insufficiently ruined or evil, and dull. Head rebuilt."
+}

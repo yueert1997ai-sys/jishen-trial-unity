@@ -1,0 +1,1520 @@
+{
+  "iteration": 7,
+  "body_unchanged": true,
+  "body_objects_compared": 1655,
+  "body_changed": [],
+  "head_mesh_curve_objects": 135,
+  "head_evaluated_triangles": 32680,
+  "nonmanifold_parts": [
+    {
+      "name": "V3H_Rear_Neck_Power_Loom.L",
+      "triangles": 588,
+      "nonmanifold_edges": 32,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.015983156859874725,
+      "modifiers": []
+    },
+    {
+      "name": "V3H_Rear_Neck_Power_Loom.R",
+      "triangles": 588,
+      "nonmanifold_edges": 32,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.015983158722519875,
+      "modifiers": []
+    }
+  ],
+  "degenerate_parts": [],
+  "head_bounds_m": [
+    [
+      -0.15822309255599976,
+      -0.15221677720546722,
+      2.9763998985290527
+    ],
+    [
+      0.1582229733467102,
+      0.15595631301403046,
+      3.360269546508789
+    ]
+  ],
+  "parts": [
+    {
+      "name": "V3H_Cranial_Frame",
+      "triangles": 344,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.21119999885559082,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Spine_00",
+      "triangles": 220,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.033916816115379333,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Spine_01",
+      "triangles": 220,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.06430435180664062,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Spine_02",
+      "triangles": 220,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.01408243179321289,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Spine_03",
+      "triangles": 220,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.027880430221557617,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Spine_04",
+      "triangles": 220,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.035860300064086914,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Spine_05",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.02326694130897522,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Inner_Rail.L",
+      "triangles": 116,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.03311089426279068,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Fronto_Temporal_Shell.L",
+      "triangles": 216,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.09565749764442444,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Upper_Leaf.L",
+      "triangles": 144,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0616750568151474,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Frontal_Lower_Leaf.L",
+      "triangles": 152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.07278789579868317,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Inner_Forehead_Leaf.L",
+      "triangles": 116,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.029684368520975113,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Swept_Crown_Crest.L",
+      "triangles": 148,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0414431095123291,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Occipital_Upper_Overlap.L",
+      "triangles": 132,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.06251568347215652,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Occipital_Middle_Overlap.L",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0631585344672203,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Occipital_Lower_Overlap.L",
+      "triangles": 78,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.054329998791217804,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Nape_Floating_Shingle.L",
+      "triangles": 64,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.048698000609874725,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Mount_Base.L",
+      "triangles": 572,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.02279999852180481,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Bearing_Rim.L",
+      "triangles": 1152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.004799999296665192,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Bearing_Cap.L",
+      "triangles": 572,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.004799999296665192,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Cap_Seal.L",
+      "triangles": 1152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0009600073099136353,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Cap_Center.L",
+      "triangles": 380,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.001319989562034607,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Silver_Antenna.L",
+      "triangles": 116,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.056016579270362854,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Gold_Antenna_Root.L",
+      "triangles": 152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.047935813665390015,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Antenna_Leading_Root_Support.L",
+      "triangles": 42,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.02481222152709961,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Antenna_Root_Key.L",
+      "triangles": 136,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.02473118156194687,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Recessed_Orbital_Chassis.L",
+      "triangles": 300,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.05585134029388428,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Twin_Cyan_Optic.L",
+      "triangles": 120,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.02387351542711258,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Optic_Inner_Filament.L",
+      "triangles": 88,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.01803780347108841,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Chevron_Brow.L",
+      "triangles": 132,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.07881779968738556,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Brow_Lower_Gasket.L",
+      "triangles": 116,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.060995914041996,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Lower_Orbital_Rail.L",
+      "triangles": 116,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.05255389213562012,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Split_Face_Shield.L",
+      "triangles": 148,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.039739176630973816,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Chin_Spear.L",
+      "triangles": 124,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.014918706379830837,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Malar_Inner_Armor.L",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.04551105573773384,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Lateral_Cheek_Armor.L",
+      "triangles": 176,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.04670853912830353,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Cheek_Outer_Overlap.L",
+      "triangles": 132,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.04141811281442642,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Cheek_Gunmetal_Edge.L",
+      "triangles": 140,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0409492589533329,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Jaw_Internal_Yoke.L",
+      "triangles": 176,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.04864979162812233,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Jaw_Link_Pivot.L",
+      "triangles": 380,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.012000001966953278,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Jaw_Link_Pin.L",
+      "triangles": 284,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0011999979615211487,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Jaw_Actuator_Barrel.L",
+      "triangles": 284,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.01151999831199646,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Jaw_Actuator_Rod.L",
+      "triangles": 236,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.010781558230519295,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Inner_Rail.R",
+      "triangles": 116,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.03311089426279068,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Fronto_Temporal_Shell.R",
+      "triangles": 216,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.09565751254558563,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Upper_Leaf.R",
+      "triangles": 144,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0616750530898571,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Frontal_Lower_Leaf.R",
+      "triangles": 152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.07278789579868317,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Inner_Forehead_Leaf.R",
+      "triangles": 116,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.029684370383620262,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Swept_Crown_Crest.R",
+      "triangles": 148,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.04142594337463379,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Occipital_Upper_Overlap.R",
+      "triangles": 132,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.06251570582389832,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Occipital_Middle_Overlap.R",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0632331371307373,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Occipital_Lower_Overlap.R",
+      "triangles": 78,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.054255545139312744,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Nape_Floating_Shingle.R",
+      "triangles": 64,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.04869198054075241,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Mount_Base.R",
+      "triangles": 572,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.02279999852180481,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Bearing_Rim.R",
+      "triangles": 1152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.004799999296665192,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Bearing_Cap.R",
+      "triangles": 572,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.004799999296665192,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Cap_Seal.R",
+      "triangles": 1152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0009600073099136353,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Temporal_Cap_Center.R",
+      "triangles": 380,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.001319989562034607,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Silver_Antenna.R",
+      "triangles": 116,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.05601668357849121,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Gold_Antenna_Root.R",
+      "triangles": 152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.047935836017131805,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Antenna_Leading_Root_Support.R",
+      "triangles": 42,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0248260498046875,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Antenna_Root_Key.R",
+      "triangles": 136,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.024726346135139465,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Recessed_Orbital_Chassis.R",
+      "triangles": 300,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.05585134029388428,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Twin_Cyan_Optic.R",
+      "triangles": 120,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.023873507976531982,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Optic_Inner_Filament.R",
+      "triangles": 88,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.018037796020507812,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Chevron_Brow.R",
+      "triangles": 132,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0788176953792572,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Brow_Lower_Gasket.R",
+      "triangles": 116,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.060995906591415405,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Lower_Orbital_Rail.R",
+      "triangles": 116,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.05255389213562012,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Split_Face_Shield.R",
+      "triangles": 148,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.03973911702632904,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Chin_Spear.R",
+      "triangles": 124,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.014918697997927666,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Malar_Inner_Armor.R",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.04551103338599205,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Lateral_Cheek_Armor.R",
+      "triangles": 176,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.046708546578884125,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Cheek_Outer_Overlap.R",
+      "triangles": 132,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.04147349298000336,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Cheek_Gunmetal_Edge.R",
+      "triangles": 140,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.040954455733299255,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Jaw_Internal_Yoke.R",
+      "triangles": 176,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.04864979535341263,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Jaw_Link_Pivot.R",
+      "triangles": 380,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.012000001966953278,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Jaw_Link_Pin.R",
+      "triangles": 284,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0011999979615211487,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Jaw_Actuator_Barrel.R",
+      "triangles": 284,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.01151999831199646,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Jaw_Actuator_Rod.R",
+      "triangles": 236,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.010781558230519295,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Sensor_Recess",
+      "triangles": 132,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.022648483514785767,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Sensor_Rail.L",
+      "triangles": 144,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.009586378000676632,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Inner_Bezel.L",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0029922197572886944,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Sensor_Rail.R",
+      "triangles": 144,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.00958638172596693,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Inner_Bezel.R",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0029922197572886944,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Glass",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.008311733603477478,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Core",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.004797333851456642,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Lower_Sill",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.008211091160774231,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Service_Well",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.02379157394170761,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Service_Insert",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.01191653311252594,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Blue_Service_Spine",
+      "triangles": 384,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.022562697529792786,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Channel_Rail.L",
+      "triangles": 128,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.017990943044424057,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Outer_Shield.L",
+      "triangles": 136,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0202208012342453,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Nape_Fork.L",
+      "triangles": 136,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.039556946605443954,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Neck_Power_Loom.L",
+      "triangles": 588,
+      "nonmanifold_edges": 32,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.015983156859874725,
+      "modifiers": []
+    },
+    {
+      "name": "V3H_Rear_Loom_Clamp.L",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.007199995219707489,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Channel_Rail.R",
+      "triangles": 128,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.017990943044424057,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Outer_Shield.R",
+      "triangles": 136,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0202208012342453,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Nape_Fork.R",
+      "triangles": 136,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.03955693170428276,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Rear_Neck_Power_Loom.R",
+      "triangles": 588,
+      "nonmanifold_edges": 32,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.015983158722519875,
+      "modifiers": []
+    },
+    {
+      "name": "V3H_Rear_Loom_Clamp.R",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.007199995219707489,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Yaw_Upper_Seal",
+      "triangles": 1152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.007200002670288086,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Cardan_Pitch",
+      "triangles": 572,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.043199989944696426,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Pitch_Seat.L",
+      "triangles": 1152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.004799999296665192,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Cardan_Fork.L",
+      "triangles": 120,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.019632527604699135,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Front_Piston.L",
+      "triangles": 284,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.01563434675335884,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Front_Piston_Rod.L",
+      "triangles": 284,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.008524931967258453,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Cranium_Socket.L",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.011999845504760742,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Pitch_Seat.R",
+      "triangles": 1152,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.004799999296665192,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Cardan_Fork.R",
+      "triangles": 120,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.019642148166894913,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Front_Piston.R",
+      "triangles": 284,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.01563434675335884,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Front_Piston_Rod.R",
+      "triangles": 284,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.008524931967258453,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Cranium_Socket.R",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.011999845504760742,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Front_Flexible_Lamella_5",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.004439830780029297,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Front_Flexible_Lamella_11",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.004439830780029297,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Neck_Front_Flexible_Lamella_17",
+      "triangles": 108,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.004439830780029297,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Key_Lower.L",
+      "triangles": 220,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.00139695405960083,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Key_Lower.L_Socket",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0003932937979698181,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Key_Upper.L",
+      "triangles": 236,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0015881061553955078,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Key_Upper.L_Socket",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.000492095947265625,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Plate_Key.L",
+      "triangles": 220,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0015570521354675293,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Plate_Key.L_Socket",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0005146339535713196,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Cheek_Gunmetal_Key.L",
+      "triangles": 236,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.001527354121208191,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Cheek_Gunmetal_Key.L_Socket",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0005093589425086975,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Occipital_Key.L",
+      "triangles": 236,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0010242760181427002,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Occipital_Key.L_Socket",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.00022301077842712402,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Key_Lower.R",
+      "triangles": 220,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0013969466090202332,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Key_Lower.R_Socket",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0003932937979698181,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Key_Upper.R",
+      "triangles": 236,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0015881061553955078,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Crown_Key_Upper.R_Socket",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.000492095947265625,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Plate_Key.R",
+      "triangles": 220,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0015570446848869324,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Forehead_Plate_Key.R_Socket",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0005146339535713196,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Cheek_Gunmetal_Key.R",
+      "triangles": 236,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0015273243188858032,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Cheek_Gunmetal_Key.R_Socket",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0005093589425086975,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Occipital_Key.R",
+      "triangles": 236,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.0010242760181427002,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    },
+    {
+      "name": "V3H_Occipital_Key.R_Socket",
+      "triangles": 164,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "min_dimension_m": 0.00022302567958831787,
+      "modifiers": [
+        "BEVEL",
+        "WEIGHTED_NORMAL"
+      ]
+    }
+  ]
+}

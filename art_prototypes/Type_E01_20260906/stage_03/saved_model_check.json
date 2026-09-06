@@ -1,0 +1,14 @@
+{
+  "model": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\Type_E01_20260906\\stage_03\\TYPE_E01_STAGE03.blend",
+  "scenes": {
+    "01 NEUTRAL - editable assembly": 723,
+    "02 RIFLE READY - two hand pose": 609
+  },
+  "mesh_datablocks": 566,
+  "shared_mesh_datablocks": 566,
+  "missing_external_images": [],
+  "packed_references": 1,
+  "left_support_contact_error_m": 1.884864366154897e-07,
+  "L_sole_min_z": 0.0560000017285347,
+  "R_sole_min_z": 0.0560000017285347
+}

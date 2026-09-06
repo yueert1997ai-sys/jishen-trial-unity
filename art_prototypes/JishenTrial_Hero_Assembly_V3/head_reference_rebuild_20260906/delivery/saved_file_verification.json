@@ -1,0 +1,40 @@
+{
+  "assembled": {
+    "path": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\JishenTrial_ASSEMBLED_MASTER.blend",
+    "mesh_parts": 141,
+    "missing_uv": [],
+    "root_parent": "Head",
+    "packed_reference": true,
+    "head_renders_visible": true,
+    "cameras": 35
+  },
+  "standalone": {
+    "path": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\head_reference_rebuild_20260906\\delivery\\VALKYR_HEAD_MASTER.blend",
+    "mesh_parts": 141,
+    "missing_uv": [],
+    "root_parent": null,
+    "packed_reference": true,
+    "head_renders_visible": true,
+    "cameras": 8
+  },
+  "fbx_reimport": {
+    "meshes": 1,
+    "triangles": 33272,
+    "materials": 10,
+    "missing_uv": false,
+    "nonmanifold_edges": 0,
+    "max_bounds_error_m": 1.4901161193847656e-08,
+    "bounds_m": [
+      [
+        -0.15822309255599976,
+        -0.15221676230430603,
+        2.9763998985290527
+      ],
+      [
+        0.1582229733467102,
+        0.15595632791519165,
+        3.360269546508789
+      ]
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "iteration": 4,
+  "review_intent": "Extra visual iteration after ITER03 exposed backing penetration: enforce core inside forehead plane, recess full orbital carrier behind cheek and mask",
+  "crown_width": 1.0,
+  "temple_width": 1.0,
+  "forehead_width": 1.0,
+  "rear_depth": 1.0,
+  "eye_length": 0.97,
+  "eye_depth": 0.035,
+  "eye_inset": 0.058,
+  "mask_width": 0.90,
+  "mask_y": 0.014,
+  "cheek_width": 1.0,
+  "lower_face_factor": 0.74,
+  "brow_drop": 0.0,
+  "fin_height": 0.86,
+  "continuous_shell": true,
+  "buried_eyes": true,
+  "integrated_face": true,
+  "surface_order_fix": true,
+  "neck_ring_raise": 0.029,
+  "light_energy_factor": 0.26
+}

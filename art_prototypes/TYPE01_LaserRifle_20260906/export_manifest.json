@@ -1,0 +1,51 @@
+{
+  "source_sha256": "5ddff32197d6a8afb9bb8c7b81ce82e8d1c19f8c07bf4d12663b46ce0fbc858c",
+  "source_unchanged": true,
+  "mesh_subassemblies": 7,
+  "triangles": 302358,
+  "materials": 12,
+  "dimensions_m": [
+    0.8925527930259705,
+    0.07194262742996216,
+    0.26618364453315735
+  ],
+  "sockets": {
+    "SCK_AI_HARDPOINT": [
+      0.03132985532283783,
+      0.0,
+      0.10559321939945221
+    ],
+    "SCK_ENERGY_CELL": [
+      -0.14620599150657654,
+      0.0,
+      -0.0011603650636970997
+    ],
+    "SCK_MUZZLE": [
+      -0.6207953095436096,
+      0.0,
+      0.061499349772930145
+    ],
+    "SCK_PRIMARY_GRIP": [
+      0.013924380764365196,
+      0.0,
+      -0.05105606094002724
+    ],
+    "SCK_SUPPORT_GRIP": [
+      -0.3446284234523773,
+      0.0,
+      0.02668839693069458
+    ]
+  },
+  "geometry_decimation": false,
+  "surface_export": "Base PBR colors/roughness/metals/emission. Blender procedural micro-surface remains in editable master; not texture-baked.",
+  "exports": {
+    "TYPE01_LASER_RIFLE.fbx": {
+      "bytes": 8834604,
+      "sha256": "65ba4d60d9b8fc205d907f0f96a455e02f3bef569f218bce344ca244403f2053"
+    },
+    "TYPE01_LASER_RIFLE.glb": {
+      "bytes": 13112404,
+      "sha256": "4020bea9b53b67474c3336937a59c21a3aecf05c1c367631eb43de39c40f40c5"
+    }
+  }
+}

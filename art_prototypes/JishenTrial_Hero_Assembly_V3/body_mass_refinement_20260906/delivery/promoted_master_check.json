@@ -1,0 +1,14 @@
+{
+  "master": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\JishenTrial_ASSEMBLED_MASTER.blend",
+  "sha256": "dd743a9f7a3bca5c42d208ad7ec2b8e5822c4a028e0dbb526d84c84b2081dbce",
+  "reopened": true,
+  "mass_revision": 10,
+  "visible_meshes": 3144,
+  "approved_head_meshes_unchanged": 141,
+  "head_errors": [],
+  "export_status": "Modeling review only. User requested no new demo/FBX/GLB export. Existing game candidate predates this body revision.",
+  "head_and_joint_parent_hierarchy_retained": true,
+  "retained_rk_meshes": 838,
+  "retained_objects_errors": [],
+  "game_candidate_unchanged": true
+}

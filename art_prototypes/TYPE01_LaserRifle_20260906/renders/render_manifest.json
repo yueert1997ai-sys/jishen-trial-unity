@@ -1,0 +1,69 @@
+{
+  "source_sha256": "5ddff32197d6a8afb9bb8c7b81ce82e8d1c19f8c07bf4d12663b46ce0fbc858c",
+  "shots": [
+    {
+      "name": "HERO",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\renders\\HERO.png",
+      "resolution": [
+        3000,
+        1300
+      ]
+    },
+    {
+      "name": "SIDE",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\renders\\SIDE.png",
+      "resolution": [
+        3000,
+        1050
+      ]
+    },
+    {
+      "name": "REVERSE",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\renders\\REVERSE.png",
+      "resolution": [
+        3000,
+        1150
+      ]
+    },
+    {
+      "name": "TOP",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\renders\\TOP.png",
+      "resolution": [
+        3000,
+        850
+      ]
+    },
+    {
+      "name": "EMITTER",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\renders\\EMITTER.png",
+      "resolution": [
+        1600,
+        1100
+      ]
+    },
+    {
+      "name": "ENERGY_CELL",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\renders\\ENERGY_CELL.png",
+      "resolution": [
+        1700,
+        1250
+      ]
+    },
+    {
+      "name": "STOCK",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\renders\\STOCK.png",
+      "resolution": [
+        1600,
+        1150
+      ]
+    },
+    {
+      "name": "OPTIC",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\renders\\OPTIC.png",
+      "resolution": [
+        1700,
+        1000
+      ]
+    }
+  ]
+}

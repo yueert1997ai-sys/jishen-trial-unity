@@ -1,0 +1,21 @@
+{
+  "iteration": 3,
+  "review_intent": "After actual ITER02 review: integrate apertures in full orbital bed, close crown profile, taper internal jaw, attach continuous armor collar",
+  "crown_width": 1.0,
+  "temple_width": 1.0,
+  "forehead_width": 1.0,
+  "rear_depth": 1.0,
+  "eye_length": 0.97,
+  "eye_depth": 0.041,
+  "eye_inset": 0.058,
+  "mask_width": 0.90,
+  "mask_y": 0.014,
+  "cheek_width": 1.0,
+  "lower_face_factor": 0.74,
+  "brow_drop": 0.0,
+  "fin_height": 0.86,
+  "continuous_shell": true,
+  "buried_eyes": true,
+  "integrated_face": true,
+  "light_energy_factor": 0.26
+}

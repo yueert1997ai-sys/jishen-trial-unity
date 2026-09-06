@@ -1,0 +1,51 @@
+{
+  "source_sha256": "aeda7d658085d1af150c3157466440d5032b14a856f83ff2ac5511f12f42957e",
+  "source_unchanged": true,
+  "mesh_subassemblies": 7,
+  "triangles": 139982,
+  "materials": 9,
+  "dimensions_m": [
+    1.1252200603485107,
+    0.08972815424203873,
+    0.23517459630966187
+  ],
+  "sockets": {
+    "SCK_MAGAZINE": [
+      0.21527521312236786,
+      0.0,
+      0.0615072026848793
+    ],
+    "SCK_MUZZLE": [
+      0.8520556688308716,
+      0.0,
+      0.1248234435915947
+    ],
+    "SCK_PRIMARY_GRIP": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "SCK_STOCK_CONTACT": [
+      -0.2677372395992279,
+      0.0,
+      0.050652991980314255
+    ],
+    "SCK_SUPPORT_GRIP": [
+      0.3961787521839142,
+      0.0,
+      0.0814065933227539
+    ]
+  },
+  "geometry_decimation": false,
+  "surface_export": "Base PBR colors/roughness/metals/emission. Blender procedural micro-surface remains in editable master; not texture-baked.",
+  "exports": {
+    "BOSS_M14_EBR.fbx": {
+      "bytes": 4125548,
+      "sha256": "c7335e8b36ba61a1c3a4453272367ce24b94fe51270a12efe1645071c4749ddf"
+    },
+    "BOSS_M14_EBR.glb": {
+      "bytes": 6684348,
+      "sha256": "94de5b3e924aa5088956cb2886110d406ef9ecd7c5c88dfe09c7ba803204cbb9"
+    }
+  }
+}

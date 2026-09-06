@@ -1,0 +1,21 @@
+{
+  "mode": "GAME",
+  "source": "JishenTrial_GAME_CANDIDATE.blend",
+  "preserved_nonweapon_meshes": 105,
+  "nonweapon_mesh_data_and_materials_identical": true,
+  "old_weapon_parts_removed": 3,
+  "new_weapon_meshes": 12,
+  "grip_world": [
+    -1.4058995246887207,
+    -0.20510344207286835,
+    2.3659913539886475
+  ],
+  "tip_world": [
+    -3.876150131225586,
+    -0.46775609254837036,
+    0.2175438404083252
+  ],
+  "tip_above_ground": true,
+  "forearm_pose_degrees": 65,
+  "production_length_m": 3.519021739130435
+}

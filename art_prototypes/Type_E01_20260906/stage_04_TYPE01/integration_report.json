@@ -1,0 +1,1879 @@
+{
+  "model": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\Type_E01_20260906\\stage_04_TYPE01\\TYPE_E01_TYPE01_RIFLE_MASTER.blend",
+  "base": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\Type_E01_20260906\\stage_03\\TYPE_E01_STAGE03.blend",
+  "base_sha256": "df420002ff95d9c73dcb98c6cf63b03dab64fbde322780c29a098d4f418d69fb",
+  "source_weapon": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\TYPE01_LASER_RIFLE_MASTER.blend",
+  "source_sha256": "5ddff32197d6a8afb9bb8c7b81ce82e8d1c19f8c07bf4d12663b46ce0fbc858c",
+  "source_unchanged": true,
+  "body_geometry": {
+    "H02 neck bearing": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "H02 neck concentric seal": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "H02 neck column": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "H02 compact internal skull": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "H02 recessed tapered optical chassis": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R H02 angular facial rail": {
+      "vertices": 14,
+      "polygons": 13
+    },
+    "R H02 jaw side blade": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "R H02 ear isolation gasket": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "R H02 ear armored disc": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "R H02 ear recessed center": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "R H02 ear perimeter latch": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R H02 ear perimeter latch.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R H02 ear perimeter latch.002": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R H02 rear hinge recess": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R H02 small jaw pivot": {
+      "vertices": 48,
+      "polygons": 26
+    },
+    "R H02 flush screw 0": {
+      "vertices": 24,
+      "polygons": 14
+    },
+    "R H02 flush screw 1": {
+      "vertices": 24,
+      "polygons": 14
+    },
+    "R H02 flush screw 2": {
+      "vertices": 24,
+      "polygons": 14
+    },
+    "R H02 forehead narrow service slot": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L H02 angular facial rail": {
+      "vertices": 14,
+      "polygons": 13
+    },
+    "L H02 jaw side blade": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "L H02 ear isolation gasket": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "L H02 ear armored disc": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "L H02 ear recessed center": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "L H02 ear perimeter latch": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L H02 ear perimeter latch.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L H02 ear perimeter latch.002": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L H02 rear hinge recess": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L H02 small jaw pivot": {
+      "vertices": 48,
+      "polygons": 26
+    },
+    "L H02 flush screw 0": {
+      "vertices": 24,
+      "polygons": 14
+    },
+    "L H02 flush screw 1": {
+      "vertices": 24,
+      "polygons": 14
+    },
+    "L H02 flush screw 2": {
+      "vertices": 24,
+      "polygons": 14
+    },
+    "L H02 forehead narrow service slot": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "H02 narrowed chin bridge": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "H02 monoeye deep socket": {
+      "vertices": 256,
+      "polygons": 256
+    },
+    "H02 inner dark lens rim": {
+      "vertices": 256,
+      "polygons": 256
+    },
+    "H02 red recessed lens": {
+      "vertices": 128,
+      "polygons": 66
+    },
+    "H02 red optical dome": {
+      "vertices": 762,
+      "polygons": 800
+    },
+    "H02 lower face dark intake": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "H02 inset intake vane": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "H02 inset intake vane.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "H02 rear nape armored insert": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "H02 antenna shoe": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "H02 single short antenna": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "H02 continuous swept helmet crown": {
+      "vertices": 208,
+      "polygons": 176
+    },
+    "H02 inset planar forehead shield": {
+      "vertices": 16,
+      "polygons": 14
+    },
+    "Torso internal hexagonal chassis": {
+      "vertices": 24,
+      "polygons": 18
+    },
+    "R pectoral armor lobe": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R chest side wrap": {
+      "vertices": 7,
+      "polygons": 10
+    },
+    "R collar armored support": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R abdominal side inner guard": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L pectoral armor lobe": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L chest side wrap": {
+      "vertices": 7,
+      "polygons": 10
+    },
+    "L collar armored support": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L abdominal side inner guard": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "Waist central actuator": {
+      "vertices": 16,
+      "polygons": 10
+    },
+    "Abdominal armored segmented block": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "Abdominal armored segmented block.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "Abdominal armored segmented block.002": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "Pelvis internal frame": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "Central armored pelvis apron": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R front waist flare": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R hip side armor": {
+      "vertices": 6,
+      "polygons": 8
+    },
+    "R rear waist plate": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L front waist flare": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L hip side armor": {
+      "vertices": 6,
+      "polygons": 8
+    },
+    "L rear waist plate": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R shoulder rotary joint": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "R broad clipped shoulder shell | recessed frame": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R shoulder inner top mount": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R upper arm internal frame": {
+      "vertices": 48,
+      "polygons": 26
+    },
+    "R upper arm armor | recessed frame": {
+      "vertices": 16,
+      "polygons": 10
+    },
+    "R elbow transverse hinge": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "R elbow outer dark ring": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "R elbow end cap": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "R forearm inner frame": {
+      "vertices": 48,
+      "polygons": 26
+    },
+    "R long tapered forearm shell | recessed frame": {
+      "vertices": 24,
+      "polygons": 18
+    },
+    "R wrist": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "L shoulder rotary joint": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "L broad clipped shoulder shell | recessed frame": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L shoulder inner top mount": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L upper arm internal frame": {
+      "vertices": 48,
+      "polygons": 26
+    },
+    "L upper arm armor | recessed frame": {
+      "vertices": 16,
+      "polygons": 10
+    },
+    "L elbow transverse hinge": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "L elbow outer dark ring": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "L elbow end cap": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "L forearm inner frame": {
+      "vertices": 48,
+      "polygons": 26
+    },
+    "L long tapered forearm shell | recessed frame": {
+      "vertices": 24,
+      "polygons": 18
+    },
+    "L wrist": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "R hip axis": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "R thigh structural core": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "R long thigh primary armor | recessed frame": {
+      "vertices": 24,
+      "polygons": 18
+    },
+    "R knee bearing axle": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "R knee outer steel bearing": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "R knee outer inset": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "R knee armored frontal cap": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R shin rear structural strut": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "R exposed ankle axis": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "R ankle outer cover": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "R broad dark boot sole": {
+      "vertices": 10,
+      "polygons": 16
+    },
+    "R white sloped foot instep": {
+      "vertices": 10,
+      "polygons": 16
+    },
+    "R boot dark toe cap": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R square boot heel": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R slanted ankle front cuff": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R ankle outer pentagonal cap": {
+      "vertices": 10,
+      "polygons": 7
+    },
+    "L hip axis": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "L thigh structural core": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "L long thigh primary armor | recessed frame": {
+      "vertices": 24,
+      "polygons": 18
+    },
+    "L knee bearing axle": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "L knee outer steel bearing": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "L knee outer inset": {
+      "vertices": 96,
+      "polygons": 50
+    },
+    "L knee armored frontal cap": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L shin rear structural strut": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "L exposed ankle axis": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "L ankle outer cover": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "L broad dark boot sole": {
+      "vertices": 10,
+      "polygons": 16
+    },
+    "L white sloped foot instep": {
+      "vertices": 10,
+      "polygons": 16
+    },
+    "L boot dark toe cap": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L square boot heel": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L slanted ankle front cuff": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L ankle outer pentagonal cap": {
+      "vertices": 10,
+      "polygons": 7
+    },
+    "B02 central breastplate folded panels": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "Chest recessed fixing dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "Chest recessed fixing hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "Chest recessed fixing dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "Chest recessed fixing hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "Chest recessed fixing dark seating.002": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "Chest recessed fixing hex head.002": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "Chest recessed fixing dark seating.003": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "Chest recessed fixing hex head.003": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "Chest recessed fixing dark seating.004": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "Chest recessed fixing hex head.004": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "Chest recessed fixing dark seating.005": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "Chest recessed fixing hex head.005": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "B02 collar central armor lip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "B02 collar continuous dark support": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R pectoral fastener dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R pectoral fastener hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R pectoral fastener dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R pectoral fastener hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R pectoral fastener dark seating.002": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R pectoral fastener hex head.002": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R oblique abdominal piston": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R abdominal polished piston rod": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R waist side rib": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R waist side rib.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R waist side rib.002": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R hip armor fixing dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R hip armor fixing hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R hip armor fixing dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R hip armor fixing hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R hip top seam insert": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L pectoral fastener dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L pectoral fastener hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L pectoral fastener dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L pectoral fastener hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L pectoral fastener dark seating.002": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L pectoral fastener hex head.002": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L oblique abdominal piston": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L abdominal polished piston rod": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L waist side rib": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L waist side rib.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L waist side rib.002": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L hip armor fixing dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L hip armor fixing hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L hip armor fixing dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L hip armor fixing hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L hip top seam insert": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "B02 abdomen center dark service insert": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "B02 front apron service screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "B02 front apron service screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 shoulder broad front armor": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 shoulder rear armor": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 shoulder top return": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "R B02 shoulder outer upper lip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 shoulder outer lower return": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 shoulder vent dark recess": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 shoulder vent blade 0": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 shoulder vent blade 1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 shoulder vent blade 2": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 shoulder vent blade 3": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R shoulder armor fastener 0 dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R shoulder armor fastener 0 hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R shoulder armor fastener 1 dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R shoulder armor fastener 1 hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R shoulder armor fastener 3 dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R shoulder armor fastener 3 hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R shoulder armor fastener 4 dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R shoulder armor fastener 4 hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R shoulder armor fastener 5 dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R shoulder armor fastener 5 hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 shoulder bottom stop": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 upper arm front armor": {
+      "vertices": 16,
+      "polygons": 14
+    },
+    "R B02 upper arm right side armor": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 upper arm rear armor": {
+      "vertices": 16,
+      "polygons": 14
+    },
+    "R B02 upper arm left side armor": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R elbow double hinge link -0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R elbow exposed piston -0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R elbow double hinge link 0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R elbow exposed piston 0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R B02 forearm front armor": {
+      "vertices": 24,
+      "polygons": 22
+    },
+    "R B02 forearm right side armor": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "R B02 forearm rear armor": {
+      "vertices": 24,
+      "polygons": 22
+    },
+    "R B02 forearm left side armor": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "R B02 forearm elbow recess": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R forearm elbow link": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R forearm corner fixing dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R forearm corner fixing hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R forearm corner fixing dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R forearm corner fixing hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R forearm corner fixing dark seating.002": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R forearm corner fixing hex head.002": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 forearm side service rail": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 hand palm chassis": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 hand dorsal armored plate": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R finger 0 curled middle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 0 knuckle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 0 fingertip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 1 curled middle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 1 knuckle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 1 fingertip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 2 curled middle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 2 knuckle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 2 fingertip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 3 curled middle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 3 knuckle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R finger 3 fingertip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 thumb proximal": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 thumb curled tip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R hand dorsal screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R hand dorsal screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R hand dorsal screw dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R hand dorsal screw hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 shoulder broad front armor": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 shoulder rear armor": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 shoulder top return": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "L B02 shoulder outer upper lip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 shoulder outer lower return": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 shoulder vent dark recess": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 shoulder vent blade 0": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 shoulder vent blade 1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 shoulder vent blade 2": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 shoulder vent blade 3": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L shoulder armor fastener 0 dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L shoulder armor fastener 0 hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L shoulder armor fastener 1 dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L shoulder armor fastener 1 hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L shoulder armor fastener 3 dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L shoulder armor fastener 3 hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L shoulder armor fastener 4 dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L shoulder armor fastener 4 hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L shoulder armor fastener 5 dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L shoulder armor fastener 5 hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 shoulder bottom stop": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 upper arm front armor": {
+      "vertices": 16,
+      "polygons": 14
+    },
+    "L B02 upper arm right side armor": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 upper arm rear armor": {
+      "vertices": 16,
+      "polygons": 14
+    },
+    "L B02 upper arm left side armor": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L elbow double hinge link -0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L elbow exposed piston -0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L elbow double hinge link 0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L elbow exposed piston 0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L B02 forearm front armor": {
+      "vertices": 24,
+      "polygons": 22
+    },
+    "L B02 forearm right side armor": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "L B02 forearm rear armor": {
+      "vertices": 24,
+      "polygons": 22
+    },
+    "L B02 forearm left side armor": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "L B02 forearm elbow recess": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L forearm elbow link": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L forearm corner fixing dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L forearm corner fixing hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L forearm corner fixing dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L forearm corner fixing hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L forearm corner fixing dark seating.002": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L forearm corner fixing hex head.002": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 forearm side service rail": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 hand palm chassis": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 hand dorsal armored plate": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L finger 0 curled middle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 0 knuckle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 0 fingertip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 1 curled middle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 1 knuckle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 1 fingertip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 2 curled middle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 2 knuckle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 2 fingertip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 3 curled middle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 3 knuckle": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L finger 3 fingertip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 thumb proximal": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 thumb curled tip": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L hand dorsal screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L hand dorsal screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L hand dorsal screw dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L hand dorsal screw hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 thigh front armor": {
+      "vertices": 24,
+      "polygons": 22
+    },
+    "R B02 thigh right side armor": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "R B02 thigh rear armor": {
+      "vertices": 24,
+      "polygons": 22
+    },
+    "R B02 thigh left side armor": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "R B02 upper thigh access lid": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R thigh upper structural screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R thigh upper structural screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R thigh upper structural screw dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R thigh upper structural screw hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 thigh lower knee recess": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R knee front ram -0.052": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R knee front ram 0.052": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R B02 long faceted shin shield": {
+      "vertices": 24,
+      "polygons": 22
+    },
+    "R B02 outside calf return": {
+      "vertices": 16,
+      "polygons": 14
+    },
+    "R B02 inside calf return": {
+      "vertices": 10,
+      "polygons": 9
+    },
+    "R B02 outer shin diamond": {
+      "vertices": 10,
+      "polygons": 7
+    },
+    "R rear calf piston housing -0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R rear calf polished rod -0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R rear calf piston housing 0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R rear calf polished rod 0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R B02 rear calf actuator bridge": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 rear calf actuator bridge.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 rear calf narrow armor rail -1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 rear calf narrow armor rail 1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R shin plate edge screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R shin plate edge screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R shin plate edge screw dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R shin plate edge screw hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R shin plate edge screw dark seating.002": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R shin plate edge screw hex head.002": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 kneecap lower mechanical shoe": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R kneecap panel screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R kneecap panel screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 toe cap segment -1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 toe cap segment 0": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 toe cap segment 1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R instep panel seam -0.083": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R instep panel seam 0.083": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R ankle wrap fixing dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R ankle wrap fixing hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R ankle wrap fixing dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R ankle wrap fixing hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 heel inset plate": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R heel rib -1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R heel rib 0": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R heel rib 1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 thigh front armor": {
+      "vertices": 24,
+      "polygons": 22
+    },
+    "L B02 thigh right side armor": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "L B02 thigh rear armor": {
+      "vertices": 24,
+      "polygons": 22
+    },
+    "L B02 thigh left side armor": {
+      "vertices": 12,
+      "polygons": 10
+    },
+    "L B02 upper thigh access lid": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L thigh upper structural screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L thigh upper structural screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L thigh upper structural screw dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L thigh upper structural screw hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 thigh lower knee recess": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L knee front ram -0.052": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L knee front ram 0.052": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L B02 long faceted shin shield": {
+      "vertices": 24,
+      "polygons": 22
+    },
+    "L B02 outside calf return": {
+      "vertices": 16,
+      "polygons": 14
+    },
+    "L B02 inside calf return": {
+      "vertices": 10,
+      "polygons": 9
+    },
+    "L B02 outer shin diamond": {
+      "vertices": 10,
+      "polygons": 7
+    },
+    "L rear calf piston housing -0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L rear calf polished rod -0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L rear calf piston housing 0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L rear calf polished rod 0.042": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L B02 rear calf actuator bridge": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 rear calf actuator bridge.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 rear calf narrow armor rail -1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 rear calf narrow armor rail 1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L shin plate edge screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L shin plate edge screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L shin plate edge screw dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L shin plate edge screw hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L shin plate edge screw dark seating.002": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L shin plate edge screw hex head.002": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 kneecap lower mechanical shoe": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L kneecap panel screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L kneecap panel screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 toe cap segment -1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 toe cap segment 0": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 toe cap segment 1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L instep panel seam -0.083": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L instep panel seam 0.083": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L ankle wrap fixing dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L ankle wrap fixing hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L ankle wrap fixing dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L ankle wrap fixing hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 heel inset plate": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L heel rib -1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L heel rib 0": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L heel rib 1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "Backpack mounting spine": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "Backpack dark outer housing": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R backpack side shell": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R backpack upper mount": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R backpack recessed upright": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R backpack thruster outer": {
+      "vertices": 160,
+      "polygons": 160
+    },
+    "R backpack thruster machined lip": {
+      "vertices": 160,
+      "polygons": 160
+    },
+    "R backpack exhaust darkness": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "L backpack side shell": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L backpack upper mount": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L backpack recessed upright": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L backpack thruster outer": {
+      "vertices": 160,
+      "polygons": 160
+    },
+    "L backpack thruster machined lip": {
+      "vertices": 160,
+      "polygons": 160
+    },
+    "L backpack exhaust darkness": {
+      "vertices": 64,
+      "polygons": 34
+    },
+    "Backpack lower service block": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "B02 backpack rear dark recessed cavity": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "B02 backpack central armored rear door": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 backpack outer upright": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 backpack inner upright": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R backpack slot end": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R backpack slot end.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R backpack hatch fixing dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R backpack hatch fixing hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R backpack hatch fixing dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R backpack hatch fixing hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 backpack bottom latch": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R pack latch screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "R pack latch screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "R B02 backpack side radiator 0": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 backpack side radiator 1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 backpack side radiator 2": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 backpack side radiator 3": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "R B02 thruster internal central cone": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "R thruster internal brace 0": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R thruster internal brace 2.094": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R thruster internal brace 4.189": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "R rear mounting hydraulic pipe": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L B02 backpack outer upright": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 backpack inner upright": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L backpack slot end": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L backpack slot end.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L backpack hatch fixing dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L backpack hatch fixing hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L backpack hatch fixing dark seating.001": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L backpack hatch fixing hex head.001": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 backpack bottom latch": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L pack latch screw dark seating": {
+      "vertices": 32,
+      "polygons": 18
+    },
+    "L pack latch screw hex head": {
+      "vertices": 12,
+      "polygons": 8
+    },
+    "L B02 backpack side radiator 0": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 backpack side radiator 1": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 backpack side radiator 2": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 backpack side radiator 3": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "L B02 thruster internal central cone": {
+      "vertices": 80,
+      "polygons": 42
+    },
+    "L thruster internal brace 0": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L thruster internal brace 2.094": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L thruster internal brace 4.189": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "L rear mounting hydraulic pipe": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "B02 backpack lower central service door": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "B02 backpack horizontal top bridge": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "B02 pack service vent": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "B02 pack service vent.001": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "B02 pack service vent.002": {
+      "vertices": 8,
+      "polygons": 6
+    }
+  },
+  "weapon_mesh_parts": 1148,
+  "weapon_scale": 1.85,
+  "weapon_length_m": 1.6512226670980454,
+  "removed_prior_weapon_objects": 353,
+  "contacts": {
+    "R": {
+      "contact_world": [
+        -0.019999999552965164,
+        -0.4300000071525574,
+        2.180000066757202
+      ],
+      "contact_relative_to_wrist": [
+        -0.00800000037997961,
+        -0.041999999433755875,
+        -0.14900000393390656
+      ],
+      "wrist": [
+        -0.10913074016571045,
+        -0.3507726788520813,
+        2.27903413772583
+      ],
+      "elbow": [
+        -0.3772543966770172,
+        -0.2492474615573883,
+        2.0489768981933594
+      ],
+      "arm_length": 0.7451647392107124
+    },
+    "L": {
+      "contact_world": [
+        0.4881346523761749,
+        -0.8563756346702576,
+        2.3238275051116943
+      ],
+      "contact_relative_to_wrist": [
+        0.006000000052154064,
+        0.07999999821186066,
+        -0.1459999978542328
+      ],
+      "wrist": [
+        0.38014888763427734,
+        -0.7579323649406433,
+        2.2438275814056396
+      ],
+      "elbow": [
+        0.48720958828926086,
+        -0.406771719455719,
+        2.225163459777832
+      ],
+      "arm_length": 0.7451647392107124
+    }
+  },
+  "source_sockets_local": {
+    "primary": [
+      0.013924380764365196,
+      0.0,
+      -0.05105606094002724
+    ],
+    "support": [
+      -0.3446284234523773,
+      0.0,
+      0.02668839693069458
+    ],
+    "muzzle": [
+      -0.6207953095436096,
+      0.0,
+      0.061499349772930145
+    ]
+  },
+  "scenes": [
+    "01 NEUTRAL - editable assembly",
+    "02 TYPE01 READY - two hand pose"
+  ]
+}

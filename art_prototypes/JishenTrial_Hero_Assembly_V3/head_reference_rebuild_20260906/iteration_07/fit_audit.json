@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "yaw_degrees": 0,
+      "pitch_degrees": 0,
+      "broad_phase_pairs": 0,
+      "surface_intersections": []
+    },
+    {
+      "yaw_degrees": 30,
+      "pitch_degrees": 0,
+      "broad_phase_pairs": 0,
+      "surface_intersections": []
+    },
+    {
+      "yaw_degrees": -30,
+      "pitch_degrees": 0,
+      "broad_phase_pairs": 0,
+      "surface_intersections": []
+    },
+    {
+      "yaw_degrees": 0,
+      "pitch_degrees": 12,
+      "broad_phase_pairs": 0,
+      "surface_intersections": []
+    },
+    {
+      "yaw_degrees": 0,
+      "pitch_degrees": -12,
+      "broad_phase_pairs": 0,
+      "surface_intersections": []
+    }
+  ],
+  "excluded_mating_interfaces": [
+    "14_Low_Profile_Neck_Yaw_Ring",
+    "16_Neck_Armor_Collar",
+    "17_Neck_Load_Bearing_Pedestal"
+  ],
+  "restored_to_rest": true,
+  "method": "Evaluated mesh BVH surface intersections; no animation timing claim"
+}

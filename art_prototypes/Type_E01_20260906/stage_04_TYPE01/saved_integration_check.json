@@ -1,0 +1,44 @@
+{
+  "model": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\Type_E01_20260906\\stage_04_TYPE01\\TYPE_E01_TYPE01_RIFLE_MASTER.blend",
+  "scenes": {
+    "01 NEUTRAL - editable assembly": {
+      "weapon_mesh_parts": 1148,
+      "editable_subassemblies": 7,
+      "socket_names": [
+        "SCK_AI_HARDPOINT",
+        "SCK_ENERGY_CELL",
+        "SCK_MUZZLE",
+        "SCK_PRIMARY_GRIP",
+        "SCK_SUPPORT_GRIP"
+      ]
+    },
+    "02 TYPE01 READY - two hand pose": {
+      "weapon_mesh_parts": 1148,
+      "editable_subassemblies": 7,
+      "socket_names": [
+        "READY | SCK_AI_HARDPOINT",
+        "READY | SCK_ENERGY_CELL",
+        "READY | SCK_MUZZLE",
+        "READY | SCK_PRIMARY_GRIP",
+        "READY | SCK_SUPPORT_GRIP"
+      ]
+    }
+  },
+  "contacts": {
+    "R": {
+      "socket": "SCK_PRIMARY_GRIP",
+      "error_m": 0.0
+    },
+    "L": {
+      "socket": "SCK_SUPPORT_GRIP",
+      "error_m": 0.0
+    }
+  },
+  "body_geometry_counts_preserved": true,
+  "missing_images": [],
+  "packed_images": 2,
+  "prior_weapon_removed": true,
+  "source_weapon_unchanged": true,
+  "approved_mech_source_unchanged": true,
+  "passed": true
+}

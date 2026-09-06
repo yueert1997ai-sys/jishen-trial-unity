@@ -1,0 +1,34 @@
+Branch: codex/industrial-dash-polish
+HEAD: 3b1f0546ae231ee6a7174c8bff76cb28e79b8ddd
+
+ M ../../Assets/Editor/HeroVisualAudit.cs
+ M ../../Assets/Prefabs/Player/PlayerMech_Guest.prefab
+ M ../../Assets/Scripts/Player/MechDashPresentation.cs
+ M ../../Assets/Scripts/Player/RiggedMechAnimator.cs
+ M ../../docs/ASSET_PROVENANCE.md
+ M ../../docs/HERO_MODEL_HANDOFF.md
+ M ../../tools/hero/README.md
+?? ../../Assets/Art/JishenTrial_Assembly_V3.meta
+?? ../../Assets/Art/JishenTrial_Assembly_V3/
+?? ../../Assets/Editor/JishenHeroIntegration.cs
+?? ../../Assets/Editor/JishenHeroIntegration.cs.meta
+?? ../../Assets/Prefabs/Player/JishenTrialVisual.prefab
+?? ../../Assets/Prefabs/Player/JishenTrialVisual.prefab.meta
+?? ../../Assets/Scripts/Player/RigidMechPoseDriver.cs
+?? ../../Assets/Scripts/Player/RigidMechPoseDriver.cs.meta
+?? ../../agent/
+?? ../
+?? ../../data/
+?? ../../docs/JISHEN_GAME_INTEGRATION.md
+?? ../../docs/PLAYTEST_QUESTIONNAIRE_20260905.md
+?? ../../handoff/
+?? ../../optix7cache.db
+?? ../../prolasso.ini.backup-20260718-1745
+?? ../../prolasso.ini.codex-working
+?? ../../tools/jishen/
+?? ../../wegame-battle-request.json
+?? ../../wegame-role-request.json
+?? ../../wegame-web-sdk.index.mjs
+?? ../../wegame_df_App.C7kHxRHx.js
+?? "../../\345\275\225\351\237\263 (448)_\351\231\215\345\231\252\345\216\273\345\221\274\345\220\270\347\211\210.m4a"
+?? "../../\345\275\225\351\237\263 (448)_\351\231\215\345\231\252\347\211\210.m4a"

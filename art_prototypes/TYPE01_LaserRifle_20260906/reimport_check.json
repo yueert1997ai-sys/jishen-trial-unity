@@ -1,0 +1,14 @@
+[
+  {
+    "file": "TYPE01_LASER_RIFLE.glb",
+    "mesh_objects": 7,
+    "dimension_error_m": 0.0,
+    "all_sockets_present": true
+  },
+  {
+    "file": "TYPE01_LASER_RIFLE.fbx",
+    "mesh_objects": 7,
+    "dimension_error_m": 0.0,
+    "all_sockets_present": true
+  }
+]

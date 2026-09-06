@@ -1,0 +1,40 @@
+{
+  "stage": 3,
+  "status": "visual revision for review",
+  "previous_versions_preserved": [
+    "stage_01",
+    "stage_02"
+  ],
+  "body_length_before": 389,
+  "body_length_after": 469.12,
+  "body_length_ratio": 1.2059640102827764,
+  "not_real_manufacturing_units": true,
+  "parts": 745,
+  "changes": [
+    "resculpted receiver shoulders",
+    "recessed chassis details",
+    "layered external controls",
+    "three ventilated fore-end segments",
+    "angled top and bottom openings",
+    "local rail and heat shield",
+    "rounded grip with conforming texture",
+    "recessed adjustable stock surfaces",
+    "satin metal and polymer finish"
+  ],
+  "optic_materials": [
+    "AI_M7_Black.001",
+    "AI_M7_Black_Hardware",
+    "AI_M7_Display",
+    "AI_M7_Glass.001",
+    "AI_M7_Lens_Coating",
+    "AI_M7_Marking",
+    "AI_M7_Recess",
+    "AI_M7_Rubber.001",
+    "AI_M7_Seam"
+  ],
+  "pending": [
+    "appearance feedback",
+    "character fitting",
+    "game export"
+  ]
+}

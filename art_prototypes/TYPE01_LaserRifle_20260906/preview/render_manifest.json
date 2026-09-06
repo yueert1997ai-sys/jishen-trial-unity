@@ -1,0 +1,29 @@
+{
+  "source_sha256": "87e2663ee8aa9b3e343ab4e34a0148f6e4548f9bd294c718e7e60e6bc42ef534",
+  "shots": [
+    {
+      "name": "HERO",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\preview\\HERO.png",
+      "resolution": [
+        3000,
+        1300
+      ]
+    },
+    {
+      "name": "ENERGY_CELL",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\preview\\ENERGY_CELL.png",
+      "resolution": [
+        1700,
+        1250
+      ]
+    },
+    {
+      "name": "EMITTER",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\preview\\EMITTER.png",
+      "resolution": [
+        1600,
+        1100
+      ]
+    }
+  ]
+}

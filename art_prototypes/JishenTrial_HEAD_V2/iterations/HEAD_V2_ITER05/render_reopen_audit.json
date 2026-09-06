@@ -1,0 +1,166 @@
+{
+  "reopened_blend": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_HEAD_V2\\iterations\\HEAD_V2_ITER05\\HEAD_V2_ITER05.blend",
+  "views": [
+    {
+      "camera": "HEAD_FRONT",
+      "path": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_HEAD_V2\\iterations\\HEAD_V2_ITER05\\HEAD_FRONT.png",
+      "seconds": 8.1,
+      "resolution": [
+        1440,
+        1440
+      ]
+    },
+    {
+      "camera": "HEAD_SIDE",
+      "path": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_HEAD_V2\\iterations\\HEAD_V2_ITER05\\HEAD_SIDE.png",
+      "seconds": 8.07,
+      "resolution": [
+        1440,
+        1440
+      ]
+    },
+    {
+      "camera": "HEAD_3Q",
+      "path": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_HEAD_V2\\iterations\\HEAD_V2_ITER05\\HEAD_3Q.png",
+      "seconds": 7.97,
+      "resolution": [
+        1440,
+        1440
+      ]
+    }
+  ],
+  "raw_editable_meshes": [
+    {
+      "name": "01_Crown_Central_Keel",
+      "vertices": 12,
+      "faces": 10,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "02_Forehead_Armored_Wedge",
+      "vertices": 12,
+      "faces": 10,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "03_Helmet_FrontoTemporal.R",
+      "vertices": 22,
+      "faces": 21,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "03_Helmet_FrontoTemporal.L",
+      "vertices": 22,
+      "faces": 21,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "04_Rear_Head_Occipital_Armor",
+      "vertices": 24,
+      "faces": 24,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "05_Inner_Chassis_Cranium_And_Cheek_Bearings",
+      "vertices": 52,
+      "faces": 66,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "06_Outer_Armor_Brow.R",
+      "vertices": 12,
+      "faces": 10,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "07_Orbital_Bed_With_Recessed_Cavity.R",
+      "vertices": 24,
+      "faces": 20,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "08_Inner_Optic_Clay_NoEmission.R",
+      "vertices": 8,
+      "faces": 8,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "06_Outer_Armor_Brow.L",
+      "vertices": 12,
+      "faces": 10,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "07_Orbital_Bed_With_Recessed_Cavity.L",
+      "vertices": 24,
+      "faces": 20,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "08_Inner_Optic_Clay_NoEmission.L",
+      "vertices": 8,
+      "faces": 8,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "09_Face_Mask_Independent_Faceted_Shield",
+      "vertices": 18,
+      "faces": 16,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "10_Outer_Cheek_Armor.R",
+      "vertices": 14,
+      "faces": 17,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "10_Outer_Cheek_Armor.L",
+      "vertices": 14,
+      "faces": 17,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "11_Jaw_Chin_Armored_Cradle",
+      "vertices": 8,
+      "faces": 6,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "12_Short_Sensor_Fin_With_Keyed_Mount.R",
+      "vertices": 10,
+      "faces": 11,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "12_Short_Sensor_Fin_With_Keyed_Mount.L",
+      "vertices": 10,
+      "faces": 11,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "13_Central_Neck_Pitch_Joint",
+      "vertices": 96,
+      "faces": 50,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "14_Low_Profile_Neck_Yaw_Ring",
+      "vertices": 192,
+      "faces": 192,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "15_Neck_Twin_Pitch_Supports",
+      "vertices": 20,
+      "faces": 22,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "16_Neck_Armor_Collar",
+      "vertices": 32,
+      "faces": 32,
+      "nonmanifold_edges": 0
+    }
+  ]
+}

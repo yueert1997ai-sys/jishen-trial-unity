@@ -1,0 +1,31 @@
+{
+  "master": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE01_LaserRifle_20260906\\TYPE01_LASER_RIFLE_MASTER.blend",
+  "mesh_objects": 1148,
+  "separate_parts": 1186,
+  "materials": [
+    "Gunmetal",
+    "Armor",
+    "Panel",
+    "Steel",
+    "DarkSteel",
+    "Recess",
+    "Polymer",
+    "Brass",
+    "Lettering",
+    "Cyan",
+    "CyanCore",
+    "OpticGlass"
+  ],
+  "reference_sha256": "87917c5b5d310a0275e080ce25dbfe75be58c389e44c4352fc6d6870718a8477",
+  "length_m": 0.89,
+  "open_handguard_vents_per_side": 31,
+  "editable_subassemblies": [
+    "TYPE01_RECEIVER",
+    "TYPE01_HANDGUARD",
+    "TYPE01_EMITTER",
+    "TYPE01_OPTIC",
+    "TYPE01_REMOVABLE_ENERGY_CELL",
+    "TYPE01_ADJUSTABLE_STOCK",
+    "TYPE01_GRIP_AND_CONTROLS"
+  ]
+}

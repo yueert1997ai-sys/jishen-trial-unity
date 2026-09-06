@@ -1,0 +1,13 @@
+{
+  "name": "RAIKEN Mk-II",
+  "length_m": 18.5,
+  "mesh_and_text_parts": 850,
+  "evaluated_triangles": 158338,
+  "materials": 11,
+  "beam_objects": [
+    "RK_Blue_Plasma_Envelope",
+    "RK_Cyan_White_Edge_Core"
+  ],
+  "source_reference": "references/RAIKEN_DESIGN.png",
+  "coordinate_system": "X to pommel, -Y front, Z up; origin grip centre"
+}

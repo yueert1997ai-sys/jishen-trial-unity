@@ -1,0 +1,38 @@
+{
+  "current_master": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\JishenTrial_ASSEMBLED_MASTER.blend",
+  "master_sha256": "d5eca099933a862c08337d5ac486b9e24f78d29441109e8f269a75e10a00e98b",
+  "source_sha256": "748a1466c7849fd55254fe50c04fbc97ca5d138e7eed70bebabb911c434f0a48",
+  "master_triangles": 505366,
+  "master_meshes": 2021,
+  "approved_head_meshes_unchanged": 141,
+  "beam_toggle_verified": [
+    {
+      "Beam_On": false,
+      "beam_meshes": 20,
+      "hidden": 20,
+      "physical_blade_present": true
+    },
+    {
+      "Beam_On": true,
+      "beam_meshes": 20,
+      "hidden": 0,
+      "physical_blade_present": true
+    }
+  ],
+  "reference": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_reference_rebuild_20260906\\REFERENCE.png",
+  "actual_promoted_master_reopened": true,
+  "reopened_render_views": [
+    "MASTER_REOPENED_3Q",
+    "CLAY_3Q",
+    "WAIST",
+    "LEGS",
+    "FOOT",
+    "ARM",
+    "HAND",
+    "BACKPACK",
+    "CANNON",
+    "WEAPON_BEAM_ON",
+    "WEAPON_BEAM_OFF",
+    "FULL_BODY_BEAM_OFF"
+  ]
+}

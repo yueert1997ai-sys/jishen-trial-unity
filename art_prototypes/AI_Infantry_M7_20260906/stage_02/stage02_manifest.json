@@ -1,0 +1,38 @@
+{
+  "stage": 2,
+  "status": "rendered for user feedback",
+  "source": "stage_01 kept unchanged",
+  "changes": [
+    "longer exposed barrel",
+    "longer magazine",
+    "black-only optic exterior",
+    "machined handguard apertures",
+    "receiver and stock detailing",
+    "fine surface finish"
+  ],
+  "shape_units_are_arbitrary": true,
+  "barrel_tip_before": 598,
+  "barrel_tip_after": 658,
+  "handguard_front_before": 527,
+  "handguard_front_after": 534,
+  "magazine_bottom_before": 383,
+  "magazine_bottom_after": 411,
+  "optic_materials": [
+    "AI_M7_Black.001",
+    "AI_M7_Black_Hardware",
+    "AI_M7_Display",
+    "AI_M7_Glass.001",
+    "AI_M7_Lens_Coating",
+    "AI_M7_Marking",
+    "AI_M7_Recess",
+    "AI_M7_Rubber.001",
+    "AI_M7_Seam"
+  ],
+  "parts": 548,
+  "mesh_parts": 443,
+  "pending": [
+    "user appearance feedback",
+    "character grip fit",
+    "game asset exports"
+  ]
+}

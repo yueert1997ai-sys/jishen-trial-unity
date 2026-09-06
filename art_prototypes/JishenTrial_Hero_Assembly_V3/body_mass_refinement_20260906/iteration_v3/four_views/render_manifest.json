@@ -1,0 +1,52 @@
+{
+  "source": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\iteration_v3\\reference_action_pose\\VALKYR_V3_REFERENCE_ACTION.blend",
+  "source_sha256": "c7297dd9a4cfec2f9ef590237661beb3a1a43c291eb1f522f355feed32862f54",
+  "mass_revision": 11,
+  "weapon_pose_revision": 2,
+  "pose_reference": "USER_POSE_REFERENCE.png: two-handed upper-left blade presentation, counterturned torso, split airborne legs.",
+  "mesh_count": 3152,
+  "projection": "ORTHOGRAPHIC",
+  "includes_current_weapon": true,
+  "views": [
+    {
+      "view": "FRONT",
+      "file": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\iteration_v3\\reference_action_pose\\four_views\\FRONT.png",
+      "camera_location": [
+        -0.4324842691421509,
+        -20.056245803833008,
+        2.445192813873291
+      ],
+      "ortho_scale": 6.1995930671691895
+    },
+    {
+      "view": "BACK",
+      "file": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\iteration_v3\\reference_action_pose\\four_views\\BACK.png",
+      "camera_location": [
+        -0.4324842691421509,
+        19.943754196166992,
+        2.445192813873291
+      ],
+      "ortho_scale": 6.1995930671691895
+    },
+    {
+      "view": "LEFT",
+      "file": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\iteration_v3\\reference_action_pose\\four_views\\LEFT.png",
+      "camera_location": [
+        19.567516326904297,
+        -0.05624634027481079,
+        2.445192813873291
+      ],
+      "ortho_scale": 6.1995930671691895
+    },
+    {
+      "view": "RIGHT",
+      "file": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\iteration_v3\\reference_action_pose\\four_views\\RIGHT.png",
+      "camera_location": [
+        -20.432483673095703,
+        -0.05624634027481079,
+        2.445192813873291
+      ],
+      "ortho_scale": 6.1995930671691895
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "source_backup": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\head_reference_rebuild_20260906\\BODY_SOURCE_BEFORE_HEAD.blend",
+  "source_sha256": "56428c2c142b375bbaba14353f89d06fa2c2cf5723f885dda3b9f1a440adc69e",
+  "current_master": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\JishenTrial_ASSEMBLED_MASTER.blend",
+  "current_master_sha256": "748a1466c7849fd55254fe50c04fbc97ca5d138e7eed70bebabb911c434f0a48",
+  "assembled_copy": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\head_reference_rebuild_20260906\\delivery\\JishenTrial_WITH_REFERENCE_HEAD.blend",
+  "standalone_head": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\head_reference_rebuild_20260906\\delivery\\VALKYR_HEAD_MASTER.blend",
+  "reference_image_packed": true,
+  "reviewed_iterations": 8,
+  "rendered_views": [
+    "BACK",
+    "FRONT",
+    "FULL_BODY",
+    "LEFT",
+    "ON_BODY",
+    "RIGHT",
+    "THREE_QUARTER",
+    "TOP",
+    "UNDER"
+  ],
+  "export": {
+    "mesh_objects": 1,
+    "triangles": 33272,
+    "materials": [
+      "V3H_06_Inner_Frame",
+      "V3H_01_Valkyr_Blue",
+      "V3H_02_Deep_Blue",
+      "V3H_05_Machined_Rim",
+      "V3H_07_Optical_Well",
+      "V3H_04_Gunmetal_Armor",
+      "V3H_08_Antenna_Gold",
+      "V3H_09_Cyan_Sensor",
+      "V3H_10_Cyan_Core",
+      "V3H_11_Seals"
+    ],
+    "uv_loops": 99816,
+    "uv_outside_0_1": 0,
+    "mount_pivot_m": [
+      0.0,
+      0.0,
+      3.002999782562256
+    ],
+    "bounds_m": [
+      [
+        -0.15822309255599976,
+        -0.15221677720546722,
+        2.9763998985290527
+      ],
+      [
+        0.1582229733467102,
+        0.15595631301403046,
+        3.360269546508789
+      ]
+    ]
+  }
+}

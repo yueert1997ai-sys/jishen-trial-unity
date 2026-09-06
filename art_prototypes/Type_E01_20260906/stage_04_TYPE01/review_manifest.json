@@ -1,0 +1,20 @@
+{
+  "model": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\Type_E01_20260906\\stage_04_TYPE01\\TYPE_E01_TYPE01_RIFLE_MASTER.blend",
+  "model_sha256": "31ee94bb06570e74a89863c6e169d2af449d967c7b98452bea8f4b9ccf70b45b",
+  "renders": [
+    "BACK.png",
+    "FRONT.png",
+    "LEFT.png",
+    "NEUTRAL_3Q.png",
+    "READY_3Q.png",
+    "READY_HANDS.png",
+    "READY_SIDE.png",
+    "RIGHT.png"
+  ],
+  "review_boards": [
+    "TYPE01_INTEGRATION_REVIEW.jpg",
+    "TYPE01_INTEGRATION_FOUR_VIEWS.jpg"
+  ],
+  "source": "Completed TYPE-01 editable rifle master, appended into the approved E-01 body.",
+  "image_processing": "Only layout and resizing; all views are actual Blender renders."
+}

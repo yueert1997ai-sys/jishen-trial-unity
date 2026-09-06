@@ -1,0 +1,12 @@
+{
+  "JishenTrial_ASSEMBLED_MASTER.blend": {
+    "source": "VALKYR_RAIKEN_MASTER.blend",
+    "sha256": "96baba31bb643b03dd3344ca9f727ebce9518cf553b6e07f72d1d04e873fbb61",
+    "matches": true
+  },
+  "JishenTrial_GAME_CANDIDATE.blend": {
+    "source": "VALKYR_RAIKEN_GAME.blend",
+    "sha256": "3bfcf79c1b0b62f43feb4f575d0d2d32363e7448e849266a7c6233748ca64359",
+    "matches": true
+  }
+}

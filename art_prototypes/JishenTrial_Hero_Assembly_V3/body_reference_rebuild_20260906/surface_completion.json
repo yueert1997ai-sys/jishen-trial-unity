@@ -1,0 +1,786 @@
+{
+  "removed_crossing_overlays": [
+    "V3B_Sternum_Crown_Secondary",
+    "V3B_Clavicle_Facing.L",
+    "V3B_Clavicle_Facing.R"
+  ],
+  "wordmark": [
+    {
+      "font": "C:/Windows/Fonts/arial.ttf",
+      "nonmanifold_edges": 0
+    }
+  ],
+  "microscopic_bevel_cleanup": [
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_00_Washer",
+      "before": [
+        0,
+        32
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_00_DarkSocket",
+      "before": [
+        0,
+        24
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_01_Washer",
+      "before": [
+        0,
+        32
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_01_DarkSocket",
+      "before": [
+        0,
+        24
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_02_Washer",
+      "before": [
+        0,
+        32
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_02_DarkSocket",
+      "before": [
+        0,
+        18
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_03_Washer",
+      "before": [
+        0,
+        32
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_03_DarkSocket",
+      "before": [
+        0,
+        24
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_04_Washer",
+      "before": [
+        0,
+        32
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_04_DarkSocket",
+      "before": [
+        0,
+        24
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_05_Washer",
+      "before": [
+        0,
+        32
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_05_DarkSocket",
+      "before": [
+        0,
+        20
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_06_Washer",
+      "before": [
+        0,
+        32
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_06_DarkSocket",
+      "before": [
+        0,
+        16
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_07_Washer",
+      "before": [
+        0,
+        32
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Waist_Yaw_Drive_ServiceBolt_07_DarkSocket",
+      "before": [
+        0,
+        23
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Shoulder_Servo.R_ServiceBolt_01_DarkSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Shoulder_Servo.R_ServiceBolt_02_DarkSocket",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Shoulder_Servo.R_ServiceBolt_03_DarkSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Shoulder_Servo.R_ServiceBolt_05_DarkSocket",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Hip_Load_Bearing.R_ServiceBolt_01_DarkSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Knee_Servo.R_ServiceBolt_07_HexSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_00_Washer",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_00_HexSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_00_DarkSocket",
+      "before": [
+        0,
+        4
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_01_HexSocket",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_01_DarkSocket",
+      "before": [
+        0,
+        3
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_02_Washer",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_02_DarkSocket",
+      "before": [
+        0,
+        3
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_03_Washer",
+      "before": [
+        0,
+        4
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_03_HexSocket",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_03_DarkSocket",
+      "before": [
+        0,
+        8
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_04_Washer",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_04_DarkSocket",
+      "before": [
+        0,
+        8
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_05_Washer",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_05_HexSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_05_DarkSocket",
+      "before": [
+        0,
+        8
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_06_Washer",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_06_DarkSocket",
+      "before": [
+        0,
+        4
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_07_Washer",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.R_ServiceBolt_07_DarkSocket",
+      "before": [
+        0,
+        5
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Shoulder_Servo.L_ServiceBolt_01_DarkSocket",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Shoulder_Servo.L_ServiceBolt_03_DarkSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Shoulder_Servo.L_ServiceBolt_06_DarkSocket",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Elbow_Servo.L_ServiceBolt_04_DarkSocket",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Knee_Servo.L_ServiceBolt_03_HexSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Knee_Servo.L_ServiceBolt_05_HexSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_00_Washer",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_00_DarkSocket",
+      "before": [
+        0,
+        8
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_01_Washer",
+      "before": [
+        0,
+        4
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_01_HexSocket",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_01_DarkSocket",
+      "before": [
+        0,
+        8
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_02_Washer",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_02_DarkSocket",
+      "before": [
+        0,
+        3
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_03_HexSocket",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_03_DarkSocket",
+      "before": [
+        0,
+        3
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_04_Washer",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_04_HexSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_04_DarkSocket",
+      "before": [
+        0,
+        4
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_05_Washer",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_05_DarkSocket",
+      "before": [
+        0,
+        5
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_06_Washer",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_06_DarkSocket",
+      "before": [
+        0,
+        4
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_07_Washer",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_07_HexSocket",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "Ankle_Rotator.L_ServiceBolt_07_DarkSocket",
+      "before": [
+        0,
+        8
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "V3B_Backpack_Central_Cyan_Window",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "V3B_Backpack_Central_Cyan_Filament",
+      "before": [
+        0,
+        2
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "V3B_Backpack_Long_Descending_Vane.R",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    },
+    {
+      "object": "V3B_Sword_Cyan_Emitter_Lens_-1",
+      "before": [
+        0,
+        1
+      ],
+      "after": [
+        0,
+        0
+      ]
+    }
+  ],
+  "unwrapped_body_meshes": 1873
+}

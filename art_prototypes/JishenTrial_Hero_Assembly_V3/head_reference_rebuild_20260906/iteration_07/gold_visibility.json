@@ -1,0 +1,714 @@
+[
+  {
+    "z": 154,
+    "visible_x": [
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "hidden": [
+      {
+        "x": 70,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 35.67
+      },
+      {
+        "x": 71,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 33.82
+      },
+      {
+        "x": 72,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 29.89
+      },
+      {
+        "x": 73,
+        "occluder": "V3H_Recessed_Orbital_Chassis.L",
+        "depth_units": 28.54
+      },
+      {
+        "x": 74,
+        "occluder": "V3H_Recessed_Orbital_Chassis.L",
+        "depth_units": 28.5
+      },
+      {
+        "x": 75,
+        "occluder": "V3H_Recessed_Orbital_Chassis.L",
+        "depth_units": 28.57
+      }
+    ]
+  },
+  {
+    "z": 158,
+    "visible_x": [
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86
+    ],
+    "hidden": [
+      {
+        "x": 71,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 36.99
+      },
+      {
+        "x": 72,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 35.16
+      },
+      {
+        "x": 73,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 33.38
+      },
+      {
+        "x": 74,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 32.61
+      }
+    ]
+  },
+  {
+    "z": 162,
+    "visible_x": [
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90
+    ],
+    "hidden": [
+      {
+        "x": 73,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 36.48
+      },
+      {
+        "x": 74,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 34.64
+      },
+      {
+        "x": 75,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 33.56
+      },
+      {
+        "x": 76,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 32.83
+      }
+    ]
+  },
+  {
+    "z": 166,
+    "visible_x": [
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91
+    ],
+    "hidden": [
+      {
+        "x": 74,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 37.79
+      },
+      {
+        "x": 75,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 35.96
+      },
+      {
+        "x": 76,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 34.52
+      },
+      {
+        "x": 77,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 33.78
+      },
+      {
+        "x": 78,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 33.05
+      }
+    ]
+  },
+  {
+    "z": 170,
+    "visible_x": [
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91
+    ],
+    "hidden": [
+      {
+        "x": 75,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 39.11
+      },
+      {
+        "x": 76,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 37.28
+      },
+      {
+        "x": 77,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 35.5
+      },
+      {
+        "x": 78,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 34.74
+      },
+      {
+        "x": 79,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 34.01
+      },
+      {
+        "x": 80,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 33.24
+      }
+    ]
+  },
+  {
+    "z": 174,
+    "visible_x": [
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92
+    ],
+    "hidden": [
+      {
+        "x": 77,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 40.7
+      },
+      {
+        "x": 78,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 37.65
+      },
+      {
+        "x": 79,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 35.69
+      },
+      {
+        "x": 80,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 34.96
+      },
+      {
+        "x": 81,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 34.23
+      },
+      {
+        "x": 82,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 33.39
+      }
+    ]
+  },
+  {
+    "z": 178,
+    "visible_x": [
+      89,
+      90,
+      91,
+      92,
+      93
+    ],
+    "hidden": [
+      {
+        "x": 78,
+        "occluder": "V3H_Frontal_Lower_Leaf.L",
+        "depth_units": 36.0
+      },
+      {
+        "x": 79,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 44.89
+      },
+      {
+        "x": 80,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 41.61
+      },
+      {
+        "x": 81,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 39.02
+      },
+      {
+        "x": 82,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 36.44
+      },
+      {
+        "x": 83,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 34.45
+      },
+      {
+        "x": 84,
+        "occluder": "V3H_Chevron_Brow.L",
+        "depth_units": 33.47
+      },
+      {
+        "x": 85,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 10.67
+      },
+      {
+        "x": 86,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 7.31
+      },
+      {
+        "x": 87,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 4.33
+      },
+      {
+        "x": 88,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 1.54
+      }
+    ]
+  },
+  {
+    "z": 182,
+    "visible_x": [
+      89,
+      90,
+      91,
+      92,
+      93,
+      94
+    ],
+    "hidden": [
+      {
+        "x": 79,
+        "occluder": "V3H_Frontal_Lower_Leaf.L",
+        "depth_units": 34.95
+      },
+      {
+        "x": 80,
+        "occluder": "V3H_Frontal_Lower_Leaf.L",
+        "depth_units": 32.88
+      },
+      {
+        "x": 81,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 23.79
+      },
+      {
+        "x": 82,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 18.72
+      },
+      {
+        "x": 83,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 15.62
+      },
+      {
+        "x": 84,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 12.52
+      },
+      {
+        "x": 85,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 9.42
+      },
+      {
+        "x": 86,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 6.32
+      },
+      {
+        "x": 87,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 3.22
+      },
+      {
+        "x": 88,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 0.88
+      }
+    ]
+  },
+  {
+    "z": 186,
+    "visible_x": [
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94
+    ],
+    "hidden": [
+      {
+        "x": 81,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 29.37
+      },
+      {
+        "x": 82,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 16.1
+      },
+      {
+        "x": 83,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 9.32
+      },
+      {
+        "x": 84,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 6.22
+      },
+      {
+        "x": 85,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 3.12
+      },
+      {
+        "x": 86,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 0.02
+      }
+    ]
+  },
+  {
+    "z": 190,
+    "visible_x": [
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95
+    ],
+    "hidden": [
+      {
+        "x": 82,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 21.74
+      },
+      {
+        "x": 83,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 8.97
+      },
+      {
+        "x": 84,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 4.46
+      },
+      {
+        "x": 85,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 0.63
+      }
+    ]
+  },
+  {
+    "z": 194,
+    "visible_x": [
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96
+    ],
+    "hidden": [
+      {
+        "x": 83,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 14.11
+      },
+      {
+        "x": 84,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 6.52
+      },
+      {
+        "x": 85,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 1.66
+      }
+    ]
+  },
+  {
+    "z": 198,
+    "visible_x": [
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97
+    ],
+    "hidden": [
+      {
+        "x": 85,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 4.07
+      }
+    ]
+  },
+  {
+    "z": 202,
+    "visible_x": [
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98
+    ],
+    "hidden": [
+      {
+        "x": 86,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 2.61
+      }
+    ]
+  },
+  {
+    "z": 206,
+    "visible_x": [
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98
+    ],
+    "hidden": [
+      {
+        "x": 87,
+        "occluder": "V3H_Fronto_Temporal_Shell.L",
+        "depth_units": 1.11
+      }
+    ]
+  },
+  {
+    "z": 210,
+    "visible_x": [
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99
+    ],
+    "hidden": []
+  },
+  {
+    "z": 214,
+    "visible_x": [
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100
+    ],
+    "hidden": []
+  },
+  {
+    "z": 218,
+    "visible_x": [
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101
+    ],
+    "hidden": []
+  },
+  {
+    "z": 222,
+    "visible_x": [
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101
+    ],
+    "hidden": []
+  },
+  {
+    "z": 226,
+    "visible_x": [
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102
+    ],
+    "hidden": []
+  },
+  {
+    "z": 230,
+    "visible_x": [
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103
+    ],
+    "hidden": []
+  },
+  {
+    "z": 234,
+    "visible_x": [
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104
+    ],
+    "hidden": []
+  },
+  {
+    "z": 238,
+    "visible_x": [
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "hidden": []
+  },
+  {
+    "z": 242,
+    "visible_x": [
+      100,
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "hidden": []
+  }
+]

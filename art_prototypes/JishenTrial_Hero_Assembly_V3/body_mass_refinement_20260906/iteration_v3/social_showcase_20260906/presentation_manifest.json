@@ -1,0 +1,66 @@
+{
+  "source": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\JishenTrial_ASSEMBLED_MASTER.blend",
+  "source_sha256": "c7297dd9a4cfec2f9ef590237661beb3a1a43c291eb1f522f355feed32862f54",
+  "source_unchanged": true,
+  "mesh_count": 3152,
+  "arm_ik": [
+    {
+      "side": "R",
+      "wrist_error_m": 2.4755668231600746e-07,
+      "reach_fraction": 0.8227895022357893
+    },
+    {
+      "side": "L",
+      "wrist_error_m": 2.457562461863554e-07,
+      "reach_fraction": 0.7363717806592346
+    }
+  ],
+  "gauntlet_clearance": [
+    {
+      "side": "R",
+      "roll_degrees": -30,
+      "trials": [
+        [
+          0,
+          8
+        ],
+        [
+          -15,
+          3
+        ],
+        [
+          15,
+          15
+        ],
+        [
+          -30,
+          0
+        ]
+      ]
+    },
+    {
+      "side": "L",
+      "roll_degrees": -15,
+      "trials": [
+        [
+          0,
+          4
+        ],
+        [
+          -15,
+          0
+        ]
+      ]
+    }
+  ],
+  "grip_transform_errors": {
+    "R": 1.341104507446289e-06,
+    "L": 1.7285346984863281e-06
+  },
+  "blade_axis": [
+    -0.4902390241622925,
+    -0.04502195119857788,
+    0.8704243898391724
+  ],
+  "body_reference": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_reference_rebuild_20260906\\REFERENCE.png"
+}

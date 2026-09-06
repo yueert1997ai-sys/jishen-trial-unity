@@ -1,0 +1,23 @@
+{
+  "files": {
+    "VALKYR_ASSEMBLED_MASTER.blend": {
+      "sha256": "d5eca099933a862c08337d5ac486b9e24f78d29441109e8f269a75e10a00e98b",
+      "bytes": 5209383
+    },
+    "VALKYR_GAME_DEMO.blend": {
+      "sha256": "6ba3ae6d8521b19a11cf08dad4bfc915d65bd599aebc66fbd96389a7aa13ae33",
+      "bytes": 16219014
+    },
+    "exports\\VALKYR_GAME_DEMO.fbx": {
+      "sha256": "58ee5aff40006360fe4a721a680e148404b9d8e7de9cbcb24f1d69ff1a6972f0",
+      "bytes": 15840908
+    },
+    "exports\\VALKYR_GAME_DEMO.glb": {
+      "sha256": "ebf4cdc4eeff36df6dbeef273e33bd88265998502f3ef79ba5c3809b4ef8f8e8",
+      "bytes": 18403472
+    }
+  },
+  "reviewed_side_depth": true,
+  "native_master_reopened": true,
+  "fbx_and_glb_reimported": true
+}

@@ -1,0 +1,24 @@
+{
+  "stage": 1,
+  "status": "awaiting user direction approval",
+  "parts": 189,
+  "materials": [
+    "Desert",
+    "Sand_Edge",
+    "Black",
+    "Rubber",
+    "Steel",
+    "Glass",
+    "Recess"
+  ],
+  "check_focus": [
+    "M7 silhouette",
+    "desert and black colour split",
+    "fire-control optic proportions"
+  ],
+  "not_yet_done": [
+    "surface detail pass",
+    "final grip fit to AI infantry",
+    "game exports"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "model": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE_E01_ELITE_20260906\\stage_02_head\\TYPE_E01_ELITE_HEAD_R02.blend",
+  "sha256": "ece950050c3827105ad4dba67ec5ccc42f1c492ee8a537d45aa4a2fc7725747d",
+  "boards": [
+    "HEAD_R02_COMPARISON.jpg",
+    "HEAD_R02_REVIEW.jpg"
+  ],
+  "renders": [
+    "GAME_READ.png",
+    "HEAD_DRAFT.png",
+    "HEAD_FRONT.png",
+    "HEAD_INVADED.png",
+    "HEAD_PROFILE.png",
+    "HEAD_REVERSE.png",
+    "HERO.png"
+  ],
+  "render_source": "Saved and reopened Blender assembly. Only image layout and scaling used."
+}

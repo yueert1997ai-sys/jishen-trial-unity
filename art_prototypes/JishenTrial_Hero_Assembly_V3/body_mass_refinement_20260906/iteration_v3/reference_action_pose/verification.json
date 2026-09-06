@@ -1,0 +1,29 @@
+{
+  "staged": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\iteration_v3\\reference_action_pose\\VALKYR_V3_REFERENCE_ACTION.blend",
+  "sha256": "c7297dd9a4cfec2f9ef590237661beb3a1a43c291eb1f522f355feed32862f54",
+  "source_sha256": "f24567003d1dd89fc496ff1262fb31df9b68132f4dcd62cdaab91f0a2c699a3a",
+  "native_reopened": true,
+  "weapon_pose_revision": 2,
+  "mesh_geometry_uv_material_errors": [],
+  "mesh_count": 3152,
+  "blade_axis_world": [
+    -0.759013831615448,
+    -0.2297016829252243,
+    0.6092085838317871
+  ],
+  "grip_centers_in_weapon": {
+    "R": [
+      -0.3499981164932251,
+      7.152557373046875e-07,
+      -1.1380064961485914e-06
+    ],
+    "L": [
+      0.35000211000442505,
+      -7.264316082000732e-07,
+      -9.53806193138007e-07
+    ]
+  },
+  "guard_to_arm_chest_surface_contacts": [],
+  "game_candidate_sha256": "3bfcf79c1b0b62f43feb4f575d0d2d32363e7448e849266a7c6233748ca64359",
+  "exports_run": false
+}

@@ -1,0 +1,58 @@
+{
+  "materials": [
+    "VALKYR_DEMO_Armor",
+    "VALKYR_DEMO_Beam",
+    "VALKYR_DEMO_Mechanics",
+    "VALKYR_DEMO_Sensor",
+    "VALKYR_DEMO_Weapon"
+  ],
+  "atlases": {
+    "Armor": {
+      "resolution": [
+        4096,
+        4096
+      ],
+      "channels": [
+        "BaseColor",
+        "Roughness",
+        "Metallic",
+        "Normal",
+        "MetallicSmoothness"
+      ],
+      "unique_uv_atlas": true,
+      "normal_bake": "LOD weighted surface normals and material microfinish; no high-to-low detail-transfer claim"
+    },
+    "Mechanics": {
+      "resolution": [
+        2048,
+        2048
+      ],
+      "channels": [
+        "BaseColor",
+        "Roughness",
+        "Metallic",
+        "Normal",
+        "MetallicSmoothness"
+      ],
+      "unique_uv_atlas": true,
+      "normal_bake": "LOD weighted surface normals and material microfinish; no high-to-low detail-transfer claim"
+    },
+    "Weapon": {
+      "resolution": [
+        2048,
+        2048
+      ],
+      "channels": [
+        "BaseColor",
+        "Roughness",
+        "Metallic",
+        "Normal",
+        "MetallicSmoothness"
+      ],
+      "unique_uv_atlas": true,
+      "normal_bake": "LOD weighted surface normals and material microfinish; no high-to-low detail-transfer claim"
+    }
+  },
+  "fbx": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_reference_rebuild_20260906\\delivery\\exports\\VALKYR_GAME_DEMO.fbx",
+  "glb": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_reference_rebuild_20260906\\delivery\\exports\\VALKYR_GAME_DEMO.glb"
+}

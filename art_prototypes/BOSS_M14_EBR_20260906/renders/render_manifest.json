@@ -1,0 +1,77 @@
+{
+  "source_sha256": "43ddf0054c30893ceb3d4a0c05c948e78d96301ef25427151d6df2ce27ad7755",
+  "shots": [
+    {
+      "name": "HERO",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\BOSS_M14_EBR_20260906\\renders\\HERO.png",
+      "resolution": [
+        3200,
+        1250
+      ]
+    },
+    {
+      "name": "SIDE",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\BOSS_M14_EBR_20260906\\renders\\SIDE.png",
+      "resolution": [
+        3200,
+        930
+      ]
+    },
+    {
+      "name": "REFERENCE",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\BOSS_M14_EBR_20260906\\renders\\REFERENCE.png",
+      "resolution": [
+        3200,
+        930
+      ]
+    },
+    {
+      "name": "REVERSE",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\BOSS_M14_EBR_20260906\\renders\\REVERSE.png",
+      "resolution": [
+        3200,
+        1250
+      ]
+    },
+    {
+      "name": "TOP",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\BOSS_M14_EBR_20260906\\renders\\TOP.png",
+      "resolution": [
+        3200,
+        830
+      ]
+    },
+    {
+      "name": "STOCK",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\BOSS_M14_EBR_20260906\\renders\\STOCK.png",
+      "resolution": [
+        1800,
+        1150
+      ]
+    },
+    {
+      "name": "RECEIVER",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\BOSS_M14_EBR_20260906\\renders\\RECEIVER.png",
+      "resolution": [
+        1800,
+        1250
+      ]
+    },
+    {
+      "name": "HANDGUARD",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\BOSS_M14_EBR_20260906\\renders\\HANDGUARD.png",
+      "resolution": [
+        2000,
+        1100
+      ]
+    },
+    {
+      "name": "MUZZLE",
+      "path": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\BOSS_M14_EBR_20260906\\renders\\MUZZLE.png",
+      "resolution": [
+        1800,
+        1000
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "stage": 4,
+  "status": "reference optic installed; rendered for visual review",
+  "source_master": "stage_03/AI_INFANTRY_M7_STAGE03.blend",
+  "reference": "references/FireControl_reference.png",
+  "rifle_body_geometry_unchanged": true,
+  "body_signature": "2ec7a6b325e5140b15e0291e208b87714b16a6022fcf452dec3f6ff335d436b0",
+  "optic_parts": 488,
+  "optic_materials": [
+    "FCS_Body",
+    "FCS_Armor",
+    "FCS_Edge",
+    "FCS_Recess",
+    "FCS_Rubber",
+    "FCS_Glass",
+    "FCS_SensorGlass",
+    "FCS_Coating",
+    "FCS_Marking",
+    "FCS_SubtleMark"
+  ],
+  "reference_features": [
+    "upper rectangular sensor pod",
+    "shared dual front optical window",
+    "lower main optical axis",
+    "wide central adjustment drums",
+    "open diagonal support",
+    "integrated skeleton base and clamp feet",
+    "armored objective bell",
+    "recessed connector and retaining tether"
+  ],
+  "colour": "black and graphite exterior per previous user instruction",
+  "pending": [
+    "visual feedback",
+    "white infantry character fitting",
+    "game export"
+  ]
+}

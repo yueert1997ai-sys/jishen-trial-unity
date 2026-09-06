@@ -1,0 +1,13 @@
+{
+  "master": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\JishenTrial_ASSEMBLED_MASTER.blend",
+  "sha256": "f24567003d1dd89fc496ff1262fb31df9b68132f4dcd62cdaab91f0a2c699a3a",
+  "source_sha256": "f05388a289f682cf7d95d5e2b98970259c8127214dfcf235c6e76caaba4a3d7e",
+  "native_master_reopened": true,
+  "weapon_pose_revision": 1,
+  "mesh_geometry_uv_material_errors": [],
+  "grip_retained": true,
+  "weapon_lowest_point_m": 0.21229767799377441,
+  "forearm_yaw_added_degrees": 20.0,
+  "wrist_yaw_added_degrees": 12.0,
+  "exports_run": false
+}

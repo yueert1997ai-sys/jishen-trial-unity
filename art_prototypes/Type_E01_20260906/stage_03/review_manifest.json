@@ -1,0 +1,26 @@
+{
+  "model": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\Type_E01_20260906\\stage_03\\TYPE_E01_STAGE03.blend",
+  "model_sha256": "df420002ff95d9c73dcb98c6cf63b03dab64fbde322780c29a098d4f418d69fb",
+  "raw_renders": [
+    "3Q.png",
+    "BACK.png",
+    "BACKPACK_DETAIL.png",
+    "FRONT.png",
+    "HEAD_3Q.png",
+    "HEAD_FRONT.png",
+    "HEAD_SIDE.png",
+    "LEFT.png",
+    "READY_3Q.png",
+    "READY_HANDS.png",
+    "READY_SIDE.png",
+    "RIFLE_SIDE.png",
+    "RIGHT.png"
+  ],
+  "review_boards": [
+    "STAGE03_FOUR_VIEWS.jpg",
+    "STAGE03_HEAD_COMPARISON.jpg",
+    "STAGE03_REVIEW.jpg"
+  ],
+  "status": "Stage 03 modeling and two-hand pose completed; awaiting user visual review",
+  "image_processing": "Layout, resize and reference crop only; actual Blender renders, no shape retouching."
+}

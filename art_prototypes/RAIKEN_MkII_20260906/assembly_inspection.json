@@ -1,0 +1,587 @@
+{
+  "source": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\JishenTrial_ASSEMBLED_MASTER.blend",
+  "scene_props": {
+    "stage": "High-detail master: industrial hard-surface asset",
+    "source": "Fresh meshes; no v0 geometry loaded",
+    "phase": "F",
+    "crown_height_m": 3.308605670928955,
+    "coordinates": "Z up; -Y front; -X character right",
+    "master_revision": "03: conformed helmet and toe armor, calf paint balance",
+    "user_briefs": "USER_HIGH_DETAIL_BRIEF.txt + USER_DEMO_ASSET_BRIEF.txt",
+    "visual_review_01": "Actual 3Q, head, chest, leg, backpack, blade renders inspected; see iteration report",
+    "visual_iterations": 3,
+    "integration_state": "External review asset only; current game hero untouched",
+    "scale_source": "tools/hero/prepare_hero.py: 3.25 m crown normalization; concept text dimensions ignored",
+    "assembly_sources": "V2_HIGH_DETAIL_FINAL body + HEAD_V2 ITER05",
+    "head_fit": "User size correction: head forms uniformly 1.5x, seated 20mm lower; crown 3.351056m. Neck bearing and torso preserved.",
+    "head_status": "Refined and reviewed in actual renders; no user approval assumed",
+    "rigging_state": "Editable high-detail master with original rigid assembly pivots. Refined demo derivative has a Generic rigid armature.",
+    "refinement_phase": 7,
+    "refinement_source": "Existing JishenTrial_ASSEMBLED_MASTER.blend; retained assembly, materials, collections, cameras",
+    "refinement_notes": "Limited functional detail pass: gasketed actuator/damper access covers with captive keys; shoulder/shin unit IDs and blade ID. No random fastener scatter. Dead boolean links cleaned. Agent visual review complete; user design approval not assumed.",
+    "head_review": "Shorter depth, flatter paired optics, compact faceted mask; interpretive reconstruction from provided views",
+    "current_delivery": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_reference_rebuild_20260906\\delivery\\VALKYR_ASSEMBLED_MASTER.blend",
+    "refinement_backup": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\iterations\\before_refinement_20260905\\JishenTrial_ASSEMBLED_MASTER.blend",
+    "head_revision": "Supplied VALKYR reference recreation, 8 rendered iterations, installed on existing Head pivot",
+    "head_reference_path": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\head_reference_rebuild_20260906\\REFERENCE.png",
+    "head_only_replacement": true,
+    "head_reference_delivery": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\head_reference_rebuild_20260906\\delivery",
+    "body_preservation": "Existing mechanical hierarchy retained; body armor completed from latest full-body reference; original source archived in ACCEPTED_HEAD_ASSEMBLY_SOURCE.blend.",
+    "accepted_head_unchanged": true,
+    "sword_grip_center_units": "<bpy id property array [3]>",
+    "sword_grip_axis": "<bpy id property array [3]>",
+    "body_finish_legacy_external_parts_removed": [
+      "Thigh_Service_Latch_5.48.R_Washer",
+      "Thigh_Service_Latch_5.48.R_HexSocket",
+      "Thigh_Service_Latch_5.48.R_DarkSocket",
+      "Thigh_Service_Latch_4.39.R_Washer",
+      "Thigh_Service_Latch_4.39.R_HexSocket",
+      "Thigh_Service_Latch_4.39.R_DarkSocket",
+      "Calf_Vector_Thruster_Bracket.R",
+      "Calf_Vector_Nozzle_Outer.R",
+      "Calf_Vector_Nozzle_Rim.R",
+      "Calf_Vector_Nozzle_Core.R",
+      "Calf_Armor_Catch_3.16.R_Washer",
+      "Calf_Armor_Catch_3.16.R_HexSocket",
+      "Calf_Armor_Catch_3.16.R_DarkSocket",
+      "Calf_Armor_Catch_2.29.R_Washer",
+      "Calf_Armor_Catch_2.29.R_HexSocket",
+      "Calf_Armor_Catch_2.29.R_DarkSocket",
+      "Calf_Armor_Catch_1.52.R_Washer",
+      "Calf_Armor_Catch_1.52.R_HexSocket",
+      "Calf_Armor_Catch_1.52.R_DarkSocket",
+      "Thigh_Service_Latch_5.48.L_Washer",
+      "Thigh_Service_Latch_5.48.L_HexSocket",
+      "Thigh_Service_Latch_5.48.L_DarkSocket",
+      "Thigh_Service_Latch_4.39.L_Washer",
+      "Thigh_Service_Latch_4.39.L_HexSocket",
+      "Thigh_Service_Latch_4.39.L_DarkSocket",
+      "Calf_Vector_Thruster_Bracket.L",
+      "Calf_Vector_Nozzle_Outer.L",
+      "Calf_Vector_Nozzle_Rim.L",
+      "Calf_Vector_Nozzle_Core.L",
+      "Calf_Armor_Catch_3.16.L_Washer",
+      "Calf_Armor_Catch_3.16.L_HexSocket",
+      "Calf_Armor_Catch_3.16.L_DarkSocket",
+      "Calf_Armor_Catch_2.29.L_Washer",
+      "Calf_Armor_Catch_2.29.L_HexSocket",
+      "Calf_Armor_Catch_2.29.L_DarkSocket",
+      "Calf_Armor_Catch_1.52.L_Washer",
+      "Calf_Armor_Catch_1.52.L_HexSocket",
+      "Calf_Armor_Catch_1.52.L_DarkSocket",
+      "Shin_Exposed_Transmission_-0.12.R",
+      "Shin_Exposed_Transmission_0.12.R",
+      "Shin_Exposed_Transmission_-0.12.L",
+      "Shin_Exposed_Transmission_0.12.L"
+    ],
+    "body_accepted_head_geometry_unchanged": true,
+    "body_head_fit_scale": 1.35,
+    "body_visual_fit_pass": 5,
+    "side_depth_revision": "User-requested full side elevation review: expanded thorax, pelvis, limb shells and feet; forward knees and wrists; circular rotary joints preserved.",
+    "side_surface_cleanup": "Superseded intersecting side sheets replaced by deliberate closed housings and planar service panels.",
+    "side_profile_fit_pass": 8,
+    "body_surface_final_pass": 9,
+    "body_final_review_note": "Side shell depth, forward chest wedge, stance and extended feet reviewed in orthographic views. Approved head mesh/material identity retained.",
+    "reference_image": "REFERENCE.png.001",
+    "body_reference_stage": 9,
+    "body_reference_notes": "Complete body reference refinement with final surface and fit corrections.",
+    "body_reference_source": "Accepted current assembly; original pivot hierarchy and internal drive components retained",
+    "design_height_m": 18.4,
+    "design_mass_t": 62.1,
+    "production_scale_m_per_reference_pixel": 0.008545977011494253,
+    "body_reference_delivery": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_reference_rebuild_20260906\\delivery",
+    "body_completion_status": "Reference body and side-depth correction complete; render and topology reviewed. Demo derivative is separate."
+  },
+  "objects": [
+    {
+      "name": "UpperArm.R",
+      "parent": "Thorax",
+      "world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.5469425320625305
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.04272988438606262
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.8201725482940674
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "props": {}
+    },
+    {
+      "name": "Forearm.R",
+      "parent": "UpperArm.R",
+      "world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.7434999942779541
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.03418390452861786
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.4014196395874023
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "props": {}
+    },
+    {
+      "name": "Hand.R",
+      "parent": "Forearm.R",
+      "world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.9571494460105896
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.15382759273052216
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          1.9313907623291016
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "props": {
+        "grip_reference_diameter_m": 0.058499999999999996
+      }
+    },
+    {
+      "name": "Shoulder_Armor_Floating_Pivot.R",
+      "parent": "Thorax",
+      "world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.5469425320625305
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.04272988438606262
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.905632257461548
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "props": {}
+    },
+    {
+      "name": "UpperArm.L",
+      "parent": "Thorax",
+      "world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.5469425320625305
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.04272988438606262
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.8201725482940674
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "props": {}
+    },
+    {
+      "name": "Forearm.L",
+      "parent": "UpperArm.L",
+      "world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.7434999942779541
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.03418390452861786
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.4014196395874023
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "props": {}
+    },
+    {
+      "name": "Hand.L",
+      "parent": "Forearm.L",
+      "world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.9571494460105896
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.15382759273052216
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          1.9313907623291016
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "props": {
+        "grip_reference_diameter_m": 0.058499999999999996
+      }
+    },
+    {
+      "name": "Shoulder_Armor_Floating_Pivot.L",
+      "parent": "Thorax",
+      "world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.5469425320625305
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.04272988438606262
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.905632257461548
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "props": {}
+    },
+    {
+      "name": "AntiShip_Blade_Display_Root",
+      "parent": "V3B_Sword_Grip_Socket",
+      "world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "props": {
+        "length_m": 2.275,
+        "height_ratio": 0.7,
+        "grip_diameter_m": 0.058499999999999996,
+        "approval": "Physical mass only; gray placeholder sensor and energy materials",
+        "Beam_On": true,
+        "attachment": "Right hand / fitted cylindrical grip",
+        "weapon_type": "Anti-ship beam sword, dual luminous edges over physical blade",
+        "blade_tip_world_m": "<bpy id property array [3]>"
+      }
+    },
+    {
+      "name": "V3B_Sword_Grip_Socket",
+      "parent": "Hand.R",
+      "world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.9913333654403687
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.20510344207286835
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          1.786109209060669
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "props": {
+        "grip_axis": "<bpy id property array [3]>"
+      }
+    }
+  ],
+  "weapons": [
+    "V3B_Sword_Grip_Continuous_Core",
+    "V3B_Sword_Grip_Rib_00",
+    "V3B_Sword_Grip_Inset_00",
+    "V3B_Sword_Grip_Pin_00_Seat",
+    "V3B_Sword_Grip_Pin_00_Hex",
+    "V3B_Sword_Grip_Pin_00_Socket",
+    "V3B_Sword_Grip_Rib_01",
+    "V3B_Sword_Grip_Inset_01",
+    "V3B_Sword_Grip_Pin_01_Seat",
+    "V3B_Sword_Grip_Pin_01_Hex",
+    "V3B_Sword_Grip_Pin_01_Socket",
+    "V3B_Sword_Grip_Rib_02",
+    "V3B_Sword_Grip_Inset_02",
+    "V3B_Sword_Grip_Pin_02_Seat",
+    "V3B_Sword_Grip_Pin_02_Hex",
+    "V3B_Sword_Grip_Pin_02_Socket",
+    "V3B_Sword_Grip_Rib_03",
+    "V3B_Sword_Grip_Inset_03",
+    "V3B_Sword_Grip_Pin_03_Seat",
+    "V3B_Sword_Grip_Pin_03_Hex",
+    "V3B_Sword_Grip_Pin_03_Socket",
+    "V3B_Sword_Grip_Rib_04",
+    "V3B_Sword_Grip_Inset_04",
+    "V3B_Sword_Grip_Pin_04_Seat",
+    "V3B_Sword_Grip_Pin_04_Hex",
+    "V3B_Sword_Grip_Pin_04_Socket",
+    "V3B_Sword_Grip_Rib_05",
+    "V3B_Sword_Grip_Inset_05",
+    "V3B_Sword_Grip_Pin_05_Seat",
+    "V3B_Sword_Grip_Pin_05_Hex",
+    "V3B_Sword_Grip_Pin_05_Socket",
+    "V3B_Sword_Grip_Rib_06",
+    "V3B_Sword_Grip_Inset_06",
+    "V3B_Sword_Grip_Pin_06_Seat",
+    "V3B_Sword_Grip_Pin_06_Hex",
+    "V3B_Sword_Grip_Pin_06_Socket",
+    "V3B_Sword_Grip_Rib_07",
+    "V3B_Sword_Grip_Inset_07",
+    "V3B_Sword_Grip_Pin_07_Seat",
+    "V3B_Sword_Grip_Pin_07_Hex",
+    "V3B_Sword_Grip_Pin_07_Socket",
+    "V3B_Sword_Pommel_Silver_Collar",
+    "V3B_Sword_Pommel_Closure",
+    "V3B_Sword_Pommel_Gold_Key",
+    "V3B_Sword_Grip_Guard_Collar",
+    "V3B_Sword_Octagonal_Emitter_Chassis",
+    "V3B_Sword_Circular_Emitter_Race_-1",
+    "V3B_Sword_Emitter_Dark_Core_-1",
+    "V3B_Sword_Cyan_Emitter_Lens_-1",
+    "V3B_Sword_Emitter_Luminous_Center_-1",
+    "V3B_Sword_Emitter_White_Guard_-1",
+    "V3B_Sword_Emitter_Front_Lock_-1",
+    "V3B_Sword_Emitter_Bolt_-1_0_Seat",
+    "V3B_Sword_Emitter_Bolt_-1_0_Hex",
+    "V3B_Sword_Emitter_Bolt_-1_0_Socket",
+    "V3B_Sword_Emitter_Bolt_-1_1_Seat",
+    "V3B_Sword_Emitter_Bolt_-1_1_Hex",
+    "V3B_Sword_Emitter_Bolt_-1_1_Socket",
+    "V3B_Sword_Emitter_Bolt_-1_2_Seat",
+    "V3B_Sword_Emitter_Bolt_-1_2_Hex",
+    "V3B_Sword_Emitter_Bolt_-1_2_Socket",
+    "V3B_Sword_Emitter_Bolt_-1_3_Seat",
+    "V3B_Sword_Emitter_Bolt_-1_3_Hex",
+    "V3B_Sword_Emitter_Bolt_-1_3_Socket",
+    "V3B_Sword_Root_Armor_Block_-1",
+    "V3B_Sword_Circular_Emitter_Race_1",
+    "V3B_Sword_Emitter_Dark_Core_1",
+    "V3B_Sword_Cyan_Emitter_Lens_1",
+    "V3B_Sword_Emitter_Luminous_Center_1",
+    "V3B_Sword_Emitter_White_Guard_1",
+    "V3B_Sword_Emitter_Front_Lock_1",
+    "V3B_Sword_Emitter_Bolt_1_0_Seat",
+    "V3B_Sword_Emitter_Bolt_1_0_Hex",
+    "V3B_Sword_Emitter_Bolt_1_0_Socket",
+    "V3B_Sword_Emitter_Bolt_1_1_Seat",
+    "V3B_Sword_Emitter_Bolt_1_1_Hex",
+    "V3B_Sword_Emitter_Bolt_1_1_Socket",
+    "V3B_Sword_Emitter_Bolt_1_2_Seat",
+    "V3B_Sword_Emitter_Bolt_1_2_Hex",
+    "V3B_Sword_Emitter_Bolt_1_2_Socket",
+    "V3B_Sword_Emitter_Bolt_1_3_Seat",
+    "V3B_Sword_Emitter_Bolt_1_3_Hex",
+    "V3B_Sword_Emitter_Bolt_1_3_Socket",
+    "V3B_Sword_Root_Armor_Block_1",
+    "V3B_Sword_Continuous_Physical_Diamond_Blade",
+    "V3B_Sword_Dark_Machinery_Spine_-1",
+    "V3B_Sword_Spine_Cartridge_-1_0",
+    "V3B_Sword_Gold_Conductor_-1_0",
+    "V3B_Sword_Cartridge_Pin_-1_0_-5.25_Seat",
+    "V3B_Sword_Cartridge_Pin_-1_0_-5.25_Hex",
+    "V3B_Sword_Cartridge_Pin_-1_0_-5.25_Socket",
+    "V3B_Sword_Cartridge_Pin_-1_0_5.25_Seat",
+    "V3B_Sword_Cartridge_Pin_-1_0_5.25_Hex",
+    "V3B_Sword_Cartridge_Pin_-1_0_5.25_Socket",
+    "V3B_Sword_Spine_Cartridge_-1_1",
+    "V3B_Sword_Gold_Conductor_-1_1",
+    "V3B_Sword_Cartridge_Pin_-1_1_-7.35_Seat",
+    "V3B_Sword_Cartridge_Pin_-1_1_-7.35_Hex",
+    "V3B_Sword_Cartridge_Pin_-1_1_-7.35_Socket",
+    "V3B_Sword_Cartridge_Pin_-1_1_7.35_Seat",
+    "V3B_Sword_Cartridge_Pin_-1_1_7.35_Hex",
+    "V3B_Sword_Cartridge_Pin_-1_1_7.35_Socket",
+    "V3B_Sword_Spine_Cartridge_-1_2",
+    "V3B_Sword_Gold_Conductor_-1_2",
+    "V3B_Sword_Cartridge_Pin_-1_2_-9.799999999999999_Seat",
+    "V3B_Sword_Cartridge_Pin_-1_2_-9.799999999999999_Hex",
+    "V3B_Sword_Cartridge_Pin_-1_2_-9.799999999999999_Socket",
+    "V3B_Sword_Cartridge_Pin_-1_2_9.799999999999999_Seat",
+    "V3B_Sword_Cartridge_Pin_-1_2_9.799999999999999_Hex",
+    "V3B_Sword_Cartridge_Pin_-1_2_9.799999999999999_Socket",
+    "V3B_Sword_Spine_Cartridge_-1_3",
+    "V3B_Sword_Spine_Cartridge_-1_4",
+    "V3B_Sword_Edge_Rail_-1_-3",
+    "V3B_Sword_Edge_Rail_-1_3",
+    "V3B_Sword_Dark_Machinery_Spine_1",
+    "V3B_Sword_Spine_Cartridge_1_0",
+    "V3B_Sword_Gold_Conductor_1_0",
+    "V3B_Sword_Cartridge_Pin_1_0_-5.25_Seat",
+    "V3B_Sword_Cartridge_Pin_1_0_-5.25_Hex",
+    "V3B_Sword_Cartridge_Pin_1_0_-5.25_Socket",
+    "V3B_Sword_Cartridge_Pin_1_0_5.25_Seat",
+    "V3B_Sword_Cartridge_Pin_1_0_5.25_Hex",
+    "V3B_Sword_Cartridge_Pin_1_0_5.25_Socket",
+    "V3B_Sword_Spine_Cartridge_1_1",
+    "V3B_Sword_Gold_Conductor_1_1",
+    "V3B_Sword_Cartridge_Pin_1_1_-7.35_Seat",
+    "V3B_Sword_Cartridge_Pin_1_1_-7.35_Hex",
+    "V3B_Sword_Cartridge_Pin_1_1_-7.35_Socket",
+    "V3B_Sword_Cartridge_Pin_1_1_7.35_Seat",
+    "V3B_Sword_Cartridge_Pin_1_1_7.35_Hex",
+    "V3B_Sword_Cartridge_Pin_1_1_7.35_Socket",
+    "V3B_Sword_Spine_Cartridge_1_2",
+    "V3B_Sword_Gold_Conductor_1_2",
+    "V3B_Sword_Cartridge_Pin_1_2_-9.799999999999999_Seat",
+    "V3B_Sword_Cartridge_Pin_1_2_-9.799999999999999_Hex",
+    "V3B_Sword_Cartridge_Pin_1_2_-9.799999999999999_Socket",
+    "V3B_Sword_Cartridge_Pin_1_2_9.799999999999999_Seat",
+    "V3B_Sword_Cartridge_Pin_1_2_9.799999999999999_Hex",
+    "V3B_Sword_Cartridge_Pin_1_2_9.799999999999999_Socket",
+    "V3B_Sword_Spine_Cartridge_1_3",
+    "V3B_Sword_Spine_Cartridge_1_4",
+    "V3B_Sword_Edge_Rail_1_-3",
+    "V3B_Sword_Edge_Rail_1_3",
+    "V3B_Sword_beam_Edge_-1_00",
+    "V3B_Sword_beam_core_Edge_-1_00",
+    "V3B_Sword_beam_Edge_-1_01",
+    "V3B_Sword_beam_core_Edge_-1_01",
+    "V3B_Sword_beam_Edge_-1_02",
+    "V3B_Sword_beam_core_Edge_-1_02",
+    "V3B_Sword_beam_Edge_-1_03",
+    "V3B_Sword_beam_core_Edge_-1_03",
+    "V3B_Sword_beam_Edge_-1_04",
+    "V3B_Sword_beam_core_Edge_-1_04",
+    "V3B_Sword_beam_Edge_1_00",
+    "V3B_Sword_beam_core_Edge_1_00",
+    "V3B_Sword_beam_Edge_1_01",
+    "V3B_Sword_beam_core_Edge_1_01",
+    "V3B_Sword_beam_Edge_1_02",
+    "V3B_Sword_beam_core_Edge_1_02",
+    "V3B_Sword_beam_Edge_1_03",
+    "V3B_Sword_beam_core_Edge_1_03",
+    "V3B_Sword_beam_Edge_1_04",
+    "V3B_Sword_beam_core_Edge_1_04"
+  ]
+}

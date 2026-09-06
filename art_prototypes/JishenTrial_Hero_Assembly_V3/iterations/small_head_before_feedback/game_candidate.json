@@ -1,0 +1,32 @@
+{
+  "meshes": 110,
+  "triangles": 129824,
+  "materials": [
+    "JT_DEMO_Armor",
+    "JT_DEMO_Beam",
+    "JT_DEMO_Mechanics",
+    "JT_DEMO_Sensor",
+    "JT_DEMO_Weapon"
+  ],
+  "source_head_parts": 22,
+  "head_side_approved": false,
+  "crown_height_m": 3.25,
+  "rigged": false,
+  "animations": 0,
+  "uv": "Body Armor in left atlas tile, newly baked head in right tile; UV0",
+  "atlas_dimensions": {
+    "Armor": [
+      4096,
+      2048
+    ],
+    "Mechanics": [
+      2048,
+      2048
+    ],
+    "Weapon": [
+      2048,
+      2048
+    ]
+  },
+  "nonmanifold_edges": {}
+}

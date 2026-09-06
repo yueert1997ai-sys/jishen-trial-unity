@@ -1,0 +1,89 @@
+{
+  "iteration": 1,
+  "blend": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_HEAD_V2\\iterations\\HEAD_V2_ITER01\\HEAD_V2_ITER01.blend",
+  "visible_primary_meshes": 22,
+  "parameters": {
+    "iteration": 1,
+    "review_intent": "Fresh primary form reconstruction; initial clay silhouette inspection",
+    "crown_width": 1.0,
+    "temple_width": 1.0,
+    "forehead_width": 1.0,
+    "rear_depth": 1.0,
+    "eye_length": 1.0,
+    "eye_depth": 0.047,
+    "mask_width": 1.0,
+    "mask_y": 0.0,
+    "cheek_width": 1.0,
+    "brow_drop": 0.0,
+    "fin_height": 1.0
+  },
+  "landmarks_design_units": {
+    "TOP": [
+      0,
+      0.12,
+      1.02
+    ],
+    "ANTENNA ROOT": [
+      -0.327,
+      -0.013,
+      0.834
+    ],
+    "FOREHEAD": [
+      0,
+      -0.332,
+      0.7
+    ],
+    "EYE LINE": [
+      -0.175,
+      -0.346,
+      0.459
+    ],
+    "CHEEK WIDTH": [
+      -0.418,
+      -0.133,
+      0.53
+    ],
+    "MASK TIP": [
+      0,
+      -0.418,
+      0.035
+    ],
+    "CHIN": [
+      0,
+      -0.382,
+      -0.025
+    ],
+    "REAR HEAD": [
+      0,
+      0.383,
+      0.55
+    ]
+  },
+  "camera_rig": {
+    "HEAD_FRONT": [
+      0,
+      -7,
+      0.465
+    ],
+    "HEAD_SIDE": [
+      -7,
+      0,
+      0.465
+    ],
+    "HEAD_BACK": [
+      0,
+      7,
+      0.465
+    ],
+    "HEAD_3Q": [
+      -4.4,
+      -7,
+      2.75
+    ]
+  },
+  "materials": 1,
+  "body_imported": false,
+  "emission": false,
+  "textures": false,
+  "micro_details": false
+}

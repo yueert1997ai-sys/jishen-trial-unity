@@ -1,0 +1,11 @@
+{
+  "output": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\iteration_v3\\social_showcase_20260906\\comparison_only\\VALKYR_TYPE01_FOUR_VIEW_COMPARISON_WHITE.png",
+  "model_file_modified": false,
+  "original_board_sha256": "9a8cebd45d5174745c20689a47b5ac808dd524f3317a6424c566dfa53b73cecb",
+  "model_view_sha256": {
+    "FRONT": "b54f5786fffec28e00a0bf9cabf749e19786af2d588f4486dbb85b765e715021",
+    "LEFT": "df580b87c742e6c1a5086b4b9c82fa5610dca559043369e563d2af425fd8ca52",
+    "BACK": "bbac21ad05ef244b426902ae4aa8e06b4d17bae2c7059279bc11ee79d1525569",
+    "RIGHT": "657b5ca151517f85b18303ec79f8afa96681463067de3ad918ffc2429bbbdf76"
+  }
+}

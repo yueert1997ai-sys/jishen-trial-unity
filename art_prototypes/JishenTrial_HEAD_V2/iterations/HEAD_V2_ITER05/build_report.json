@@ -1,0 +1,100 @@
+{
+  "iteration": 5,
+  "blend": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_HEAD_V2\\iterations\\HEAD_V2_ITER05\\HEAD_V2_ITER05.blend",
+  "visible_primary_meshes": 22,
+  "parameters": {
+    "iteration": 5,
+    "review_intent": "After TOP/CHIN aligned reference comparison: reduce head width 14%, move fin roots inward, shorten mask height 22% while keeping eye-line fixed",
+    "crown_width": 1.0,
+    "temple_width": 1.0,
+    "forehead_width": 1.0,
+    "rear_depth": 1.0,
+    "eye_length": 0.97,
+    "eye_depth": 0.035,
+    "eye_inset": 0.058,
+    "mask_width": 0.9,
+    "mask_y": 0.014,
+    "cheek_width": 1.0,
+    "lower_face_factor": 0.74,
+    "head_width_factor": 0.86,
+    "mask_height_factor": 0.78,
+    "fin_inset": 0.06,
+    "brow_drop": 0.0,
+    "fin_height": 0.86,
+    "continuous_shell": true,
+    "buried_eyes": true,
+    "integrated_face": true,
+    "surface_order_fix": true,
+    "neck_ring_raise": 0.029,
+    "light_energy_factor": 0.26
+  },
+  "landmarks_design_units": {
+    "TOP": [
+      0.0,
+      0.12,
+      1.02
+    ],
+    "ANTENNA ROOT": [
+      -0.22962000000000002,
+      -0.013,
+      0.834
+    ],
+    "FOREHEAD": [
+      0.0,
+      -0.332,
+      0.7
+    ],
+    "EYE LINE": [
+      -0.1505,
+      -0.346,
+      0.46186
+    ],
+    "CHEEK WIDTH": [
+      -0.35947999999999997,
+      -0.133,
+      0.53
+    ],
+    "MASK TIP": [
+      0.0,
+      -0.40399999999999997,
+      0.20898719999999993
+    ],
+    "CHIN": [
+      0.0,
+      -0.382,
+      0.10369999999999996
+    ],
+    "REAR HEAD": [
+      0.0,
+      0.383,
+      0.55
+    ]
+  },
+  "camera_rig": {
+    "HEAD_FRONT": [
+      0,
+      -7,
+      0.465
+    ],
+    "HEAD_SIDE": [
+      -7,
+      0,
+      0.465
+    ],
+    "HEAD_BACK": [
+      0,
+      7,
+      0.465
+    ],
+    "HEAD_3Q": [
+      -4.4,
+      -7,
+      2.75
+    ]
+  },
+  "materials": 1,
+  "body_imported": false,
+  "emission": false,
+  "textures": false,
+  "micro_details": false
+}

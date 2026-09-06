@@ -1,0 +1,24 @@
+{
+  "source": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\iteration_v3\\social_showcase_20260906\\VALKYR_V3_SOCIAL_DISPLAY.blend",
+  "source_sha256": "7dc7aba13535e7b42c51486b1c47bcecb81155118428cce73c5fd5d3bc180056",
+  "views": [
+    {
+      "name": "FRONT",
+      "ortho_scale": 4.925189971923828,
+      "outward": [
+        0.0,
+        -1.0,
+        0.0
+      ]
+    },
+    {
+      "name": "HERO",
+      "ortho_scale": 4.924656867980957,
+      "outward": [
+        0.3194918930530548,
+        -0.9396820068359375,
+        0.12215865403413773
+      ]
+    }
+  ]
+}

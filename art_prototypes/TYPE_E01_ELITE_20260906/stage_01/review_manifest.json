@@ -1,0 +1,25 @@
+{
+  "model": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\TYPE_E01_ELITE_20260906\\stage_01\\TYPE_E01_ELITE_STAGE01.blend",
+  "sha256": "ef4ad850c5b3df9886f4c5717822b8a67db47d2b12100c95ba15c7ef5c3c6d21",
+  "renders": [
+    "BACK.png",
+    "CLAW.png",
+    "CORE.png",
+    "DORSAL.png",
+    "FRONT.png",
+    "GAME_READ.png",
+    "HEAD.png",
+    "HEAD_INVADED.png",
+    "HERO.png",
+    "HERO_DRAFT.png",
+    "LEFT.png",
+    "RIGHT.png"
+  ],
+  "review_boards": [
+    "ELITE_MODEL_REVIEW.jpg",
+    "ELITE_FOUR_VIEWS.jpg",
+    "ELITE_DETAILS.jpg"
+  ],
+  "images_are": "Native Blender render outputs; only resized and arranged into boards",
+  "stage": "Modeling approval gate. Not rigged or integrated into the game yet."
+}

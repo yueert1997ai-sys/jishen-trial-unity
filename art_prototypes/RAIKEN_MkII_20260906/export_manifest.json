@@ -1,0 +1,93 @@
+{
+  "scale": 0.19021739130434784,
+  "production_length_m": 3.519021739130435,
+  "meshes": [
+    {
+      "name": "RAIKEN_Solid_05_Inner_Frame",
+      "triangles": 6276,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": false
+    },
+    {
+      "name": "RAIKEN_Solid_07_Brass_Fasteners",
+      "triangles": 12140,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": false
+    },
+    {
+      "name": "RAIKEN_Solid_03_Gunmetal_Panels",
+      "triangles": 15476,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": false
+    },
+    {
+      "name": "RAIKEN_Solid_06_Recess_And_Grip",
+      "triangles": 18364,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": false
+    },
+    {
+      "name": "RAIKEN_Solid_04_Machined_Titanium",
+      "triangles": 9724,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": false
+    },
+    {
+      "name": "RAIKEN_Solid_02_Deep_Navy",
+      "triangles": 3272,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": false
+    },
+    {
+      "name": "RAIKEN_Solid_01_Cobalt_Armor",
+      "triangles": 1256,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": false
+    },
+    {
+      "name": "RAIKEN_Solid_08_Cyan_Emitter",
+      "triangles": 360,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": false
+    },
+    {
+      "name": "RAIKEN_Solid_10_Beam_Core",
+      "triangles": 136,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": false
+    },
+    {
+      "name": "RAIKEN_Solid_11_Identification",
+      "triangles": 2632,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": false
+    },
+    {
+      "name": "RAIKEN_Beam_09_Beam_Sheath",
+      "triangles": 44,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": true
+    },
+    {
+      "name": "RAIKEN_Beam_10_Beam_Core",
+      "triangles": 44,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0,
+      "beam": true
+    }
+  ],
+  "triangles": 69724,
+  "materials": 11,
+  "mesh_count": 12
+}

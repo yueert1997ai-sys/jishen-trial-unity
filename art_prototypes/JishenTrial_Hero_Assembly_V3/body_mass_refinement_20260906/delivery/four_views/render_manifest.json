@@ -1,0 +1,50 @@
+{
+  "source": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\JishenTrial_ASSEMBLED_MASTER.blend",
+  "source_sha256": "dd743a9f7a3bca5c42d208ad7ec2b8e5822c4a028e0dbb526d84c84b2081dbce",
+  "mass_revision": 10,
+  "mesh_count": 3144,
+  "projection": "ORTHOGRAPHIC",
+  "includes_current_weapon": true,
+  "views": [
+    {
+      "view": "FRONT",
+      "file": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\delivery\\four_views\\FRONT.png",
+      "camera_location": [
+        -1.4018924236297607,
+        -19.952688217163086,
+        1.7477316856384277
+      ],
+      "ortho_scale": 5.557432174682617
+    },
+    {
+      "view": "BACK",
+      "file": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\delivery\\four_views\\BACK.png",
+      "camera_location": [
+        -1.4018924236297607,
+        20.047311782836914,
+        1.7477316856384277
+      ],
+      "ortho_scale": 5.557432174682617
+    },
+    {
+      "view": "LEFT",
+      "file": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\delivery\\four_views\\LEFT.png",
+      "camera_location": [
+        18.598108291625977,
+        0.0473121702671051,
+        1.7477316856384277
+      ],
+      "ortho_scale": 5.557432174682617
+    },
+    {
+      "view": "RIGHT",
+      "file": "C:\\Users\\yue\\Documents\\MECH ROUGE\\art_prototypes\\JishenTrial_Hero_Assembly_V3\\body_mass_refinement_20260906\\delivery\\four_views\\RIGHT.png",
+      "camera_location": [
+        -21.401891708374023,
+        0.0473121702671051,
+        1.7477316856384277
+      ],
+      "ortho_scale": 5.557432174682617
+    }
+  ]
+}
