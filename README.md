@@ -1,5 +1,9 @@
 # 机神试炼 / MECH ROUGE
 
+2026-09-06 最新试玩已在现有游戏副本中更新第三版厚装甲与双手持刀机甲：`handoff/GameplayLoop_V1/Builds/ValkyrV3/MECH_TRIAL_Valkyr.exe`。模型接入、动作检查和继续开发的位置见 [第三版游戏更新](handoff/GameplayLoop_V1/docs/VALKYR_V3_MODEL_UPDATE.md)；该副本保留已实现的装备收藏与推进飞行。下文为本目录此前版本记录。
+
+玩法方向已于 2026-09-06 确认：固定机体，夺取并永久收藏敌方武器与背包；局内 buff 随机获取，结束后清空。后续迭代依据见 [核心玩法约定](docs/CORE_GAME_DESIGN.md)。这些新系统待实现，下文仍为现有原型说明。
+
 最新一轮：右摇杆按住拖动瞄准射击、独立挥刀键，以及低饱和环境与 UI。桌面鼠标瞄准、左键按住射击，右键 / Q 挥刀；不再自动炮击。保留工业建筑、推进器冲刺和桌面不限帧，未动另一边的主角模型制作。见 [操作与配色交接](docs/MANUAL_COMBAT_HANDOFF.md)。
 
 Unity 6 上帝视角机甲 Roguelite 作品原型。当前源码已接通手机横屏操作、手动射击与挥刀、两战区六场战斗、六次强化、两阶段 Boss 和一次存档续关。历史自动射击版本的 626.66 秒 Play Mode 回归不代表本轮新操作验证。当前交接以 [操作与配色交接](docs/MANUAL_COMBAT_HANDOFF.md) 为准，[项目审计](docs/AUDIT_2026-09-05.md) 保留改版前基线。当前流程：

@@ -1,5 +1,7 @@
 # Rigged Hero Asset Pipeline
 
+The active player now uses the frozen Jishen assembly through `tools/jishen/`. This older pipeline remains the animation skeleton/motion source and rollback visual. Running `HeroVisualBuilder.Build` would explicitly switch the active player back to that older visual; use `JishenHeroIntegration` for the current integration.
+
 Only `prepare_hero.py` is required to regenerate the shipped model. It reads the fixed files in `source/`, uses Blender's existing FBX/glTF import/export APIs, retargets the animations and writes `Assets/Art/Hero/RiggedSentinel.fbx`. No download, desktop automation, auto-rig service or paid plugin runs as part of regeneration.
 
 ```

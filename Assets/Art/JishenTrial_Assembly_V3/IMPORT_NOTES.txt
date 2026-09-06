@@ -1,0 +1,6 @@
+Static assembly review. No rig, animation controller or gameplay components.
+The side form of HEAD_V2 remains rejected by the user.
+5 shared Standard materials; Armor 4096x2048, Mechanics/Weapon 2048x2048.
+MetalSmooth texture R = metallic; A = 1 - roughness.
+Prefab path is deliberately different from the game auto-load path.
+No Assets/UserContent/PlayerMech/PlayerMech.prefab is supplied.

@@ -15,6 +15,7 @@ public sealed class MechDashPresentation : MonoBehaviour
     private Material glow, housing;
     private Vector3 direction;
     private float started = -10, pulse;
+    private bool integratedNozzles;
     public float Pulse => pulse;
     public int ActiveTrailCount => trails == null ? 0 : (trails[0].emitting ? 2 : 0);
 
@@ -32,7 +33,8 @@ public sealed class MechDashPresentation : MonoBehaviour
     private void Start()
     {
         rig = GetComponentInChildren<RiggedMechAnimator>();
-        Transform anchor = rig != null ? rig.chest : transform;
+        Transform anchor = rig != null ? (rig.rigidPose != null ? rig.rigidPose.Resolve(rig.chest) : rig.chest) : transform;
+        integratedNozzles = rig != null && rig.rigidPose != null && rig.rigidPose.thrusters.Length == 2;
         glow = new Material(Shader.Find("Sprites/Default"));
         housing = new Material(Shader.Find("Standard"));
         housing.color = new Color(.13f, .17f, .19f);
@@ -42,16 +44,23 @@ public sealed class MechDashPresentation : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             var jet = new GameObject("DashGimbal_" + i).transform;
-            jet.position = transform.position + Vector3.up * 2.05f - transform.forward * .48f + transform.right * (i == 0 ? -.48f : .48f);
-            jet.SetParent(anchor, true);
+            if (integratedNozzles) jet.SetParent(rig.rigidPose.thrusters[i], false);
+            else
+            {
+                jet.position = transform.position + Vector3.up * 2.05f - transform.forward * .48f + transform.right * (i == 0 ? -.48f : .48f);
+                jet.SetParent(anchor, true);
+            }
             jets[i] = jet;
-            var nozzle = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            Destroy(nozzle.GetComponent<Collider>());
-            nozzle.name = "ThrusterNozzle";
-            nozzle.transform.SetParent(jet, false);
-            nozzle.transform.localRotation = Quaternion.Euler(90, 0, 0);
-            nozzle.transform.localScale = new Vector3(.29f, .2f, .29f);
-            nozzle.GetComponent<Renderer>().sharedMaterial = housing;
+            if (!integratedNozzles)
+            {
+                var nozzle = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+                Destroy(nozzle.GetComponent<Collider>());
+                nozzle.name = "ThrusterNozzle";
+                nozzle.transform.SetParent(jet, false);
+                nozzle.transform.localRotation = Quaternion.Euler(90, 0, 0);
+                nozzle.transform.localScale = new Vector3(.29f, .2f, .29f);
+                nozzle.GetComponent<Renderer>().sharedMaterial = housing;
+            }
             for (int layer = 0; layer < 2; layer++)
             {
                 var line = new GameObject("JetFlame_" + layer).AddComponent<LineRenderer>();
@@ -102,12 +111,17 @@ public sealed class MechDashPresentation : MonoBehaviour
         if (!player.IsDashing) pulse = Mathf.Min(pulse, .6f * release);
         if (rig != null && rig.enabled && alive && pulse > 0)
         {
-            // Rotate the animated skeleton, retaining the cannon's solved aim direction.
-            Quaternion cannonRotation = rig.leftForearm.rotation;
+            // Tilt the displayed body and retain the solved muzzle direction.
+            Transform hips = rig.rigidPose != null ? rig.rigidPose.Resolve(rig.hips) : rig.hips;
+            Transform chest = rig.rigidPose != null ? rig.rigidPose.Resolve(rig.chest) : rig.chest;
+            Transform cannon = rig.rigidPose != null ? rig.rigidPose.cannon : rig.leftForearm;
+            Quaternion cannonRotation = cannon.rotation;
             Vector3 axis = Vector3.Cross(Vector3.up, direction);
-            rig.hips.rotation = Quaternion.AngleAxis(24 * pulse, axis) * rig.hips.rotation;
-            rig.chest.rotation = Quaternion.AngleAxis(10 * pulse, axis) * rig.chest.rotation;
-            rig.leftForearm.rotation = cannonRotation;
+            hips.rotation = Quaternion.AngleAxis(24 * pulse, axis) * hips.rotation;
+            chest.rotation = Quaternion.AngleAxis(10 * pulse, axis) * chest.rotation;
+            cannon.rotation = cannonRotation;
+            if (rig.rigidPose != null) rig.rigidPose.GroundFeet();
+            rig.RefreshSockets();
         }
         Vector3 exhaust = -(player.IsDashing ? direction : transform.forward) + Vector3.down * .15f;
         for (int i = 0; i < 2; i++)
@@ -122,9 +136,10 @@ public sealed class MechDashPresentation : MonoBehaviour
                 length *= 1 + Mathf.Sin(Time.time * 90 + i) * .06f;
                 flame.startWidth = (.07f + .3f * pulse) * (layer == 0 ? 1 : .45f);
                 flame.endWidth = .008f;
-                flame.SetPosition(0, new Vector3(0, 0, .17f));
-                flame.SetPosition(1, new Vector3(0, 0, .17f + length * .35f));
-                flame.SetPosition(2, new Vector3(0, 0, .17f + length));
+                float start = integratedNozzles ? 0 : .17f;
+                flame.SetPosition(0, new Vector3(0, 0, start));
+                flame.SetPosition(1, new Vector3(0, 0, start + length * .35f));
+                flame.SetPosition(2, new Vector3(0, 0, start + length));
             }
         }
     }

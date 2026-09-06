@@ -1,5 +1,7 @@
 # Mobile-first vertical slice
 
+Historical slice plan. For the next gameplay iteration, decisions that conflict with the [core game design approved on 2026-09-06](CORE_GAME_DESIGN.md) are superseded by that document. Existing implementation and validation notes below remain historical records.
+
 Approved 2026-09-05. Start from commit 65ca4d9, never rebuild the game from scratch.
 
 ## Locked decisions

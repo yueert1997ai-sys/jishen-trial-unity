@@ -79,11 +79,25 @@ public static class HeroVisualAudit
         hero = player.GetComponentInChildren<RiggedMechAnimator>();
         Check(hero != null && hero.enabled && hero.animator.isInitialized, "rigged_hero_loaded");
         Check(!player.GetComponent<MechMotionAnimator>().enabled, "legacy_whole_mesh_bob_disabled");
-        Check(player.weaponController.muzzle == hero.muzzle && hero.muzzle.IsChildOf(hero.leftForearm), "cannon_uses_real_bone_socket");
-        Check(hero.bladeTip.IsChildOf(hero.rightHand), "blade_attached_to_hand");
+        Check(player.weaponController.muzzle == hero.muzzle && hero.muzzle.IsChildOf(hero.rigidPose != null ? hero.rigidPose.cannon : hero.leftForearm), "cannon_uses_real_bone_socket");
+        Check(hero.bladeTip.IsChildOf(hero.rigidPose != null ? hero.rigidPose.Resolve(hero.rightHand) : hero.rightHand), "blade_attached_to_hand");
         var skin = hero.GetComponentInChildren<SkinnedMeshRenderer>();
-        Check(skin.bones.Length >= 40 && skin.sharedMesh.vertexCount > 1000, "skinned_mesh_and_bones_present");
-        report.Add("SKIN vertices=" + skin.sharedMesh.vertexCount + " bones=" + skin.bones.Length + " submeshes=" + skin.sharedMesh.subMeshCount);
+        if (hero.rigidPose != null)
+        {
+            var meshes = hero.rigidPose.assemblyRoot.GetComponentsInChildren<MeshFilter>();
+            Check(skin == null && meshes.Length == 110 && hero.rigidPose.segments.Length >= 15, "frozen_rigid_armor_and_animation_bindings_present");
+            Check(meshes.Sum(m => m.sharedMesh.triangles.Length / 3) == 129824, "frozen_geometry_triangles_preserved");
+            Check(hero.rigidPose.thrusters.Length == 2 && !hero.GetComponentsInChildren<Transform>().Any(t => t.name == "ThrusterNozzle"), "vfx_uses_existing_backpack_nozzles");
+            hero.rigidPose.SetBeamActive(false);
+            Check(!hero.rigidPose.beam.activeInHierarchy && meshes.Where(m => m.name == "LOD0_AntiShipBlade_Weapon").All(m => m.gameObject.activeInHierarchy), "beam_switch_preserves_physical_blade");
+            hero.rigidPose.SetBeamActive(true);
+            report.Add("RIGID meshes=" + meshes.Length + " materials=" + meshes.SelectMany(m => m.GetComponent<Renderer>().sharedMaterials).Distinct().Count());
+        }
+        else
+        {
+            Check(skin.bones.Length >= 40 && skin.sharedMesh.vertexCount > 1000, "skinned_mesh_and_bones_present");
+            report.Add("SKIN vertices=" + skin.sharedMesh.vertexCount + " bones=" + skin.bones.Length + " submeshes=" + skin.sharedMesh.subMeshCount);
+        }
         camera = Camera.main;
         Capture("01_hangar_game_camera");
         ProjectAudit.Click("DeployButton");
@@ -104,6 +118,7 @@ public static class HeroVisualAudit
         shin = hero.GetComponentsInChildren<Transform>().Single(t => t.name == "shin.L");
         thigh = hero.GetComponentsInChildren<Transform>().Single(t => t.name == "thigh.L");
         foot = hero.GetComponentsInChildren<Transform>().Single(t => t.name == "foot.L");
+        if (hero.rigidPose != null) { shin = hero.rigidPose.Resolve(shin); thigh = hero.rigidPose.Resolve(thigh); foot = hero.rigidPose.Resolve(foot); }
         idleKneeBend = Vector3.Angle(shin.position - thigh.position, foot.position - shin.position);
         cameraOffset.z = 7;
         Capture("idle_front");
@@ -176,7 +191,7 @@ public static class HeroVisualAudit
         Check(player.GetComponent<Damageable>().IsDead, "actual_player_death");
         var death = Sequence("death", 4, .18f, .04f, true);
         while (death.MoveNext()) yield return null;
-        report.Add("RENDER: Unity Play Mode, actual scene and skinned mesh. Closeups move only the diagnostic camera. Time.captureDeltaTime=1/60; not a performance measurement.");
+        report.Add("RENDER: Unity Play Mode, actual scene and visible mesh vertices (skinned or rigid armor). Closeups move only the diagnostic camera. Time.captureDeltaTime=1/60; not a performance measurement.");
     }
 
     private static IEnumerator Sequence(string name, int count, float interval, float minimumMotion, bool unscaled = false)
@@ -208,6 +223,17 @@ public static class HeroVisualAudit
 
     private static Vector3[] SkinPoints()
     {
+        if (hero.rigidPose != null)
+        {
+            var samples = new List<Vector3>();
+            foreach (var filter in hero.rigidPose.assemblyRoot.GetComponentsInChildren<MeshFilter>().Where(f => !f.name.Contains("AntiShipBlade")))
+            {
+                var rigidVertices = filter.sharedMesh.vertices;
+                Matrix4x4 transform = hero.transform.worldToLocalMatrix * filter.transform.localToWorldMatrix;
+                for (int i = 0; i < rigidVertices.Length; i += 37) samples.Add(transform.MultiplyPoint3x4(rigidVertices[i]));
+            }
+            return samples.ToArray();
+        }
         var skin = hero.GetComponentInChildren<SkinnedMeshRenderer>();
         var mesh = new Mesh();
         skin.BakeMesh(mesh);

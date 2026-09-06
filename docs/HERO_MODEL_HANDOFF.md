@@ -1,5 +1,7 @@
 # Hero Model Pass / 2026-09-05
 
+Current visual integration: [JISHEN_GAME_INTEGRATION.md](JISHEN_GAME_INTEGRATION.md). This document records the earlier robot pass; its rig and clips remain the animation driver, but its visible mesh is no longer the active hero.
+
 Historical hero-only pass. Current manual shooting and playable slash supersede its automatic-fire/no-melee scope: see [MANUAL_COMBAT_HANDOFF.md](MANUAL_COMBAT_HANDOFF.md). The model itself remains unchanged.
 
 ## Scope And Starting Point

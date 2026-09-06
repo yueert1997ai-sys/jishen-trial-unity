@@ -20,3 +20,20 @@ sysinfo.txt
 /AuditEvidence/
 __pycache__/
 /tools/hero/source/*.blend1
+
+# Local/private records and unrelated utilities are not game source.
+/docs/chat-recovery-*/
+/agent/
+/data/
+/handoff/
+/prolasso.ini*
+/wegame*
+/*.m4a
+**/optix7cache.db
+
+# Keep authored Blender sources, not autosaves, nested Unity review copies or duplicate packages.
+*.blend[0-9]
+/art_prototypes/**/UnityImportReview/
+/art_prototypes/**/*.log
+/art_prototypes/**/*.zip
+/art_prototypes/**/*.unitypackage
