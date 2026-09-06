@@ -22,7 +22,7 @@ public class StageManager : MonoBehaviour
 
     public void StartStage(int stageIndex) { StartEncounter((stageIndex - 1) * 3); }
 
-    public void StartEncounter(int index)
+    public void StartEncounter(int index, GameObject bossOverride = null)
     {
         StopStage();
         CurrentEncounter = Mathf.Clamp(index, 0, 6);
@@ -31,7 +31,7 @@ public class StageManager : MonoBehaviour
             WaveRepairsGranted = 0;
             System.Array.Clear(EncounterSeconds, 0, EncounterSeconds.Length);
         }
-        stageRoutine = StartCoroutine(index == 6 ? RunBoss() : RunEncounterStage(index));
+        stageRoutine = StartCoroutine(index == 6 ? RunBoss(bossOverride) : RunEncounterStage(index));
     }
 
     public void NotifyEnemySpawned() { enemiesAlive++; }
@@ -72,19 +72,21 @@ public class StageManager : MonoBehaviour
         gm.OnEncounterCleared(index);
     }
 
-    private IEnumerator RunBoss()
+    private IEnumerator RunBoss(GameObject bossOverride)
     {
         var gm = GameManager.Instance;
-        gm.SetProgress("REACTOR WARDEN  /  INCOMING");
+        var prefab = bossOverride != null ? bossOverride : enemySpawner.DefaultBossPrefab;
+        var bossDefinition = prefab != null ? prefab.GetComponent<BossController>() : null;
+        gm.SetProgress((bossDefinition != null ? bossDefinition.DisplayName : GameText.T("REACTOR WARDEN")) + "  /  " + GameText.T("INCOMING"));
         GameAudio.Play(GameAudioCue.Warning, 0.5f, 0.82f);
         yield return new WaitForSeconds(1.4f);
-        var boss = enemySpawner.SpawnBoss();
+        var boss = enemySpawner.SpawnBoss(prefab);
         if (boss == null)
         {
             Debug.LogError("Boss prefab is missing; cannot complete the mission.");
             yield break;
         }
-        gm.SetProgress("REACTOR WARDEN  /  PHASE 1");
+        gm.SetProgress(boss.DisplayName + "  /  " + GameText.T("PHASE 1"));
         while (bossAlive) yield return null;
         stageRoutine = null;
         gm.OnStageCleared(2);
@@ -110,8 +112,11 @@ public class StageManager : MonoBehaviour
         for (int index = 0; index < encounter.beats.Length; index++)
         {
             var beat = encounter.beats[index];
-            int count = Mathf.Clamp(beat.count, 1, Mathf.Max(1, encounter.maxAlive));
-            while (Time.time - start < beat.at || enemiesAlive + count > Mathf.Max(1, encounter.maxAlive)) yield return null;
+            bool shortRooms = GameManager.Instance != null && GameManager.Instance.equipmentLoop != null;
+            int limit = shortRooms ? Mathf.Min(8, Mathf.Max(1, encounter.maxAlive)) : Mathf.Max(1, encounter.maxAlive);
+            int count = Mathf.Clamp(beat.count, 1, shortRooms ? Mathf.Min(3, limit) : limit);
+            float at = shortRooms ? beat.at * .3f : beat.at;
+            while (Time.time - start < at || enemiesAlive + count > limit) yield return null;
             if (GameManager.Instance == null || !GameManager.Instance.IsCombatActive) yield break;
             enemySpawner.SpawnEntry(beat.kind, count, beat.entry);
             GameManager.Instance.SetProgress(encounter.title + "  /  " + Mathf.RoundToInt((index + 1f) / encounter.beats.Length * 100f) + "%");

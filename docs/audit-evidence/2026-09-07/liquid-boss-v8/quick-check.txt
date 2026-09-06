@@ -1,0 +1,24 @@
+PASS normal launch opens the homepage
+PASS homepage has an enabled liquid-boss challenge button
+PASS homepage button goes directly to the valid final encounter
+PASS direct challenge receives six temporary random upgrades
+PASS liquid boss actually spawns, independent of the veteran
+PASS liquid boss imported skeleton and both LOD meshes are bound in the Player
+PASS actual Player renderers use the living-metal materials
+PASS V7 protagonist, large combo profile and sword remain active
+PASS normal direct challenge does not grant invulnerability
+PASS boss attacks and its liquid-metal appendages animate
+PASS pause freezes the boss attack and deformation
+PASS boss exposes its core after attacking
+PASS core opening is driven by the actual damage window
+PASS V7 sword sweep damages the liquid boss collider through the real attack path
+PASS half-health state drives phase two and its visual transition
+PASS boss death animation leads to the normal victory result
+PASS six challenge buffs are cleared after the fight
+PASS result button returns to a fresh homepage
+PASS retained veteran trial still selects the old mech boss
+PASS ordinary sortie still starts at encounter one without challenge buffs
+PASS ordinary sortie final boss resolves to the liquid boss after returning from veteran trial
+Test-only protection, half-health and death overrides were used to check lifecycle; this is not a natural boss clear.
+Version=liquid-boss-v8-20260906.162239 GPU=NVIDIA GeForce RTX 4070 Ti
+LIQUID_BOSS_CHECK code=0 errors=0

@@ -18,7 +18,7 @@ public static class GamePreferences
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Load()
     {
-        Chinese = PlayerPrefs.GetInt(Prefix + "Chinese", 0) == 1;
+        Chinese = PlayerPrefs.GetInt(Prefix + "Chinese", 1) == 1;
         Master = Mathf.Clamp01(PlayerPrefs.GetFloat(Prefix + "Master", 1));
         Music = Mathf.Clamp01(PlayerPrefs.GetFloat(Prefix + "Music", 1));
         Effects = Mathf.Clamp01(PlayerPrefs.GetFloat(Prefix + "Effects", 1));

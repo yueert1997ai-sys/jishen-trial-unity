@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     // Retained for serialized compatibility only. All live beam input is manual.
     [HideInInspector] public bool automaticFire;
     public PlayerMeleeController Melee { get; private set; }
+    public PlayerWeaponStance Stance { get; private set; }
 
     public PlayerInputRouter InputRouter { get; private set; }
     public AutoAimController AutoAim { get; private set; }
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 MoveDirection { get; private set; }
     public Vector3 Velocity { get; private set; }
     public bool IsDashing => dashRemaining > 0f;
+    public bool IsBoosting { get; private set; }
     public float DashCooldownRemaining => Mathf.Max(0f, nextDashTime - Time.time);
     public bool IsDashReady => DashCooldownRemaining <= 0f;
     public event Action<Vector3> Dashed;
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
     private float dashRemaining;
     private float dashTotalDuration;
     private float nextDashTime;
+    private float boostHeldTime;
+    private bool boostExhausted;
     private readonly RaycastHit[] aimHits = new RaycastHit[32];
 
     private void Awake()
@@ -56,6 +60,7 @@ public class PlayerController : MonoBehaviour
         }
         AimDirection = Vector3.forward;
         Melee = GetComponent<PlayerMeleeController>() ?? gameObject.AddComponent<PlayerMeleeController>();
+        Stance = GetComponent<PlayerWeaponStance>() ?? gameObject.AddComponent<PlayerWeaponStance>();
     }
 
     private void Start()
@@ -77,10 +82,16 @@ public class PlayerController : MonoBehaviour
         }
         if (deltaTime <= 0f) return;
         command.Move = Vector2.ClampMagnitude(command.Move, 1f);
+        boostHeldTime = command.BoostHeld ? boostHeldTime + deltaTime : 0;
+        if (!command.BoostHeld) boostExhausted = false;
+        IsBoosting = !boostExhausted && command.BoostHeld && boostHeldTime > .20f && gm != null && gm.IsCombatActive;
+        if (IsBoosting && stats != null && !stats.TrySpendEnergy(24 * deltaTime)) { IsBoosting = false; boostExhausted = true; }
         if (command.Dash) TryDash(command.Move);
         float speed = stats != null ? stats.MoveSpeed : 7.4f;
-        Vector3 desired = new Vector3(command.Move.x, 0f, command.Move.y) * speed;
+        if (IsBoosting) speed *= 1.32f;
+        Vector3 desired = new Vector3(command.Move.x, 0f, command.Move.y) * speed * Melee.MovementScale;
         planarVelocity = Vector3.MoveTowards(planarVelocity, desired, (desired.sqrMagnitude > 0f ? acceleration : braking) * deltaTime);
+        if(Melee.IsAttacking && Melee.MovementScale==0) planarVelocity=Vector3.zero;
         float dashStep = Mathf.Min(dashRemaining, deltaTime);
         // Integrate the launch-heavy speed curve over the frame, preserving distance at any FPS.
         float dashTravelTime = 0;
@@ -91,6 +102,7 @@ public class PlayerController : MonoBehaviour
             dashTravelTime = dashTotalDuration * ((2 * to - to * to) - (2 * from - from * from));
         }
         Vector3 displacement = dashVelocity * dashTravelTime + planarVelocity * (deltaTime - dashStep);
+        if(!IsDashing) displacement+=Melee.ConsumeRootAdvance();
         dashRemaining = Mathf.Max(0f, dashRemaining - deltaTime);
         Vector3 before = transform.position;
         Vector3 bounded = before + displacement;
@@ -111,12 +123,7 @@ public class PlayerController : MonoBehaviour
         {
             AutoAim.Tick();
             var target = AutoAim.CurrentTarget;
-            if (target != null)
-            {
-                if (command.Skill && AutoAim.IsValidTarget(target)) weaponController.TryFireSkill(target);
-            }
-            if (command.Melee) Melee.TryAttack();
-            if (command.Fire && command.HasAim && !Melee.IsAttacking) weaponController.TryFireBeam();
+            Stance.Process(command, target != null && AutoAim.IsValidTarget(target) ? target : null, deltaTime);
         }
         else AutoAim.Clear();
     }
@@ -171,9 +178,12 @@ public class PlayerController : MonoBehaviour
     public void CancelMovement()
     {
         planarVelocity = Velocity = MoveDirection = Vector3.zero;
+        IsBoosting = false;
+        boostHeldTime = 0;
         dashRemaining = 0f;
         if (InputRouter != null) InputRouter.Clear();
         if (Melee != null) Melee.CancelAttack();
+        if (Stance != null) Stance.ClearRequests();
     }
 
     public void RestoreAt(Vector3 position)
@@ -188,6 +198,7 @@ public class PlayerController : MonoBehaviour
         Motor.enabled = true;
         weaponController.ResetCooldowns();
         Melee.ResetCooldown();
+        Stance.ResetStance();
     }
 
     private void OnDisable() { CancelMovement(); }

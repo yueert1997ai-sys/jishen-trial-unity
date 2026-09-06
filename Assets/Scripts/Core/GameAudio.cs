@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameAudioCue { Beam, Missile, Hit, Death, Dash, Warning, Wave, Reward, Victory, Defeat, Slash }
+public enum GameAudioCue { Beam, Missile, Hit, Death, Dash, Warning, Wave, Reward, Victory, Defeat, Slash, SwordWindup, SwordRegrip, SwordCut1, SwordCut2, SwordCut3, SwordHit, SwordHitHeavy }
 
 [DisallowMultipleComponent]
 public class GameAudio : MonoBehaviour
 {
     public static GameAudio Instance { get; private set; }
     private readonly Dictionary<GameAudioCue, AudioClip[]> clips = new Dictionary<GameAudioCue, AudioClip[]>();
-    private readonly float[] lastCueTime = new float[11];
+    private readonly float[] lastCueTime = new float[System.Enum.GetValues(typeof(GameAudioCue)).Length];
     private AudioSource[] voices;
-    private readonly float[] voiceGains = new float[14];
+    private readonly float[] voiceGains = new float[22];
+    private readonly GameAudioCue[] voiceCues = new GameAudioCue[22];
     private AudioSource ambience;
     private readonly AudioSource[] music = new AudioSource[2];
     private int activeMusic;
@@ -18,13 +19,14 @@ public class GameAudio : MonoBehaviour
     private float musicLevel;
     public bool MusicLoaded => music[0] != null && music[0].clip != null;
     private float duckUntil;
-    private int weaponVoice, impactVoice, priorityVoice;
+    private int weaponVoice, impactVoice, priorityVoice,swordVoice;
+    public static event System.Action<GameAudioCue> CuePlayed;
     public int LoadedCueCount => clips.Count;
 
     private void Awake()
     {
         Instance = this;
-        voices = new AudioSource[14];
+        voices = new AudioSource[22];
         for (int i = 0; i < voices.Length; i++)
         {
             voices[i] = gameObject.AddComponent<AudioSource>();
@@ -39,6 +41,13 @@ public class GameAudio : MonoBehaviour
         Load(GameAudioCue.Death, "explosionCrunch_000", "explosionCrunch_002");
         Load(GameAudioCue.Dash, "thrusterFire_000");
         Load(GameAudioCue.Slash, "forceField_001");
+        Load(GameAudioCue.SwordWindup,"RaikenV7/servo_load");
+        Load(GameAudioCue.SwordRegrip,"RaikenV7/grip_lock");
+        Load(GameAudioCue.SwordCut1,"RaikenV7/cut_reverse");
+        Load(GameAudioCue.SwordCut2,"RaikenV7/cut_return");
+        Load(GameAudioCue.SwordCut3,"RaikenV7/cut_heavy");
+        Load(GameAudioCue.SwordHit,"RaikenV7/armor_cut_01","RaikenV7/armor_cut_02");
+        Load(GameAudioCue.SwordHitHeavy,"RaikenV7/armor_break_heavy");
         Load(GameAudioCue.Warning, "computerNoise_000");
         Load(GameAudioCue.Wave, "jingles_HIT00");
         Load(GameAudioCue.Reward, "jingles_HIT04");
@@ -109,7 +118,12 @@ public class GameAudio : MonoBehaviour
         ambience.volume = (Time.unscaledTime < duckUntil ? 0.006f : 0.018f) * GamePreferences.Effects;
     }
 
-    private void OnDestroy() { if (Instance == this) Instance = null; }
+    private void OnDestroy() { if (Instance == this){Instance = null;CuePlayed=null;} }
+    public static void StopSwordPreparation()
+    {
+        if(Instance==null)return;
+        for(int i=14;i<Instance.voices.Length;i++)if(Instance.voiceCues[i]==GameAudioCue.SwordWindup||Instance.voiceCues[i]==GameAudioCue.SwordRegrip)Instance.voices[i].Stop();
+    }
 
     public static void Play(GameAudioCue cue, float volume = 1f, float pitch = 1f)
     {
@@ -119,20 +133,24 @@ public class GameAudio : MonoBehaviour
     private void PlayInternal(GameAudioCue cue, float volume, float pitch)
     {
         if (!clips.TryGetValue(cue, out var options) || options.Length == 0) return;
-        bool priority = cue >= GameAudioCue.Warning && cue != GameAudioCue.Slash;
-        float spacing = priority ? 0.18f : cue == GameAudioCue.Hit ? 0.055f : 0.035f;
+        bool sword=cue>=GameAudioCue.SwordWindup;
+        bool priority = cue >= GameAudioCue.Warning && cue <= GameAudioCue.Defeat;
+        float spacing = priority ? 0.18f : cue == GameAudioCue.Hit ? 0.055f : cue>=GameAudioCue.SwordHit?.075f:.035f;
         if (Time.unscaledTime - lastCueTime[(int)cue] < spacing) return;
         lastCueTime[(int)cue] = Time.unscaledTime;
         // Reserve voices for telegraphs and results so rapid fire cannot cut them off.
-        int index = priority ? 10 + priorityVoice++ % 4
+        int index = sword ? 14+swordVoice++%8 : priority ? 10 + priorityVoice++ % 4
             : cue == GameAudioCue.Beam || cue == GameAudioCue.Missile ? weaponVoice++ % 6 : 6 + impactVoice++ % 4;
         var voice = voices[index];
         voice.Stop();
         voice.clip = options[Random.Range(0, options.Length)];
-        voiceGains[index] = Mathf.Clamp01(volume) * (cue == GameAudioCue.Beam ? 0.42f : 0.72f);
+        voiceCues[index]=cue;
+        voiceGains[index] = Mathf.Clamp01(volume) * (sword?.72f:cue == GameAudioCue.Beam ? 0.42f : 0.72f);
         voice.volume = voiceGains[index] * GamePreferences.Effects;
         voice.pitch = Mathf.Clamp(pitch, 0.8f, 1.2f);
         voice.Play();
+        CuePlayed?.Invoke(cue);
         if (priority) duckUntil = Time.unscaledTime + 1.2f;
+        else if(cue>=GameAudioCue.SwordHit)duckUntil=Mathf.Max(duckUntil,Time.unscaledTime+(cue==GameAudioCue.SwordHitHeavy?.24f:.13f));
     }
 }

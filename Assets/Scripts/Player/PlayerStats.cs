@@ -50,21 +50,28 @@ public class PlayerStats : MonoBehaviour
     public event Action OnStatsChanged;
 
     private Damageable damageable;
+    private float runHealthBonus, runDashBonus, runCooldownBonus;
+    private float packDashBonus, packCooldownBonus, packSpeedBonus;
+    private PlayerController controller;
 
     private void Awake()
     {
         damageable = GetComponent<Damageable>();
+        controller = GetComponent<PlayerController>();
         ResetStats();
     }
 
     private void Update()
     {
-        CurrentEnergy = Mathf.Min(MaxEnergy, CurrentEnergy + energyRegenPerSecond * Time.deltaTime);
+        if (controller == null || (!controller.IsBoosting && !controller.IsDashing))
+            CurrentEnergy = Mathf.Min(MaxEnergy, CurrentEnergy + energyRegenPerSecond * Time.deltaTime);
         RaiseChanged();
     }
 
     public void ResetStats()
     {
+        runHealthBonus = runDashBonus = runCooldownBonus = 0f;
+        packDashBonus = packCooldownBonus = packSpeedBonus = 0f;
         MaxHp = baseMaxHp;
         MaxEnergy = baseEnergy;
         MoveSpeed = baseMoveSpeed;
@@ -113,6 +120,7 @@ public class PlayerStats : MonoBehaviour
     public void AddMaxHealth(float amount, bool healAddedAmount)
     {
         float bonus = Mathf.Max(0f, amount);
+        runHealthBonus += bonus;
         MaxHp += bonus;
         CurrentHp = Mathf.Clamp(CurrentHp + (healAddedAmount ? bonus : 0f), 1f, MaxHp);
         if (damageable != null)
@@ -126,8 +134,36 @@ public class PlayerStats : MonoBehaviour
 
     public void AddDashBonus(float distanceBonus, float cooldownReduction)
     {
+        runDashBonus += Mathf.Max(0f, distanceBonus);
+        runCooldownBonus += Mathf.Max(0f, cooldownReduction);
         DashDistance += Mathf.Max(0f, distanceBonus);
         DashCooldown = Mathf.Max(0.35f, DashCooldown - Mathf.Max(0f, cooldownReduction));
+        RaiseChanged();
+    }
+
+    public void SetBackpackBonuses(float distance, float cooldown, float speed)
+    {
+        DashDistance += distance - packDashBonus;
+        MoveSpeed += speed - packSpeedBonus;
+        packDashBonus = distance;
+        packCooldownBonus = cooldown;
+        packSpeedBonus = speed;
+        DashCooldown = Mathf.Max(.35f, baseDashCooldown - runCooldownBonus - packCooldownBonus);
+        RaiseChanged();
+    }
+
+    public void ClearRunUpgradeBonuses()
+    {
+        MaxHp = Mathf.Max(baseMaxHp, MaxHp - runHealthBonus);
+        CurrentHp = Mathf.Clamp(CurrentHp, 0, MaxHp);
+        DashDistance -= runDashBonus;
+        runHealthBonus = runDashBonus = runCooldownBonus = 0f;
+        DashCooldown = Mathf.Max(.35f, baseDashCooldown - packCooldownBonus);
+        if (damageable != null)
+        {
+            damageable.SetMaxHealth(MaxHp, false);
+            damageable.SetCurrentHealth(CurrentHp);
+        }
         RaiseChanged();
     }
 

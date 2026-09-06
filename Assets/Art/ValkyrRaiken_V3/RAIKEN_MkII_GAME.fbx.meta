@@ -1,0 +1,250 @@
+fileFormatVersion: 2
+guid: 5190c4863f5c9454bba596033cbf0b10
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 01_Painted_Military_Navy
+    second: {fileID: 2100000, guid: fef8eca483f86ec48bdd506394c7fee1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 05_Black_Mechanical_Frame
+    second: {fileID: 2100000, guid: 10d89b00b47f2f24386fed6be6dd3475, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_01_Cobalt_Armor
+    second: {fileID: 2100000, guid: cd794f57ebebf484299a0bf474f5f349, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_02_Deep_Navy
+    second: {fileID: 2100000, guid: ff6db3ddf025b6345979253a52a6947b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_03_Gunmetal_Panels
+    second: {fileID: 2100000, guid: b29e25d649afa234fa7be97c360ef701, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_04_Machined_Titanium
+    second: {fileID: 2100000, guid: 143386dedad693845bde51832d13dcd6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_05_Inner_Frame
+    second: {fileID: 2100000, guid: d0ea7d09083e9674084ca88592570fe8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_06_Recess_And_Grip
+    second: {fileID: 2100000, guid: a5e327e7d8403c84c8ceff50afef6979, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_07_Brass_Fasteners
+    second: {fileID: 2100000, guid: 644aac8090460e84a8b94474e8c1f5af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_08_Cyan_Emitter
+    second: {fileID: 2100000, guid: 4cc42691b51eff4439ac02b7b7f12b13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_09_Beam_Sheath
+    second: {fileID: 2100000, guid: f031968bf495298458b215fd65236e5f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_10_Beam_Core
+    second: {fileID: 2100000, guid: 01870fdd576187f4f805c806db6ed5a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAIKEN_11_Identification
+    second: {fileID: 2100000, guid: a21cdd5f8ba7a1b40948233ca2f45a79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3B_edge
+    second: {fileID: 2100000, guid: 70d3ff9f12c78fd4e8b1fd807743e012, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3B_mark
+    second: {fileID: 2100000, guid: 98aa30937cca41c44a437f54df1c1e1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3B_panel
+    second: {fileID: 2100000, guid: 8bde822df6c7fd04fad5d4bf3a1fd6cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3B_titanium
+    second: {fileID: 2100000, guid: b46c421f202862544b386baed6fe500f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3B_white
+    second: {fileID: 2100000, guid: 05d15f001f85ef141adff365d2989779, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3H_01_Valkyr_Blue
+    second: {fileID: 2100000, guid: c849d4f962322984293113874dc3030f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3H_02_Deep_Blue
+    second: {fileID: 2100000, guid: 69596bfc6f8c7f248852d9a7f5e92a74, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3H_04_Gunmetal_Armor
+    second: {fileID: 2100000, guid: 7dbec9668f23fa047bdfd24cee0ab594, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3H_05_Machined_Rim
+    second: {fileID: 2100000, guid: a90adea3868461643a7155afec12bd1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3H_06_Inner_Frame
+    second: {fileID: 2100000, guid: 7985b6c1d9ebcae408cebede8007d81d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3H_07_Optical_Well
+    second: {fileID: 2100000, guid: fab43bbacd30a214a9b6ba17fbaccb0b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3H_08_Antenna_Gold
+    second: {fileID: 2100000, guid: cbf0927199b165b4680955e0c2161abe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3H_09_Cyan_Sensor
+    second: {fileID: 2100000, guid: 8b10907cb95c44844ba5b39d55704df9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3H_10_Cyan_Core
+    second: {fileID: 2100000, guid: e9628ef2ba87f774c8996c34c55453b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V3H_11_Seals
+    second: {fileID: 2100000, guid: b4118edebd90aee43b6d6c8e8ff38fb7, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

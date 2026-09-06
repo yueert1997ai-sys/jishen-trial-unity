@@ -1,0 +1,270 @@
+{
+  "materials": [
+    {
+      "name": "VALKYR_DEMO_Armor",
+      "baseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.5,
+      "albedo": "Assets/Art/ValkyrRaiken_V1/Textures/VALKYR_Armor_BaseColor.png",
+      "normal": "Assets/Art/ValkyrRaiken_V1/Textures/VALKYR_Armor_Normal.png",
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "emissionStrength": 1
+    },
+    {
+      "name": "VALKYR_DEMO_Mechanics",
+      "baseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.5,
+      "albedo": "Assets/Art/ValkyrRaiken_V1/Textures/VALKYR_Mechanics_BaseColor.png",
+      "normal": "Assets/Art/ValkyrRaiken_V1/Textures/VALKYR_Mechanics_Normal.png",
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "emissionStrength": 1
+    },
+    {
+      "name": "VALKYR_DEMO_Sensor",
+      "baseColor": [
+        0.004000000189989805,
+        0.5199999809265137,
+        1,
+        1
+      ],
+      "metallic": 0.15000000596046448,
+      "roughness": 0.25,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0.004000000189989805,
+        0.5199999809265137,
+        1
+      ],
+      "emissionStrength": 3
+    },
+    {
+      "name": "RAIKEN_09_Beam_Sheath",
+      "baseColor": [
+        0,
+        0.3277781009674072,
+        1,
+        1
+      ],
+      "metallic": 0.05000000074505806,
+      "roughness": 0.1899999976158142,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0,
+        0.3277781009674072,
+        1
+      ],
+      "emissionStrength": 4.5
+    },
+    {
+      "name": "RAIKEN_10_Beam_Core",
+      "baseColor": [
+        0.30946892499923706,
+        0.8879231214523315,
+        1,
+        1
+      ],
+      "metallic": 0.019999999552965164,
+      "roughness": 0.1599999964237213,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0.30946892499923706,
+        0.8879231214523315,
+        1
+      ],
+      "emissionStrength": 6
+    },
+    {
+      "name": "RAIKEN_01_Cobalt_Armor",
+      "baseColor": [
+        0.015208514407277107,
+        0.07036009430885315,
+        0.28314873576164246,
+        1
+      ],
+      "metallic": 0.6499999761581421,
+      "roughness": 0.3100000023841858,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "emissionStrength": 1
+    },
+    {
+      "name": "RAIKEN_02_Deep_Navy",
+      "baseColor": [
+        0.005181516520678997,
+        0.017641954123973846,
+        0.04666508734226227,
+        1
+      ],
+      "metallic": 0.6499999761581421,
+      "roughness": 0.33000001311302185,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "emissionStrength": 1
+    },
+    {
+      "name": "RAIKEN_03_Gunmetal_Panels",
+      "baseColor": [
+        0.13286831974983215,
+        0.17144110798835754,
+        0.2345505803823471,
+        1
+      ],
+      "metallic": 0.7699999809265137,
+      "roughness": 0.28999999165534973,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "emissionStrength": 1
+    },
+    {
+      "name": "RAIKEN_04_Machined_Titanium",
+      "baseColor": [
+        0.5088813304901123,
+        0.5906188488006592,
+        0.7011018991470337,
+        1
+      ],
+      "metallic": 0.8299999833106995,
+      "roughness": 0.25999999046325684,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "emissionStrength": 1
+    },
+    {
+      "name": "RAIKEN_05_Inner_Frame",
+      "baseColor": [
+        0.01850022003054619,
+        0.026241222396492958,
+        0.039546236395835876,
+        1
+      ],
+      "metallic": 0.7799999713897705,
+      "roughness": 0.3199999928474426,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "emissionStrength": 1
+    },
+    {
+      "name": "RAIKEN_06_Recess_And_Grip",
+      "baseColor": [
+        0.0033465358428657055,
+        0.005605391692370176,
+        0.009721217676997185,
+        1
+      ],
+      "metallic": 0.11999999731779099,
+      "roughness": 0.47999998927116394,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "emissionStrength": 1
+    },
+    {
+      "name": "RAIKEN_07_Brass_Fasteners",
+      "baseColor": [
+        0.4019777774810791,
+        0.27049779891967773,
+        0.09758734703063965,
+        1
+      ],
+      "metallic": 0.7900000214576721,
+      "roughness": 0.28999999165534973,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "emissionStrength": 1
+    },
+    {
+      "name": "RAIKEN_08_Cyan_Emitter",
+      "baseColor": [
+        0,
+        0.577580451965332,
+        1,
+        1
+      ],
+      "metallic": 0.2199999988079071,
+      "roughness": 0.2199999988079071,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0,
+        0.577580451965332,
+        1
+      ],
+      "emissionStrength": 3
+    },
+    {
+      "name": "RAIKEN_11_Identification",
+      "baseColor": [
+        0.715693473815918,
+        0.8148465752601624,
+        0.9301108717918396,
+        1
+      ],
+      "metallic": 0.11999999731779099,
+      "roughness": 0.3799999952316284,
+      "albedo": "",
+      "normal": "",
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "emissionStrength": 1
+    }
+  ]
+}

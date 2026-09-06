@@ -6,6 +6,7 @@ public static class GameText
     public static IEnumerable<string> Translations => chinese.Values;
     private static readonly Dictionary<string, string> chinese = new Dictionary<string, string>
     {
+        { "TYPE E-01 ELITE", "E-01 液态金属侵蚀体" },
         { "MECH TRIAL", "\u673a\u795e\u8bd5\u70bc" },
         { "SORTIE 01", "\u51fa\u51fb\u4efb\u52a1 01" },
         { "ROSE GOLD\nSENTINEL", "\u73ab\u7470\u91d1\n\u54e8\u5175" },

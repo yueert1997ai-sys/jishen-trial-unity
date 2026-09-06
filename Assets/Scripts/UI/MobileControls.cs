@@ -13,6 +13,7 @@ public class MobileControls : MonoBehaviour
     private Button skill;
     private Text dashLabel;
     private Text skillLabel;
+    private MobileActionButton dashAction;
     private float nextRefresh;
 
     private void Start()
@@ -47,6 +48,7 @@ public class MobileControls : MonoBehaviour
         melee.GetComponent<MobileActionButton>().isMelee = true;
         meleeLabel = melee.GetComponentInChildren<Text>();
         dashLabel = dash.GetComponentInChildren<Text>();
+        dashAction = dash.GetComponent<MobileActionButton>();
         skillLabel = skill.GetComponentInChildren<Text>();
     }
 
@@ -79,11 +81,12 @@ public class MobileControls : MonoBehaviour
         SetVisible(show);
         if (!show || Time.unscaledTime < nextRefresh) return;
         nextRefresh = Time.unscaledTime + 0.1f;
-        dash.interactable = player.IsDashReady && player.stats.CurrentEnergy >= 25f;
+        dash.interactable = dashAction.IsHoldingBoost || (player.IsDashReady && player.stats.CurrentEnergy >= 25f);
         melee.interactable = player.Melee.CooldownRemaining <= 0 && !player.IsDashing;
         meleeLabel.text = player.Melee.CooldownRemaining > 0 ? player.Melee.CooldownRemaining.ToString("0.0") : GameText.T("SLASH");
         skill.interactable = player.weaponController.SkillCooldownRemaining <= 0f && player.AutoAim.CurrentTarget != null;
-        dashLabel.text = player.IsDashReady ? GameText.T("DASH") : player.DashCooldownRemaining.ToString("0.0");
+        dashLabel.text = player.IsBoosting ? EquipmentWarehouseUI.T("推进", "BOOST")
+            : player.IsDashReady ? GameText.T("DASH") : player.DashCooldownRemaining.ToString("0.0");
         float cooldown = player.weaponController.SkillCooldownRemaining;
         skillLabel.text = cooldown > 0f ? cooldown.ToString("0.0") : GameText.T("SALVO");
     }

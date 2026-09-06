@@ -1,0 +1,351 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8432bf7edc4e94c87df179e2d36d1c, type: 3}
+  m_Name: PowerComboV7
+  m_EditorClassIdentifier: Assembly-CSharp::ValkyrComboProfile
+  strokes:
+  - label: "\u53CD\u624B\u5927\u6A2A\u65A9"
+    contactStart: 0.17
+    contactEnd: 0.33
+    linkTime: 0.38
+    duration: 0.7
+    advance: 0.68
+    hitHold: 0.075
+    keys:
+    - time: 0
+      forwardGrip: 0
+      open: 0
+      wrist: {x: 0.93, y: 1.94, z: 0.24}
+      elbow: {x: 1.06, y: 2.35, z: -0.46}
+      blade: {x: 0.15934801, y: -0.50792176, z: -0.84653634}
+      pelvis: {x: 0, y: -0.08, z: 0}
+      hips: {x: 3, y: -6, z: 0.71999997}
+      waist: {x: 5, y: -7.1, z: 0.96}
+      chest: {x: 7, y: -8, z: 1.2}
+      leftFoot: {x: -0.63, y: 0, z: 0.24}
+      rightFoot: {x: 0.6, y: 0, z: -0.24}
+    - time: 0.12
+      forwardGrip: 0
+      open: 0
+      wrist: {x: 1.43, y: 2.05, z: -0.45}
+      elbow: {x: 1.72, y: 2.65, z: -0.62}
+      blade: {x: 0.4181434, y: -0.14933693, z: -0.8960216}
+      pelvis: {x: 0.24, y: -0.22, z: -0.12}
+      hips: {x: 3, y: 31, z: -3.72}
+      waist: {x: 5, y: 40.9, z: -5.8799996}
+      chest: {x: 7, y: 49, z: -7.3500004}
+      leftFoot: {x: -0.63, y: 0.19320388, z: 0.48721}
+      rightFoot: {x: 0.6, y: 0, z: -0.24}
+    - time: 0.17
+      forwardGrip: 0
+      open: 0
+      wrist: {x: 1.48, y: 2.16, z: 0.02}
+      elbow: {x: 1.8, y: 2.82, z: -0.14}
+      blade: {x: 0.9592329, y: -0.03996804, z: -0.27977628}
+      pelvis: {x: 0.15, y: -0.29, z: -0.02}
+      hips: {x: 3, y: 21, z: -2.52}
+      waist: {x: 5, y: 33.1, z: -5.16}
+      chest: {x: 7, y: 43, z: -6.4500003}
+      leftFoot: {x: -0.63, y: 0.22558673, z: 0.7470272}
+      rightFoot: {x: 0.6, y: 0, z: -0.24}
+    - time: 0.245
+      forwardGrip: 0
+      open: 0
+      wrist: {x: 0.72, y: 2.3, z: 1.07}
+      elbow: {x: 1.13, y: 2.99, z: 0.63}
+      blade: {x: 0.08039896, y: -0.06029922, z: 0.99493724}
+      pelvis: {x: -0.15, y: -0.4, z: 0.15}
+      hips: {x: 3, y: -29, z: 3.48}
+      waist: {x: 5, y: -24.05, z: 2.3999999}
+      chest: {x: 7, y: -20, z: 3}
+      leftFoot: {x: -0.63, y: 0.023744754, z: 1.0438184}
+      rightFoot: {x: 0.6, y: 0, z: -0.24}
+    - time: 0.315
+      forwardGrip: 0
+      open: 0
+      wrist: {x: -0.38, y: 2.1, z: 0.96}
+      elbow: {x: 0.07, y: 2.81, z: 0.54}
+      blade: {x: -0.96129864, y: -0.09012175, z: 0.26035172}
+      pelvis: {x: -0.35, y: -0.44, z: 0.2}
+      hips: {x: 3, y: -49, z: 5.8799996}
+      waist: {x: 5, y: -61.65, z: 8.639999}
+      chest: {x: 7, y: -72, z: 10.8}
+      leftFoot: {x: -0.63, y: -0.000000020981465, z: 1.0699999}
+      rightFoot: {x: 0.6, y: 0, z: -0.24}
+    - time: 0.38
+      forwardGrip: 0
+      open: 0
+      wrist: {x: -0.55, y: 1.98, z: 0.81}
+      elbow: {x: -0.12, y: 2.7, z: 0.22}
+      blade: {x: -0.9535346, y: -0.1505581, z: -0.26096737}
+      pelvis: {x: -0.34, y: -0.39, z: 0.16}
+      hips: {x: 3, y: -48, z: 5.7599998}
+      waist: {x: 5, y: -64.5, z: 9.36}
+      chest: {x: 7, y: -78, z: 11.700001}
+      leftFoot: {x: -0.63, y: -0.000000020981465, z: 1.0699999}
+      rightFoot: {x: 0.6, y: 0, z: -0.24}
+    - time: 0.52
+      forwardGrip: 0
+      open: 0
+      wrist: {x: 0.09, y: 1.99, z: 0.35}
+      elbow: {x: 0.59, y: 2.54, z: -0.08}
+      blade: {x: -0.6695649, y: -0.2998052, z: -0.6795584}
+      pelvis: {x: -0.13, y: -0.22, z: 0.06}
+      hips: {x: 3, y: -25, z: 3}
+      waist: {x: 5, y: -32.7, z: 4.68}
+      chest: {x: 7, y: -39, z: 5.8500004}
+      leftFoot: {x: -0.6065625, y: -0.000000017703114, z: 0.8371388}
+      rightFoot: {x: 0.58125, y: 0, z: -0.236875}
+    - time: 0.7
+      forwardGrip: 0
+      open: 0
+      wrist: {x: 0.93, y: 1.94, z: 0.24}
+      elbow: {x: 1.06, y: 2.35, z: -0.46}
+      blade: {x: 0.15934801, y: -0.50792176, z: -0.84653634}
+      pelvis: {x: 0, y: -0.08, z: 0}
+      hips: {x: 3, y: -6, z: 0.71999997}
+      waist: {x: 5, y: -7.1, z: 0.96}
+      chest: {x: 7, y: -8, z: 1.2}
+      leftFoot: {x: -0.48, y: 0, z: 0.28}
+      rightFoot: {x: 0.48, y: 0, z: -0.22}
+  - label: "\u4FA7\u7529\u6362\u63E1 / \u5927\u5E45\u56DE\u65A9"
+    contactStart: 0.3
+    contactEnd: 0.49
+    linkTime: 0.56
+    duration: 0.94
+    advance: 0.6
+    hitHold: 0.075
+    keys:
+    - time: 0
+      forwardGrip: 0
+      open: 0
+      wrist: {x: -0.55, y: 1.98, z: 0.81}
+      elbow: {x: -0.12, y: 2.7, z: 0.22}
+      blade: {x: -0.9535346, y: -0.1505581, z: -0.26096737}
+      pelvis: {x: -0.34, y: -0.39, z: 0.16}
+      hips: {x: 3, y: -48, z: 5.7599998}
+      waist: {x: 5, y: -64.5, z: 9.36}
+      chest: {x: 7, y: -78, z: 11.700001}
+      leftFoot: {x: -0.6, y: 0, z: 0.24}
+      rightFoot: {x: 0.63, y: 0, z: -0.24}
+    - time: 0.1
+      forwardGrip: 0
+      open: 0.38
+      wrist: {x: -0.5, y: 2.29, z: 1.07}
+      elbow: {x: -0.02, y: 2.62, z: 0.38}
+      blade: {x: -0.83258504, y: 0.45140153, z: 0.32099664}
+      pelvis: {x: -0.29, y: -0.34, z: 0.08}
+      hips: {x: 3, y: -43, z: 5.16}
+      waist: {x: 5, y: -58.95, z: 8.639999}
+      chest: {x: 7, y: -72, z: 10.8}
+      leftFoot: {x: -0.6, y: 0, z: 0.24}
+      rightFoot: {x: 0.63, y: 0.08141577, z: -0.14856115}
+    - time: 0.2
+      forwardGrip: 0.55
+      open: 1
+      wrist: {x: -0.28, y: 2.81, z: 1.12}
+      elbow: {x: 0.1, y: 2.18, z: 0.46}
+      blade: {x: -0.6115307, y: 0.73183185, z: -0.30075282}
+      pelvis: {x: -0.18, y: -0.25, z: -0.03}
+      hips: {x: 3, y: -32, z: 3.84}
+      waist: {x: 5, y: -43.55, z: 6.3599997}
+      chest: {x: 7, y: -53, z: 7.9500003}
+      leftFoot: {x: -0.6, y: 0, z: 0.24}
+      rightFoot: {x: 0.63, y: 0.23849319, z: 0.20462047}
+    - time: 0.28
+      forwardGrip: 1
+      open: 0
+      wrist: {x: -0.28, y: 2.75, z: 1.02}
+      elbow: {x: 0.08, y: 2.11, z: 0.35}
+      blade: {x: -0.9819544, y: 0.050616205, z: 0.18221834}
+      pelvis: {x: -0.24, y: -0.32, z: 0.02}
+      hips: {x: 3, y: -27, z: 3.24}
+      waist: {x: 5, y: -45.7, z: 7.3199997}
+      chest: {x: 7, y: -61, z: 9.150001}
+      leftFoot: {x: -0.6, y: 0, z: 0.24}
+      rightFoot: {x: 0.63, y: 0.09267944, z: 0.48525375}
+    - time: 0.39
+      forwardGrip: 1
+      open: 0
+      wrist: {x: 0.66, y: 2.83, z: 0.68}
+      elbow: {x: 0.59, y: 2.14, z: 0.58}
+      blade: {x: -0.049872983, y: -0.14961895, z: 0.9874851}
+      pelvis: {x: 0.1, y: -0.41, z: 0.17}
+      hips: {x: 3, y: 27, z: -3.24}
+      waist: {x: 5, y: 18.75, z: -1.4399999}
+      chest: {x: 7, y: 12, z: -1.8000001}
+      leftFoot: {x: -0.6, y: 0, z: 0.24}
+      rightFoot: {x: 0.63, y: -0.000000020981465, z: 0.59}
+    - time: 0.46
+      forwardGrip: 1
+      open: 0
+      wrist: {x: 1.1, y: 2.75, z: 0.18}
+      elbow: {x: 0.99, y: 2.05, z: -0.06}
+      blade: {x: 0.95033264, y: -0.22007704, z: 0.22007704}
+      pelvis: {x: 0.33, y: -0.43, z: 0.19}
+      hips: {x: 3, y: 49, z: -5.8799996}
+      waist: {x: 5, y: 60, z: -8.28}
+      chest: {x: 7, y: 69, z: -10.35}
+      leftFoot: {x: -0.6, y: 0, z: 0.24}
+      rightFoot: {x: 0.63, y: -0.000000020981465, z: 0.59}
+    - time: 0.56
+      forwardGrip: 1
+      open: 0
+      wrist: {x: 1.02, y: 2.7, z: -0.12}
+      elbow: {x: 1.13, y: 2.09, z: -0.4}
+      blade: {x: 0.93598384, y: -0.24893188, z: -0.24893188}
+      pelvis: {x: 0.31, y: -0.35, z: 0.14}
+      hips: {x: 3, y: 47, z: -5.64}
+      waist: {x: 5, y: 62.95, z: -9.12}
+      chest: {x: 7, y: 76, z: -11.400001}
+      leftFoot: {x: -0.6, y: 0, z: 0.24}
+      rightFoot: {x: 0.63, y: -0.000000020981465, z: 0.59}
+    - time: 0.72
+      forwardGrip: 0.55
+      open: 0.85
+      wrist: {x: 1.27, y: 2.13, z: 0.02}
+      elbow: {x: 1.3, y: 2.68, z: -0.51}
+      blade: {x: 0.4302798, y: -0.53034484, z: -0.730475}
+      pelvis: {x: 0.13, y: -0.23, z: 0.05}
+      hips: {x: 3, y: 23, z: -2.76}
+      waist: {x: 5, y: 29.6, z: -4.2}
+      chest: {x: 7, y: 35, z: -5.25}
+      leftFoot: {x: -0.58240026, y: 0, z: 0.24586658}
+      rightFoot: {x: 0.6080003, y: -0.000000017904226, z: 0.3673237}
+    - time: 0.94
+      forwardGrip: 0
+      open: 0
+      wrist: {x: 0.93, y: 1.94, z: 0.24}
+      elbow: {x: 1.06, y: 2.35, z: -0.46}
+      blade: {x: 0.15934801, y: -0.50792176, z: -0.84653634}
+      pelvis: {x: 0, y: -0.08, z: 0}
+      hips: {x: 3, y: -6, z: 0.71999997}
+      waist: {x: 5, y: -7.1, z: 0.96}
+      chest: {x: 7, y: -8, z: 1.2}
+      leftFoot: {x: -0.48, y: 0, z: 0.28}
+      rightFoot: {x: 0.48, y: 0, z: -0.22}
+  - label: "\u8E0F\u8FDB\u6B63\u9762\u91CD\u5288"
+    contactStart: 0.32
+    contactEnd: 0.51
+    linkTime: 1
+    duration: 1
+    advance: 0.88
+    hitHold: 0.095
+    keys:
+    - time: 0
+      forwardGrip: 1
+      open: 0
+      wrist: {x: 1.02, y: 2.7, z: -0.12}
+      elbow: {x: 1.13, y: 2.09, z: -0.4}
+      blade: {x: 0.93598384, y: -0.24893188, z: -0.24893188}
+      pelvis: {x: 0.31, y: -0.35, z: 0.14}
+      hips: {x: 3, y: 47, z: -5.64}
+      waist: {x: 5, y: 62.95, z: -9.12}
+      chest: {x: 7, y: 76, z: -11.400001}
+      leftFoot: {x: -0.63, y: 0, z: 0.24}
+      rightFoot: {x: 0.6, y: 0, z: -0.24}
+    - time: 0.14
+      forwardGrip: 1
+      open: 0
+      wrist: {x: 1.1, y: 3.38, z: -0.1}
+      elbow: {x: 0.48, y: 3.05, z: -0.44}
+      blade: {x: 0.21133563, y: 0.93591493, z: -0.28178084}
+      pelvis: {x: 0.18, y: -0.14, z: -0.12}
+      hips: {x: 3, y: 29, z: -3.48}
+      waist: {x: 5, y: 35.6, z: -4.92}
+      chest: {x: 7, y: 41, z: -6.15}
+      leftFoot: {x: -0.63, y: 0.23255599, z: 0.67733425}
+      rightFoot: {x: 0.6, y: 0, z: -0.15589724}
+    - time: 0.24
+      forwardGrip: 1
+      open: 0
+      wrist: {x: 0.66, y: 3.58, z: 0.01}
+      elbow: {x: 0.08, y: 3.13, z: -0.42}
+      blade: {x: 0.060150564, y: 0.8320828, z: -0.5513802}
+      pelvis: {x: 0.1, y: -0.13, z: -0.12}
+      hips: {x: -7, y: 17, z: -2.04}
+      waist: {x: -14, y: 20.3, z: -2.76}
+      chest: {x: -18, y: 23, z: -3.45}
+      leftFoot: {x: -0.63, y: 0.033614717, z: 1.2334807}
+      rightFoot: {x: 0.6, y: 0, z: -0.048945993}
+    - time: 0.32
+      forwardGrip: 1
+      open: 0
+      wrist: {x: 0.65, y: 3.37, z: 0.65}
+      elbow: {x: 0.05, y: 3.24, z: 0.1}
+      blade: {x: 0.010009012, y: 0.6605948, z: 0.7506759}
+      pelvis: {x: 0.01, y: -0.28, z: 0.04}
+      hips: {x: 3, y: -10, z: 1.1999999}
+      waist: {x: 5, y: -6.15, z: 0.35999998}
+      chest: {x: 7, y: -3, z: 0.45000002}
+      leftFoot: {x: -0.63, y: -0.000000020981465, z: 1.28}
+      rightFoot: {x: 0.6, y: 0, z: -0.03999999}
+    - time: 0.395
+      forwardGrip: 1
+      open: 0
+      wrist: {x: 0.61, y: 2.55, z: 1.21}
+      elbow: {x: 0.02, y: 2.89, z: 0.56}
+      blade: {x: 0.02006835, y: -0.18061514, z: 0.98334914}
+      pelvis: {x: -0.13, y: -0.49, z: 0.21}
+      hips: {x: 3, y: -21, z: 2.52}
+      waist: {x: 5, y: -21.55, z: 2.6399999}
+      chest: {x: 7, y: -22, z: 3.3000002}
+      leftFoot: {x: -0.63, y: -0.000000020981465, z: 1.28}
+      rightFoot: {x: 0.6, y: 0, z: -0.03999999}
+    - time: 0.49
+      forwardGrip: 1
+      open: 0
+      wrist: {x: 0.56, y: 1.63, z: 1.04}
+      elbow: {x: 0.15, y: 2.34, z: 0.55}
+      blade: {x: 0.02994913, y: -0.55905044, z: 0.8285926}
+      pelvis: {x: -0.14, y: -0.55, z: 0.25}
+      hips: {x: 18, y: -17, z: 2.04}
+      waist: {x: 29, y: -20.85, z: 2.8799999}
+      chest: {x: 42, y: -24, z: 3.6000001}
+      leftFoot: {x: -0.63, y: -0.000000020981465, z: 1.28}
+      rightFoot: {x: 0.6, y: 0, z: -0.03999999}
+    - time: 0.62
+      forwardGrip: 1
+      open: 0
+      wrist: {x: 0.91, y: 1.64, z: 0.82}
+      elbow: {x: 0.66, y: 2.34, z: 0.24}
+      blade: {x: 0.38064766, y: -0.59100556, z: 0.7112101}
+      pelvis: {x: -0.1, y: -0.48, z: 0.19}
+      hips: {x: 14, y: -15, z: 1.8}
+      waist: {x: 25, y: -20.5, z: 3}
+      chest: {x: 34, y: -25, z: 3.7500002}
+      leftFoot: {x: -0.63, y: -0.000000020981465, z: 1.28}
+      rightFoot: {x: 0.6, y: 0, z: -0.03999999}
+    - time: 0.8
+      forwardGrip: 0.48
+      open: 0.85
+      wrist: {x: 1.3, y: 2.04, z: 0.2}
+      elbow: {x: 1.34, y: 2.63, z: -0.4}
+      blade: {x: 0.6896553, y: -0.31984013, z: -0.64967525}
+      pelvis: {x: 0.03, y: -0.25, z: 0.08}
+      hips: {x: 3, y: 9, z: -1.0799999}
+      waist: {x: 5, y: 11.2, z: -1.56}
+      chest: {x: 7, y: 13, z: -1.95}
+      leftFoot: {x: -0.5785057, y: -0.000000013778629, z: 0.70224345}
+      rightFoot: {x: 0.5588046, y: 0, z: -0.14688186}
+    - time: 1
+      forwardGrip: 0
+      open: 0
+      wrist: {x: 0.93, y: 1.94, z: 0.24}
+      elbow: {x: 1.06, y: 2.35, z: -0.46}
+      blade: {x: 0.15934801, y: -0.50792176, z: -0.84653634}
+      pelvis: {x: 0, y: -0.08, z: 0}
+      hips: {x: 3, y: -6, z: 0.71999997}
+      waist: {x: 5, y: -7.1, z: 0.96}
+      chest: {x: 7, y: -8, z: 1.2}
+      leftFoot: {x: -0.48, y: 0, z: 0.28}
+      rightFoot: {x: 0.48, y: 0, z: -0.22}

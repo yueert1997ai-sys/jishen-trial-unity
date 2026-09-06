@@ -1,5 +1,23 @@
 # 机神试炼 / MECH ROUGE
 
+2026-09-07 最新版本：**V8 液态 Boss 接入**。首页点击“挑战液态 Boss”，携带当前仓库装备和六项临时随机强化直达首领战；正常出击的最终首领同样使用 E-01 液态金属侵蚀体。保留 V7 的大幅度三连斩、新斩舰刀音效、白兵和苍钢卫士试战。Windows 本地试玩：`Builds/ValkyrLiquidBossV8/MECH_TRIAL_Valkyr.exe`。接入、构建方式和验证记录见 [液态 Boss 与首页入口 V8](docs/LIQUID_BOSS_V8.md)。当前游戏源码保存于 GitHub 的 `codex/equipment-loop-v1` 分支。
+
+前一轮 V7：`Builds/ValkyrPowerComboV7/MECH_TRIAL_Valkyr.exe`。放大三连斩的转身、踏进、横扫和重劈幅度，并更换斩舰刀音效：蓄力、换握、三种破风、装甲命中分别触发。右手反握与刃口朝下保留。操作、实际短片及动作参数见 [大幅度三连斩与新音效 V7](docs/VALKYR_POWER_COMBO_V7.md)。当前工作目录位于 D 盘，下文较早版本均保留。
+
+前一轮 V6：`Builds/ValkyrReverseComboV6/MECH_TRIAL_Valkyr.exe`。右手低位反握，蓝色刃口朝下；Q / 右键逐次按出反手斩、侧甩换握回斩、正面重劈。停按后收回反手待机，保留枪刀切换、白兵及永久装备仓库。历史接入记录见 [反手持刀与三连斩 V6](docs/VALKYR_REVERSE_COMBO_V6.md)。
+
+前一轮 V5：`Builds/ValkyrCombatV5/MECH_TRIAL_Valkyr.exe`。单手持刀、枪刀切换、刀刃轨迹命中和 E-01 白色步枪兵的历史接入记录见 [单手斩舰刀与白兵 V5](docs/VALKYR_COMBAT_V5.md)。
+
+前一轮 V4：`Builds/ValkyrActionV4/MECH_TRIAL_Valkyr.exe`。蓝色光刃、挥刀碎光、敌方受击闪光、真实刀尖贴地火花和移动粒子记录见 [斩舰刀与移动表现 V4](docs/VALKYR_ACTION_V4.md)。
+
+前一轮试玩：`Builds/ValkyrMotionV3/MECH_TRIAL_Valkyr.exe`。在已接入的第三版机体上重做刀柄握持、刃口方向、胸腰胯发力、踏进与收招、支撑脚和奔跑摆臂。实际游戏镜头与关闭刀光的动作片段见 [动作重做 V3](docs/VALKYR_MOTION_V3.md)。模型外观未编辑；以下 `ValkyrV3` 和 `ValkyrCombat` 为此前构建。
+
+此前第三版厚装甲、大腿与膝甲、当前头部已装入游戏，模型接入记录见 [第三版模型更新](docs/VALKYR_V3_MODEL_UPDATE.md)。当时的动作检查不代表本轮用户认可动作表现。
+
+此前 `Builds/ValkyrCombat/MECH_TRIAL_Valkyr.exe` 接入 VALKYR 与 RAIKEN Mk-II 斩舰刀，昨天的 Jishen V3 机体改为敌方精英首领。进入机库可点“斩舰刀 · 首领试战”。WASD 奔跑，右键 / Q 全身重斩，空格点按冲刺、按住推进飞行；支持空中挥刀。历史动作见 [全身动作 V2](docs/VALKYR_MOTION_V2.md)，模型接入见 [新主角与斩舰刀接入](docs/VALKYR_COMBAT_HANDOFF.md)。
+
+本版保留永久武器与背包仓库、敌人部件吸收、战后换装及局内随机 buff；本局结束 buff 清空。前一版程序 `Builds/EquipmentLoop/MECH_TRIAL_Equipment.exe` 保留，操作见 [装备玩法交接](docs/EQUIPMENT_LOOP_HANDOFF.md)。以下为旧版原型记录。
+
 最新一轮：右摇杆按住拖动瞄准射击、独立挥刀键，以及低饱和环境与 UI。桌面鼠标瞄准、左键按住射击，右键 / Q 挥刀；不再自动炮击。保留工业建筑、推进器冲刺和桌面不限帧，未动另一边的主角模型制作。见 [操作与配色交接](docs/MANUAL_COMBAT_HANDOFF.md)。
 
 Unity 6 上帝视角机甲 Roguelite 作品原型。当前源码已接通手机横屏操作、手动射击与挥刀、两战区六场战斗、六次强化、两阶段 Boss 和一次存档续关。历史自动射击版本的 626.66 秒 Play Mode 回归不代表本轮新操作验证。当前交接以 [操作与配色交接](docs/MANUAL_COMBAT_HANDOFF.md) 为准，[项目审计](docs/AUDIT_2026-09-05.md) 保留改版前基线。当前流程：
@@ -8,7 +26,7 @@ Unity 6 上帝视角机甲 Roguelite 作品原型。当前源码已接通手机�
 
 现有内容包括原生绕障导航、分批增援、动态火花烟尘、池化弹药、成品音效和流式配乐。中英文、音量/震动/画质设置已通过 Play Mode 验证。真实手机多点触控、真人难度和人耳听感仍待评审。测试证据分别位于 `mobile-01`、`maintenance-02`、`progression-03`、`presentation-04`，素材来源见 `docs/ASSET_PROVENANCE.md`。
 
-现用 joney_lol 的 Rigged robot（CC BY 3.0）及 Quaternius CC0 动作，旧 Meshy 模型保留回退。主角模型不在本轮重做。原本仅供预览的挥刀现已接入真实前方范围伤害，尚无连击系统。历史模型资料见 [主角交接](docs/HERO_MODEL_HANDOFF.md)，最新验证见操作与配色交接。
+较早版本使用 joney_lol 的 Rigged robot（CC BY 3.0）及 Quaternius CC0 动作，旧 Meshy 模型保留回退；当时只有单段范围斩击。现用 VALKYR / RAIKEN 的模型接入和三连斩以上方 V7 记录为准。历史模型资料见 [主角交接](docs/HERO_MODEL_HANDOFF.md)。
 
 ## 直接试玩 Windows 版
 
@@ -49,10 +67,10 @@ Unity 6 上帝视角机甲 Roguelite 作品原型。当前源码已接通手机�
 
 ## 当前源码操作
 
-- `WASD` 或左下摇杆：移动
+- `WASD` 或左下摇杆：奔跑
 - 鼠标瞄准、按住左键射击；触屏按住拖动右摇杆瞄准射击，松手停火
-- 右键 / Q 或独立挥刀键：近战，冲刺可取消
-- `Space` 或右侧 DASH：冲刺
+- 右键 / Q 或独立挥刀键：逐次按出三连斩，冲刺可取消；远程状态会先拔刀
+- `Space` 或右侧 DASH：点按冲刺，按住持续低空推进
 - `E` 或右侧 SALVO：四发追踪导弹，冷却 10 秒，无装备前置
 - `1`、`2`、`3`：选择强化
 - `Esc`：暂停或继续

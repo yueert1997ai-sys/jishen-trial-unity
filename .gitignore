@@ -20,3 +20,6 @@ sysinfo.txt
 /AuditEvidence/
 __pycache__/
 /tools/hero/source/*.blend1
+
+# Local patch handoffs are reproducible exports, not an additional source tree.
+/handoff/

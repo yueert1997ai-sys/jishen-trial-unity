@@ -20,6 +20,8 @@ public class EnemyBase : MonoBehaviour
     public float contactDamage = 12f;
     public float fireInterval = 1.25f;
     public int killReward = 5;
+    public Transform rifleMuzzle;
+    public bool TrainingTarget { get; set; }
 
     private Damageable damageable;
     private float nextAttackTime;
@@ -37,7 +39,7 @@ public class EnemyBase : MonoBehaviour
         damageable = GetComponent<Damageable>();
         navigation = gameObject.AddComponent<NavMeshAgent>();
         navigation.radius = kind == EnemyKind.Elite ? 0.8f : 0.6f;
-        navigation.height = 2.5f;
+        navigation.height = rifleMuzzle != null ? 2.8f : 2.5f;
         navigation.updateRotation = false;
         navigation.acceleration = 20f;
         navigation.angularSpeed = 540f;
@@ -68,6 +70,7 @@ public class EnemyBase : MonoBehaviour
     {
         target = targetTransform;
         stageManager = ownerStage;
+        if (GameManager.Instance != null && GameManager.Instance.equipmentLoop != null) GameManager.Instance.equipmentLoop.AttachCarrier(this);
         if (damageable != null && GameManager.Instance != null)
         {
             DifficultyHealthMultiplier = GameManager.Instance.EnemyHealthMultiplier;
@@ -196,10 +199,25 @@ public class EnemyBase : MonoBehaviour
         CombatEffects.Line(origin, direction, 18f, 0.24f, attackDuration, color);
         yield return new WaitForSeconds(attackDuration);
         if (damageable.IsDead) yield break;
+        if(rifleMuzzle!=null)
+        {
+            origin=rifleMuzzle.position;
+            direction=target.GetComponent<Damageable>().AimCenter-origin;
+            GetComponent<E01SoldierMotion>()?.Recoil();
+        }
         float damage = kind == EnemyKind.Elite ? 9f : 6f;
-        var projectile = ProjectilePool.Spawn(false, "EnemyProjectile", origin, color, 0.24f);
         ProjectileVisuals.SpawnMuzzleFlash(origin, color, 0.24f);
-        projectile.Init(1, damageable, direction.normalized, damage, kind == EnemyKind.Elite ? 12f : 10f, 3f, 0f, 0);
+        var carrier = GetComponent<SalvageCarrier>();
+        bool scatter = carrier != null && carrier.gear.id == "scatter";
+        bool swarm = carrier != null && carrier.gear.id == "salvo";
+        int shots = scatter ? 5 : swarm ? 4 : 1;
+        for (int i = 0; i < shots; i++)
+        {
+            float angle = shots == 1 ? 0 : Mathf.Lerp(-18, 18, i / (float)(shots - 1));
+            var projectile = ProjectilePool.Spawn(false, "EnemyProjectile", origin, color, .24f);
+            projectile.Init(1, damageable, Quaternion.AngleAxis(angle, Vector3.up) * direction.normalized,
+                damage * (shots > 1 ? .55f : 1f), kind == EnemyKind.Elite ? 12f : 10f, 3f, 0f, 0);
+        }
         attacking = false;
     }
 
@@ -257,6 +275,9 @@ public class EnemyBase : MonoBehaviour
 
     private void OnDied(Damageable dead)
     {
+        if(TrainingTarget)return;
+        foreach(var collider in GetComponents<Collider>())collider.enabled=false;
+        if (GameManager.Instance != null && GameManager.Instance.equipmentLoop != null) GameManager.Instance.equipmentLoop.DropFrom(this);
         if (stageManager != null)
         {
             stageManager.NotifyEnemyKilled();

@@ -9,6 +9,8 @@ public sealed class RiggedMechAnimator : MonoBehaviour
     public Transform hips, chest, head, leftArm, leftForearm, leftHand, rightArm, rightForearm, rightHand;
     public Transform muzzle, bladeTip;
     public TrailRenderer bladeTrail;
+    public RigidMechPoseDriver rigidPose;
+    public bool HasAuthoredMotion => GetComponent<ValkyrMotionDriver>() != null;
 
     private PlayerController player;
     private WeaponController weapon;
@@ -83,6 +85,7 @@ public sealed class RiggedMechAnimator : MonoBehaviour
 
     private void BindSocket(MechHardpointManager manager, string name, Transform bone)
     {
+        if (rigidPose != null) bone = rigidPose.Resolve(bone);
         var socket = manager.GetSocket(name);
         sockets.Add(new SocketBinding { socket = socket, bone = bone, position = socket.localPosition, rotation = socket.localRotation });
     }
@@ -110,6 +113,7 @@ public sealed class RiggedMechAnimator : MonoBehaviour
     private void Update()
     {
         if (!bound) return;
+        if (HasAuthoredMotion) return;
         bool dead = health != null && health.IsDead;
         animator.updateMode = dead ? AnimatorUpdateMode.UnscaledTime : AnimatorUpdateMode.Normal;
         string state = dead ? "Death" : Time.time < slashUntil ? "Slash" : player.IsDashing ? "Dash" : "Locomotion";
@@ -124,16 +128,18 @@ public sealed class RiggedMechAnimator : MonoBehaviour
         animator.SetFloat(Stride, local.z < -0.1f ? -1.25f : 1.25f);
         float weight = !dead && Time.time < firingUntil && state != "Slash" ? 1 : 0;
         cannonWeight = Mathf.MoveTowards(cannonWeight, weight, Time.deltaTime * 12);
-        animator.SetLayerWeight(1, cannonWeight);
+        animator.SetLayerWeight(1, rigidPose != null ? 0 : cannonWeight);
         if (bladeTrail != null)
             bladeTrail.emitting = state == "Slash" && slashUntil - Time.time < 0.43f && slashUntil - Time.time > 0.18f;
     }
 
     private void LateUpdate()
     {
-        if (!bound || Time.deltaTime <= 0) return;
+        if (!bound) return;
+        if (HasAuthoredMotion) return;
         bool alive = health == null || !health.IsDead;
-        float dt = Time.deltaTime;
+        float dt = alive ? Time.deltaTime : Time.unscaledDeltaTime;
+        if (dt <= 0) return;
         if (alive)
         {
             Vector3 velocity = player.Velocity;
@@ -145,7 +151,7 @@ public sealed class RiggedMechAnimator : MonoBehaviour
             hips.rotation = Quaternion.AngleAxis(legYaw, Vector3.up) * hips.rotation;
             chest.rotation = upperRotation;
             chest.rotation = Quaternion.AngleAxis(-hitRecoil * 8 + recoil * 3, player.transform.right) * chest.rotation;
-            if (cannonWeight > 0.01f)
+            if (rigidPose == null && cannonWeight > 0.01f)
             {
                 Vector3 aim = player.HasAimPoint ? player.AimPoint - muzzle.position : player.AimDirection;
                 Quaternion aligned = Quaternion.FromToRotation(muzzle.forward, aim.normalized) * leftForearm.rotation;
@@ -160,8 +166,24 @@ public sealed class RiggedMechAnimator : MonoBehaviour
                 CombatEffects.Thrust(player.transform.position + Vector3.up * 0.6f - player.transform.right * 0.35f, exhaust, player.IsDashing);
             }
         }
+        if (rigidPose != null)
+        {
+            rigidPose.ApplyPose(alive);
+            if (alive && player.HasAimPoint)
+            {
+                Vector3 aim = player.AimPoint - muzzle.position;
+                Quaternion aligned = Quaternion.FromToRotation(muzzle.forward, aim.normalized) * rigidPose.cannon.rotation;
+                rigidPose.cannon.rotation = aligned;
+                rigidPose.cannon.rotation = Quaternion.AngleAxis(-recoil * 2, player.transform.right) * rigidPose.cannon.rotation;
+            }
+        }
         recoil = Mathf.MoveTowards(recoil, 0, dt * 9);
         hitRecoil = Mathf.MoveTowards(hitRecoil, 0, dt * 6);
+        RefreshSockets();
+    }
+
+    public void RefreshSockets()
+    {
         foreach (var item in sockets)
             item.socket.SetPositionAndRotation(item.bone.position, item.bone.rotation);
     }

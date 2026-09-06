@@ -6,6 +6,7 @@ public struct PlayerCommand
 {
     public Vector2 Move;
     public bool Dash;
+    public bool BoostHeld;
     public bool Skill;
     public bool Melee;
     public bool Fire;
@@ -24,7 +25,7 @@ public class PlayerInputRouter : MonoBehaviour
     private Vector2 touchMove;
     private bool dashQueued;
     private bool skillQueued;
-    private bool meleeQueued, touchFire;
+    private bool meleeQueued, touchFire, boostHeld;
     private Vector2 touchAim;
     private Camera aimCamera;
     private bool mouseFire;
@@ -34,6 +35,7 @@ public class PlayerInputRouter : MonoBehaviour
 
     public void SetTouchMove(Vector2 move) { touchMove = Vector2.ClampMagnitude(move, 1f); }
     public void QueueDash() { dashQueued = true; }
+    public void SetBoostHeld(bool value) { boostHeld = value; }
     public void QueueSkill() { skillQueued = true; }
     public void QueueMelee() { meleeQueued = true; }
     public void SetTouchAim(Vector2 aim, bool held)
@@ -76,6 +78,7 @@ public class PlayerInputRouter : MonoBehaviour
         {
             Move = Vector2.ClampMagnitude(move, 1f),
             Dash = dashQueued || (readKeyboard && Input.GetKeyDown(KeyCode.Space)),
+            BoostHeld = boostHeld || (readKeyboard && Input.GetKey(KeyCode.Space)),
             Skill = skillQueued || (readKeyboard && Input.GetKeyDown(KeyCode.E)),
             Melee = meleeQueued || (readKeyboard && Input.GetKeyDown(KeyCode.Q)),
             HasAim = touchFire,
@@ -104,6 +107,7 @@ public class PlayerInputRouter : MonoBehaviour
         touchMove = Vector2.zero;
         touchAim = Vector2.zero;
         touchFire = false;
+        boostHeld = false;
         mouseFire = false;
         dashQueued = skillQueued = meleeQueued = false;
     }

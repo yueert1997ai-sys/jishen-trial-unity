@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject dronePrefab;
     public GameObject elitePrefab;
     public GameObject bossPrefab;
+    public GameObject liquidBossPrefab;
+    public GameObject DefaultBossPrefab => liquidBossPrefab != null ? liquidBossPrefab : bossPrefab;
     public float spawnRadius = 18f;
 
     public void SpawnGroup(EnemyKind kind, int count)
@@ -59,14 +61,15 @@ public class EnemySpawner : MonoBehaviour
         StopAllCoroutines();
     }
 
-    public BossController SpawnBoss()
+    public BossController SpawnBoss(GameObject prefabOverride = null)
     {
-        if (bossPrefab == null)
+        var prefab = prefabOverride != null ? prefabOverride : DefaultBossPrefab;
+        if (prefab == null)
         {
             return null;
         }
 
-        GameObject bossObject = Instantiate(bossPrefab, new Vector3(0f, 0f, 18f), Quaternion.identity);
+        GameObject bossObject = Instantiate(prefab, new Vector3(0f, 0f, 18f), Quaternion.identity);
         BossController boss = bossObject.GetComponent<BossController>();
         if (boss != null)
         {

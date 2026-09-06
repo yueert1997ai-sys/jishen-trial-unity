@@ -6480,7 +6480,7 @@ MonoBehaviour:
   target: {fileID: 931836330}
   offset: {x: 0, y: 16, z: -12.5}
   followSpeed: 9
-  normalSize: 11.5
+  normalSize: 9
   screenShake: 1
 --- !u!81 &261062986
 AudioListener:
@@ -22704,6 +22704,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 184430782832331220, guid: b8d623d37cda35046b167e4cdec5b548, type: 3}
+      propertyPath: defaultMechPrefab
+      value: 
+      objectReference: {fileID: 1739961285007573064, guid: cdfc543ca3b97d44d9594cfe3af097d6, type: 3}
     - target: {fileID: 3570538421483383881, guid: b8d623d37cda35046b167e4cdec5b548, type: 3}
       propertyPath: upgradeSystem
       value: 
@@ -26981,6 +26985,7 @@ MonoBehaviour:
   resultUI: {fileID: 1667340907}
   arenaSector: {fileID: 2045659798}
   settingsUI: {fileID: 0}
+  equipmentLoop: {fileID: 0}
 --- !u!114 &1097347302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30500,11 +30505,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   stageManager: {fileID: 1097347302}
   player: {fileID: 931836329}
-  meleePrefab: {fileID: 8119977977420736117, guid: 41d2ac74dcd832648830cfb2d922db1a, type: 3}
-  rangedPrefab: {fileID: 3980749570886727999, guid: 6b23af525fc086c4b8cfe3343baa6d18, type: 3}
-  dronePrefab: {fileID: 2193355487925333431, guid: e7c2740ad51cfa843a0758ddf035ef3d, type: 3}
-  elitePrefab: {fileID: 4136462760650745768, guid: 7054ab7917ace4d4d89fdca9cc5a110f, type: 3}
-  bossPrefab: {fileID: 7024179538432962091, guid: eb503850249c7e940bcc01e60902d575, type: 3}
+  meleePrefab: {fileID: 9185012535406261210, guid: 07ac5351c90f00b41817591db1d68687, type: 3}
+  rangedPrefab: {fileID: 9185012535406261210, guid: 07ac5351c90f00b41817591db1d68687, type: 3}
+  dronePrefab: {fileID: 9185012535406261210, guid: 07ac5351c90f00b41817591db1d68687, type: 3}
+  elitePrefab: {fileID: 9185012535406261210, guid: 07ac5351c90f00b41817591db1d68687, type: 3}
+  bossPrefab: {fileID: 5881426455976898090, guid: c7d6c7b941fa44545a32090e8a0a5ca1, type: 3}
+  liquidBossPrefab: {fileID: 7024179538432962091, guid: 87b3560859536394eb87e5015426c88f, type: 3}
   spawnRadius: 18
 --- !u!4 &1215884779
 Transform:

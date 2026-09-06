@@ -46,7 +46,7 @@ public class CameraFollow : MonoBehaviour
         float desiredSize = normalSize;
         if (GameManager.Instance != null && GameManager.Instance.Phase == GamePhase.Hangar)
         {
-            desiredFocus = target.position + new Vector3(3.7f, 1f, 0);
+            desiredFocus = target.position + new Vector3(2.2f, 1f, 0);
             desiredSize = 4.2f;
         }
         if (boss != null && GameManager.Instance != null && GameManager.Instance.IsCombatActive)

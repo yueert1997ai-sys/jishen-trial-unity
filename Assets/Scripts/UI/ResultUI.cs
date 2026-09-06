@@ -31,7 +31,10 @@ public class ResultUI : MonoBehaviour
         int seconds = Mathf.CeilToInt(gameManager.GetRunTime());
         resultText.text = GameText.T("Kills") + "  " + gameManager.Kills + "     " + GameText.T("Salvage") + "  " + gameManager.Coins
             + "\n" + gameManager.DifficultyDisplayName + "     " + GameText.T("Time") + "  " + (seconds / 60).ToString("00") + ":" + (seconds % 60).ToString("00")
-            + "\n\n" + (gameManager.upgradeSystem != null ? gameManager.upgradeSystem.GetSummary() : "");
+            + "\n\n" + gameManager.LastRunUpgradeSummary;
+        if (owner.equipmentLoop != null)
+            resultText.text += "\n\n" + EquipmentWarehouseUI.T("本局新装备已永久入库：", "New equipment kept: ") + owner.equipmentLoop.NewThisRun
+                + "\n" + EquipmentWarehouseUI.T("本局 buff 已清空。下次出击重新随机。", "Run buffs cleared. Next sortie starts fresh.");
     }
 
     public void Hide() { if (canvas != null) canvas.gameObject.SetActive(false); }

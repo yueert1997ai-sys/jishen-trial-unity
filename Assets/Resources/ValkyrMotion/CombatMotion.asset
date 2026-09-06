@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cb6c39fa396db408fabbfdcb17d92d, type: 3}
+  m_Name: CombatMotion
+  m_EditorClassIdentifier: Assembly-CSharp::ValkyrMotionProfile
+  slash:
+  - time: 0
+    cutAngle: -28
+    cutWeight: 0
+    pelvis: {x: 0, y: -0.1, z: 0}
+    hips: {x: 0, y: -8, z: 0}
+    waist: {x: 3, y: -5, z: 0}
+    chest: {x: 5, y: -8, z: -2}
+    grip: {x: 0.87, y: 2.07, z: 0.26}
+    leftFoot: {x: -0.48, y: 0, z: 0.26}
+    rightFoot: {x: 0.48, y: 0, z: -0.25}
+    leftFootAngles: {x: 0, y: -10, z: 0}
+    rightFootAngles: {x: 0, y: 18, z: 0}
+  - time: 0.13
+    cutAngle: -42
+    cutWeight: 1
+    pelvis: {x: 0.18, y: -0.2, z: -0.1}
+    hips: {x: -3, y: 23, z: -6}
+    waist: {x: -5, y: 35, z: -7}
+    chest: {x: -6, y: 48, z: -9}
+    grip: {x: 1.06, y: 2.56, z: -0.19}
+    leftFoot: {x: -0.48, y: 0.09, z: 0.36}
+    rightFoot: {x: 0.48, y: 0, z: -0.25}
+    leftFootAngles: {x: 0, y: -10, z: 0}
+    rightFootAngles: {x: 0, y: 18, z: 0}
+  - time: 0.2
+    cutAngle: -32
+    cutWeight: 1
+    pelvis: {x: 0.21, y: -0.24, z: -0.1}
+    hips: {x: 4, y: 12, z: -3}
+    waist: {x: -2, y: 32, z: -6}
+    chest: {x: -4, y: 52, z: -9}
+    grip: {x: 1.12, y: 2.48, z: -0.12}
+    leftFoot: {x: -0.52, y: 0.08, z: 0.65}
+    rightFoot: {x: 0.48, y: 0, z: -0.25}
+    leftFootAngles: {x: 0, y: -10, z: 0}
+    rightFootAngles: {x: 0, y: 18, z: 0}
+  - time: 0.275
+    cutAngle: 68
+    cutWeight: 1
+    pelvis: {x: -0.12, y: -0.28, z: 0.12}
+    hips: {x: 10, y: -25, z: 5}
+    waist: {x: 12, y: -12, z: 3}
+    chest: {x: 15, y: 2, z: 2}
+    grip: {x: 0.71, y: 2.28, z: 0.68}
+    leftFoot: {x: -0.55, y: 0, z: 0.91}
+    rightFoot: {x: 0.48, y: 0, z: -0.25}
+    leftFootAngles: {x: 0, y: -10, z: 0}
+    rightFootAngles: {x: 0, y: 18, z: 0}
+  - time: 0.34
+    cutAngle: 132
+    cutWeight: 1
+    pelvis: {x: -0.29, y: -0.33, z: 0.14}
+    hips: {x: 12, y: -39, z: 8}
+    waist: {x: 15, y: -47, z: 9}
+    chest: {x: 18, y: -61, z: 11}
+    grip: {x: -0.02, y: 2.05, z: 0.87}
+    leftFoot: {x: -0.55, y: 0, z: 0.91}
+    rightFoot: {x: 0.48, y: 0.035, z: -0.25}
+    leftFootAngles: {x: 0, y: -10, z: 0}
+    rightFootAngles: {x: 22, y: 18, z: 0}
+  - time: 0.4
+    cutAngle: 168
+    cutWeight: 1
+    pelvis: {x: -0.28, y: -0.31, z: 0.12}
+    hips: {x: 9, y: -37, z: 7}
+    waist: {x: 14, y: -51, z: 8}
+    chest: {x: 19, y: -78, z: 11}
+    grip: {x: -0.43, y: 1.98, z: 0.53}
+    leftFoot: {x: -0.55, y: 0, z: 0.91}
+    rightFoot: {x: 0.48, y: 0.07, z: -0.2}
+    leftFootAngles: {x: 0, y: -10, z: 0}
+    rightFootAngles: {x: 22, y: 18, z: 0}
+  - time: 0.49
+    cutAngle: 177
+    cutWeight: 1
+    pelvis: {x: -0.23, y: -0.26, z: 0.08}
+    hips: {x: 6, y: -29, z: 4}
+    waist: {x: 10, y: -43, z: 6}
+    chest: {x: 14, y: -68, z: 8}
+    grip: {x: -0.4, y: 2.02, z: 0.48}
+    leftFoot: {x: -0.55, y: 0, z: 0.89}
+    rightFoot: {x: 0.48, y: 0.13, z: -0.1}
+    leftFootAngles: {x: 0, y: -10, z: 0}
+    rightFootAngles: {x: 22, y: 18, z: 0}
+  - time: 0.61
+    cutAngle: 205
+    cutWeight: 0.35
+    pelvis: {x: -0.08, y: -0.15, z: 0.02}
+    hips: {x: 1, y: -16, z: 1}
+    waist: {x: 6, y: -25, z: 2}
+    chest: {x: 9, y: -39, z: 1}
+    grip: {x: 0.22, y: 2.17, z: 0.53}
+    leftFoot: {x: -0.5, y: 0.03, z: 0.76}
+    rightFoot: {x: 0.48, y: 0.06, z: 0.12}
+    leftFootAngles: {x: 0, y: -10, z: 0}
+    rightFootAngles: {x: 22, y: 18, z: 0}
+  - time: 0.72
+    cutAngle: 220
+    cutWeight: 0
+    pelvis: {x: 0, y: -0.1, z: 0}
+    hips: {x: 0, y: -8, z: 0}
+    waist: {x: 3, y: -5, z: 0}
+    chest: {x: 5, y: -8, z: -2}
+    grip: {x: 0.87, y: 2.07, z: 0.26}
+    leftFoot: {x: -0.48, y: 0, z: 0.71}
+    rightFoot: {x: 0.48, y: 0, z: 0.2}
+    leftFootAngles: {x: 0, y: -10, z: 0}
+    rightFootAngles: {x: 0, y: 18, z: 0}

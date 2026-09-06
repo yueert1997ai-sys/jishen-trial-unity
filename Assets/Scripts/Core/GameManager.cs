@@ -7,7 +7,8 @@ public enum GamePhase
     Combat,
     Reward,
     Shop,
-    Result
+    Result,
+    Loadout
 }
 
 public enum RunDifficulty
@@ -37,6 +38,10 @@ public class GameManager : MonoBehaviour
     public ResultUI resultUI;
     public ArenaSector arenaSector;
     public SettingsUI settingsUI;
+    public EquipmentLoop equipmentLoop;
+    public string LastRunUpgradeSummary { get; private set; }
+    public bool WeaponTrialActive => weaponTrial != null;
+    private WeaponTrial weaponTrial;
 
     public int Coins { get; private set; }
     public int Kills { get; private set; }
@@ -47,7 +52,7 @@ public class GameManager : MonoBehaviour
     public int CompletedEncounters { get; private set; }
     public bool ContinueUsed { get; private set; }
     public bool LastResultVictory { get; private set; }
-    public bool CanContinue => Phase == GamePhase.Result && !LastResultVictory && !ContinueUsed
+    public bool CanContinue => equipmentLoop == null && Phase == GamePhase.Result && !LastResultVictory && !ContinueUsed
         && Difficulty == RunDifficulty.Cadet && checkpoint != null;
     public int CheckpointEncounter => checkpoint != null ? checkpoint.encounter : -1;
     private RunCheckpoint checkpoint;
@@ -89,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     public bool CanPlayerControl
     {
-        get { return !IsPaused && (Phase == GamePhase.Hangar || Phase == GamePhase.Combat); }
+        get { return !IsPaused && (equipmentLoop == null || !equipmentLoop.UI.IsVisible) && (Phase == GamePhase.Hangar || Phase == GamePhase.Combat); }
     }
 
     private void Awake()
@@ -98,6 +103,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         AudioListener.pause = false;
         FindMissingReferences();
+        equipmentLoop = GetComponent<EquipmentLoop>() ?? gameObject.AddComponent<EquipmentLoop>();
+        equipmentLoop.Initialize(this);
     }
 
     private void Start()
@@ -113,6 +120,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (equipmentLoop != null && equipmentLoop.UI.IsVisible)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) && Phase == GamePhase.Hangar) equipmentLoop.CloseWarehouse();
+            return;
+        }
         if (settingsUI != null && settingsUI.IsVisible && Input.GetKeyDown(KeyCode.Escape))
         {
             settingsUI.Hide();
@@ -145,6 +157,7 @@ public class GameManager : MonoBehaviour
         SetPaused(false);
         Phase = GamePhase.Hangar;
         ProgressText = "Hangar ready - press E to start";
+        if (equipmentLoop != null) equipmentLoop.ApplyLoadout();
         if (combatHUD != null)
         {
             combatHUD.SetVisible(false);
@@ -173,9 +186,14 @@ public class GameManager : MonoBehaviour
 
     public void BeginRun()
     {
-        if (Phase != GamePhase.Hangar)
+        if (PrepareRun()) StartEncounter(0, true);
+    }
+
+    private bool PrepareRun()
+    {
+        if (Phase != GamePhase.Hangar || IsPaused || (equipmentLoop != null && equipmentLoop.UI.IsVisible))
         {
-            return;
+            return false;
         }
 
         if (hangarUI != null)
@@ -209,8 +227,10 @@ public class GameManager : MonoBehaviour
             upgradeSystem.ResetUpgrades();
         }
 
+        if (equipmentLoop != null) equipmentLoop.BeginRun();
+
         playerController.GetComponent<Damageable>().RestoreLife(playerStats.MaxHp, playerStats.MaxHp);
-        StartEncounter(0, true);
+        return true;
     }
 
     public void SetDifficulty(RunDifficulty difficulty)
@@ -232,7 +252,7 @@ public class GameManager : MonoBehaviour
         StartEncounter((stageIndex - 1) * 3, true);
     }
 
-    private void StartEncounter(int index, bool saveCheckpoint)
+    private void StartEncounter(int index, bool saveCheckpoint, GameObject bossOverride = null)
     {
         SetPaused(false);
         Phase = GamePhase.Combat;
@@ -249,7 +269,7 @@ public class GameManager : MonoBehaviour
                     player = playerStats.Capture() };
             }
         }
-        stageManager.StartEncounter(index);
+        stageManager.StartEncounter(index, bossOverride);
     }
 
     public void OnEncounterCleared(int index)
@@ -257,6 +277,7 @@ public class GameManager : MonoBehaviour
         if (Phase != GamePhase.Combat || stageManager.CurrentEncounter != index || CompletedEncounters != index) return;
         CompletedEncounters++;
         AddCoins(30 + index * 10);
+        if (equipmentLoop != null) equipmentLoop.AbsorbNearby(true);
         EnterReward();
     }
 
@@ -290,6 +311,61 @@ public class GameManager : MonoBehaviour
             rewardUI.Hide();
         }
 
+        if (equipmentLoop != null)
+        {
+            Phase = GamePhase.Loadout;
+            equipmentLoop.OpenWarehouse();
+        }
+        else StartEncounter(CompletedEncounters, true);
+    }
+
+    public void BeginBossPreview()
+    {
+        if (!PrepareRun()) return;
+        CompletedEncounters = 6;
+        StartEncounter(6, false, stageManager.enemySpawner.bossPrefab);
+    }
+
+    public void BeginLiquidBossChallenge()
+    {
+        var bossPrefab = stageManager.enemySpawner.liquidBossPrefab;
+        if (bossPrefab == null)
+        {
+            Debug.LogError("Liquid E-01 boss is not assigned to this scene.");
+            return;
+        }
+        if (!PrepareRun()) return;
+        // Match the six random upgrades normally earned before the final encounter.
+        // These use the run-only buff system and never enter the permanent warehouse.
+        for (int i = 0; i < 6; i++)
+        {
+            var options = upgradeSystem.GenerateOptions();
+            upgradeSystem.ApplyOption(options[Random.Range(0, options.Count)]);
+        }
+        CompletedEncounters = 6;
+        playerController.GetComponent<Damageable>().RestoreLife(playerStats.MaxHp, playerStats.MaxHp);
+        StartEncounter(6, false, bossPrefab);
+    }
+    public void BeginWeaponTrial()
+    {
+        if(Phase!=GamePhase.Hangar || IsPaused)return;
+        StopCombat();equipmentLoop.ClearPickups();
+        Phase=GamePhase.Combat;hangarUI.Hide();combatHUD.SetVisible(false);
+        playerController.RestoreAt(new Vector3(0,.1f,-12));
+        playerController.GetComponent<Damageable>().RestoreLife(playerStats.MaxHp,playerStats.MaxHp);
+        weaponTrial=gameObject.AddComponent<WeaponTrial>();weaponTrial.Open(this);
+    }
+    public void EndWeaponTrial()
+    {
+        if(weaponTrial!=null)Destroy(weaponTrial);weaponTrial=null;
+        StopCombat();equipmentLoop.ClearPickups();
+        EnterHangar();
+    }
+
+    public void ContinueFromLoadout()
+    {
+        if (Phase != GamePhase.Loadout) return;
+        equipmentLoop.UI.Hide();
         StartEncounter(CompletedEncounters, true);
     }
 
@@ -319,7 +395,15 @@ public class GameManager : MonoBehaviour
         SetPaused(false);
         Phase = GamePhase.Result;
         LastResultVictory = victory;
+        LastRunUpgradeSummary = upgradeSystem != null ? upgradeSystem.GetSummary() : "";
         StopCombat();
+        if (equipmentLoop != null)
+        {
+            equipmentLoop.UI.Hide();
+            equipmentLoop.ClearPickups();
+            checkpoint = null;
+            if (upgradeSystem != null) upgradeSystem.ResetUpgrades();
+        }
         if (combatHUD != null) combatHUD.SetVisible(false);
         if (rewardUI != null) rewardUI.Hide();
         if (shopUI != null) shopUI.Hide();

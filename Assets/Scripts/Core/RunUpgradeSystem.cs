@@ -40,9 +40,11 @@ public class RunUpgradeSystem : MonoBehaviour
 
     public void ResetUpgrades(int seed = 0)
     {
+        FindReferences();
+        if (playerStats != null) playerStats.ClearRunUpgradeBonuses();
         acquired.Clear();
         System.Array.Clear(ranks, 0, ranks.Length);
-        Seed = seed == 0 ? System.Environment.TickCount : seed;
+        Seed = seed == 0 ? System.Guid.NewGuid().GetHashCode() : seed;
         RefreshSummary();
     }
 

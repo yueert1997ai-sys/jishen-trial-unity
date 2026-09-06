@@ -22,6 +22,8 @@ public class WeaponController : MonoBehaviour
     private float nextMissileTime;
     private float temporaryFireRateMultiplier = 1f;
     private float temporaryFireRateTimer;
+    private SalvageGear LoadoutWeapon => GameManager.Instance != null && GameManager.Instance.equipmentLoop != null ? GameManager.Instance.equipmentLoop.Weapon : null;
+    private SalvageGear LoadoutPack => GameManager.Instance != null && GameManager.Instance.equipmentLoop != null ? GameManager.Instance.equipmentLoop.Backpack : null;
 
     private void Awake()
     {
@@ -91,16 +93,24 @@ public class WeaponController : MonoBehaviour
         }
 
         int level = GetWeaponLevel(EquipmentType.RightHandWeapon, 1);
-        nextBeamTime = Time.time + beamFireInterval / fireRate;
+        var gear = LoadoutWeapon;
+        nextBeamTime = Time.time + (gear != null ? gear.interval : beamFireInterval) / fireRate;
 
         int shotCount = (level == 1 ? 1 : level == 2 ? 2 : 3) + (upgradeSystem != null ? upgradeSystem.BonusBeamProjectiles : 0);
         float baseDamage = level == 1 ? 18f : level == 2 ? 20f : 22f;
         int pierce = (level >= 3 ? 1 : 0) + (upgradeSystem != null ? upgradeSystem.BonusPierce : 0);
         float explosionRadius = upgradeSystem != null ? upgradeSystem.BeamExplosionRadius : 0f;
+        if (gear != null)
+        {
+            shotCount = gear.projectiles * (1 + (upgradeSystem != null ? upgradeSystem.BonusBeamProjectiles : 0));
+            baseDamage = gear.damage;
+            pierce = gear.pierce + (upgradeSystem != null ? upgradeSystem.BonusPierce : 0);
+        }
 
         for (int i = 0; i < shotCount; i++)
         {
-            float spread = shotCount == 1 ? 0f : Mathf.Lerp(-6f, 6f, shotCount == 1 ? 0f : i / (float)(shotCount - 1));
+            float angle = gear != null ? Mathf.Max(6f, gear.spread) : 6f;
+            float spread = shotCount == 1 ? 0f : Mathf.Lerp(-angle, angle, i / (float)(shotCount - 1));
             Vector3 origin = GetMuzzlePosition() + transform.right * ((i - (shotCount - 1) * 0.5f) * 0.16f);
             // The offset muzzle must converge on the cursor target, not fire parallel to the torso.
             Vector3 aim = playerController != null && playerController.HasAimPoint
@@ -138,7 +148,7 @@ public class WeaponController : MonoBehaviour
         {
             float spread = Mathf.Lerp(-35f, 35f, missileCount == 1 ? 0f : i / (float)(missileCount - 1));
             Vector3 direction = Quaternion.AngleAxis(spread, Vector3.up) * GetAimDirection();
-            Vector3 origin = GetMuzzlePosition() + transform.up * 0.5f + transform.right * ((i % 2 == 0 ? -1f : 1f) * 0.45f);
+            Vector3 origin = GetSkillMuzzlePosition() + transform.up * 0.5f + transform.right * ((i % 2 == 0 ? -1f : 1f) * 0.45f);
             CreateMissileProjectile(origin, direction, 18f * GetDamageMultiplier(), explosionRadius, target);
         }
 
@@ -148,11 +158,13 @@ public class WeaponController : MonoBehaviour
     public bool TryFireSkill(Damageable target)
     {
         if (!CanFire() || Time.time < nextSkillTime || target == null || target.IsDead) return false;
-        nextSkillTime = Time.time + 10f;
-        for (int i = 0; i < 4; i++)
+        var pack = LoadoutPack;
+        int count = pack != null ? pack.missiles : 4;
+        nextSkillTime = Time.time + (pack != null ? pack.skillCooldown : 10f);
+        for (int i = 0; i < count; i++)
         {
-            Vector3 origin = GetMuzzlePosition() + Vector3.up * 0.2f + transform.right * (i % 2 == 0 ? -0.4f : 0.4f);
-            Vector3 direction = Quaternion.AngleAxis(Mathf.Lerp(-24f, 24f, i / 3f), Vector3.up) * (target.AimCenter - origin).normalized;
+            Vector3 origin = GetSkillMuzzlePosition() + Vector3.up * 0.2f + transform.right * (i % 2 == 0 ? -0.4f : 0.4f);
+            Vector3 direction = Quaternion.AngleAxis(Mathf.Lerp(-24f, 24f, i / (float)(count - 1)), Vector3.up) * (target.AimCenter - origin).normalized;
             CreateMissileProjectile(origin, direction, 18f * GetDamageMultiplier(), 1.6f, target);
         }
         GameAudio.Play(GameAudioCue.Missile, 0.35f);
@@ -163,6 +175,7 @@ public class WeaponController : MonoBehaviour
     private bool CanFire()
     {
         return (damageable == null || !damageable.IsDead)
+            && (playerController == null || playerController.Stance == null || playerController.Stance.CanFire)
             && (playerController == null || playerController.Melee == null || !playerController.Melee.IsAttacking)
             && (GameManager.Instance == null || GameManager.Instance.IsCombatActive);
     }
@@ -187,6 +200,11 @@ public class WeaponController : MonoBehaviour
         }
 
         return transform.position + Vector3.up * 1.1f + GetAimDirection() * 1f;
+    }
+    private Vector3 GetSkillMuzzlePosition()
+    {
+        var rig=GetComponentInChildren<RiggedMechAnimator>();
+        return rig!=null&&rig.muzzle!=null?rig.muzzle.position:GetMuzzlePosition();
     }
 
     private int GetWeaponLevel(EquipmentType equipmentType, int fallback)
@@ -216,7 +234,7 @@ public class WeaponController : MonoBehaviour
 
     private void CreateBeamProjectile(Vector3 origin, Vector3 direction, float damage, int pierce, float explosionRadius)
     {
-        Color color = new Color(0.1f, 0.8f, 1f);
+        Color color = LoadoutWeapon != null ? LoadoutWeapon.color : new Color(0.1f, 0.8f, 1f);
         var projectile = ProjectilePool.Spawn(false, "BeamProjectile", origin, color);
         projectile.Init(team, damageable, direction, damage, 30f, 2.1f, explosionRadius, pierce);
         ProjectileVisuals.SpawnMuzzleFlash(origin, color, 0.26f);
