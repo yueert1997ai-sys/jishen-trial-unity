@@ -1,5 +1,9 @@
 # 机神试炼 / MECH ROUGE
 
+## GitHub / Mac 接续
+
+当前 Unity 工程的私有仓库：<https://github.com/yueert1997ai-sys/jishen-trial-unity>。默认分支为 `codex/industrial-dash-polish`。另一仓库 `mecha-marco` 是 JavaScript 网页版，不是此 Unity 工程。换电脑请使用有权限的 GitHub 账号克隆本仓库，安装 Unity `6000.3.18f1`；详见 [Mac 接续说明](docs/MAC_GITHUB_HANDOFF.md)。今晚继续制作的文件需保存后再次提交推送，未保存的编辑器状态不会自动进入 GitHub。
+
 2026-09-06 最新试玩已在现有游戏副本中更新第三版厚装甲与双手持刀机甲：`handoff/GameplayLoop_V1/Builds/ValkyrV3/MECH_TRIAL_Valkyr.exe`。模型接入、动作检查和继续开发的位置见 [第三版游戏更新](handoff/GameplayLoop_V1/docs/VALKYR_V3_MODEL_UPDATE.md)；该副本保留已实现的装备收藏与推进飞行。下文为本目录此前版本记录。
 
 玩法方向已于 2026-09-06 确认：固定机体，夺取并永久收藏敌方武器与背包；局内 buff 随机获取，结束后清空。后续迭代依据见 [核心玩法约定](docs/CORE_GAME_DESIGN.md)。这些新系统待实现，下文仍为现有原型说明。

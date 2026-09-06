@@ -37,3 +37,4 @@ __pycache__/
 /art_prototypes/**/*.log
 /art_prototypes/**/*.zip
 /art_prototypes/**/*.unitypackage
+/BackupVerification/
