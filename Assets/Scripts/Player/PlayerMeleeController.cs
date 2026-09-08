@@ -20,7 +20,8 @@ public sealed class PlayerMeleeController : MonoBehaviour
     private void Awake() { player = GetComponent<PlayerController>(); owner = GetComponent<Damageable>(); }
     public bool TryAttack()
     {
-        if (IsAttacking || CooldownRemaining > 0 || player.IsDashing || owner.IsDead
+        if (player.Loadout == null || player.Loadout.Selected != PrimaryWeapon.Greatsword
+            || IsAttacking || CooldownRemaining > 0 || player.IsDashing || owner.IsDead
             || (GameManager.Instance != null && !GameManager.Instance.IsCombatActive)) return false;
         elapsed = 0;
         nextAttack = Time.time + 0.68f;

@@ -14,6 +14,16 @@ No paid plan, Git LFS subscription or paid storage purchase was enabled. Assets 
 
 ## Mac Setup
 
+### 2026-09-08 continuation
+
+The main scene now includes the V3 pre-sortie hangar: unarmed default, M7/RAIKEN/M14 selection, close inspection, and the selected weapon carried into combat. Read `docs/HANGAR_LOADOUT_20260908.md` first. Required exported models, prefabs, materials and Unity `.meta` files are committed with the code. Editable hangar and lunar-base sources are in `art_prototypes/VALKYR_Hangar_20260908` and `art_prototypes/LunarBase_Sector01_20260908`; the lunar base is still a Blender scene, not a playable Unity arena.
+
+The Mac preview was verified with installed Unity 6000.3.17f1 in an isolated copy. The main project still requires 6000.3.18f1. Mac builds and the validation copy are local artifacts and are not uploaded. Historical Windows executables were not updated.
+
+The user reported excessive heat on this Mac. Keep further work here to code review, small edits and Git synchronization; run substantial Unity builds or Blender rendering on the more capable development machine. No new render or build is needed for this handoff.
+
+### Setup steps
+
 1. Sign in to GitHub using the owning account or an invited collaborator account. A private URL alone does not grant download access. Other IDEs/platforms must authenticate to GitHub with authorized repository access.
 2. Install Git/GitHub Desktop and Unity Hub. Install Unity **6000.3.18f1**, choosing the Editor for the Mac's processor architecture.
 3. Clone this repository. The remote default branch is intended to point to the current development branch `codex/industrial-dash-polish`; verify the latest backup commit before editing. Do not clone `mecha-marco` as a substitute.

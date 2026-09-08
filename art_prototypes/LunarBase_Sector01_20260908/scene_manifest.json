@@ -1,0 +1,46 @@
+{
+  "scene": "MARE-07 | Abandoned Lunar Service Yard",
+  "file": "MARE07_LUNAR_BASE_MASTER.blend",
+  "blender": "5.2.1 LTS",
+  "objects": 2078,
+  "collections": {
+    "01 | Lunar terrain and impact field": 176,
+    "02 | Central service apron - clear combat space": 99,
+    "03 | MARE-07 damaged maintenance hangar": 168,
+    "04 | Abandoned six-wheel lunar rover": 314,
+    "05 | Tire ruts and abandoned worksite debris": 292,
+    "06 | Broken photovoltaic farm": 317,
+    "07 | Damaged long-range communications": 82,
+    "08 | Cryogenic storage and exposed plumbing": 40,
+    "09 | Cargo gantry, low cover and maintenance props": 111,
+    "10 | Dust drifts against structures": 7,
+    "90 | Existing VALKYR - removable scale reference": 179,
+    "99 | Cameras and lunar lighting": 8,
+    "11 | Breached roof, buckled armor and exposed trusses": 47,
+    "12 | Pressure-lock annex and base infrastructure": 117,
+    "13 | Collapsed service truss and impact wreckage": 77,
+    "14 | Perimeter utility cabling and low retaining remnants": 44
+  },
+  "hero_source": "/Users/yuemarco/Documents/mech/jishen-trial-unity/art_prototypes/RAIKEN_MkII_20260906/VALKYR_RAIKEN_GAME.blend",
+  "hero_reference_height": 3.5,
+  "cameras": [
+    "01 | Establishing view",
+    "02 | Gameplay 60 degree",
+    "03 | Rover story detail",
+    "04 | Hangar architecture"
+  ],
+  "scope": "One authored Blender sector; no Unity integration or runtime performance certification.",
+  "required_props": [
+    "Abandoned six-wheel rover with missing wheel",
+    "Detached wheel and tools",
+    "Broken PV panels",
+    "Damaged communications dish",
+    "Jammed maintenance hangar",
+    "Cryogenic tanks",
+    "Cargo gantry",
+    "Low cover",
+    "Tire tracks",
+    "Lunar craters and dust drifts"
+  ],
+  "art_pass": "02: physical roof breach, annex, angular armor, collapsed truss, craters, dust, utility dressing."
+}

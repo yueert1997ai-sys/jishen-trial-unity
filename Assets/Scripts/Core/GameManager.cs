@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public ResultUI resultUI;
     public ArenaSector arenaSector;
     public SettingsUI settingsUI;
+    public HangarPresentation Hangar { get; private set; }
 
     public int Coins { get; private set; }
     public int Kills { get; private set; }
@@ -89,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     public bool CanPlayerControl
     {
-        get { return !IsPaused && (Phase == GamePhase.Hangar || Phase == GamePhase.Combat); }
+        get { return !IsPaused && Phase == GamePhase.Combat; }
     }
 
     private void Awake()
@@ -98,6 +99,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         AudioListener.pause = false;
         FindMissingReferences();
+        Hangar = GetComponent<HangarPresentation>() ?? gameObject.AddComponent<HangarPresentation>();
     }
 
     private void Start()
@@ -144,6 +146,8 @@ public class GameManager : MonoBehaviour
     {
         SetPaused(false);
         Phase = GamePhase.Hangar;
+        playerController.GetComponent<PlayerLoadout>().EnterHangar();
+        Hangar.Show(this);
         ProgressText = "Hangar ready - press E to start";
         if (combatHUD != null)
         {
@@ -173,7 +177,7 @@ public class GameManager : MonoBehaviour
 
     public void BeginRun()
     {
-        if (Phase != GamePhase.Hangar)
+        if (Phase != GamePhase.Hangar || IsPaused || !playerController.GetComponent<PlayerLoadout>().CanDeploy)
         {
             return;
         }
@@ -182,6 +186,7 @@ public class GameManager : MonoBehaviour
         {
             hangarUI.Hide();
         }
+        Hangar.Hide();
 
         if (combatHUD != null)
         {

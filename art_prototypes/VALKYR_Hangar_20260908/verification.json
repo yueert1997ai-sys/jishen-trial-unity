@@ -1,0 +1,50 @@
+{
+  "opened_file": "/Users/yuemarco/Documents/mech/jishen-trial-unity/art_prototypes/VALKYR_Hangar_20260908/VALKYR_HANGAR_MASTER.blend",
+  "scene": "VALKYR | Pre-sortie Hangar",
+  "objects": 779,
+  "mesh_objects": 665,
+  "base_triangles": 385428,
+  "missing_used_textures": [],
+  "hero_source_unchanged": true,
+  "hero_source": "/Users/yuemarco/Documents/mech/jishen-trial-unity/art_prototypes/JishenTrial_Hero_Assembly_V3/body_mass_refinement_20260906/iteration_v3/game_update/VALKYR_V3_GAME.blend",
+  "hero_revision_marker_present": true,
+  "hero_meshes": 29,
+  "hero_geometry_matches_appended_v3": true,
+  "default_unarmed": true,
+  "right_forearm_relaxed": true,
+  "body_main_camera_bounds": {
+    "x": [
+      0.3291051387786865,
+      0.5973456501960754
+    ],
+    "y": [
+      0.1523655205965042,
+      0.8620315790176392
+    ]
+  },
+  "orbit_camera_positions": {
+    "1": [
+      0.0,
+      -3.200000047683716,
+      3.2699999809265137
+    ],
+    "31": [
+      3.200000047683716,
+      1.3987644820190326e-07,
+      3.2699999809265137
+    ],
+    "61": [
+      -2.797528964038065e-07,
+      3.200000047683716,
+      3.2699999809265137
+    ],
+    "91": [
+      -3.200000047683716,
+      -3.815961946429525e-08,
+      3.2699999809265137
+    ]
+  },
+  "orbit_distinct_positions": true,
+  "checks_passed": true,
+  "scope": "Blender artifact integrity, body framing and camera motion; visual renders checked separately. No Unity runtime claims."
+}

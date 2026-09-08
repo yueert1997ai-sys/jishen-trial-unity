@@ -1,0 +1,34 @@
+{
+  "opened_file": "/Users/yuemarco/Documents/mech/jishen-trial-unity/art_prototypes/LunarBase_Sector01_20260908/MARE07_LUNAR_BASE_MASTER.blend",
+  "blender": "5.2.1 LTS",
+  "active_scene": "MARE-07 | Abandoned Lunar Service Yard",
+  "objects": 2078,
+  "mesh_objects": 1917,
+  "base_mesh_triangles": 301104,
+  "materials_used": 28,
+  "image_textures_used": 8,
+  "missing_used_image_textures": [],
+  "non_finite_transforms": [],
+  "critical_object_presence": {
+    "SELENE-04 | immobilized recovery rover": true,
+    "Detached rover wheel": true,
+    "Dead blue windshield": true,
+    "Damaged parabolic reflector": true,
+    "Dark interior under breach": true,
+    "PRESSURE LOCK | quiet service annex": true,
+    "COLLAPSED CABLE BRIDGE": true,
+    "Sculpted regolith with impact basins": true,
+    "Octagonal maintenance apron": true,
+    "VALKYR scale reference - source preserved": true
+  },
+  "cameras": [
+    "01 | Establishing view",
+    "02 | Gameplay 60 degree",
+    "03 | Rover story detail",
+    "04 | Hangar architecture"
+  ],
+  "startup_camera": "01 | Establishing view",
+  "hero_source_sha256": "3bfcf79c1b0b62f43feb4f575d0d2d32363e7448e849266a7c6233748ca64359",
+  "checks_passed": true,
+  "scope": "Artifact readback and visual-review support only. No Unity playability or performance validation."
+}

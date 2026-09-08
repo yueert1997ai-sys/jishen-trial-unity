@@ -80,7 +80,7 @@ public class MobileControls : MonoBehaviour
         if (!show || Time.unscaledTime < nextRefresh) return;
         nextRefresh = Time.unscaledTime + 0.1f;
         dash.interactable = player.IsDashReady && player.stats.CurrentEnergy >= 25f;
-        melee.interactable = player.Melee.CooldownRemaining <= 0 && !player.IsDashing;
+        melee.interactable = player.Loadout.Selected == PrimaryWeapon.Greatsword && player.Melee.CooldownRemaining <= 0 && !player.IsDashing;
         meleeLabel.text = player.Melee.CooldownRemaining > 0 ? player.Melee.CooldownRemaining.ToString("0.0") : GameText.T("SLASH");
         skill.interactable = player.weaponController.SkillCooldownRemaining <= 0f && player.AutoAim.CurrentTarget != null;
         dashLabel.text = player.IsDashReady ? GameText.T("DASH") : player.DashCooldownRemaining.ToString("0.0");

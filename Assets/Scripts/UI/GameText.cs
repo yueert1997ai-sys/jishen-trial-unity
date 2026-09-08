@@ -6,6 +6,20 @@ public static class GameText
     public static IEnumerable<string> Translations => chinese.Values;
     private static readonly Dictionary<string, string> chinese = new Dictionary<string, string>
     {
+        { "VALKYR / BAY 07", "VALKYR / 07 号格纳库" },
+        { "PRE-SORTIE LOADOUT", "战前装备整理" },
+        { "Choose your primary weapon", "选择主武器" },
+        { "Unequip", "卸下" },
+        { "Full body", "查看全身" },
+        { "Close-up", "近距离查看" },
+        { "Drag to rotate / scroll to zoom", "拖动旋转查看 / 滚轮缩放" },
+        { "Unarmed. Select a weapon to deploy.", "当前空手，请选择武器后出击。" },
+        { "M7 equipped / automatic fire", "已装备 M7 / 连续自动射击" },
+        { "M14 equipped / heavy piercing rounds", "已装备 M14 / 重型穿透射击" },
+        { "RAIKEN equipped / close-range slash", "已装备巨剑 / 近战挥斩" },
+        { "M7 / ASSAULT RIFLE\nFast, sustained fire", "M7 / 突击步枪\n快速、持续火力" },
+        { "RAIKEN / GREATSWORD\nClose-range sweeping attacks", "RAIKEN / 巨剑\n近距离范围挥斩" },
+        { "M14 / BATTLE RIFLE\nSlower, powerful piercing rounds", "M14 / 战斗步枪\n低射速、高伤害、穿透目标" },
         { "MECH TRIAL", "\u673a\u795e\u8bd5\u70bc" },
         { "SORTIE 01", "\u51fa\u51fb\u4efb\u52a1 01" },
         { "ROSE GOLD\nSENTINEL", "\u73ab\u7470\u91d1\n\u54e8\u5175" },

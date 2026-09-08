@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "method": "Native macOS mouse and keyboard input with window captures",
+  "editor": "6000.3.17f1",
+  "checks": [
+    "Launch standalone Player with V3 hero and no weapon",
+    "Select Chinese through Settings",
+    "Click M7 and see model equipped",
+    "Click close-up and inspect head/chest",
+    "Drag mouse and observe orbit angle change",
+    "Deploy and reach live combat with selected M7",
+    "Return from result to hangar and verify unarmed default"
+  ],
+  "unity_runtime_exceptions": 0,
+  "platform_log_notes": [
+    "macOS input method IMKCFRunLoopWakeUpReliable emitted one mach port messaging line while changing language. No Unity runtime exception was logged."
+  ]
+}

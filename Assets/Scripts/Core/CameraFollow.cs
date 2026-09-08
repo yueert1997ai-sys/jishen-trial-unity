@@ -36,6 +36,12 @@ public class CameraFollow : MonoBehaviour
     private void LateUpdate()
     {
         if (target == null) return;
+        if (GameManager.Instance != null && GameManager.Instance.Phase == GamePhase.Hangar)
+        {
+            GameManager.Instance.Hangar.UpdateCamera(view, GameManager.Instance.playerController.transform);
+            return;
+        }
+        view.orthographic = true;
         if (controller == null) controller = target.GetComponent<PlayerController>();
         if (Time.unscaledTime >= nextBossLookup)
         {

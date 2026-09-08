@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {
+      "path": "art_prototypes/JishenTrial_Hero_Assembly_V3/body_mass_refinement_20260906/iteration_v3/game_update/VALKYR_V3_GAME.blend",
+      "sha256": "669cae31f3143c1b275060217fb28ca0f1d01f8aad1e232bb8ef93f0c2562626"
+    },
+    {
+      "path": "art_prototypes/AI_Infantry_M7_20260906/stage_04/AI_INFANTRY_M7_STAGE04.blend",
+      "sha256": "1d608630658063f9d076f4e9b13c82878f875947750c3831bf0ff0a534cd9730"
+    },
+    {
+      "path": "art_prototypes/BOSS_M14_EBR_20260906/BOSS_M14_EBR_MASTER.blend",
+      "sha256": "aeda7d658085d1af150c3157466440d5032b14a856f83ff2ac5511f12f42957e"
+    }
+  ],
+  "scope": "Unity copies; no weapon source edits. Procedural micro-textures remain in Blender."
+}

@@ -1,0 +1,24 @@
+{
+  "scene": "VALKYR | Pre-sortie Hangar",
+  "objects": 859,
+  "collections": {
+    "01 | Hangar shell - open front for inspection": 204,
+    "02 | Central turntable and maintenance spine": 182,
+    "03 | Articulated service arms - retracted behind hero": 36,
+    "04 | Rear service catwalk and stairs": 104,
+    "05 | Workbench, equipment racks and diagnostics": 141,
+    "90 | VALKYR - current model copy": 179,
+    "99 | Inspection lighting and cameras": 13
+  },
+  "source_hero_sha256": "3bfcf79c1b0b62f43feb4f575d0d2d32363e7448e849266a7c6233748ca64359",
+  "source_hero": "/Users/yuemarco/Documents/mech/jishen-trial-unity/art_prototypes/RAIKEN_MkII_20260906/VALKYR_RAIKEN_GAME.blend",
+  "height_m": 3.5,
+  "cameras": [
+    "01 | Pre-sortie hero - UI room at right",
+    "02 | Complete maintenance bay",
+    "03 | Head and chest inspection",
+    "04 | Backpack and hardpoints",
+    "05 | 360 degree inspection"
+  ],
+  "scope": "Independent Blender pre-sortie presentation scene. Unity code unchanged."
+}

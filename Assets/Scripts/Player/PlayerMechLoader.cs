@@ -33,6 +33,8 @@ public class PlayerMechLoader : MonoBehaviour
         }
 
         GameObject selectedPrefab = defaultMechPrefab;
+        var armory = Resources.Load<HangarArmory>("Hangar/Armory");
+        if (armory != null && armory.heroPrefab != null) selectedPrefab = armory.heroPrefab;
         bool usingCustomPrefab = false;
 
 #if UNITY_EDITOR

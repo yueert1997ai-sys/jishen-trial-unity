@@ -1,5 +1,7 @@
 # 机神试炼 / MECH ROUGE
 
+2026-09-08 新增：**战前格纳库配装**已接入当前 `Assets/Scenes/Demo_Main.unity`。使用第三版厚装甲机体；进入格纳库默认空手，选择 M7、RAIKEN 巨剑或 M14 后才装备，点击出击沿用选择。支持卸下、近距离查看、拖动旋转和滚轮缩放。Mac 本地试玩入口为 `Builds/Mac/MECH_TRIAL_Hangar_20260908.app`（构建包不随 Git 同步）；实现、素材来源和验证范围见 [格纳库配装交接](docs/HANGAR_LOADOUT_20260908.md)。本次未更新下文 Windows 历史试玩包。同期制作的月球基地可编辑源文件见 [MARE-07 场景说明](art_prototypes/LunarBase_Sector01_20260908/README.md)。
+
 ## GitHub / Mac 接续
 
 当前 Unity 工程的私有仓库：<https://github.com/yueert1997ai-sys/jishen-trial-unity>。默认分支为 `codex/industrial-dash-polish`。另一仓库 `mecha-marco` 是 JavaScript 网页版，不是此 Unity 工程。换电脑请使用有权限的 GitHub 账号克隆本仓库，安装 Unity `6000.3.18f1`；详见 [Mac 接续说明](docs/MAC_GITHUB_HANDOFF.md)。今晚继续制作的文件需保存后再次提交推送，未保存的编辑器状态不会自动进入 GitHub。
@@ -49,7 +51,7 @@ Unity 6 上帝视角机甲 Roguelite 作品原型。当前源码已接通手机�
 2. 打开 `Assets/Scenes/Demo_Main.unity`。
 3. 等待脚本与资源导入完成。
 4. 进入 Play Mode。
-5. 在机库点 `DEPLOY` 开始任务。
+5. 在格纳库选择 M7、RAIKEN 巨剑或 M14，再点 `DEPLOY` 开始任务；空手时不能出击。
 
 不要在普通启动时运行 `MECH ROUGE > Build Phase 1 Demo`：它会重建/覆盖生成的场景、Prefab 和材质。只有明确需要重新生成且已保护改动时才使用。
 

@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     // Retained for serialized compatibility only. All live beam input is manual.
     [HideInInspector] public bool automaticFire;
     public PlayerMeleeController Melee { get; private set; }
+    public PlayerLoadout Loadout { get; private set; }
 
     public PlayerInputRouter InputRouter { get; private set; }
     public AutoAimController AutoAim { get; private set; }
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
         }
         AimDirection = Vector3.forward;
         Melee = GetComponent<PlayerMeleeController>() ?? gameObject.AddComponent<PlayerMeleeController>();
+        Loadout = GetComponent<PlayerLoadout>() ?? gameObject.AddComponent<PlayerLoadout>();
     }
 
     private void Start()
@@ -116,7 +118,11 @@ public class PlayerController : MonoBehaviour
                 if (command.Skill && AutoAim.IsValidTarget(target)) weaponController.TryFireSkill(target);
             }
             if (command.Melee) Melee.TryAttack();
-            if (command.Fire && command.HasAim && !Melee.IsAttacking) weaponController.TryFireBeam();
+            if (command.Fire && command.HasAim && !Melee.IsAttacking)
+            {
+                if (Loadout.Selected == PrimaryWeapon.Greatsword) Melee.TryAttack();
+                else weaponController.TryFireBeam();
+            }
         }
         else AutoAim.Clear();
     }

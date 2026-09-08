@@ -1,0 +1,6 @@
+Succeeded
+Editor: 6000.3.17f1
+Output: /Users/yuemarco/Documents/mech/jishen-trial-unity/Builds/Mac/MECH_TRIAL_Hangar_20260908.app
+Errors: 0
+Warnings: 0
+Bytes: 471631829

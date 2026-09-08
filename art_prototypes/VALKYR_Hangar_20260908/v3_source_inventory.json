@@ -1,0 +1,1017 @@
+{
+  "file": "/Users/yuemarco/Documents/mech/jishen-trial-unity/art_prototypes/JishenTrial_Hero_Assembly_V3/body_mass_refinement_20260906/iteration_v3/game_update/VALKYR_V3_GAME.blend",
+  "collections": {
+    "ARMOR": 0,
+    "BACKPACK": 0,
+    "BODY": 52,
+    "BODY_V3 | 01 Chest and abdomen": 0,
+    "BODY_V3 | 02 Waist and pelvis": 0,
+    "BODY_V3 | 03 Swept shoulder armor": 0,
+    "BODY_V3 | 04 Arms and articulated hands": 1,
+    "BODY_V3 | 05 Thigh and knee armor": 0,
+    "BODY_V3 | 06 Tapered shin and calf": 0,
+    "BODY_V3 | 07 Feet and ankle couplings": 0,
+    "BODY_V3 | 08 Backpack spine and twin thrusters": 0,
+    "BODY_V3 | 09 Shoulder cannon": 0,
+    "BODY_V3 | 10 Anti-ship beam sword": 0,
+    "BODY_V3 | reference inspection cameras": 14,
+    "BODY_V3 | review lighting": 4,
+    "CAMERAS": 27,
+    "Construction_Cutters | hidden": 0,
+    "FRAME": 0,
+    "HEAD": 0,
+    "HEAD_V2 | colored editable parts": 0,
+    "HEAD_V3 | inspection cameras": 8,
+    "HEAD_V3 | packed reference": 1,
+    "HEAD_V3 | reference matched editable assembly": 1,
+    "HEAD_V3 | review lights": 3,
+    "Joint_Housings": 0,
+    "LIGHTS": 3,
+    "MATERIALS": 1,
+    "RAIKEN | 01 Structure": 4,
+    "RAIKEN | 02 Layered armor": 0,
+    "RAIKEN | 03 Cutting edge": 0,
+    "RAIKEN | 04 Reactor and guard": 0,
+    "RAIKEN | 05 Grip": 0,
+    "RAIKEN | 06 Fasteners and markings": 0,
+    "RAIKEN | 07 Switchable beam": 0,
+    "RAIKEN | Assembled preview": 7,
+    "Secondary_Armor": 0,
+    "SHOULDER_CANNON": 0,
+    "V3 Game Import": 37,
+    "WEAPON": 0
+  },
+  "objects": [
+    {
+      "name": "JishenTrial_Hero_Assembly_V3",
+      "type": "EMPTY",
+      "parent": null,
+      "hidden": false
+    },
+    {
+      "name": "V3B_Left_Support_Grip_Socket",
+      "type": "EMPTY",
+      "parent": "Hand.L",
+      "hidden": false
+    },
+    {
+      "name": "JISHEN_Master_Root",
+      "type": "EMPTY",
+      "parent": "JishenTrial_Hero_Assembly_V3",
+      "hidden": false
+    },
+    {
+      "name": "Pelvis",
+      "type": "EMPTY",
+      "parent": "JISHEN_Master_Root",
+      "hidden": false
+    },
+    {
+      "name": "Waist",
+      "type": "EMPTY",
+      "parent": "Pelvis",
+      "hidden": false
+    },
+    {
+      "name": "Thorax",
+      "type": "EMPTY",
+      "parent": "Waist",
+      "hidden": false
+    },
+    {
+      "name": "Head",
+      "type": "EMPTY",
+      "parent": "Thorax",
+      "hidden": false
+    },
+    {
+      "name": "Skirt_Hinge.R",
+      "type": "EMPTY",
+      "parent": "Pelvis",
+      "hidden": false
+    },
+    {
+      "name": "Skirt_Hinge.L",
+      "type": "EMPTY",
+      "parent": "Pelvis",
+      "hidden": false
+    },
+    {
+      "name": "Thigh.R",
+      "type": "EMPTY",
+      "parent": "Pelvis",
+      "hidden": false
+    },
+    {
+      "name": "Shin.R",
+      "type": "EMPTY",
+      "parent": "Thigh.R",
+      "hidden": false
+    },
+    {
+      "name": "Foot.R",
+      "type": "EMPTY",
+      "parent": "Shin.R",
+      "hidden": false
+    },
+    {
+      "name": "Thigh.L",
+      "type": "EMPTY",
+      "parent": "Pelvis",
+      "hidden": false
+    },
+    {
+      "name": "Shin.L",
+      "type": "EMPTY",
+      "parent": "Thigh.L",
+      "hidden": false
+    },
+    {
+      "name": "Foot.L",
+      "type": "EMPTY",
+      "parent": "Shin.L",
+      "hidden": false
+    },
+    {
+      "name": "UpperArm.R",
+      "type": "EMPTY",
+      "parent": "Thorax",
+      "hidden": false
+    },
+    {
+      "name": "Forearm.R",
+      "type": "EMPTY",
+      "parent": "UpperArm.R",
+      "hidden": false
+    },
+    {
+      "name": "Hand.R",
+      "type": "EMPTY",
+      "parent": "Forearm.R",
+      "hidden": false
+    },
+    {
+      "name": "Shoulder_Armor_Floating_Pivot.R",
+      "type": "EMPTY",
+      "parent": "Thorax",
+      "hidden": false
+    },
+    {
+      "name": "UpperArm.L",
+      "type": "EMPTY",
+      "parent": "Thorax",
+      "hidden": false
+    },
+    {
+      "name": "Forearm.L",
+      "type": "EMPTY",
+      "parent": "UpperArm.L",
+      "hidden": false
+    },
+    {
+      "name": "Hand.L",
+      "type": "EMPTY",
+      "parent": "Forearm.L",
+      "hidden": false
+    },
+    {
+      "name": "Shoulder_Armor_Floating_Pivot.L",
+      "type": "EMPTY",
+      "parent": "Thorax",
+      "hidden": false
+    },
+    {
+      "name": "Backpack_Structural_Mount",
+      "type": "EMPTY",
+      "parent": "Thorax",
+      "hidden": false
+    },
+    {
+      "name": "Backpack_Main_Deploy_Hinge.R",
+      "type": "EMPTY",
+      "parent": "Backpack_Structural_Mount",
+      "hidden": false
+    },
+    {
+      "name": "Backpack_Outer_Fold_Pivot.R",
+      "type": "EMPTY",
+      "parent": "Backpack_Main_Deploy_Hinge.R",
+      "hidden": false
+    },
+    {
+      "name": "Backpack_Main_Deploy_Hinge.L",
+      "type": "EMPTY",
+      "parent": "Backpack_Structural_Mount",
+      "hidden": false
+    },
+    {
+      "name": "Backpack_Outer_Fold_Pivot.L",
+      "type": "EMPTY",
+      "parent": "Backpack_Main_Deploy_Hinge.L",
+      "hidden": false
+    },
+    {
+      "name": "Cannon_Right_Cradle_Mount",
+      "type": "EMPTY",
+      "parent": "Backpack_Structural_Mount",
+      "hidden": false
+    },
+    {
+      "name": "Cannon_Pitch_Trunnion",
+      "type": "EMPTY",
+      "parent": "Cannon_Right_Cradle_Mount",
+      "hidden": false
+    },
+    {
+      "name": "Finger_0_Joint_0.R",
+      "type": "EMPTY",
+      "parent": "Hand.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_0_Joint_1.R",
+      "type": "EMPTY",
+      "parent": "Finger_0_Joint_0.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_0_Joint_2.R",
+      "type": "EMPTY",
+      "parent": "Finger_0_Joint_1.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_1_Joint_0.R",
+      "type": "EMPTY",
+      "parent": "Hand.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_1_Joint_1.R",
+      "type": "EMPTY",
+      "parent": "Finger_1_Joint_0.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_1_Joint_2.R",
+      "type": "EMPTY",
+      "parent": "Finger_1_Joint_1.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_2_Joint_0.R",
+      "type": "EMPTY",
+      "parent": "Hand.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_2_Joint_1.R",
+      "type": "EMPTY",
+      "parent": "Finger_2_Joint_0.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_2_Joint_2.R",
+      "type": "EMPTY",
+      "parent": "Finger_2_Joint_1.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_3_Joint_0.R",
+      "type": "EMPTY",
+      "parent": "Hand.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_3_Joint_1.R",
+      "type": "EMPTY",
+      "parent": "Finger_3_Joint_0.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_3_Joint_2.R",
+      "type": "EMPTY",
+      "parent": "Finger_3_Joint_1.R",
+      "hidden": false
+    },
+    {
+      "name": "Finger_0_Joint_0.L",
+      "type": "EMPTY",
+      "parent": "Hand.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_0_Joint_1.L",
+      "type": "EMPTY",
+      "parent": "Finger_0_Joint_0.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_0_Joint_2.L",
+      "type": "EMPTY",
+      "parent": "Finger_0_Joint_1.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_1_Joint_0.L",
+      "type": "EMPTY",
+      "parent": "Hand.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_1_Joint_1.L",
+      "type": "EMPTY",
+      "parent": "Finger_1_Joint_0.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_1_Joint_2.L",
+      "type": "EMPTY",
+      "parent": "Finger_1_Joint_1.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_2_Joint_0.L",
+      "type": "EMPTY",
+      "parent": "Hand.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_2_Joint_1.L",
+      "type": "EMPTY",
+      "parent": "Finger_2_Joint_0.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_2_Joint_2.L",
+      "type": "EMPTY",
+      "parent": "Finger_2_Joint_1.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_3_Joint_0.L",
+      "type": "EMPTY",
+      "parent": "Hand.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_3_Joint_1.L",
+      "type": "EMPTY",
+      "parent": "Finger_3_Joint_0.L",
+      "hidden": false
+    },
+    {
+      "name": "Finger_3_Joint_2.L",
+      "type": "EMPTY",
+      "parent": "Finger_3_Joint_1.L",
+      "hidden": false
+    },
+    {
+      "name": "Material_Palette_and_Usage",
+      "type": "EMPTY",
+      "parent": null,
+      "hidden": false
+    },
+    {
+      "name": "HEAD_V3_ROOT",
+      "type": "EMPTY",
+      "parent": "Head",
+      "hidden": false
+    },
+    {
+      "name": "V3H_REFERENCE_front_side_back_top",
+      "type": "EMPTY",
+      "parent": null,
+      "hidden": true
+    },
+    {
+      "name": "V3B_Sword_Grip_Socket",
+      "type": "EMPTY",
+      "parent": "Hand.R",
+      "hidden": false
+    },
+    {
+      "name": "AntiShip_Blade_Display_Root",
+      "type": "EMPTY",
+      "parent": "V3B_Sword_Grip_Socket",
+      "hidden": false
+    },
+    {
+      "name": "RAIKEN_GRIP_SOCKET",
+      "type": "EMPTY",
+      "parent": "AntiShip_Blade_Display_Root",
+      "hidden": false
+    },
+    {
+      "name": "RAIKEN_BLADE_TIP",
+      "type": "EMPTY",
+      "parent": "AntiShip_Blade_Display_Root",
+      "hidden": false
+    },
+    {
+      "name": "RAIKEN_EMITTER_SOCKET",
+      "type": "EMPTY",
+      "parent": "AntiShip_Blade_Display_Root",
+      "hidden": false
+    },
+    {
+      "name": "V3B_Left_Hand_Pose_Guide",
+      "type": "EMPTY",
+      "parent": "AntiShip_Blade_Display_Root",
+      "hidden": false
+    },
+    {
+      "name": "V3B_Left_Grip_Pose_Guide",
+      "type": "EMPTY",
+      "parent": "AntiShip_Blade_Display_Root",
+      "hidden": false
+    },
+    {
+      "name": "V3B_Blade_Edge_Frame",
+      "type": "EMPTY",
+      "parent": "AntiShip_Blade_Display_Root",
+      "hidden": false
+    },
+    {
+      "name": "V3B_Ready_Grip",
+      "type": "EMPTY",
+      "parent": "JISHEN_Master_Root",
+      "hidden": false
+    },
+    {
+      "name": "V3B_Ready_Tip",
+      "type": "EMPTY",
+      "parent": "JISHEN_Master_Root",
+      "hidden": false
+    },
+    {
+      "name": "V3B_Ready_Edge",
+      "type": "EMPTY",
+      "parent": "JISHEN_Master_Root",
+      "hidden": false
+    },
+    {
+      "name": "VALKYR_Model_Revision_V3_c7297dd9",
+      "type": "EMPTY",
+      "parent": "JISHEN_Master_Root",
+      "hidden": false
+    },
+    {
+      "name": "LOD0_AntiShipBlade_Beam",
+      "type": "EMPTY",
+      "parent": "AntiShip_Blade_Display_Root",
+      "hidden": false
+    },
+    {
+      "name": "LOD0_Thorax_V3",
+      "type": "MESH",
+      "parent": "Thorax",
+      "hidden": false,
+      "vertices": 6777,
+      "bounds": [
+        [
+          -0.5316493511199951,
+          -0.5161393880844116,
+          2.3560404777526855
+        ],
+        [
+          0.5316493511199951,
+          0.2792549431324005,
+          2.990752696990967
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Waist_V3",
+      "type": "MESH",
+      "parent": "Waist",
+      "hidden": false,
+      "vertices": 10558,
+      "bounds": [
+        [
+          -0.25490301847457886,
+          -0.3153006136417389,
+          2.1469080448150635
+        ],
+        [
+          0.25911402702331543,
+          0.22794684767723083,
+          2.6051557064056396
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Pelvis_V3",
+      "type": "MESH",
+      "parent": "Pelvis",
+      "hidden": false,
+      "vertices": 4760,
+      "bounds": [
+        [
+          -0.3996519148349762,
+          -0.3363901674747467,
+          1.794655203819275
+        ],
+        [
+          0.3996519148349762,
+          0.2136494219303131,
+          2.360827684402466
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Thigh.R_V3",
+      "type": "MESH",
+      "parent": "Thigh.R",
+      "hidden": false,
+      "vertices": 9980,
+      "bounds": [
+        [
+          -0.6192162036895752,
+          -0.3221101760864258,
+          1.3341249227523804
+        ],
+        [
+          -0.16718722879886627,
+          0.23287835717201233,
+          2.151839256286621
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Shin.R_V3",
+      "type": "MESH",
+      "parent": "Shin.R",
+      "hidden": false,
+      "vertices": 13015,
+      "bounds": [
+        [
+          -0.898065447807312,
+          -0.3625341057777405,
+          0.32742759585380554
+        ],
+        [
+          -0.333122193813324,
+          0.2524333894252777,
+          1.629525899887085
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Foot.R_V3",
+      "type": "MESH",
+      "parent": "Foot.R",
+      "hidden": false,
+      "vertices": 9299,
+      "bounds": [
+        [
+          -0.9910204410552979,
+          -0.5630170702934265,
+          0.0
+        ],
+        [
+          -0.6115854382514954,
+          0.3452591001987457,
+          0.4785747230052948
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Thigh.L_V3",
+      "type": "MESH",
+      "parent": "Thigh.L",
+      "hidden": false,
+      "vertices": 10004,
+      "bounds": [
+        [
+          0.16718724370002747,
+          -0.3221101760864258,
+          1.3341249227523804
+        ],
+        [
+          0.6192162036895752,
+          0.23287835717201233,
+          2.151839256286621
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Shin.L_V3",
+      "type": "MESH",
+      "parent": "Shin.L",
+      "hidden": false,
+      "vertices": 12991,
+      "bounds": [
+        [
+          0.333122193813324,
+          -0.3625341057777405,
+          0.32742759585380554
+        ],
+        [
+          0.906109631061554,
+          0.2524333894252777,
+          1.629525899887085
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Foot.L_V3",
+      "type": "MESH",
+      "parent": "Foot.L",
+      "hidden": false,
+      "vertices": 9299,
+      "bounds": [
+        [
+          0.6115854382514954,
+          -0.5630170702934265,
+          0.0
+        ],
+        [
+          0.9910204410552979,
+          0.3452591001987457,
+          0.4785747230052948
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_UpperArm.R_V3",
+      "type": "MESH",
+      "parent": "UpperArm.R",
+      "hidden": false,
+      "vertices": 5664,
+      "bounds": [
+        [
+          -0.8384727835655212,
+          -0.17623727023601532,
+          2.379824161529541
+        ],
+        [
+          -0.4087072014808655,
+          0.20194494724273682,
+          2.949286937713623
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Forearm.R_V3",
+      "type": "MESH",
+      "parent": "Forearm.R",
+      "hidden": false,
+      "vertices": 7550,
+      "bounds": [
+        [
+          -1.0866835117340088,
+          -0.39390096068382263,
+          1.8963632583618164
+        ],
+        [
+          -0.5802135467529297,
+          0.2287314534187317,
+          2.6650326251983643
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_UpperArm.L_V3",
+      "type": "MESH",
+      "parent": "UpperArm.L",
+      "hidden": false,
+      "vertices": 5688,
+      "bounds": [
+        [
+          0.4087072014808655,
+          -0.17623727023601532,
+          2.379824161529541
+        ],
+        [
+          0.8460786938667297,
+          0.2019449770450592,
+          2.949286937713623
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Forearm.L_V3",
+      "type": "MESH",
+      "parent": "Forearm.L",
+      "hidden": false,
+      "vertices": 7524,
+      "bounds": [
+        [
+          0.5802135467529297,
+          -0.40408197045326233,
+          1.8974992036819458
+        ],
+        [
+          1.0831705331802368,
+          0.2287314534187317,
+          2.6650326251983643
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_HEAD_V3_ROOT_V3",
+      "type": "MESH",
+      "parent": "HEAD_V3_ROOT",
+      "hidden": false,
+      "vertices": 9766,
+      "bounds": [
+        [
+          -0.2135848104953766,
+          -0.20547184348106384,
+          2.977238655090332
+        ],
+        [
+          0.2135847508907318,
+          0.21053959429264069,
+          3.495401382446289
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Skirt_Hinge.L_V3",
+      "type": "MESH",
+      "parent": "Skirt_Hinge.L",
+      "hidden": false,
+      "vertices": 130,
+      "bounds": [
+        [
+          0.02170911245048046,
+          0.03663512319326401,
+          1.4116827249526978
+        ],
+        [
+          0.6221258640289307,
+          0.3459356129169464,
+          2.3144681453704834
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Skirt_Hinge.R_V3",
+      "type": "MESH",
+      "parent": "Skirt_Hinge.R",
+      "hidden": false,
+      "vertices": 130,
+      "bounds": [
+        [
+          -0.6221258640289307,
+          0.036635104566812515,
+          1.4116827249526978
+        ],
+        [
+          -0.02170911617577076,
+          0.3459356129169464,
+          2.3144681453704834
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Shoulder_Armor_Floating_Pivot.L_V3",
+      "type": "MESH",
+      "parent": "Shoulder_Armor_Floating_Pivot.L",
+      "hidden": false,
+      "vertices": 3223,
+      "bounds": [
+        [
+          0.36404556035995483,
+          -0.3331950008869171,
+          2.667421817779541
+        ],
+        [
+          0.8812966346740723,
+          0.2717626988887787,
+          3.3350205421447754
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Shoulder_Armor_Floating_Pivot.R_V3",
+      "type": "MESH",
+      "parent": "Shoulder_Armor_Floating_Pivot.R",
+      "hidden": false,
+      "vertices": 3469,
+      "bounds": [
+        [
+          -0.8812966346740723,
+          -0.3331950306892395,
+          2.667421817779541
+        ],
+        [
+          -0.36404556035995483,
+          0.2717626988887787,
+          3.3350203037261963
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Hand.L_V3",
+      "type": "MESH",
+      "parent": "Hand.L",
+      "hidden": false,
+      "vertices": 2526,
+      "bounds": [
+        [
+          0.8935809135437012,
+          -0.24210099875926971,
+          1.7055540084838867
+        ],
+        [
+          1.0420982837677002,
+          -0.1196436807513237,
+          1.9643001556396484
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Hand.R_V3",
+      "type": "MESH",
+      "parent": "Hand.R",
+      "hidden": false,
+      "vertices": 2526,
+      "bounds": [
+        [
+          -1.06814444065094,
+          -0.2545531392097473,
+          1.7206623554229736
+        ],
+        [
+          -0.9234764575958252,
+          -0.1196436807513237,
+          1.9643001556396484
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Backpack_Structural_Mount_V3",
+      "type": "MESH",
+      "parent": "Backpack_Structural_Mount",
+      "hidden": false,
+      "vertices": 3789,
+      "bounds": [
+        [
+          -0.22646839916706085,
+          0.28201723098754883,
+          2.3004393577575684
+        ],
+        [
+          0.2715728282928467,
+          0.5479680299758911,
+          3.2122931480407715
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Backpack_Main_Deploy_Hinge.L_V3",
+      "type": "MESH",
+      "parent": "Backpack_Main_Deploy_Hinge.L",
+      "hidden": false,
+      "vertices": 924,
+      "bounds": [
+        [
+          0.17091956734657288,
+          0.3456847369670868,
+          2.744581460952759
+        ],
+        [
+          0.5653035044670105,
+          0.5376003384590149,
+          3.4767003059387207
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Backpack_Outer_Fold_Pivot.L_V3",
+      "type": "MESH",
+      "parent": "Backpack_Outer_Fold_Pivot.L",
+      "hidden": false,
+      "vertices": 4778,
+      "bounds": [
+        [
+          -0.2715727984905243,
+          0.32068783044815063,
+          1.8902925252914429
+        ],
+        [
+          0.572060227394104,
+          0.6576934456825256,
+          2.9650750160217285
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Backpack_Main_Deploy_Hinge.R_V3",
+      "type": "MESH",
+      "parent": "Backpack_Main_Deploy_Hinge.R",
+      "hidden": false,
+      "vertices": 924,
+      "bounds": [
+        [
+          -0.5653035044670105,
+          0.3456847369670868,
+          2.744581460952759
+        ],
+        [
+          -0.17091956734657288,
+          0.5376003384590149,
+          3.4767003059387207
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Backpack_Outer_Fold_Pivot.R_V3",
+      "type": "MESH",
+      "parent": "Backpack_Outer_Fold_Pivot.R",
+      "hidden": false,
+      "vertices": 2150,
+      "bounds": [
+        [
+          -0.572060227394104,
+          0.32068783044815063,
+          1.8902925252914429
+        ],
+        [
+          -0.2053719013929367,
+          0.6576934456825256,
+          2.9011454582214355
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Cannon_Right_Cradle_Mount_V3",
+      "type": "MESH",
+      "parent": "Cannon_Right_Cradle_Mount",
+      "hidden": false,
+      "vertices": 3208,
+      "bounds": [
+        [
+          -0.4437498152256012,
+          0.08994642645120621,
+          2.9184508323669434
+        ],
+        [
+          -0.2162986546754837,
+          0.29483622312545776,
+          3.1526546478271484
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_Cannon_Pitch_Trunnion_V3",
+      "type": "MESH",
+      "parent": "Cannon_Pitch_Trunnion",
+      "hidden": false,
+      "vertices": 6092,
+      "bounds": [
+        [
+          -0.7147449851036072,
+          -0.3432677090167999,
+          3.043105363845825
+        ],
+        [
+          -0.21503350138664246,
+          0.2936463952064514,
+          3.488168478012085
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_LOD0_AntiShipBlade_Beam_V3",
+      "type": "MESH",
+      "parent": "LOD0_AntiShipBlade_Beam",
+      "hidden": false,
+      "vertices": 48,
+      "bounds": [
+        [
+          -0.8727312684059143,
+          -0.49359652400016785,
+          -1.2805765867233276
+        ],
+        [
+          -0.018456635996699333,
+          -0.37696343660354614,
+          1.3942539691925049
+        ]
+      ]
+    },
+    {
+      "name": "LOD0_AntiShip_Blade_Display_Root_V3",
+      "type": "MESH",
+      "parent": "AntiShip_Blade_Display_Root",
+      "hidden": false,
+      "vertices": 39818,
+      "bounds": [
+        [
+          -1.1247296333312988,
+          -0.5698522925376892,
+          -1.2789015769958496
+        ],
+        [
+          -0.020145373418927193,
+          0.15742677450180054,
+          2.0883641242980957
+        ]
+      ]
+    }
+  ]
+}
