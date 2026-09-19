@@ -85,9 +85,8 @@ public static class HangarLoadoutAudit
             switch(step)
             {
                 case 0:
-                    Check(loadout.Selected==PrimaryWeapon.None && visual.WeaponObject==null,"Initial hangar is unarmed");
-                    gm.BeginRun();Check(gm.Phase==GamePhase.Hangar,"Unarmed deploy is blocked through gameplay API");
-                    Capture("01_UNARMED");Click("EquipM7");break;
+                    Check(loadout.Selected==PrimaryWeapon.Type08 && loadout.CanDeploy && visual.WeaponObject!=null,"Initial hangar equips the starter cannon");
+                    Capture("01_STARTER_TYPE08");Click("EquipM7");break;
                 case 1:
                     Check(loadout.Selected==PrimaryWeapon.M7 && visual.WeaponObject!=null,"M7 selection equips real model");
                     Grip(visual);
@@ -102,6 +101,7 @@ public static class HangarLoadoutAudit
                     Capture("04_M14");Click("UnequipButton");break;
                 case 4:
                     Check(loadout.Selected==PrimaryWeapon.None && visual.WeaponObject==null,"Unequip removes the weapon");
+                    gm.BeginRun();Check(gm.Phase==GamePhase.Hangar,"Unarmed deploy is blocked through gameplay API");
                     Click("EquipM7");break;
                 case 5: Click("DeployButton");break;
                 case 6:
@@ -109,7 +109,7 @@ public static class HangarLoadoutAudit
                     Check(!loadout.Select(PrimaryWeapon.M14),"Loadout cannot change during combat");
                     Shot(player,18,38,0);Capture("05_M7_COMBAT");gm.RestartRun();break;
                 case 7:
-                    Check(loadout.Selected==PrimaryWeapon.None && visual.WeaponObject==null,"Return to hangar resets to unarmed");
+                    Check(loadout.Selected==PrimaryWeapon.Type08 && loadout.CanDeploy && visual.WeaponObject!=null,"Return to hangar restores the starter cannon");
                     Click("EquipM14");break;
                 case 8: Click("DeployButton");break;
                 case 9: Shot(player,46,48,1);gm.RestartRun();break;

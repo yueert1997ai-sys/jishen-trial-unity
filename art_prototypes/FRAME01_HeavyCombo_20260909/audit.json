@@ -1,0 +1,11 @@
+{
+  "max_ik_error": {
+    "hand.R": 0.00039911941311319006,
+    "foot.R": 0.00038138698354786213,
+    "hand.L": 0.11626122289185471,
+    "foot.L": 0.19061879303705156
+  },
+  "min_blade_z": 1.6271240711212158,
+  "frames": 120,
+  "notes": "Pose and IK audit only; mechanical self collision not certified."
+}

@@ -1,0 +1,97 @@
+{
+  "name": "VALKYR V3 | Full-height TYPE-08 cannon",
+  "object_count": 270,
+  "objects": [
+    {
+      "name": "Rear power casing - broad chamfered silhouette",
+      "type": "MESH",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Rear cap seam",
+      "type": "MESH",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Rear armored end cap",
+      "type": "MESH",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Receiver steel chassis",
+      "type": "MESH",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Receiver lower structural keel",
+      "type": "MESH",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Long forward tapered armored barrel",
+      "type": "MESH",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Breech upper cylindrical sleeve",
+      "type": "MESH",
+      "location": [
+        0.38,
+        0.0,
+        0.63
+      ]
+    },
+    {
+      "name": "Forward recoil tube",
+      "type": "MESH",
+      "location": [
+        1.36,
+        0.0,
+        0.54
+      ]
+    },
+    {
+      "name": "Recoil locking collar 00",
+      "type": "MESH",
+      "location": [
+        0.03,
+        0.0,
+        0.6
+      ]
+    },
+    {
+      "name": "Recoil locking collar 01",
+      "type": "MESH",
+      "location": [
+        0.67,
+        0.0,
+        0.6
+      ]
+    }
+  ],
+  "materials_count": 10
+}

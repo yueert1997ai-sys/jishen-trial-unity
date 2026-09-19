@@ -1,0 +1,9 @@
+{
+    "version": 1,
+    "owned": [
+        "pulse",
+        "standard"
+    ],
+    "weapon": "pulse",
+    "backpack": "standard"
+}

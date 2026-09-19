@@ -1,0 +1,46 @@
+{
+  "asset": "VALKYR PARALLEL R01",
+  "geometry_created_from_scratch": true,
+  "old_V3_modified": false,
+  "shoulder_cannon": false,
+  "mesh_count": 270,
+  "reference_images": [
+    "references/VALKYR_ORIGINAL_BODY.png",
+    "references/VALKYR_ORIGINAL_HEAD.png"
+  ],
+  "pivots": [
+    "VALKYR_PARALLEL_R01_ROOT",
+    "HIP_MOUNT",
+    "TORSO_MOUNT",
+    "HEAD_MOUNT",
+    "BACKPACK_MOUNT",
+    "HIP_SWING.R",
+    "THIGH_MOUNT.R",
+    "KNEE_PIVOT.R",
+    "ANKLE_PIVOT.R",
+    "SHOULDER_PIVOT.R",
+    "ELBOW_PIVOT.R",
+    "WRIST_PIVOT.R",
+    "GRIP_SOCKET.R",
+    "FRONT_SKIRT_HINGE.R",
+    "HIP_SWING.L",
+    "THIGH_MOUNT.L",
+    "KNEE_PIVOT.L",
+    "ANKLE_PIVOT.L",
+    "SHOULDER_PIVOT.L",
+    "ELBOW_PIVOT.L",
+    "WRIST_PIVOT.L",
+    "GRIP_SOCKET.L",
+    "FRONT_SKIRT_HINGE.L",
+    "VECTOR_THRUSTER.R",
+    "FLIGHT_VANE_HINGE.R",
+    "VECTOR_THRUSTER.L",
+    "FLIGHT_VANE_HINGE.L",
+    "OPTIONAL_SWORD_MOUNT"
+  ],
+  "limits": [
+    "Design study with assembly pivots, not skinned animation rig",
+    "Reference-inferred rear and internal details",
+    "No Unity integration for this separate line"
+  ]
+}

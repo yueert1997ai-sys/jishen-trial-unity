@@ -98,7 +98,7 @@ public class WeaponController : MonoBehaviour
         int shotCount = (level == 1 ? 1 : level == 2 ? 2 : 3) + (upgradeSystem != null ? upgradeSystem.BonusBeamProjectiles : 0);
         float baseDamage = profile.damage * (1f + (level - 1) * .1f);
         int pierce = profile.pierce + (level >= 3 ? 1 : 0) + (upgradeSystem != null ? upgradeSystem.BonusPierce : 0);
-        float explosionRadius = upgradeSystem != null ? upgradeSystem.BeamExplosionRadius : 0f;
+        float explosionRadius = Mathf.Max(profile.blastRadius, upgradeSystem != null ? upgradeSystem.BeamExplosionRadius : 0f);
 
         for (int i = 0; i < shotCount; i++)
         {
@@ -118,7 +118,8 @@ public class WeaponController : MonoBehaviour
             BeamFired.Invoke();
         }
 
-        GameAudio.Play(GameAudioCue.Beam, 0.2f, UnityEngine.Random.Range(0.96f, 1.04f));
+        if (playerController.Loadout.Selected != PrimaryWeapon.Type08)
+            GameAudio.Play(GameAudioCue.Beam, 0.2f, UnityEngine.Random.Range(0.96f, 1.04f));
     }
 
     public void TryFireMissiles()
@@ -218,11 +219,19 @@ public class WeaponController : MonoBehaviour
 
     private void CreateBeamProjectile(Vector3 origin, Vector3 direction, float damage, int pierce, float explosionRadius)
     {
+        if (playerController.Loadout.Selected == PrimaryWeapon.Type08)
+        {
+            Vector3 aim = playerController.HasAimPoint ? playerController.AimPoint : origin + direction * MinovskyBeam.MaximumRange;
+            // A spread upgrade retains separate beam directions instead of collapsing every shot onto the same point.
+            if (Vector3.Angle(direction, (aim-origin).normalized) > .1f) aim=origin+direction*MinovskyBeam.MaximumRange;
+            MinovskyBeam.Fire(muzzle, origin, direction, aim, team, damageable, damage, pierce, explosionRadius);
+            return;
+        }
         bool m14 = playerController.Loadout.Selected == PrimaryWeapon.M14;
         Color color = m14 ? new Color(1f,.73f,.35f) : new Color(.72f,.9f,1f);
         var projectile = ProjectilePool.Spawn(false, "BeamProjectile", origin, color);
         projectile.Init(team, damageable, direction, damage, playerController.Loadout.Equipped.speed, 2.1f, explosionRadius, pierce);
-        ProjectileVisuals.SpawnMuzzleFlash(origin, color, 0.26f);
+        ProjectileVisuals.SpawnMuzzleFlash(origin, color, .26f);
     }
 
     private void CreateMissileProjectile(Vector3 origin, Vector3 direction, float damage, float explosionRadius, Damageable target)

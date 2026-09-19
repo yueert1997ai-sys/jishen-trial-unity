@@ -1,0 +1,15 @@
+{
+  "source_sha256": "d666413d2e8c46faf28e059d74dfec727b8ef18171678e962ea0d64f245bbbda",
+  "views": [
+    "01_THREE_QUARTER",
+    "02_FRONT",
+    "03_SIDE",
+    "04_BACK",
+    "05_HEAD",
+    "06_HEAD_FRONT",
+    "07_LEG",
+    "08_BACK_DETAIL",
+    "09_HEAD_LOW"
+  ],
+  "reopened_source_before_render": true
+}

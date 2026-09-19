@@ -1,0 +1,1522 @@
+[
+  {
+    "name": "Waist",
+    "type": "EMPTY",
+    "parent": "Pelvis",
+    "position": [
+      0.0,
+      0.0,
+      2.34159779548645
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "VALKYR_Model_Revision_V3_c7297dd9",
+    "type": "EMPTY",
+    "parent": "JISHEN_Master_Root",
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "V3H_REFERENCE_front_side_back_top",
+    "type": "EMPTY",
+    "parent": null,
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "V3B_Sword_Grip_Socket",
+    "type": "EMPTY",
+    "parent": "Hand.R",
+    "position": [
+      -0.9913337826728821,
+      -0.20510342717170715,
+      1.786109209060669
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "V3B_Ready_Tip",
+    "type": "EMPTY",
+    "parent": "JISHEN_Master_Root",
+    "position": [
+      -2.538347005844116,
+      -1.3141635656356812,
+      4.467040061950684
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "V3B_Ready_Grip",
+    "type": "EMPTY",
+    "parent": "JISHEN_Master_Root",
+    "position": [
+      -0.09999997913837433,
+      -0.5600000023841858,
+      2.4000000953674316
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "V3B_Ready_Edge",
+    "type": "EMPTY",
+    "parent": "JISHEN_Master_Root",
+    "position": [
+      -0.7455474734306335,
+      -0.5659966468811035,
+      1.6363035440444946
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "V3B_Left_Support_Grip_Socket",
+    "type": "EMPTY",
+    "parent": "Hand.L",
+    "position": [
+      0.9827871322631836,
+      -0.18801163136959076,
+      1.7519251108169556
+    ],
+    "rotation": [
+      1.2161954641342163,
+      0.0051163844764232635,
+      2.4326088428497314
+    ],
+    "scale": [
+      1.0000003576278687,
+      0.9999999403953552,
+      1.0000001192092896
+    ]
+  },
+  {
+    "name": "V3B_Left_Hand_Pose_Guide",
+    "type": "EMPTY",
+    "parent": "AntiShip_Blade_Display_Root",
+    "position": [
+      -0.8808387517929077,
+      -0.11170190572738647,
+      1.9801650047302246
+    ],
+    "rotation": [
+      1.2999202013015747,
+      -3.0350707902471186e-07,
+      3.141592264175415
+    ],
+    "scale": [
+      5.25714111328125,
+      5.25714111328125,
+      5.257143020629883
+    ]
+  },
+  {
+    "name": "V3B_Left_Grip_Pose_Guide",
+    "type": "EMPTY",
+    "parent": "AntiShip_Blade_Display_Root",
+    "position": [
+      -1.0312788486480713,
+      -0.19445109367370605,
+      1.912680983543396
+    ],
+    "rotation": [
+      -3.1501269859290915e-07,
+      -0.6763434410095215,
+      -0.23177088797092438
+    ],
+    "scale": [
+      5.257143020629883,
+      5.257143020629883,
+      5.25714111328125
+    ]
+  },
+  {
+    "name": "V3B_Blade_Edge_Frame",
+    "type": "EMPTY",
+    "parent": "AntiShip_Blade_Display_Root",
+    "position": [
+      -1.0275461673736572,
+      -1.1983206272125244,
+      1.9008408784866333
+    ],
+    "rotation": [
+      -3.9625993508707325e-07,
+      -0.676343560218811,
+      -0.23177088797092438
+    ],
+    "scale": [
+      5.257143020629883,
+      5.257143020629883,
+      5.25714111328125
+    ]
+  },
+  {
+    "name": "UpperArm.R",
+    "type": "EMPTY",
+    "parent": "Thorax",
+    "position": [
+      -0.5469425320625305,
+      0.04272988438606262,
+      2.8201725482940674
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "UpperArm.L",
+    "type": "EMPTY",
+    "parent": "Thorax",
+    "position": [
+      0.5469425320625305,
+      0.04272988438606262,
+      2.8201725482940674
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Thorax",
+    "type": "EMPTY",
+    "parent": "Waist",
+    "position": [
+      0.0,
+      0.00854597706347704,
+      2.623615026473999
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Thigh.R",
+    "type": "EMPTY",
+    "parent": "Pelvis",
+    "position": [
+      -0.2649253010749817,
+      0.00854597706347704,
+      2.0681264400482178
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Thigh.L",
+    "type": "EMPTY",
+    "parent": "Pelvis",
+    "position": [
+      0.2649253010749817,
+      0.00854597706347704,
+      2.0681264400482178
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Skirt_Hinge.R",
+    "type": "EMPTY",
+    "parent": "Pelvis",
+    "position": [
+      -0.23074138164520264,
+      -0.06836781650781631,
+      2.281775951385498
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Skirt_Hinge.L",
+    "type": "EMPTY",
+    "parent": "Pelvis",
+    "position": [
+      0.23074138164520264,
+      -0.06836781650781631,
+      2.281775951385498
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Shoulder_Armor_Floating_Pivot.R",
+    "type": "EMPTY",
+    "parent": "Thorax",
+    "position": [
+      -0.5469425320625305,
+      0.04272988438606262,
+      2.905632257461548
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Shoulder_Armor_Floating_Pivot.L",
+    "type": "EMPTY",
+    "parent": "Thorax",
+    "position": [
+      0.5469425320625305,
+      0.04272988438606262,
+      2.905632257461548
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Shin.R",
+    "type": "EMPTY",
+    "parent": "Thigh.R",
+    "position": [
+      -0.4956666827201843,
+      -0.12818965315818787,
+      1.427178144454956
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Shin.L",
+    "type": "EMPTY",
+    "parent": "Thigh.L",
+    "position": [
+      0.4956666827201843,
+      -0.12818965315818787,
+      1.427178144454956
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "RAIKEN_GRIP_SOCKET",
+    "type": "EMPTY",
+    "parent": "AntiShip_Blade_Display_Root",
+    "position": [
+      -1.0113062858581543,
+      -0.199777290225029,
+      1.8493947982788086
+    ],
+    "rotation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "RAIKEN_EMITTER_SOCKET",
+    "type": "EMPTY",
+    "parent": "AntiShip_Blade_Display_Root",
+    "position": [
+      -0.8816231489181519,
+      -0.23435959219932556,
+      1.438472032546997
+    ],
+    "rotation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "RAIKEN_BLADE_TIP",
+    "type": "EMPTY",
+    "parent": "AntiShip_Blade_Display_Root",
+    "position": [
+      -0.024292826652526855,
+      -0.37696343660354614,
+      -1.278122067451477
+    ],
+    "rotation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Pelvis",
+    "type": "EMPTY",
+    "parent": "JISHEN_Master_Root",
+    "position": [
+      0.0,
+      0.0,
+      2.145040273666382
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Material_Palette_and_Usage",
+    "type": "EMPTY",
+    "parent": null,
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "LOD0_UpperArm.R_V3",
+    "type": "MESH",
+    "parent": "UpperArm.R",
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "LOD0_UpperArm.L_V3",
+    "type": "MESH",
+    "parent": "UpperArm.L",
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "LOD0_Hand.R_V3",
+    "type": "MESH",
+    "parent": "Hand.R",
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "LOD0_Hand.L_V3",
+    "type": "MESH",
+    "parent": "Hand.L",
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "LOD0_Forearm.R_V3",
+    "type": "MESH",
+    "parent": "Forearm.R",
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "LOD0_Forearm.L_V3",
+    "type": "MESH",
+    "parent": "Forearm.L",
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "LOD0_AntiShipBlade_Beam",
+    "type": "EMPTY",
+    "parent": "AntiShip_Blade_Display_Root",
+    "position": [
+      -1.0113064050674438,
+      -0.199777290225029,
+      1.8493947982788086
+    ],
+    "rotation": [
+      9.313224080820248e-10,
+      7.4505792646561986e-09,
+      -1.4901157641133977e-08
+    ],
+    "scale": [
+      1.000000238418579,
+      1.0000001192092896,
+      1.0000001192092896
+    ]
+  },
+  {
+    "name": "JishenTrial_Hero_Assembly_V3",
+    "type": "EMPTY",
+    "parent": null,
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "JISHEN_Master_Root",
+    "type": "EMPTY",
+    "parent": "JishenTrial_Hero_Assembly_V3",
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "HEAD_V3_ROOT",
+    "type": "EMPTY",
+    "parent": "Head",
+    "position": [
+      0.0,
+      0.0,
+      -1.0409002304077148
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.350000023841858,
+      1.350000023841858,
+      1.350000023841858
+    ]
+  },
+  {
+    "name": "Head",
+    "type": "EMPTY",
+    "parent": "Thorax",
+    "position": [
+      0.0,
+      0.0,
+      3.002999782562256
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Hand.R",
+    "type": "EMPTY",
+    "parent": "Forearm.R",
+    "position": [
+      -0.957149863243103,
+      -0.15382757782936096,
+      1.9313907623291016
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Hand.L",
+    "type": "EMPTY",
+    "parent": "Forearm.L",
+    "position": [
+      0.9571494460105896,
+      -0.15382759273052216,
+      1.9313907623291016
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Forearm.R",
+    "type": "EMPTY",
+    "parent": "UpperArm.R",
+    "position": [
+      -0.7435000538825989,
+      -0.03418390452861786,
+      2.4014196395874023
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Forearm.L",
+    "type": "EMPTY",
+    "parent": "UpperArm.L",
+    "position": [
+      0.7434999942779541,
+      -0.03418390452861786,
+      2.4014196395874023
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Foot.R",
+    "type": "EMPTY",
+    "parent": "Shin.R",
+    "position": [
+      -0.7947758436203003,
+      0.04272988438606262,
+      0.341839075088501
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Foot.L",
+    "type": "EMPTY",
+    "parent": "Shin.L",
+    "position": [
+      0.7947758436203003,
+      0.04272988438606262,
+      0.341839075088501
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_3_Joint_2.R",
+    "type": "EMPTY",
+    "parent": "Finger_3_Joint_1.R",
+    "position": [
+      -0.9756798148155212,
+      -0.24225665628910065,
+      1.7503489255905151
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_3_Joint_2.L",
+    "type": "EMPTY",
+    "parent": "Finger_3_Joint_1.L",
+    "position": [
+      1.0229533910751343,
+      -0.19655747711658478,
+      1.7177413702011108
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_3_Joint_1.R",
+    "type": "EMPTY",
+    "parent": "Finger_3_Joint_0.R",
+    "position": [
+      -1.0016697645187378,
+      -0.23335668444633484,
+      1.741396188735962
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_3_Joint_1.L",
+    "type": "EMPTY",
+    "parent": "Finger_3_Joint_0.L",
+    "position": [
+      1.0229533910751343,
+      -0.16237355768680573,
+      1.7262873649597168
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_3_Joint_0.R",
+    "type": "EMPTY",
+    "parent": "Hand.R",
+    "position": [
+      -1.0113463401794434,
+      -0.20665298402309418,
+      1.7360944747924805
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_3_Joint_0.L",
+    "type": "EMPTY",
+    "parent": "Hand.L",
+    "position": [
+      1.0229533910751343,
+      -0.15382759273052216,
+      1.769017219543457
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_2_Joint_2.R",
+    "type": "EMPTY",
+    "parent": "Finger_2_Joint_1.R",
+    "position": [
+      -0.9840120077133179,
+      -0.24003474414348602,
+      1.7767506837844849
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_2_Joint_2.L",
+    "type": "EMPTY",
+    "parent": "Finger_2_Joint_1.L",
+    "position": [
+      0.9964609146118164,
+      -0.19655747711658478,
+      1.7177413702011108
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_2_Joint_1.R",
+    "type": "EMPTY",
+    "parent": "Finger_2_Joint_0.R",
+    "position": [
+      -1.0100018978118896,
+      -0.2311347872018814,
+      1.7677979469299316
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_2_Joint_1.L",
+    "type": "EMPTY",
+    "parent": "Finger_2_Joint_0.L",
+    "position": [
+      0.9964609146118164,
+      -0.16237355768680573,
+      1.7262873649597168
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_2_Joint_0.R",
+    "type": "EMPTY",
+    "parent": "Hand.R",
+    "position": [
+      -1.0196785926818848,
+      -0.20443107187747955,
+      1.7624962329864502
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_2_Joint_0.L",
+    "type": "EMPTY",
+    "parent": "Hand.L",
+    "position": [
+      0.9964609146118164,
+      -0.15382759273052216,
+      1.769017219543457
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_1_Joint_2.R",
+    "type": "EMPTY",
+    "parent": "Finger_1_Joint_1.R",
+    "position": [
+      -0.9923439621925354,
+      -0.2378128468990326,
+      1.8031525611877441
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_1_Joint_2.L",
+    "type": "EMPTY",
+    "parent": "Finger_1_Joint_1.L",
+    "position": [
+      0.969113826751709,
+      -0.19655747711658478,
+      1.7177413702011108
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_1_Joint_1.R",
+    "type": "EMPTY",
+    "parent": "Finger_1_Joint_0.R",
+    "position": [
+      -1.018333911895752,
+      -0.22891287505626678,
+      1.794199824333191
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_1_Joint_1.L",
+    "type": "EMPTY",
+    "parent": "Finger_1_Joint_0.L",
+    "position": [
+      0.969113826751709,
+      -0.16237355768680573,
+      1.7262873649597168
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_1_Joint_0.R",
+    "type": "EMPTY",
+    "parent": "Hand.R",
+    "position": [
+      -1.028010606765747,
+      -0.20220915973186493,
+      1.7888981103897095
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_1_Joint_0.L",
+    "type": "EMPTY",
+    "parent": "Hand.L",
+    "position": [
+      0.969113826751709,
+      -0.15382759273052216,
+      1.769017219543457
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_0_Joint_2.R",
+    "type": "EMPTY",
+    "parent": "Finger_0_Joint_1.R",
+    "position": [
+      -1.0006762742996216,
+      -0.23559093475341797,
+      1.8295543193817139
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_0_Joint_2.L",
+    "type": "EMPTY",
+    "parent": "Finger_0_Joint_1.L",
+    "position": [
+      0.9426212906837463,
+      -0.19655747711658478,
+      1.7177413702011108
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_0_Joint_1.R",
+    "type": "EMPTY",
+    "parent": "Finger_0_Joint_0.R",
+    "position": [
+      -1.026666283607483,
+      -0.22669096291065216,
+      1.8206017017364502
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_0_Joint_1.L",
+    "type": "EMPTY",
+    "parent": "Finger_0_Joint_0.L",
+    "position": [
+      0.9426212906837463,
+      -0.16237355768680573,
+      1.7262873649597168
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_0_Joint_0.R",
+    "type": "EMPTY",
+    "parent": "Hand.R",
+    "position": [
+      -1.0363428592681885,
+      -0.1999872475862503,
+      1.8152998685836792
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Finger_0_Joint_0.L",
+    "type": "EMPTY",
+    "parent": "Hand.L",
+    "position": [
+      0.9426212906837463,
+      -0.15382759273052216,
+      1.769017219543457
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Cannon_Right_Cradle_Mount",
+    "type": "EMPTY",
+    "parent": "Backpack_Structural_Mount",
+    "position": [
+      -0.29910919070243835,
+      0.2136494368314743,
+      2.9910922050476074
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0416662693023682,
+      1.1494247913360596,
+      1.1111106872558594
+    ]
+  },
+  {
+    "name": "Cannon_Pitch_Trunnion",
+    "type": "EMPTY",
+    "parent": "Cannon_Right_Cradle_Mount",
+    "position": [
+      -0.3589310050010681,
+      0.11964370310306549,
+      3.136373519897461
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0000001192092896,
+      1.000000238418579,
+      1.0000001192092896
+    ]
+  },
+  {
+    "name": "Backpack_Structural_Mount",
+    "type": "EMPTY",
+    "parent": "Thorax",
+    "position": [
+      0.0,
+      0.3162011504173279,
+      2.79453444480896
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      0.9599999785423279,
+      0.8700000047683716,
+      0.8999999761581421
+    ]
+  },
+  {
+    "name": "Backpack_Outer_Fold_Pivot.R",
+    "type": "EMPTY",
+    "parent": "Backpack_Main_Deploy_Hinge.R",
+    "position": [
+      -0.3162011504173279,
+      0.4102068543434143,
+      2.9141781330108643
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0000001192092896,
+      1.000000238418579,
+      1.0000001192092896
+    ]
+  },
+  {
+    "name": "Backpack_Outer_Fold_Pivot.L",
+    "type": "EMPTY",
+    "parent": "Backpack_Main_Deploy_Hinge.L",
+    "position": [
+      0.3162011504173279,
+      0.4102068543434143,
+      2.9141781330108643
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      1.0000001192092896,
+      1.000000238418579,
+      1.0000001192092896
+    ]
+  },
+  {
+    "name": "Backpack_Main_Deploy_Hinge.R",
+    "type": "EMPTY",
+    "parent": "Backpack_Structural_Mount",
+    "position": [
+      -0.20510342717170715,
+      0.341839075088501,
+      2.9483625888824463
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      0.9999998807907104,
+      0.9999997615814209,
+      0.9999998211860657
+    ]
+  },
+  {
+    "name": "Backpack_Main_Deploy_Hinge.L",
+    "type": "EMPTY",
+    "parent": "Backpack_Structural_Mount",
+    "position": [
+      0.20510342717170715,
+      0.341839075088501,
+      2.9483625888824463
+    ],
+    "rotation": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "scale": [
+      0.9999998807907104,
+      0.9999997615814209,
+      0.9999998211860657
+    ]
+  },
+  {
+    "name": "AntiShip_Blade_Display_Root",
+    "type": "EMPTY",
+    "parent": "V3B_Sword_Grip_Socket",
+    "position": [
+      -1.0113062858581543,
+      -0.199777290225029,
+      1.8493947982788086
+    ],
+    "rotation": [
+      -1.3225401639938354,
+      -1.886491298675537,
+      -0.2606033384799957
+    ],
+    "scale": [
+      0.19021743535995483,
+      0.19021739065647125,
+      0.19021740555763245
+    ]
+  }
+]

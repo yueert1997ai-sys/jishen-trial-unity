@@ -1,0 +1,73 @@
+PASS fresh launch equips TYPE08 and allows immediate sortie
+PASS starter has the actual cannon, muzzle and right-hand mounting
+PASS starter cannon right grip is within 1.5cm: 2.980232E-08
+PASS starter preserves all three cannon LODs
+PASS deployment button starts enabled
+PASS V7 authored motion is attached to the company V3 body
+PASS company V3 geometry is instantiated
+01_hangar_type08_starter.png camera=(1.84, 3.34, 7.11) angles=(9.00, 200.00, 0.00) size=9 follows=True
+PASS fresh launch deploys the starter cannon without selecting a weapon
+01_type08_first_sortie.png camera=(0.07, 22.79, -16.01) angles=(59.99, 359.69, 359.84) size=9 follows=True
+PASS restart restores TYPE08 as the starting equipment
+PASS starter shot begins with a charge before applying damage
+PASS starter beam uses the heavy cannon damage profile
+PASS starter cannon cooldown prevents duplicate beams
+PASS starter pink beam discharges and damages the range target
+PASS pink beam starts at the actual cannon muzzle
+PASS cannon barrel points along the pink beam
+PASS standalone build includes the supported pink glow shader
+PASS starter cannon emits no old rifle projectile
+PASS cannon grip stays attached and cannot trigger an invisible sword
+01_type08_pink_beam.png camera=(0.14, 22.77, -12.61) angles=(59.97, 359.34, 359.65) size=9 follows=True
+PASS beam afterglow cleans up without repeat damage
+PASS manual unload still disables deployment
+PASS game logic rejects a manually emptied loadout
+PASS TYPE08 remains selectable after unloading
+PASS owned collection weapon remains selectable from the new loadout
+PASS warehouse selection enters the preserved collection combat mode
+01_collection.png camera=(1.84, 3.34, 7.11) angles=(9.00, 200.00, 0.00) size=9 follows=True
+PASS M7 real weapon and muzzle are equipped
+02_hangar_M7.png camera=(1.84, 3.34, 7.11) angles=(9.00, 200.00, 0.00) size=9 follows=True
+M7 hangar grip errors R=2.107342E-07 L=4.777676E-07
+PASS M7 both hangar grip contacts stay within 6cm
+M7 weapon size=(0.162, 0.876, 2.558) scale=(1.650, 1.650, 1.650)
+PASS M7 rifle has a mecha-sized length between 2.5 and 3.7 world units
+PASS M7 live rounds hit the target from the real muzzle
+PASS M7 cannot create an invisible sword hit
+PASS combat locks hangar weapon selection
+M7 combat grip errors R=1.770983E-07 L=2.458692E-07
+PASS M7 both combat grip contacts stay within 6cm
+03_combat_M7.png camera=(0.00, 22.79, -12.00) angles=(60.00, 0.00, 0.00) size=9 follows=True
+PASS M14 real weapon and muzzle are equipped
+02_hangar_M14.png camera=(1.84, 3.34, 7.11) angles=(9.00, 200.00, 0.00) size=9 follows=True
+M14 hangar grip errors R=2.107342E-07 L=1.490116E-07
+PASS M14 both hangar grip contacts stay within 6cm
+M14 weapon size=(0.214, 0.561, 2.683) scale=(1.850, 1.850, 1.850)
+PASS M14 rifle has a mecha-sized length between 2.5 and 3.7 world units
+PASS M14 live rounds hit the target from the real muzzle
+PASS M14 cannot create an invisible sword hit
+PASS combat locks hangar weapon selection
+M14 combat grip errors R=1.490116E-08 L=6.598708E-07
+PASS M14 both combat grip contacts stay within 6cm
+03_combat_M14.png camera=(0.00, 22.79, -12.00) angles=(60.00, 0.00, 0.00) size=9 follows=True
+04_hangar_raiken.png camera=(1.84, 3.34, 7.11) angles=(9.00, 200.00, 0.00) size=9 follows=True
+05_combo_1.png camera=(0.62, 22.73, -13.29) angles=(59.84, 357.03, 358.46) size=9 follows=True
+05_combo_2.png camera=(0.00, 22.79, -11.33) angles=(60.00, 0.00, 0.00) size=9 follows=True
+05_combo_3.png camera=(0.00, 22.79, -10.79) angles=(60.00, 0.00, 0.00) size=9 follows=True
+PASS left click drives the three-stage real blade sweep and damages targets
+PASS sword selection never emits invisible rifle shots
+PASS lunar sector and navigation are active in combat
+PASS player remains on lunar combat ground
+PASS liquid boss button spawns the real boss with six run buffs
+06_liquid_boss.png camera=(0.00, 21.70, -7.77) angles=(60.00, 0.00, 0.00) size=15.26732 follows=True
+PASS return from boss challenge restores the starter cannon
+PASS ordinary lunar sortie spawns white E01 soldiers
+PASS white soldiers use the lunar navigation mesh
+07_lunar_sortie.png camera=(0.00, 22.79, -16.00) angles=(60.00, 0.00, 0.00) size=9 follows=True
+PASS starter cannon keeps V7 boost flight motion
+PASS starter cannon grip stays attached during boost flight
+08_type08_boost.png camera=(6.40, 22.80, -11.73) angles=(60.00, 0.00, 0.00) size=9 follows=True
+09_lunar_overview.png camera=(9.92, 51.23, -27.25) angles=(60.00, 340.00, 0.00) size=30 follows=True
+Version=hangar-lunar-v9-20260908.140123 GPU=NVIDIA GeForce RTX 4070 Ti
+Short standalone replay only; not a full clear or exhaustive animation review.
+COMPANY_V9_CHECK code=0 errors=0

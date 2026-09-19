@@ -1,0 +1,108 @@
+{
+  "source_baked": {
+    "meshes": 530,
+    "triangles": 123508,
+    "bounds_min": [
+      -1.7600520849227905,
+      -0.23668406903743744,
+      -0.29395127296447754
+    ],
+    "bounds_max": [
+      1.7454307079315186,
+      0.15503334999084473,
+      0.43559613823890686
+    ],
+    "dimensions": [
+      3.505482792854309,
+      0.39171741902828217,
+      0.7295474112033844
+    ],
+    "materials": [
+      "Black armor panels",
+      "Black rotary module",
+      "Ivory ceramic armor",
+      "Machined titanium",
+      "Matte black body",
+      "Recess black",
+      "Yellow recessed identifiers"
+    ],
+    "finite_vertices": true,
+    "sockets": [
+      "SOCKET_BackMount",
+      "SOCKET_Grip",
+      "SOCKET_Muzzle",
+      "SOCKET_Support"
+    ]
+  },
+  "glb_reimport": {
+    "meshes": 530,
+    "triangles": 123508,
+    "bounds_min": [
+      -1.7600520849227905,
+      -0.23668406903743744,
+      -0.29395127296447754
+    ],
+    "bounds_max": [
+      1.7454307079315186,
+      0.15503333508968353,
+      0.43559613823890686
+    ],
+    "dimensions": [
+      3.505482792854309,
+      0.39171740412712097,
+      0.7295474112033844
+    ],
+    "materials": [
+      "Black armor panels",
+      "Black rotary module",
+      "Ivory ceramic armor",
+      "Machined titanium",
+      "Matte black body",
+      "Recess black",
+      "Yellow recessed identifiers"
+    ],
+    "finite_vertices": true,
+    "sockets": [
+      "SOCKET_BackMount",
+      "SOCKET_Grip",
+      "SOCKET_Muzzle",
+      "SOCKET_Support"
+    ]
+  },
+  "fbx_reimport": {
+    "meshes": 530,
+    "triangles": 123508,
+    "bounds_min": [
+      -1.7600520849227905,
+      -0.23668408393859863,
+      -0.29395127296447754
+    ],
+    "bounds_max": [
+      1.7454307079315186,
+      0.15503336489200592,
+      0.43559613823890686
+    ],
+    "dimensions": [
+      3.505482792854309,
+      0.39171744883060455,
+      0.7295474112033844
+    ],
+    "materials": [
+      "Black armor panels",
+      "Black rotary module",
+      "Ivory ceramic armor",
+      "Machined titanium",
+      "Matte black body",
+      "Recess black",
+      "Yellow recessed identifiers"
+    ],
+    "finite_vertices": true,
+    "sockets": [
+      "SOCKET_BackMount",
+      "SOCKET_Grip",
+      "SOCKET_Muzzle",
+      "SOCKET_Support"
+    ]
+  },
+  "result": "PASS: GLB and FBX reimport preserve mesh count, triangles, seven materials, four sockets and dimensions."
+}

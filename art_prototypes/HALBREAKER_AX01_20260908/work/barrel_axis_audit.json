@@ -1,0 +1,47 @@
+{
+  "exposed_barrel_m": 2.2,
+  "parts": [
+    {
+      "part": "01 Main bore continuous hollow tube",
+      "offset_y_m": 0.0,
+      "offset_z_m": 1.1127920807041392e-09,
+      "tilt_degrees": 0.0
+    },
+    {
+      "part": "02 Muzzle machined silver rim",
+      "offset_y_m": 0.0,
+      "offset_z_m": 1.1127920807041392e-09,
+      "tilt_degrees": 0.0
+    },
+    {
+      "part": "03 Muzzle recessed black bore",
+      "offset_y_m": 0.0,
+      "offset_z_m": 1.1127920807041392e-09,
+      "tilt_degrees": 0.0
+    },
+    {
+      "part": "04 Front barrel cooling sleeve",
+      "offset_y_m": 0.0,
+      "offset_z_m": 1.1127920807041392e-09,
+      "tilt_degrees": 0.0
+    },
+    {
+      "part": "05 Wide central barrel collar",
+      "offset_y_m": 0.0,
+      "offset_z_m": 1.1127920807041392e-09,
+      "tilt_degrees": 0.0
+    },
+    {
+      "part": "06 Brushed forward sleeve",
+      "offset_y_m": 0.0,
+      "offset_z_m": 1.1127920807041392e-09,
+      "tilt_degrees": 0.0
+    },
+    {
+      "part": "07 Receiver neck shroud",
+      "offset_y_m": 0.0,
+      "offset_z_m": 1.1127920807041392e-09,
+      "tilt_degrees": 0.0
+    }
+  ]
+}

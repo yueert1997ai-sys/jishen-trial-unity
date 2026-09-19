@@ -75,7 +75,9 @@ public class StageManager : MonoBehaviour
     private IEnumerator RunBoss()
     {
         var gm = GameManager.Instance;
-        gm.SetProgress("REACTOR WARDEN  /  INCOMING");
+        var definition = enemySpawner.bossPrefab != null ? enemySpawner.bossPrefab.GetComponent<BossController>() : null;
+        string bossName = definition != null ? definition.displayName : "REACTOR WARDEN";
+        gm.SetProgress(bossName + "  /  INCOMING");
         GameAudio.Play(GameAudioCue.Warning, 0.5f, 0.82f);
         yield return new WaitForSeconds(1.4f);
         var boss = enemySpawner.SpawnBoss();
@@ -84,7 +86,7 @@ public class StageManager : MonoBehaviour
             Debug.LogError("Boss prefab is missing; cannot complete the mission.");
             yield break;
         }
-        gm.SetProgress("REACTOR WARDEN  /  PHASE 1");
+        gm.SetProgress(bossName + "  /  PHASE 1");
         while (bossAlive) yield return null;
         stageRoutine = null;
         gm.OnStageCleared(2);

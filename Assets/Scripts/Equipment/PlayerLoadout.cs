@@ -7,7 +7,7 @@ public sealed class PlayerLoadout : MonoBehaviour
     public PrimaryWeapon Selected { get; private set; }
     public HangarArmory Armory { get; private set; }
     public HangarArmory.Entry Equipped => Armory != null ? Armory.Find(Selected) : null;
-    public bool IsRifle => Selected == PrimaryWeapon.M7 || Selected == PrimaryWeapon.M14;
+    public bool IsRifle => Selected == PrimaryWeapon.M7 || Selected == PrimaryWeapon.M14 || Selected == PrimaryWeapon.Type08;
     public bool CanDeploy => Selected != PrimaryWeapon.None && Equipped != null && Equipped.prefab != null;
     public event Action Changed;
     private void Awake() => Armory = Resources.Load<HangarArmory>("Hangar/Armory");
@@ -22,5 +22,12 @@ public sealed class PlayerLoadout : MonoBehaviour
         Changed?.Invoke();
         return true;
     }
-    public void EnterHangar() { Selected = PrimaryWeapon.None; Changed?.Invoke(); }
+    public void EnterHangar()
+    {
+        Selected = Armory != null && Armory.Find(Armory.startingWeapon)?.prefab != null
+            ? Armory.startingWeapon : PrimaryWeapon.None;
+        GetComponent<WeaponController>()?.ResetCooldowns();
+        GetComponent<PlayerMeleeController>()?.ResetCooldown();
+        Changed?.Invoke();
+    }
 }

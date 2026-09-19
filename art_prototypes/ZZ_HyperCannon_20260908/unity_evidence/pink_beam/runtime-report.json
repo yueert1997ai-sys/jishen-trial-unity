@@ -1,0 +1,22 @@
+{
+    "passed": true,
+    "checks": [
+        "Particle cannon is selectable",
+        "Runtime firing creates the Minovsky beam effect",
+        "Additive particle glow shader compiles on the active graphics device",
+        "Charge glows before the discharge and deals no early damage",
+        "One beam penetrates exactly three targets with penetration 2",
+        "Each direct target receives one 120-damage hit and the fourth remains intact",
+        "Continuous beam remains attached to the visible muzzle",
+        "Cannon barrel and particle beam point in the same direction",
+        "Beam has a bright white-pink core and saturated pink sheath",
+        "Pausing freezes charge, beam and fade timing",
+        "Particle halo lingers briefly after the bright beam",
+        "The lingering beam never repeats damage each frame",
+        "Solid cover stops the beam at its surface",
+        "Targets behind cover receive neither direct nor splash damage",
+        "Returning to hangar clears active beam effects"
+    ],
+    "errors": [],
+    "editor": "6000.3.18f1"
+}

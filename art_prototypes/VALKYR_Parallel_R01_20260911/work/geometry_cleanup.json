@@ -1,0 +1,25 @@
+{
+  "fixed_objects": [
+    "Main delta pauldron.R",
+    "Forearm long blue front plate.R",
+    "Long quadriceps blue shield.R",
+    "Shin long blue keel.R",
+    "Main delta pauldron.L",
+    "Forearm long blue front plate.L",
+    "Long quadriceps blue shield.L",
+    "Knee inset hub.R",
+    "Knee inset hub.L",
+    "Backpack cooling fin.R.0",
+    "Backpack cooling fin.R.1",
+    "Backpack cooling fin.R.2",
+    "Backpack cooling fin.R.3",
+    "Backpack cooling fin.L.0",
+    "Backpack cooling fin.L.1",
+    "Backpack cooling fin.L.2",
+    "Backpack cooling fin.L.3",
+    "Thruster top intake grille.R.2",
+    "Thruster top intake grille.L.2"
+  ],
+  "source_modifier_version": "work/VALKYR_R01_EDITABLE_UNBAKED.blend",
+  "method": "Evaluated only flagged components; merged sub-2-micron duplicates, dissolved sub-micron degeneracies; part separation retained."
+}

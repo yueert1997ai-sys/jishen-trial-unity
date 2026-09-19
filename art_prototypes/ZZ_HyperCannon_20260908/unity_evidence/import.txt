@@ -1,0 +1,8 @@
+TYPE08_IMPORT_PASS
+Length: 3.491269 m
+Body height: 3.495401 m
+Triangles: 73628, 35226, 13067
+Right hand only: true
+Armory entries: 4
+Prefab: Assets/Resources/Hangar/TYPE08.prefab
+Editor: 6000.3.18f1

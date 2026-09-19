@@ -1,0 +1,17 @@
+﻿{
+    "version":  "hangar-lunar-v9-20260908.140123",
+    "startingWeapon":  "Type08",
+    "buildDirectory":  "D:\\project-mecha-design\\MECH ROUGE\\handoff\\GameplayLoop_V1\\Builds\\ValkyrHangarV9_Type08Starter",
+    "verifiedRuntime":  "COMPANY_V9_CHECK code=0 errors=0",
+    "buildResult":  "Succeeded errors=0 warnings=0",
+    "files":  [
+                  {
+                      "Path":  "D:\\project-mecha-design\\MECH ROUGE\\handoff\\GameplayLoop_V1\\Builds\\ValkyrHangarV9_Type08Starter\\MECH_TRIAL_Valkyr.exe",
+                      "Hash":  "5CF8283E7CB3761B6FCBBA8E2C9F36A298A75883CC65CA7719B008F3A7AA231E"
+                  },
+                  {
+                      "Path":  "D:\\project-mecha-design\\MECH ROUGE\\handoff\\GameplayLoop_V1\\Builds\\ValkyrHangarV9_Type08Starter\\MECH_TRIAL_Valkyr_Data\\Managed\\Assembly-CSharp.dll",
+                      "Hash":  "AA043DFD9AF570EA2E4F15D2A282C2F65EE5EB7E51EEFF616498C97EF5A0C790"
+                  }
+              ]
+}

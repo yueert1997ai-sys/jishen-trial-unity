@@ -784,6 +784,8 @@ public static class DemoSceneBuilder
 
     private static GameObject CreateBossPrefab(Dictionary<string, Material> materials)
     {
+        var integrated = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Boss_HeavyMech.prefab");
+        if (integrated != null && integrated.GetComponent<E01ElitePoseDriver>() != null) return integrated;
         GameObject root = new GameObject("Boss_HeavyMech");
         CapsuleCollider collider = root.AddComponent<CapsuleCollider>();
         collider.center = new Vector3(0f, 1.4f, 0f);

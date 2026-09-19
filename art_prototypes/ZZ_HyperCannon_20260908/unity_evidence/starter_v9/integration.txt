@@ -1,0 +1,7 @@
+TYPE08_STARTER_CONFIG_PASS
+Starting weapon: TYPE08
+Length: 3.491269 m
+Right hand only: true
+Pink particle beam: 120 damage, 1.1 s interval, 2 penetration, 1.8 m blast
+Hero: Assets/Resources/Hangar/VALKYR_V9.prefab
+Armory entries: 4

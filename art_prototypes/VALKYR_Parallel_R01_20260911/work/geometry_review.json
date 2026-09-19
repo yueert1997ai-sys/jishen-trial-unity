@@ -1,0 +1,3367 @@
+{
+  "asset": "VALKYR PARALLEL R01",
+  "source_file": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\VALKYR_Parallel_R01_20260911\\VALKYR_PARALLEL_R01.blend",
+  "mesh_count": 371,
+  "triangles": 115138,
+  "invalid_vertices": 0,
+  "degenerate_faces": 0,
+  "boundary_edges": 0,
+  "nonmanifold_edges": 0,
+  "bounds": {
+    "min": [
+      -1.7599999904632568,
+      -0.8050000071525574,
+      0.054999999701976776
+    ],
+    "max": [
+      1.7599999904632568,
+      1.1344002485275269,
+      6.327415943145752
+    ]
+  },
+  "problem_objects": [],
+  "parts": [
+    {
+      "name": "Closed thoracic carrier",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Waist ribbed bearing",
+      "vertices": 384,
+      "triangles": 768,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdominal bearing seal 3.87",
+      "vertices": 384,
+      "triangles": 768,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdominal bearing seal 3.98",
+      "vertices": 384,
+      "triangles": 768,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdominal bearing seal 4.09",
+      "vertices": 384,
+      "triangles": 768,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Waist rotation spindle",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pelvis enclosed gearbox",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Neck bearing",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder cross axle.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdomen piston sleeve.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder cross axle.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdomen piston sleeve.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Upper arm frame.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Elbow hinge dark outer.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm load strut.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Wrist cuff.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Hand palm carrier.R",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Hip bearing axle.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh structural spar.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee transverse hinge.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shin structural spine.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Ankle transverse joint.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Foot sole rail.R",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Upper arm frame.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Elbow hinge dark outer.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm load strut.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Wrist cuff.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Hand palm carrier.L",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Hip bearing axle.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh structural spar.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee transverse hinge.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shin structural spine.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Ankle transverse joint.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Foot sole rail.L",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head inner cranial carrier",
+      "vertices": 688,
+      "triangles": 1376,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Collar docking rim",
+      "vertices": 384,
+      "triangles": 768,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest deep side carrier.R",
+      "vertices": 149,
+      "triangles": 294,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pectoral swept upper armour.R",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest intake shadow.R",
+      "vertices": 160,
+      "triangles": 316,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pectoral lower ceramic blade.R",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Floating abdominal flank.R",
+      "vertices": 136,
+      "triangles": 268,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest deep side carrier.L",
+      "vertices": 149,
+      "triangles": 294,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pectoral swept upper armour.L",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest intake shadow.L",
+      "vertices": 160,
+      "triangles": 316,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pectoral lower ceramic blade.L",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Floating abdominal flank.L",
+      "vertices": 136,
+      "triangles": 268,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Sternum central underlying spine",
+      "vertices": 155,
+      "triangles": 306,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Cockpit blue upper arrow",
+      "vertices": 200,
+      "triangles": 396,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Cockpit white chevron",
+      "vertices": 196,
+      "triangles": 388,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Cockpit lower blue keel",
+      "vertices": 220,
+      "triangles": 436,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pelvic upper belt",
+      "vertices": 138,
+      "triangles": 272,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pelvic center blue shield",
+      "vertices": 176,
+      "triangles": 348,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder inner return shell.R",
+      "vertices": 146,
+      "triangles": 288,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Main delta pauldron.R",
+      "vertices": 438,
+      "triangles": 872,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron upper silver knife edge.R",
+      "vertices": 120,
+      "triangles": 236,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron gold inset.R",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder lower layered vane.R",
+      "vertices": 136,
+      "triangles": 268,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Upper arm ceramic shell.R",
+      "vertices": 448,
+      "triangles": 896,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Bicep recessed long plate.R",
+      "vertices": 160,
+      "triangles": 316,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm tapered housing.R",
+      "vertices": 480,
+      "triangles": 960,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm long blue front plate.R",
+      "vertices": 494,
+      "triangles": 984,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm ceramic lateral blade.R",
+      "vertices": 109,
+      "triangles": 214,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm sensor seat.R",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Hand back armour.R",
+      "vertices": 160,
+      "triangles": 316,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Front skirt blue armour.R",
+      "vertices": 156,
+      "triangles": 308,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Front skirt inset face.R",
+      "vertices": 169,
+      "triangles": 334,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Side skirt scabbard fin.R",
+      "vertices": 124,
+      "triangles": 244,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh structural ceramic shell.R",
+      "vertices": 512,
+      "triangles": 1024,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Long quadriceps blue shield.R",
+      "vertices": 55,
+      "triangles": 106,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh panel recess.R",
+      "vertices": 184,
+      "triangles": 364,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh central enamel panel.R",
+      "vertices": 184,
+      "triangles": 364,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee impact pointed guard.R",
+      "vertices": 216,
+      "triangles": 428,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee blue cap.R",
+      "vertices": 200,
+      "triangles": 396,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf white closed shell.R",
+      "vertices": 569,
+      "triangles": 1138,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shin long blue keel.R",
+      "vertices": 273,
+      "triangles": 542,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shin inset long channel.R",
+      "vertices": 129,
+      "triangles": 254,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf external swept blade.R",
+      "vertices": 83,
+      "triangles": 162,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf outside gold notch.R",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Ankle split housing.R",
+      "vertices": 384,
+      "triangles": 768,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Foot sloped blue armour.R",
+      "vertices": 120,
+      "triangles": 236,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Toe white bumper.R",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Heel stabiliser.R",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder inner return shell.L",
+      "vertices": 146,
+      "triangles": 288,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Main delta pauldron.L",
+      "vertices": 438,
+      "triangles": 872,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron upper silver knife edge.L",
+      "vertices": 120,
+      "triangles": 236,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron gold inset.L",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder lower layered vane.L",
+      "vertices": 136,
+      "triangles": 268,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Upper arm ceramic shell.L",
+      "vertices": 448,
+      "triangles": 896,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Bicep recessed long plate.L",
+      "vertices": 160,
+      "triangles": 316,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm tapered housing.L",
+      "vertices": 480,
+      "triangles": 960,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm long blue front plate.L",
+      "vertices": 491,
+      "triangles": 978,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm ceramic lateral blade.L",
+      "vertices": 109,
+      "triangles": 214,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm sensor seat.L",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Hand back armour.L",
+      "vertices": 160,
+      "triangles": 316,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Front skirt blue armour.L",
+      "vertices": 156,
+      "triangles": 308,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Front skirt inset face.L",
+      "vertices": 169,
+      "triangles": 334,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Side skirt scabbard fin.L",
+      "vertices": 124,
+      "triangles": 244,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh structural ceramic shell.L",
+      "vertices": 512,
+      "triangles": 1024,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Long quadriceps blue shield.L",
+      "vertices": 55,
+      "triangles": 106,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh panel recess.L",
+      "vertices": 184,
+      "triangles": 364,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh central enamel panel.L",
+      "vertices": 184,
+      "triangles": 364,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee impact pointed guard.L",
+      "vertices": 216,
+      "triangles": 428,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee blue cap.L",
+      "vertices": 200,
+      "triangles": 396,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf white closed shell.L",
+      "vertices": 569,
+      "triangles": 1138,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shin long blue keel.L",
+      "vertices": 362,
+      "triangles": 720,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shin inset long channel.L",
+      "vertices": 129,
+      "triangles": 254,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf external swept blade.L",
+      "vertices": 83,
+      "triangles": 162,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf outside gold notch.L",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Ankle split housing.L",
+      "vertices": 384,
+      "triangles": 768,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Foot sloped blue armour.L",
+      "vertices": 120,
+      "triangles": 236,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Toe white bumper.L",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Heel stabiliser.L",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder upper dark service hatch.R",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron lower overlapping facet.R",
+      "vertices": 152,
+      "triangles": 300,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh slim white inner armour.R",
+      "vertices": 65,
+      "triangles": 126,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh lateral ceramic return.R",
+      "vertices": 121,
+      "triangles": 238,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf inner ceramic panel.R",
+      "vertices": 61,
+      "triangles": 118,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf outside ceramic shroud.R",
+      "vertices": 111,
+      "triangles": 218,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder upper dark service hatch.L",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron lower overlapping facet.L",
+      "vertices": 152,
+      "triangles": 300,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh slim white inner armour.L",
+      "vertices": 65,
+      "triangles": 126,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh lateral ceramic return.L",
+      "vertices": 121,
+      "triangles": 238,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf inner ceramic panel.L",
+      "vertices": 61,
+      "triangles": 118,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf outside ceramic shroud.L",
+      "vertices": 111,
+      "triangles": 218,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Clavicle shaped cap.L",
+      "vertices": 56,
+      "triangles": 108,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Clavicle shaped cap.R",
+      "vertices": 56,
+      "triangles": 108,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Instep floating tile.L.0",
+      "vertices": 56,
+      "triangles": 108,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Instep floating tile.L.1",
+      "vertices": 56,
+      "triangles": 108,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Instep floating tile.R.0",
+      "vertices": 56,
+      "triangles": 108,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Instep floating tile.R.1",
+      "vertices": 56,
+      "triangles": 108,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdomen exposed rod.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Gold slanted cooling vane.R.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Gold slanted cooling vane.R.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Gold slanted cooling vane.R.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.R",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.R_hex_socket",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.R.001",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.R_hex_socket.001",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.R.002",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.R_hex_socket.002",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdomen exposed rod.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Gold slanted cooling vane.L.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Gold slanted cooling vane.L.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Gold slanted cooling vane.L.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.L",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.L_hex_socket",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.L.001",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.L_hex_socket.001",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.L.002",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Chest captive fastener.L_hex_socket.002",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron fastener.R",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron fastener.R_hex_socket",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron fastener.R.001",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron fastener.R_hex_socket.001",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Elbow bearing face.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm captive service pin.R",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm captive service pin.R_hex_socket",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm captive service pin.R.001",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm captive service pin.R_hex_socket.001",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.0.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.0.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.0.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.1.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.1.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.1.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.2.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.2.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.2.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.3.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.3.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.R.3.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Opposable thumb joint.R",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thumb distal.R",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh panel pin.R",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh panel pin.R_hex_socket",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee lateral bearing.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee inset hub.R",
+      "vertices": 168,
+      "triangles": 332,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Achilles piston.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Achilles piston.R.001",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf rear actuator sleeve.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Toe longitudinal rib.R.-1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Toe longitudinal rib.R.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron fastener.L",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron fastener.L_hex_socket",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron fastener.L.001",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Pauldron fastener.L_hex_socket.001",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Elbow bearing face.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm captive service pin.L",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm captive service pin.L_hex_socket",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm captive service pin.L.001",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm captive service pin.L_hex_socket.001",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.0.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.0.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.0.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.1.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.1.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.1.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.2.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.2.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.2.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.3.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.3.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Articulated finger.L.3.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Opposable thumb joint.L",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thumb distal.L",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh panel pin.L",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thigh panel pin.L_hex_socket",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee lateral bearing.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee inset hub.L",
+      "vertices": 168,
+      "triangles": 332,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Achilles piston.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Achilles piston.L.001",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Calf rear actuator sleeve.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Toe longitudinal rib.L.-1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Toe longitudinal rib.L.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Temple bearing.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Temple axle cover.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head rear recessed louvre.R.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head rear recessed louvre.R.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head rear recessed louvre.R.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Temple bearing.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Temple axle cover.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head rear recessed louvre.L.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head rear recessed louvre.L.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head rear recessed louvre.L.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head flush screw.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head flush screw.R.001",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head flush screw.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head flush screw.L.001",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm rear actuator rod.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shin service guide.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm rear actuator rod.R.001",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shin service guide.R.001",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Elbow second bearing.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee articulated underplate.R.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Ankle front bellows.R.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee articulated underplate.R.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Ankle front bellows.R.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee articulated underplate.R.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Ankle front bellows.R.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Toe pivot cap.R",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Toe pivot cap.R.001",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm recessed vent.R.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Quadriceps service slot.R.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm recessed vent.R.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Quadriceps service slot.R.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm recessed vent.R.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Quadriceps service slot.R.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder service recessed pin.R",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder service recessed pin.R_hex_socket",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder service recessed pin.R.001",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder service recessed pin.R_hex_socket.001",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm rear actuator rod.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shin service guide.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm rear actuator rod.L.001",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shin service guide.L.001",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Elbow second bearing.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee articulated underplate.L.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Ankle front bellows.L.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee articulated underplate.L.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Ankle front bellows.L.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Knee articulated underplate.L.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Ankle front bellows.L.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Toe pivot cap.L",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Toe pivot cap.L.001",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm recessed vent.L.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Quadriceps service slot.L.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm recessed vent.L.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Quadriceps service slot.L.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm recessed vent.L.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Quadriceps service slot.L.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder service recessed pin.L",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder service recessed pin.L_hex_socket",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder service recessed pin.L.001",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Shoulder service recessed pin.L_hex_socket.001",
+      "vertices": 144,
+      "triangles": 284,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdominal braided service line.R_00",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdominal braided service line.R_01",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdominal braided service line.R_02",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Waist hose collar.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Waist hose collar.R.001",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Waist hose collar.R.002",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Waist hose collar.R.003",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdominal braided service line.L_00",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdominal braided service line.L_01",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Abdominal braided service line.L_02",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Waist hose collar.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Waist hose collar.L.001",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Waist hose collar.L.002",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Waist hose collar.L.003",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Hollow helmet outer half.R",
+      "vertices": 459,
+      "triangles": 914,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Temple deep angular armour.R",
+      "vertices": 93,
+      "triangles": 182,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Cheek face support.R",
+      "vertices": 107,
+      "triangles": 210,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Cheek outer layered blade.R",
+      "vertices": 79,
+      "triangles": 154,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Swept silver antenna.R",
+      "vertices": 114,
+      "triangles": 224,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Antenna gold inner insert.R",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Hollow helmet outer half.L",
+      "vertices": 459,
+      "triangles": 914,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Temple deep angular armour.L",
+      "vertices": 93,
+      "triangles": 182,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Cheek face support.L",
+      "vertices": 107,
+      "triangles": 210,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Cheek outer layered blade.L",
+      "vertices": 79,
+      "triangles": 154,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Swept silver antenna.L",
+      "vertices": 114,
+      "triangles": 224,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Antenna gold inner insert.L",
+      "vertices": 128,
+      "triangles": 252,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Crown forward blue keystone",
+      "vertices": 212,
+      "triangles": 420,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Blue pointed chin",
+      "vertices": 168,
+      "triangles": 332,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Rear head service spine",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Hollow eye socket bezel.R",
+      "vertices": 192,
+      "triangles": 384,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Silver brow narrow blade.R",
+      "vertices": 112,
+      "triangles": 220,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Upper helmet swept brow shell.R",
+      "vertices": 117,
+      "triangles": 230,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Temple second swept scale.R",
+      "vertices": 101,
+      "triangles": 198,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Cheek third swept scale.R",
+      "vertices": 78,
+      "triangles": 152,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "White cheek narrow machined inset.R",
+      "vertices": 102,
+      "triangles": 200,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head cheek recessed grille.R",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head cheek recessed grille.R.001",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head cheek recessed grille.R.002",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Hollow eye socket bezel.L",
+      "vertices": 192,
+      "triangles": 384,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Silver brow narrow blade.L",
+      "vertices": 112,
+      "triangles": 220,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Upper helmet swept brow shell.L",
+      "vertices": 117,
+      "triangles": 230,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Temple second swept scale.L",
+      "vertices": 101,
+      "triangles": 198,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Cheek third swept scale.L",
+      "vertices": 78,
+      "triangles": 152,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "White cheek narrow machined inset.L",
+      "vertices": 102,
+      "triangles": 200,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head cheek recessed grille.L",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head cheek recessed grille.L.001",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Head cheek recessed grille.L.002",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forehead full blue sensor housing",
+      "vertices": 176,
+      "triangles": 348,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forehead machined slot",
+      "vertices": 125,
+      "triangles": 246,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Face mask explicit centre fold",
+      "vertices": 136,
+      "triangles": 268,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Crown sealed continuous ridge",
+      "vertices": 96,
+      "triangles": 188,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm sensor lens.R",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forearm sensor lens.L",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack recessed sensor",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster inner iris.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster inner iris.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Inset precision cyan eye.R",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Inset precision cyan eye.L",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Forehead inset narrow cyan sensor",
+      "vertices": 125,
+      "triangles": 246,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack central spine",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack luminous seat",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster pod outer shell.R",
+      "vertices": 448,
+      "triangles": 896,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster gimbal.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster nozzle open lip.R",
+      "vertices": 384,
+      "triangles": 768,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster deep cavity.R",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Primary swept backpack vane.R",
+      "vertices": 133,
+      "triangles": 262,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack upper blue blade.R",
+      "vertices": 121,
+      "triangles": 238,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack long outer silver edge.R",
+      "vertices": 93,
+      "triangles": 182,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack cooling fin.R.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack cooling fin.R.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack cooling fin.R.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack cooling fin.R.3",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster pod outer shell.L",
+      "vertices": 448,
+      "triangles": 896,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster gimbal.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster nozzle open lip.L",
+      "vertices": 384,
+      "triangles": 768,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster deep cavity.L",
+      "vertices": 192,
+      "triangles": 380,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Primary swept backpack vane.L",
+      "vertices": 133,
+      "triangles": 262,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack upper blue blade.L",
+      "vertices": 121,
+      "triangles": 238,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack long outer silver edge.L",
+      "vertices": 93,
+      "triangles": 182,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack cooling fin.L.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack cooling fin.L.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack cooling fin.L.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Backpack cooling fin.L.3",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake bottom.R",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.R.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.R.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.R.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.R.3",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.R.4",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.R.5",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake bottom.L",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.L.0",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.L.1",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.L.2",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.L.3",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.L.4",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Thruster top intake grille.L.5",
+      "vertices": 100,
+      "triangles": 196,
+      "invalid_vertices": 0,
+      "degenerate_faces": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    }
+  ],
+  "cannon_objects": [],
+  "reference_images_packed": true,
+  "limits": "No full self-intersection analysis, no skin/animation/Unity integration for this separate design line."
+}

@@ -1,0 +1,31 @@
+{
+  "asset": "AX-01 HALBREAKER",
+  "exposed_barrel_length_m": 2.2,
+  "overall_length_m": 4.12019795,
+  "weapon_parts": 630,
+  "right_grip_marker": "AX01_RIGHT_HAND_U_GRIP",
+  "right_grip_error_m": 5.057621821307283e-07,
+  "left_hand_bound": false,
+  "mount_frame": "AX01_SHOULDER_MOUNT_FRAME",
+  "mount_parent": "Thorax",
+  "shoulder_pads": [
+    {
+      "pad": "Forward shoulder contact pad",
+      "surface_z": 3.195521593093872,
+      "before_gap_m": 0.044478416442871094,
+      "after_center_gap_m": 0
+    },
+    {
+      "pad": "Rear shoulder contact pad",
+      "surface_z": 3.246833086013794,
+      "before_gap_m": 0.009166955947875977,
+      "after_center_gap_m": 0
+    }
+  ],
+  "game_integration": "Not performed in this Blender modeling task",
+  "reference_images": [
+    "AX01_Turnaround.png",
+    "AX01_Perspective.png"
+  ],
+  "front_receiver": "Flat armor; circular nose removed"
+}

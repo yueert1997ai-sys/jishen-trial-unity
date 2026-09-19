@@ -1,5 +1,15 @@
 # 机神试炼 / MECH ROUGE
 
+2026-09-17 本地试玩更新为 **Combat Loop V2 · 30 秒战斗对照**：已读取完整 AC6 调研原文，F9 进入短战斗，1 / 2 / 3 比较反馈与 Break 的贡献；统一刀击停顿时钟，清除重开残留，处理出生点被占时的进入位置。当前源码在 `handoff/GameplayLoop_V1`，沿用桌面唯一入口，19 组实际 Player 检查通过，见 [原文对应及验证](handoff/GameplayLoop_V1/docs/COMBAT_LOOP_V2_LAB.md)。尚未推送 GitHub。
+
+2026-09-11?????? **P0.10.1 ????**?????????????M7 ???????????? P0 ??????[?????](handoff/GameplayLoop_V1/docs/P0_10_1_NO_CANNON.md)????? R01 ? `art_prototypes/VALKYR_Parallel_R01_20260911` ?????????????
+
+2026-09-11?????????? **P0.10 M7**???????????????????????????????? P0 ??/?????????? [M7 ?????](handoff/GameplayLoop_V1/docs/P0_10_M7.md)?
+
+2026-09-10 追加：按画面清晰度反馈更新为 **P0.9.1 清晰版**，去除全屏泛光并收小遮挡视线的光晕，保留粒子和战斗规则。桌面 P0 新版图标已切换，详见 [清晰版说明](handoff/GameplayLoop_V1/docs/P0_9_1_CLEAR.md)。
+
+2026-09-10 本地 Windows P0 试玩更新为 **P0.9 OVERDRIVE**：冲击积累与失衡追击、敌人战斗类型生成修复、密集装甲火花/推进残光/电弧/击杀爆炸及 Bloom。桌面「机神试炼 · P0试玩」或 `PLAY_P0_DEMO.cmd` 启动；F2 调整特效强度。源码与独立构建位于 `handoff/GameplayLoop_V1`，旧版保留。改动、实弹与性能验证边界见 [P0.9 更新说明](handoff/GameplayLoop_V1/docs/P0_9_OVERDRIVE.md)。
+
 2026-09-08 新增：**战前格纳库配装**已接入当前 `Assets/Scenes/Demo_Main.unity`。使用第三版厚装甲机体；进入格纳库默认空手，选择 M7、RAIKEN 巨剑或 M14 后才装备，点击出击沿用选择。支持卸下、近距离查看、拖动旋转和滚轮缩放。Mac 本地试玩入口为 `Builds/Mac/MECH_TRIAL_Hangar_20260908.app`（构建包不随 Git 同步）；实现、素材来源和验证范围见 [格纳库配装交接](docs/HANGAR_LOADOUT_20260908.md)。本次未更新下文 Windows 历史试玩包。同期制作的月球基地可编辑源文件见 [MARE-07 场景说明](art_prototypes/LunarBase_Sector01_20260908/README.md)。
 
 ## GitHub / Mac 接续

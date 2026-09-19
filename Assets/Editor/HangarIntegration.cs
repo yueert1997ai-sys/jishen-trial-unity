@@ -84,6 +84,8 @@ public static class HangarIntegration
             entries.Add(new HangarArmory.Entry { weapon=row.Item2,prefab=prefab,damage=row.Item3,interval=row.Item4,speed=row.Item5,pierce=row.Item6 });
             Object.DestroyImmediate(wrapper);
         }
+        // Retain independently imported weapons such as TYPE-08 when rebuilding the original three.
+        entries.AddRange(armory.weapons.Where(e => e != null && !entries.Any(built => built.weapon == e.weapon)));
         armory.weapons = entries.ToArray();
         armory.heroPrefab = BuildHero();
         var room = Model("HangarRoom");

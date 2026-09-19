@@ -1,0 +1,9 @@
+{
+  "asset": "FAZZ long mega beam cannon reference rebuild",
+  "parts": 530,
+  "evaluated_triangles": 123508,
+  "scale_nominal_m": 3.5,
+  "reference": "USER_REFERENCE.png lower left weapon panel",
+  "model_status": "Editable hard surface design model; no UV bake, LOD or game integration",
+  "cycles_device": "GPU"
+}

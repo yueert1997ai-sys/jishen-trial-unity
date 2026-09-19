@@ -1,0 +1,21 @@
+{
+  "file": "exports/VALKYR_PARALLEL_R01.glb",
+  "mesh_count_including_text": 382,
+  "vertices": 207550,
+  "triangles": 126018,
+  "assembly_root_present": true,
+  "head_mount_present": true,
+  "invalid_coordinates": 0,
+  "bounds": {
+    "min": [
+      -1.7599999904632568,
+      -0.8050000071525574,
+      0.054999940097332
+    ],
+    "max": [
+      1.7599999904632568,
+      1.1344002485275269,
+      6.327415943145752
+    ]
+  }
+}

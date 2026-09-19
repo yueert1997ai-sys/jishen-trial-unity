@@ -12,6 +12,9 @@ public class BossController : MonoBehaviour
     public float moveSpeed = 2.2f;
     public int killReward = 60;
     public float encounterHealth = 6200f;
+    public string displayName = "REACTOR WARDEN";
+    public Transform coreSocket;
+    public float defeatDelay;
     public float DifficultyHealthMultiplier { get; private set; } = 1f;
     public bool IsPhaseTwo { get; private set; }
     public bool CoreExposed { get; private set; }
@@ -37,7 +40,7 @@ public class BossController : MonoBehaviour
         damageable = GetComponent<Damageable>();
         navigation = gameObject.AddComponent<NavMeshAgent>();
         navigation.radius = 1.35f;
-        navigation.height = 3.5f;
+        navigation.height = GetComponent<E01ElitePoseDriver>() != null ? 4.8f : 3.5f;
         navigation.speed = moveSpeed;
         navigation.acceleration = 10;
         navigation.stoppingDistance = 9;
@@ -120,7 +123,8 @@ public class BossController : MonoBehaviour
         CoreExposed = true;
         damageable.IncomingDamageScale = 1f;
         SetStatus("CORE EXPOSED");
-        CombatEffects.Impact(transform.position + Vector3.up * 2, Color.cyan, 0.6f);
+        CombatEffects.Impact(coreSocket != null ? coreSocket.position : transform.position + Vector3.up * 2,
+            coreSocket != null ? new Color(1f, .035f, .015f) : Color.cyan, 0.6f);
         yield return new WaitForSeconds(IsPhaseTwo ? 2f : 2.5f);
         CoreExposed = false;
         damageable.IncomingDamageScale = 0.12f;
@@ -260,10 +264,35 @@ public class BossController : MonoBehaviour
 
     private void SetStatus(string action)
     {
-        if (GameManager.Instance != null) GameManager.Instance.SetProgress("REACTOR WARDEN  /  " + action);
+        if (GameManager.Instance != null) GameManager.Instance.SetProgress(displayName + "  /  " + action);
     }
 
     private void OnDied(Damageable dead)
+    {
+        StopAllCoroutines();
+        winding = ActionRunning = false;
+        if (defeatDelay > 0 && !dead.destroyOnDeath) StartCoroutine(FinishDefeat());
+        else CompleteDefeat();
+    }
+
+    private IEnumerator FinishDefeat()
+    {
+        float elapsed = 0;
+        var pose = GetComponent<E01ElitePoseDriver>();
+        if (pose != null) pose.enabled = false;
+        var root = pose != null ? pose.rigRoot : null;
+        var rotation = root != null ? root.localRotation : Quaternion.identity;
+        while (elapsed < defeatDelay)
+        {
+            elapsed += Time.deltaTime;
+            if (root != null) root.localRotation = rotation * Quaternion.Euler(Mathf.SmoothStep(0, 28, elapsed / defeatDelay), 0, 9 * elapsed / defeatDelay);
+            yield return null;
+        }
+        CompleteDefeat();
+        Destroy(gameObject);
+    }
+
+    private void CompleteDefeat()
     {
         if (stageManager != null) stageManager.NotifyBossKilled();
         if (GameManager.Instance != null) GameManager.Instance.RegisterKill(killReward);

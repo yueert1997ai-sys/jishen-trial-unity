@@ -1,0 +1,23 @@
+PASS hangar starts unarmed and prevents empty sortie
+PASS game logic rejects empty sortie
+PASS V7 authored motion is attached to the company V3 body
+PASS company V3 geometry is instantiated
+01_hangar_unarmed.png camera=(1.84, 3.34, 7.11) angles=(9.00, 200.00, 0.00) size=9 follows=True
+PASS owned collection weapon remains selectable from the new loadout
+PASS warehouse selection enters the preserved collection combat mode
+01_collection.png camera=(1.84, 3.34, 7.11) angles=(9.00, 200.00, 0.00) size=9 follows=True
+PASS M7 real weapon and muzzle are equipped
+02_hangar_M7.png camera=(1.84, 3.34, 7.11) angles=(9.00, 200.00, 0.00) size=9 follows=True
+M7 hangar grip errors R=2.107342E-07 L=5.960464E-08
+PASS M7 both hangar grip contacts stay within 6cm
+M7 weapon size=(0.162, 0.876, 2.558) scale=(1.650, 1.650, 1.650)
+PASS M7 rifle has a mecha-sized length between 2.5 and 3.7 world units
+PASS M7 live rounds hit the target from the real muzzle
+PASS M7 cannot create an invisible sword hit
+PASS combat locks hangar weapon selection
+M7 combat grip errors R=1.770983E-07 L=0.08621469
+FAIL System.Exception: M7 both combat grip contacts stay within 6cm
+  at CompanyUpdateQuickCheck.Check (System.Boolean condition, System.String message) [0x00003] in <ea7e7da0891b4ff987b6b186b5e9dcf6>:0 
+  at CompanyUpdateQuickCheck+<Scenario>d__12.MoveNext () [0x00866] in <ea7e7da0891b4ff987b6b186b5e9dcf6>:0 
+  at CompanyUpdateQuickCheck.LateUpdate () [0x0002a] in <ea7e7da0891b4ff987b6b186b5e9dcf6>:0 
+COMPANY_V9_CHECK code=1 errors=0

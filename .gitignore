@@ -38,3 +38,14 @@ __pycache__/
 /art_prototypes/**/*.zip
 /art_prototypes/**/*.unitypackage
 /BackupVerification/
+
+# Review snapshots, playable build outputs and delivery packages are regenerable
+# artifacts (often >100MB, over GitHub's file limit); keep them out of git.
+/reviews/
+/deliveries/
+*.zip
+*.bundle
+*.resS
+
+# Windows shortcuts contain local-only paths.
+*.lnk

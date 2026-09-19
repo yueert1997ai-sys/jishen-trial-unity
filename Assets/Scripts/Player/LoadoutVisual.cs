@@ -57,6 +57,7 @@ public sealed class LoadoutVisual : MonoBehaviour
             foreach (var rest in neutral) if (rest.part != null) rest.part.SetLocalPositionAndRotation(rest.position, rest.rotation);
         if (WeaponObject == null) { player.weaponController.muzzle = adapter.muzzle; return; }
         bool sword = loadout.Selected == PrimaryWeapon.Greatsword;
+        bool rightHandOnly = loadout.Equipped != null && loadout.Equipped.rightHandOnly;
         if (!hangar && player.Melee.IsAttacking && sword)
         {
             // Follow the animated hand during the actual slash, preserving the grip attachment.
@@ -68,17 +69,38 @@ public sealed class LoadoutVisual : MonoBehaviour
                 : hangar ? new Vector3(.28f, 2.15f, .27f) : new Vector3(.1f, 2.45f, .05f);
             Quaternion angle = sword ? Quaternion.Euler(24, 62, 0)
                 : hangar ? Quaternion.Euler(12, -65, 0) : Quaternion.identity;
+            // Keep the full-height cannon beside the right shoulder, with the wrist at its primary grip.
+            float rightSide = Mathf.Sign(player.transform.InverseTransformPoint(upperR.position).x);
+            if (rightHandOnly)
+            {
+                grip = new Vector3(rightSide * 1.06f, 2.25f, .48f);
+                angle = Quaternion.Euler(8, -rightSide * 12, 0);
+            }
             WeaponObject.transform.SetPositionAndRotation(player.transform.TransformPoint(grip), player.transform.rotation * angle);
+            if (rightHandOnly && !hangar && player.HasAimPoint && WeaponMuzzle != null)
+            {
+                Vector3 localMuzzle = WeaponObject.transform.InverseTransformPoint(WeaponMuzzle.position);
+                for (int i = 0; i < 3; i++)
+                {
+                    Vector3 aim = player.AimPoint - WeaponObject.transform.TransformPoint(localMuzzle);
+                    if (aim.sqrMagnitude > .25f) WeaponObject.transform.rotation = Quaternion.LookRotation(aim.normalized, player.transform.up);
+                }
+            }
             Quaternion rightRotation = player.transform.rotation * handRestR;
             Quaternion leftRotation = player.transform.rotation * handRestL;
             Vector3 rightTarget = WeaponObject.transform.position - rightRotation * gripOffsetR;
             Vector3 leftGrip = support != null ? support.position : WeaponObject.transform.position;
             Vector3 leftTarget = leftGrip - leftRotation * gripOffsetL;
-            SolveArm(upperR, lowerR, handR, rightTarget, player.transform.TransformPoint(new Vector3(1.15f, 1.85f, .15f)));
-            SolveArm(upperL, lowerL, handL, leftTarget, player.transform.TransformPoint(new Vector3(-1.15f, 1.85f, .25f)));
-            handR.rotation = rightRotation; handL.rotation = leftRotation;
+            Vector3 rightHint = rightHandOnly ? new Vector3(rightSide * 1.38f, 2.01f, -.02f) : new Vector3(1.15f, 1.85f, .15f);
+            SolveArm(upperR, lowerR, handR, rightTarget, player.transform.TransformPoint(rightHint));
+            handR.rotation = rightRotation;
+            if (!rightHandOnly)
+            {
+                SolveArm(upperL, lowerL, handL, leftTarget, player.transform.TransformPoint(new Vector3(-1.15f, 1.85f, .25f)));
+                handL.rotation = leftRotation;
+            }
             RightGripError = Vector3.Distance(handR.TransformPoint(gripOffsetR), WeaponObject.transform.position);
-            LeftGripError = Vector3.Distance(handL.TransformPoint(gripOffsetL), leftGrip);
+            LeftGripError = rightHandOnly ? 0f : Vector3.Distance(handL.TransformPoint(gripOffsetL), leftGrip);
         }
         player.weaponController.muzzle = loadout.IsRifle ? WeaponMuzzle : adapter.muzzle;
         adapter.RefreshSockets();

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HangarArmory
   heroPrefab: {fileID: 7455081960283969756, guid: 66146abefeb63447b8e62124e46b0d49, type: 3}
   roomPrefab: {fileID: 1732218955826515675, guid: 2fb1ca26855b847248517de8122b3cd0, type: 3}
+  startingWeapon: 4
   weapons:
   - weapon: 1
     prefab: {fileID: 721830052097736899, guid: 1e71be0bb73444a93b805b94c0b7c1af, type: 3}
@@ -21,15 +22,29 @@ MonoBehaviour:
     interval: 0.18
     speed: 38
     pierce: 0
+    rightHandOnly: 0
+    blastRadius: 0
   - weapon: 2
     prefab: {fileID: 7074897833393635649, guid: b9a1d5d59d4c44f7487e894947754907, type: 3}
     damage: 42
     interval: 0.68
     speed: 0
     pierce: 0
+    rightHandOnly: 0
+    blastRadius: 0
   - weapon: 3
     prefab: {fileID: 3897298395928869753, guid: e48afc2c60b8d434a93394ada5f1e712, type: 3}
     damage: 46
     interval: 0.48
     speed: 48
     pierce: 1
+    rightHandOnly: 0
+    blastRadius: 0
+  - weapon: 4
+    prefab: {fileID: 7287338774413734389, guid: 820fadddfa45a554b8c0b0b0451e1d11, type: 3}
+    damage: 120
+    interval: 1.1
+    speed: 0
+    pierce: 2
+    rightHandOnly: 1
+    blastRadius: 1.8

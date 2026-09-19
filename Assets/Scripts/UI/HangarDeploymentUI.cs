@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class HangarDeploymentUI : MonoBehaviour
 {
     private readonly Button[] difficultyButtons = new Button[3];
-    private readonly Button[] weaponButtons = new Button[3];
-    private readonly PrimaryWeapon[] weapons = { PrimaryWeapon.M7, PrimaryWeapon.Greatsword, PrimaryWeapon.M14 };
+    private readonly Button[] weaponButtons = new Button[4];
+    private readonly PrimaryWeapon[] weapons = { PrimaryWeapon.M7, PrimaryWeapon.Greatsword, PrimaryWeapon.M14, PrimaryWeapon.Type08 };
     private Canvas canvas;
     private Text details;
     private Button deploy, unload;
@@ -33,6 +33,7 @@ public class HangarDeploymentUI : MonoBehaviour
         details.text = GameText.T(loadout.Selected == PrimaryWeapon.None ? "Unarmed. Select a weapon to deploy."
             : loadout.Selected == PrimaryWeapon.M7 ? "M7 equipped / automatic fire"
             : loadout.Selected == PrimaryWeapon.M14 ? "M14 equipped / heavy piercing rounds"
+            : loadout.Selected == PrimaryWeapon.Type08 ? "TYPE-08 equipped / pink particle beam"
             : "RAIKEN equipped / close-range slash");
         deploy.interactable = loadout.CanDeploy;
         unload.interactable = loadout.Selected != PrimaryWeapon.None;
@@ -58,15 +59,15 @@ public class HangarDeploymentUI : MonoBehaviour
         unload = RuntimeUIFactory.MenuButton(band,"UnequipButton","Unequip",new Vector2(250,-72),new Vector2(73,28));
         unload.GetComponentInChildren<Text>().fontSize = 13;
         unload.onClick.AddListener(() => loadout.Select(PrimaryWeapon.None));
-        string[] labels = { "M7 / ASSAULT RIFLE\nFast, sustained fire", "RAIKEN / GREATSWORD\nClose-range sweeping attacks", "M14 / BATTLE RIFLE\nSlower, powerful piercing rounds" };
-        for (int i = 0; i < 3; i++)
+        string[] labels = { "M7 / ASSAULT RIFLE\nFast, sustained fire", "RAIKEN / GREATSWORD\nClose-range sweeping attacks", "M14 / BATTLE RIFLE\nSlower, powerful piercing rounds", "TYPE-08 / PARTICLE CANNON\nPink beam / piercing discharge" };
+        for (int i = 0; i < weapons.Length; i++)
         {
             var choice = weapons[i];
-            weaponButtons[i] = RuntimeUIFactory.MenuButton(band,"Equip" + choice,labels[i],new Vector2(153,-131-i*70),new Vector2(262,61));
-            weaponButtons[i].GetComponentInChildren<Text>().fontSize = 16;
+            weaponButtons[i] = RuntimeUIFactory.MenuButton(band,"Equip" + choice,labels[i],new Vector2(153,-119-i*56),new Vector2(262,49));
+            weaponButtons[i].GetComponentInChildren<Text>().fontSize = 14;
             weaponButtons[i].onClick.AddListener(() => loadout.Select(choice));
         }
-        details = RuntimeUIFactory.MenuText(band,"EquippedDetails","",15,new Vector2(153,-330),new Vector2(262,46));
+        details = RuntimeUIFactory.MenuText(band,"EquippedDetails","",14,new Vector2(153,-335),new Vector2(262,38));
         string[] difficulties = { "DEMO", "STANDARD", "VETERAN" };
         for (int i = 0; i < 3; i++)
         {

@@ -1,0 +1,10 @@
+{
+  "frames": 120,
+  "max_ik_error": {
+    "hand.R": 0.00039911941311319006,
+    "foot.R": 0.00038138698354786213,
+    "hand.L": 0.007710746719582878,
+    "foot.L": 0.0003281834339427647
+  },
+  "scope": "Animation study; original rig and RAIKEN geometry. Not integrated into Unity. Mechanical collision not certified."
+}

@@ -1,0 +1,10 @@
+Code executed successfully: 
+FBX export starting... 'D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\ZZ_HyperCannon_20260908\\exports\\TYPE08_CANNON.fbx'
+export finished in 0.0816 sec.
+20:55:18 | INFO: Starting glTF 2.0 export
+20:55:18 | INFO: Extracting primitive: Aft upper docking block_Geometry.001
+20:55:18 | INFO: Primitives created: 9
+20:55:18 | INFO: Finished glTF 2.0 export in 0.07157683372497559 s
+
+信息: 已另存为 "HC09_CANNON_MASTER.blend"
+CANNON_EXPORTED {"source": "HC09_CANNON_MASTER.blend", "primary_reference": "reference/MECHA_CANNON_Turnaround.png", "scale_reference": "reference/ZZ_FullMecha_ScaleReference.png", "right_hand": true, "lods": [{"name": "TYPE08_LOD0", "vertices": 40954, "triangles": 73864, "materials": 9, "uv_layers": 2}, {"name": "TYPE08_LOD1", "vertices": 21460, "triangles": 35454, "materials": 9, "uv_layers": 2}, {"name": "TYPE08_LOD2", "vertices": 9545, "triangles": 13295, "materials": 9, "uv_layers": 2}], "sockets": {"Grip": [0.0, 0.0, 0.0], "Support": [-4.2011958356624746e-09, -0.09611216187477112, 0.1016259491443634], "Muzzle": [-7.758945486102675e-08, -1.775039792060852, 0.29243388772010803], "BackMount": [3.8031881643973975e-08, 0.8700680136680603, 0.25510188937187195], "Eject": [-0.17199015617370605, 0.28833648562431335, 0.4459098279476166]}, "forward": "Blender -Y / Unity +Z after import wrapper", "dimensions_m": [0.46781331300735474, 3.491269111633301, 1.0105217695236206], "files": {"materials.json": "7823f15bee0c45a54bba72093edd471f10e24449eb572095b6b730476edeb9c7", "TYPE08_CANNON.fbx": "45eb76a55fda4594a654aef4f71a03b778a157fb85d0433a56a103b3794ce4ab", "TYPE08_CANNON.glb": "fdb37b05758fb988fbed4a7f94d97206883db67c904a42e780b6b6c589d1b89b"}}
