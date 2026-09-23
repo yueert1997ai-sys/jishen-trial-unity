@@ -1,5 +1,22 @@
 # MECH ROUGE Handoff Status
 
+2026-09-23 地图与敌人决策 **Arena_Tactics_R1**：两张战术布局原型、遮挡感知与绕行选射位、修复运动预判计时和包围目标漂移、修复突进名额泄漏、近战前沿及枪兵两翼入场。19 组最终 Player 检查通过。地图细部美术和真人体验仍待试玩反馈。详见 [地图与 AI R1](ARENA_TACTICS_R1.md)，实际桌面版本以 `Launcher/current.json` 为准。以下旧记录保留作历史。
+
+2026-09-22 已发布主角：J-01 NEMESIS M01。详见 [冥隼动作与 demo 接入](NEMESIS_M01.md)。来源为用户当前 B20 装甲，保留源文件，动作、武器、展翼、残影在实际玩家上运行；10 项最终 Player 套件及静音启动校验通过，147 个构建文件通过哈希核对。证据在 `AuditEvidence/nemesis-m01/release`，桌面“机神试炼”已指向 `Builds/Nemesis_M01`；永久存档未变。完整自然回放 477.05 秒，基础枪 / 刀 / 混用分别 88.87 / 66.15 / 78.92 秒。用户已明确授权主角替换和本地 demo 更新；实际发布状态查看 `Launcher/current.json`。下列 V3、V2 等是历史交接，不作为当前主角身份。
+
+2026-09-17 最新开发版本：Combat Foundation V3。见 [战斗底层重构](COMBAT_FOUNDATION_V3.md) 和 [Hades 分析](HADES_FOUNDATION_ANALYSIS.md)。构建 `CombatFoundation_V3_20260917`，20 组 Player 检查、1412 项 PASS；原生零强化战斗约 60.7 秒。实际桌面版本以 `Launcher/current.json` 为准。V2 Lab 保留回退。以下 R9 及更早段落为历史记录；本轮尚未获得玩家手感或音色认可。
+
+上一版本 Combat Loop V2 · 30 秒战斗对照，见 [完整调研原文对应、改动与验证](COMBAT_LOOP_V2_LAB.md)。构建名 CombatLoop_V2_Lab_20260916；F9 进入，1 / 2 / 3 对照，R 重开。局部命中停顿统一战斗时钟；短战斗无掉落、强化或永久存档写入。19 组实际 Player 检查通过，完整回放约 63.5 秒。实际启动版本以 Launcher/current.json 为准；以下战术版、R9 等为历史记录。
+
+Historical local work: [R9 combat audio](COMBAT_SLICE_R9_AUDIO.md), `Builds/CombatSlice_R9_20260916/MECH_TRIAL_P0.exe`. Always resolve the verified release through `Launcher/current.json` and the single permanent desktop shortcut. R8 is retained. Read `COMBAT_POLISH_STANDARD.md`; the user rejects the rough audio and wants an AC6-informed complete sound pass. 47 new PCM clips, 34 native cue captures, protected priority mixing, actual propulsion/foot/weapon/absorption events. Actual Player regression and native full-battle evidence live in `AuditEvidence/combat-slice-r9`. Tests are objective evidence, not subjective approval.
+
+Previous P0.10.1: [no shoulder cannon](P0_10_1_NO_CANNON.md), `Builds/P0_10_1_NoCannon/MECH_TRIAL_P0.exe`. New Valkyr R01 art remains separate from this demo.
+
+
+Previous local demo: [P0.10 M7 refinement](P0_10_M7.md), `Builds/P0_10_M7/MECH_TRIAL_P0.exe`, version `p0.10-m7-20260911`. Sand M7 coating/material detail, machined receiver fasteners, pointed physical rounds, and sustained brass ejection with bounce/rest/expiry are integrated. Launch via the main P0 demo/practice launchers. Build with `tools/p0/build_m7.py`; validate with `tools/p0/run_m7.py m7` and `tools/p0/run_m7.py check`. Existing unrelated local edits were preserved.
+
+P0.9.1 clear-view rendering and P0.9 combat rules remain in force. Previous builds/evidence are retained: [clear view](P0_9_1_CLEAR.md), [OVERDRIVE](P0_9_OVERDRIVE.md). The historical `run_overdrive.py` targets P0_9_Clear. Earlier sections below are historical.
+
 ## Latest Manual Combat / Palette Update: 2026-09-05
 
 Continue from [MANUAL_COMBAT_HANDOFF.md](MANUAL_COMBAT_HANDOFF.md). Beams now use explicit mouse/right-stick aim and held fire, with a separate playable slash button and actual bone animation/damage. Environment colors are muted and large colored floor panels use existing textured deck material. Hero modeling work is untouched. Earlier automatic-fire/no-melee statements below describe historical revisions only.

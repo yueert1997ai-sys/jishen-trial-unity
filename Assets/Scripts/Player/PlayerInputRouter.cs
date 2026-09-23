@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public struct PlayerCommand
 {
+    public long Identity;
+    public float InputTime;
+    public int Cancellation;
     public Vector2 Move;
     public bool Dash;
     public bool BoostHeld;
@@ -29,6 +32,7 @@ public class PlayerInputRouter : MonoBehaviour
     private Vector2 touchAim;
     private Camera aimCamera;
     private bool mouseFire;
+    private long sequence;
     private readonly List<RaycastResult> uiHits = new List<RaycastResult>();
     private PointerEventData mousePointer;
     private EventSystem pointerSystem;
@@ -76,6 +80,7 @@ public class PlayerInputRouter : MonoBehaviour
         }
         var command = new PlayerCommand
         {
+            Identity=++sequence, InputTime=CombatRuntime.SimulationTime, Cancellation=CombatRuntime.ActionGeneration,
             Move = Vector2.ClampMagnitude(move, 1f),
             Dash = dashQueued || (readKeyboard && Input.GetKeyDown(KeyCode.Space)),
             BoostHeld = boostHeld || (readKeyboard && Input.GetKey(KeyCode.Space)),

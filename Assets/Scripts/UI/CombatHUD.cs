@@ -17,6 +17,7 @@ public class CombatHUD : MonoBehaviour
     private BossController boss;
     private PlayerController player;
     private Image damageOverlay;
+    private Button continueButton;
     private float flash;
     private float nextRefresh;
     private float nextBossLookup;
@@ -39,7 +40,7 @@ public class CombatHUD : MonoBehaviour
     public void SetVisible(bool value)
     {
         BuildUI();
-        canvas.gameObject.SetActive(value);
+        canvas.gameObject.SetActive(value);nextRefresh=nextBossLookup=0;
         if (!value) flash = 0f;
     }
 
@@ -51,6 +52,8 @@ public class CombatHUD : MonoBehaviour
         damageOverlay.color = new Color(0.95f, 0.08f, 0.04f, flash * 0.1f);
         Cursor.visible = true;
         UpdateLock();
+        continueButton.gameObject.SetActive(gameManager.AwaitingContinue&&!gameManager.IsPaused);
+        continueButton.interactable=gameManager.equipmentLoop.Absorption.Busy==false;
         if (Time.unscaledTime < nextRefresh) return;
         nextRefresh = Time.unscaledTime + 0.1f;
         if (playerStats != null)
@@ -65,7 +68,10 @@ public class CombatHUD : MonoBehaviour
             objectiveText.text = GameText.Progress(gameManager.ProgressText);
             statusText.text = GameText.T("Kills") + " " + gameManager.Kills + "    " + GameText.T("Hostiles") + " " + (gameManager.stageManager != null ? gameManager.stageManager.EnemiesAlive : 0);
         }
-        buildText.text = upgradeSystem != null ? upgradeSystem.GetSummary() : "";
+        string gun=player.Loadout.Selected==PrimaryWeapon.Collection?gameManager.equipmentLoop.Weapon.Title:player.Loadout.Selected.ToString();
+        float support=player.weaponController.SkillCooldownRemaining;
+        if(player.Loadout.IsNemesis&&player.Loadout.Selected==PrimaryWeapon.M7)gun="J-01 光束步枪";
+        buildText.text=gun+(player.Loadout.IsNemesis?" + 光束剑   ·   E 浮游炮 ":" + 斩舰刀   ·   E 支援 ")+(support>0?support.ToString("F1")+"s":"就绪")+"\n"+(upgradeSystem!=null?upgradeSystem.GetSummary():"");
         if (Time.unscaledTime >= nextBossLookup)
         {
             nextBossLookup = Time.unscaledTime + 0.25f;
@@ -105,6 +111,9 @@ public class CombatHUD : MonoBehaviour
         bossPanel.gameObject.SetActive(false);
         var buildBand = Panel(safeRoot, "BuildBand", new Vector2(0.5f, 0), new Vector2(-230, 12), new Vector2(230, 56));
         buildText = Label(buildBand, "BuildText", 13, new Vector2(8, -42), new Vector2(452, -2), null, TextAnchor.MiddleCenter);
+        continueButton=RuntimeUIFactory.CreateButton(safeRoot,"ContinueAfterSalvage","继续 · 三选一 [Enter]");
+        RuntimeUIFactory.Place(continueButton.GetComponent<RectTransform>(),new Vector2(.5f,0),new Vector2(0,140),new Vector2(260,42));
+        continueButton.onClick.AddListener(()=>gameManager.ContinueAfterSalvage());continueButton.gameObject.SetActive(false);
         var pause = RuntimeUIFactory.CreateButton(safeRoot, "PauseButton", "II");
         var pauseRect = pause.GetComponent<RectTransform>();
         pauseRect.anchorMin = pauseRect.anchorMax = new Vector2(1, 1);

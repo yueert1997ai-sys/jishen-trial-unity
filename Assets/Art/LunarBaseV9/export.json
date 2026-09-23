@@ -1,0 +1,76 @@
+{
+  "source": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\LunarBase_Sector01_20260908\\MARE07_LUNAR_BASE_MASTER.blend",
+  "batches": [
+    {
+      "name": "MARE07_01",
+      "vertices": 36696,
+      "polygons": 37725
+    },
+    {
+      "name": "MARE07_02",
+      "vertices": 5356,
+      "polygons": 4671
+    },
+    {
+      "name": "MARE07_03",
+      "vertices": 11355,
+      "polygons": 10255
+    },
+    {
+      "name": "MARE07_04",
+      "vertices": 19100,
+      "polygons": 17394
+    },
+    {
+      "name": "MARE07_05",
+      "vertices": 7024,
+      "polygons": 6016
+    },
+    {
+      "name": "MARE07_06",
+      "vertices": 8756,
+      "polygons": 7889
+    },
+    {
+      "name": "MARE07_07",
+      "vertices": 11144,
+      "polygons": 10794
+    },
+    {
+      "name": "MARE07_08",
+      "vertices": 5684,
+      "polygons": 4773
+    },
+    {
+      "name": "MARE07_09",
+      "vertices": 9432,
+      "polygons": 8306
+    },
+    {
+      "name": "MARE07_10",
+      "vertices": 1274,
+      "polygons": 1400
+    },
+    {
+      "name": "MARE07_11",
+      "vertices": 2100,
+      "polygons": 1992
+    },
+    {
+      "name": "MARE07_12",
+      "vertices": 7812,
+      "polygons": 7335
+    },
+    {
+      "name": "MARE07_13",
+      "vertices": 5354,
+      "polygons": 5450
+    },
+    {
+      "name": "MARE07_14",
+      "vertices": 2816,
+      "polygons": 2722
+    }
+  ],
+  "source_modified": false
+}

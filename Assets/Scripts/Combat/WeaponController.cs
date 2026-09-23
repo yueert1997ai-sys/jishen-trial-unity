@@ -15,7 +15,10 @@ public class WeaponController : MonoBehaviour
     public float missileFireInterval = 1.2f;
     public event Action BeamFired;
     public event Action SkillFired;
-    public float SkillCooldownRemaining => Mathf.Max(0f, nextSkillTime - Time.time);
+    private NemesisDroneController activeSupport;
+    // Cooldown upgrades cannot label the same six occupied units "ready" before recall.
+    public float SkillCooldownRemaining => Mathf.Max(0f, Mathf.Max(nextSkillTime - Time.time,
+        activeSupport!=null&&activeSupport.Active?NemesisDroneController.Duration-activeSupport.Age:0f));
     private float nextSkillTime;
 
     private float nextBeamTime;
@@ -83,9 +86,9 @@ public class WeaponController : MonoBehaviour
         temporaryFireRateTimer = Mathf.Max(temporaryFireRateTimer, duration);
     }
 
-    public void TryFireBeam()
+    public void TryFireBeam(bool continuous=false)
     {
-        if (!CanFire()) return;
+        if (!CanFire() || (playerController.Loadout != null && !playerController.Loadout.CanUseRifle)) return;
         float fireRate = GetFireRateMultiplier();
         if (Time.time < nextBeamTime)
         {
@@ -94,7 +97,8 @@ public class WeaponController : MonoBehaviour
 
         int level = GetWeaponLevel(EquipmentType.RightHandWeapon, 1);
         var gear = LoadoutWeapon;
-        nextBeamTime = Time.time + (gear != null ? gear.interval : beamFireInterval) / fireRate;
+        var primary = playerController.Loadout != null && playerController.Loadout.IsRifle ? playerController.Loadout.Equipped : null;
+        float interval=(gear != null ? gear.interval : beamFireInterval) / fireRate;
 
         int shotCount = (level == 1 ? 1 : level == 2 ? 2 : 3) + (upgradeSystem != null ? upgradeSystem.BonusBeamProjectiles : 0);
         float baseDamage = level == 1 ? 18f : level == 2 ? 20f : 22f;
@@ -106,7 +110,22 @@ public class WeaponController : MonoBehaviour
             baseDamage = gear.damage;
             pierce = gear.pierce + (upgradeSystem != null ? upgradeSystem.BonusPierce : 0);
         }
+        if (primary != null)
+        {
+            interval=(primary.weapon==PrimaryWeapon.M14 ? CombatRules.Current.HeavyRifleInterval : primary.interval) / fireRate;
+            shotCount = 1 + (upgradeSystem != null ? upgradeSystem.BonusBeamProjectiles : 0);
+            baseDamage = primary.damage;
+            pierce = primary.pierce + (upgradeSystem != null ? upgradeSystem.BonusPierce : 0);
+            explosionRadius = Mathf.Max(primary.blastRadius, explosionRadius);
+            gear = null;
+        }
 
+        // Preserve cadence while held instead of adding another whole frame to every interval.
+        // A fresh tap or a long interruption starts a fresh clock; never emit catch-up bursts.
+        bool carryCadence=continuous&&nextBeamTime>0&&Time.time-nextBeamTime<Mathf.Min(interval,.1f);
+        nextBeamTime=carryCadence?nextBeamTime+interval:Time.time+interval;
+
+        GetComponentInChildren<LoadoutVisual>()?.SynchronizeForFire();
         for (int i = 0; i < shotCount; i++)
         {
             float angle = gear != null ? Mathf.Max(6f, gear.spread) : 6f;
@@ -117,8 +136,9 @@ public class WeaponController : MonoBehaviour
                 ? playerController.AimPoint - origin
                 : GetAimDirection();
             Vector3 direction = Quaternion.AngleAxis(spread, Vector3.up) * aim.normalized;
+            direction=Quaternion.AngleAxis(spread,Vector3.up)*(muzzle!=null?muzzle.forward:PlanarCombat.AimDirection(origin,playerController.AimPoint,GetAimDirection()));
             float splitScale = upgradeSystem != null ? upgradeSystem.SplitShotMultiplier : 1f;
-            CreateBeamProjectile(origin, direction, baseDamage * GetDamageMultiplier() * splitScale, pierce, explosionRadius);
+            CreateBeamProjectile(origin, direction, baseDamage * GetDamageMultiplier() * splitScale, pierce, explosionRadius, 1f/shotCount);
         }
 
         if (BeamFired != null)
@@ -126,7 +146,10 @@ public class WeaponController : MonoBehaviour
             BeamFired.Invoke();
         }
 
-        GameAudio.Play(GameAudioCue.Beam, 0.2f, UnityEngine.Random.Range(0.96f, 1.04f));
+        if(primary!=null && primary.weapon==PrimaryWeapon.M7)
+            GameAudio.Play(GameAudioCue.RifleShot,.82f,1f);
+        else if (primary == null || (primary.weapon != PrimaryWeapon.Type08 && primary.weapon != PrimaryWeapon.Halbreaker))
+            GameAudio.Play(GameAudioCue.Beam, 0.2f, UnityEngine.Random.Range(0.96f, 1.04f));
     }
 
     public void TryFireMissiles()
@@ -157,14 +180,23 @@ public class WeaponController : MonoBehaviour
 
     public bool TryFireSkill(Damageable target)
     {
-        if (!CanFire() || Time.time < nextSkillTime || target == null || target.IsDead) return false;
+        if (!CanFireSupport() || Time.time < nextSkillTime) return false;
         var pack = LoadoutPack;
-        int count = pack != null ? pack.missiles : 4;
-        nextSkillTime = Time.time + (pack != null ? pack.skillCooldown : 10f);
+        int count = Mathf.Max(1, pack != null ? pack.missiles : 4);
+        var drones=GetComponentInChildren<NemesisDroneController>();
+        if(drones!=null)
+        {
+            if(!drones.Deploy(18f*count*GetDamageMultiplier(),CombatLoopV2.MissileImpact*count))return false;
+            activeSupport=drones;
+            nextSkillTime=Time.time+(pack!=null?pack.skillCooldown:10f)*(upgradeSystem!=null?upgradeSystem.SupportCooldownMultiplier:1f);
+            SkillFired?.Invoke();return true;
+        }
+        if(target==null||target.IsDead)return false;
+        nextSkillTime = Time.time + (pack != null ? pack.skillCooldown : 10f)*(upgradeSystem!=null?upgradeSystem.SupportCooldownMultiplier:1f);
         for (int i = 0; i < count; i++)
         {
             Vector3 origin = GetSkillMuzzlePosition() + Vector3.up * 0.2f + transform.right * (i % 2 == 0 ? -0.4f : 0.4f);
-            Vector3 direction = Quaternion.AngleAxis(Mathf.Lerp(-24f, 24f, i / (float)(count - 1)), Vector3.up) * (target.AimCenter - origin).normalized;
+            Vector3 direction = Quaternion.AngleAxis(Mathf.Lerp(-24f, 24f, count==1?.5f:i / (float)(count - 1)), Vector3.up) * (target.AimCenter - origin).normalized;
             CreateMissileProjectile(origin, direction, 18f * GetDamageMultiplier(), 1.6f, target);
         }
         GameAudio.Play(GameAudioCue.Missile, 0.35f);
@@ -172,6 +204,12 @@ public class WeaponController : MonoBehaviour
         return true;
     }
 
+    private bool CanFireSupport()
+    {
+        return (damageable==null||!damageable.IsDead)
+            && (GameManager.Instance==null||GameManager.Instance.IsCombatActive)
+            && GameManager.Instance?.equipmentLoop?.Absorption?.Busy!=true;
+    }
     private bool CanFire()
     {
         return (damageable == null || !damageable.IsDead)
@@ -232,20 +270,65 @@ public class WeaponController : MonoBehaviour
         return Mathf.Max(0.1f, statMultiplier * upgradeMultiplier * temporaryFireRateMultiplier);
     }
 
-    private void CreateBeamProjectile(Vector3 origin, Vector3 direction, float damage, int pierce, float explosionRadius)
+    private void CreateBeamProjectile(Vector3 origin, Vector3 direction, float damage, int pierce, float explosionRadius, float impactShare=1f)
     {
-        Color color = LoadoutWeapon != null ? LoadoutWeapon.color : new Color(0.1f, 0.8f, 1f);
+        var nemesis=GetComponentInChildren<NemesisMotionRig>();
+        if(nemesis!=null&&playerController.Loadout!=null&&
+            (playerController.Loadout.Selected==PrimaryWeapon.M7||playerController.Loadout.Selected==PrimaryWeapon.NemesisLauncher))
+        {
+            bool rocket=playerController.Loadout.Selected==PrimaryWeapon.NemesisLauncher;
+            var entry=playerController.Loadout.Equipped;
+            var packet=ProjectilePool.Spawn(false,rocket?"J01_Rocket":"J01_BeamRifle",origin,NemesisMotionRig.Amethyst,rocket?.19f:.095f);
+            packet.Init(team,damageable,PlanarCombat.Direction(direction,GetAimDirection()),damage,rocket?entry.speed:72f,2.1f,explosionRadius,pierce);
+            packet.SetImpact((rocket?CombatLoopV2.HeavyRifleImpact:CombatLoopV2.RifleImpact)*impactShare,rocket?CombatHitKind.HeavyRifle:CombatHitKind.Rifle);
+            BeamFxKit.MuzzleBlast(origin,packet.direction,NemesisMotionRig.Amethyst,rocket?.7f:.42f);
+            return;
+        }
+        if(playerController.Loadout!=null && playerController.Loadout.Selected==PrimaryWeapon.M7)
+        {
+            var bullet=ProjectilePool.SpawnKinetic(origin);
+            bullet.Init(team,damageable,PlanarCombat.Direction(direction,GetAimDirection()),damage,72f,.8f,0,pierce);
+            bullet.SetImpact(CombatLoopV2.RifleImpact*impactShare,CombatHitKind.Rifle);
+            var feedback=GetComponent<KineticRifleFeedback>()??gameObject.AddComponent<KineticRifleFeedback>();
+            feedback.Shot(origin,bullet.direction,playerController.GetComponentInChildren<LoadoutVisual>()?.EjectionPort);
+            BeamFxKit.MuzzleBlast(origin,bullet.direction,new Color(.12f,1f,.56f),.42f);
+            return;
+        }
+        if (playerController.Loadout != null && playerController.Loadout.Selected == PrimaryWeapon.Halbreaker)
+        {
+            Vector3 aim = playerController.HasAimPoint ? playerController.AimPoint : origin + direction * HalbreakerBeam.MaximumRange;
+            if (Vector3.Angle(direction, (aim-origin).normalized) > .1f) aim = origin + direction * HalbreakerBeam.MaximumRange;
+            HalbreakerBeam.Fire(muzzle, origin, direction, aim, team, damageable, damage, pierce, explosionRadius);
+            return;
+        }
+        if (playerController.Loadout != null && playerController.Loadout.Selected == PrimaryWeapon.Type08)
+        {
+            Vector3 aim = playerController.HasAimPoint ? playerController.AimPoint : origin + direction * MinovskyBeam.MaximumRange;
+            // Preserve split-shot directions while each beam starts at the cannon's visible muzzle.
+            if (Vector3.Angle(direction, (aim-origin).normalized) > .1f) aim = origin + direction * MinovskyBeam.MaximumRange;
+            MinovskyBeam.Fire(muzzle, origin, direction, aim, team, damageable, damage, pierce, explosionRadius);
+            return;
+        }
+        var primary = playerController.Loadout != null && playerController.Loadout.IsRifle ? playerController.Loadout.Equipped : null;
+        Color color = primary != null ? (primary.weapon == PrimaryWeapon.M14 ? new Color(1,.73f,.35f) : new Color(.72f,.9f,1)) : LoadoutWeapon != null ? LoadoutWeapon.color : new Color(0.1f, 0.8f, 1f);
         var projectile = ProjectilePool.Spawn(false, "BeamProjectile", origin, color);
-        projectile.Init(team, damageable, direction, damage, 30f, 2.1f, explosionRadius, pierce);
+        projectile.Init(team, damageable, direction, damage, primary != null ? primary.speed : 30f, 2.1f, explosionRadius, pierce);
+        {
+            bool heavy=primary!=null && primary.weapon==PrimaryWeapon.M14;
+            projectile.SetImpact((heavy?CombatLoopV2.HeavyRifleImpact:CombatLoopV2.RifleImpact)*impactShare,
+                heavy?CombatHitKind.HeavyRifle:CombatHitKind.Rifle,heavy?CombatLoopV2.HeavyRiflePunish:1.35f);
+        }
         ProjectileVisuals.SpawnMuzzleFlash(origin, color, 0.26f);
     }
 
     private void CreateMissileProjectile(Vector3 origin, Vector3 direction, float damage, float explosionRadius, Damageable target)
     {
-        var missile = (MissileProjectile)ProjectilePool.Spawn(true, "MissileProjectile", origin, new Color(1f, 0.65f, 0.12f), 0.22f);
+        Color tint=GetComponentInChildren<NemesisMotionRig>()!=null?NemesisMotionRig.Amethyst:new Color(1f, 0.65f, 0.12f);
+        var missile = (MissileProjectile)ProjectilePool.Spawn(true, "MissileProjectile", origin, tint, 0.22f);
         missile.target = target;
         missile.Init(team, damageable, direction, damage, 18f, 4.5f, explosionRadius, 0);
-        ProjectileVisuals.SpawnMuzzleFlash(origin, new Color(1f, 0.7f, 0.2f), 0.3f);
+        missile.SetImpact(CombatLoopV2.MissileImpact,CombatHitKind.Missile);
+        ProjectileVisuals.SpawnMuzzleFlash(origin, tint, 0.3f);
     }
 
     private Damageable FindNearestEnemy()

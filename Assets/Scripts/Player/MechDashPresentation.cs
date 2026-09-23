@@ -16,7 +16,9 @@ public sealed class MechDashPresentation : MonoBehaviour
     private Vector3 direction;
     private float started = -10, pulse;
     private bool integratedNozzles;
+    private float exhaustBudget;
     private ValkyrMotionDriver authored;
+    private bool amethyst;
     public float Pulse => pulse;
     public int ActiveTrailCount => trails == null ? 0 : (trails[0].emitting ? 2 : 0);
 
@@ -32,12 +34,17 @@ public sealed class MechDashPresentation : MonoBehaviour
     }
 
     private void Start()
+    {RebindVisuals();}
+
+    public void RebindVisuals()
     {
+        ReleaseVisuals();started=-10;pulse=exhaustBudget=0;
         rig = GetComponentInChildren<RiggedMechAnimator>();
         authored = GetComponentInChildren<ValkyrMotionDriver>();
+        amethyst=GetComponentInChildren<NemesisMotionRig>()!=null;
         Transform anchor = rig != null ? (rig.rigidPose != null ? rig.rigidPose.Resolve(rig.chest) : rig.chest) : transform;
         integratedNozzles = rig != null && rig.rigidPose != null && rig.rigidPose.thrusters.Length == 2;
-        glow = new Material(Shader.Find("Sprites/Default"));
+        glow = OverdriveVfx.CreateJetMaterial();
         housing = new Material(Shader.Find("Standard"));
         housing.color = new Color(.13f, .17f, .19f);
         housing.SetFloat("_Metallic", .65f);
@@ -68,13 +75,14 @@ public sealed class MechDashPresentation : MonoBehaviour
                 var line = new GameObject("JetFlame_" + layer).AddComponent<LineRenderer>();
                 line.transform.SetParent(jet, false);
                 line.sharedMaterial = glow;
-                line.useWorldSpace = false;
+                line.useWorldSpace = true;
                 line.positionCount = 3;
                 line.numCapVertices = 3;
                 line.shadowCastingMode = ShadowCastingMode.Off;
                 line.receiveShadows = false;
                 line.startColor = layer == 0 ? new Color(.04f,.68f,1,.75f) : new Color(.75f,1,1,1);
                 line.endColor = new Color(.03f,.6f,1,0);
+                if(amethyst){var col=Color.Lerp(NemesisMotionRig.Amethyst,Color.white,layer==0?0:.35f);col.a=layer==0?.75f:1;line.startColor=col;col.a=0;line.endColor=col;}
                 flames[i * 2 + layer] = line;
             }
             var tail = new GameObject("BoostWake").AddComponent<TrailRenderer>();
@@ -86,6 +94,7 @@ public sealed class MechDashPresentation : MonoBehaviour
             tail.endWidth = .025f;
             tail.startColor = new Color(.22f,.9f,1,.7f);
             tail.endColor = new Color(.05f,.6f,1,0);
+            if(amethyst){var col=NemesisMotionRig.Amethyst;col.a=.7f;tail.startColor=col;col.a=0;tail.endColor=col;}
             tail.shadowCastingMode = ShadowCastingMode.Off;
             tail.receiveShadows = false;
             tail.emitting = false;
@@ -97,8 +106,9 @@ public sealed class MechDashPresentation : MonoBehaviour
     {
         direction = value;
         started = Time.time;
+        OverdriveVfx.Dash(transform.position,value,amethyst);
         if (trails != null) foreach (var trail in trails) trail.Clear();
-        CombatEffects.Impact(transform.position + Vector3.up * .15f, new Color(.15f,.85f,1), .85f);
+        CombatEffects.Impact(transform.position + Vector3.up * .15f, amethyst?NemesisMotionRig.Amethyst:new Color(.15f,.85f,1), .85f);
     }
 
     private void LateUpdate()
@@ -107,11 +117,16 @@ public sealed class MechDashPresentation : MonoBehaviour
         bool alive = health == null || !health.IsDead;
         bool active = alive && GameManager.Instance != null && GameManager.Instance.IsCombatActive;
         float age = Time.time - started;
-        float attack = Mathf.SmoothStep(0, 1, age / .035f);
+        float attack = Mathf.SmoothStep(0, 1, age / (.016f));
         float release = Mathf.Clamp01(1 - (age - player.dashDuration) / .14f);
         pulse = active && age >= 0 ? attack * release : 0;
         if (!player.IsDashing) pulse = Mathf.Min(pulse, .6f * release);
         if (player.IsBoosting) pulse = Mathf.Max(pulse, .72f);
+        if(player.Melee.IsAttacking && player.Melee.ComboStage==2)
+        {
+            float t=player.Melee.AttackElapsed,s=player.Melee.CurrentStroke.contactStart;
+            pulse=Mathf.Max(pulse,Mathf.Clamp01(1-Mathf.Abs(t-s)/.12f)*1.15f);
+        }
         if(active && !player.Melee.IsAttacking && player.Velocity.sqrMagnitude>1)
             pulse=Mathf.Max(pulse,.16f+.055f*(1+Mathf.Sin(Time.time*24)));
         if (rig != null && rig.enabled && alive && pulse > 0 && authored == null)
@@ -133,29 +148,42 @@ public sealed class MechDashPresentation : MonoBehaviour
         {
             jets[i].rotation = Quaternion.Slerp(jets[i].rotation, Quaternion.LookRotation(exhaust), 1 - Mathf.Exp(-40 * Time.deltaTime));
             bool fast=player.IsDashing||player.IsBoosting;
-            trails[i].emitting = active && !player.Melee.IsAttacking && player.Velocity.sqrMagnitude > 4;
-            trails[i].time=fast?.16f:.085f;
-            trails[i].startWidth=fast?.36f:.12f;
+            bool meleeThrust=player.Melee.IsAttacking&&player.Melee.ComboStage==2&&pulse>.65f;
+            trails[i].emitting = active && ((!player.Melee.IsAttacking && player.Velocity.sqrMagnitude > 4)||meleeThrust);
+            trails[i].time=fast?(.25f):.085f;
+            trails[i].startWidth=fast?(.48f):.12f;
             for (int layer = 0; layer < 2; layer++)
             {
                 var flame = flames[i * 2 + layer];
                 flame.enabled = active;
-                float length = (.18f + 2.15f * pulse) * (layer == 0 ? 1 : .66f);
+                float length = (.18f + (3.3f) * pulse) * (layer == 0 ? 1 : .66f);
                 length *= 1 + Mathf.Sin(Time.time * 90 + i) * .06f;
                 flame.startWidth = (.07f + .3f * pulse) * (layer == 0 ? 1 : .45f);
                 flame.endWidth = .008f;
                 float start = integratedNozzles ? 0 : .17f;
-                flame.SetPosition(0, new Vector3(0, 0, start));
-                flame.SetPosition(1, new Vector3(0, 0, start + length * .35f));
-                flame.SetPosition(2, new Vector3(0, 0, start + length));
+                // World lengths: imported rig scale must not shrink booster plumes.
+                Vector3 nozzle=jets[i].position+jets[i].forward*start;
+                flame.SetPosition(0, nozzle);
+                flame.SetPosition(1, nozzle+jets[i].forward*length*.35f);
+                flame.SetPosition(2, nozzle+jets[i].forward*length);
             }
         }
+        if(active && pulse>.3f)
+        {
+            exhaustBudget+=Time.deltaTime*90;
+            int n=Mathf.Min(12,Mathf.FloorToInt(exhaustBudget));exhaustBudget-=n;
+            for(int j=0;j<n;j++)for(int i=0;i<2;i++)OverdriveVfx.Exhaust(jets[i].position,exhaust.normalized,pulse,amethyst);
+        }
+        else exhaustBudget=0;
     }
 
     private void OnDestroy()
+    {ReleaseVisuals();}
+    private void ReleaseVisuals()
     {
         if (jets != null) foreach (var jet in jets) if (jet != null) Destroy(jet.gameObject);
         if (glow != null) Destroy(glow);
         if (housing != null) Destroy(housing);
+        jets=null;flames=null;trails=null;glow=housing=null;
     }
 }

@@ -1,5 +1,19 @@
 # Asset provenance
 
+## J-01 NEMESIS M01, 2026-09-21
+
+The actual player body and three weapons are exported from the local B20 J-01 project authored against the user's supplied design sheets. Original B20 hash and editable M01 copy are recorded in `docs/NEMESIS_M01.md` and `Assets/Art/NemesisM01/manifest.json`. No downloaded Gundam, Destiny, Killing Floor or Beelzemon mesh, texture, animation or sound is included. The user's two supplied gun-pose pictures are visual pose references only and are archived in the D-drive art project's references directory; they are not game assets. Wing articulation, the broader three-cut poses, amethyst propulsion and the `NemesisGhost` shader/snapshot pool are project-authored. Existing prior assets and licenses below remain unchanged.
+
+## Metal impact audio and shrapnel sprites, 2026-09-19
+
+Five layered metal-impact clips (`metal_hit_light_1..3`, `metal_hit_heavy_1..2`) in `Assets/Resources/Audio/Combat/ImpactR2` are pure signal synthesis (band-limited noise transients, inharmonic sine partials with beating, low-frequency thuds) authored by `tools/p0/author_metal_impact.py`; no third-party recording is used or sampled. Manifest with SHA-256 hashes: `AuditEvidence/metal-impact-r1/audio-manifest.json`. One additional CC0 sprite (`dirt_01.png`) from the same Kenney Particle Pack was copied into `Assets/Resources/VFX/Sprites` for tumbling shrapnel chunks; the Kenney license notice below is updated accordingly.
+
+## Enemy VFX sprites and group AI, 2026-09-18
+
+Nine grayscale particle sprites from Kenney's CC0 Particle Pack 1.1 (`docs/licenses/Kenney_particle-pack.txt`) are copied unchanged into `Assets/Resources/VFX/Sprites` (fire_01/02, light_01, circle_03/05, muzzle_02, spark_01, star_01, smoke_05). They are tinted at runtime by the new `EnemyVfx` additive particle layer and the `TelegraphVisual` ground fill; the `MECH ROUGE/Particle Additive` shader in `Assets/Resources/VFX` is project-authored. Enemy death bursts, directional muzzle flashes, projectile impact bursts, armor-break bursts and telegraph charge fills use these sprites; all other effects remain code-authored. The pack was downloaded from kenney.nl under CC0; no attribution is required but is recorded here anyway.
+
+The group coordination (bounded concurrent attackers, surround spacing, post-volley repositioning, melee lunges, ranged burst fire with motion lead) is original project code informed by playing/reading the user's local Hades installation as a design reference. No Hades code, scripts or assets are copied into the project.
+
 ## E-01 liquid boss integration V8, 2026-09-07
 
 The user-authored R02 E-01 liquid-metal boss was previously integrated in the separate `codex/industrial-dash-polish` checkout. `tools/import_liquid_boss_v8.py` freezes its existing FBX, living-metal shader, materials and `E01ElitePoseDriver` into this gameplay checkout; it does not save or modify the original Blender projects. `Assets/Prefabs/Enemies/LiquidE01Boss.prefab` has its own GUID and retains the existing 86-bone rig, two skinned LODs, core and tendril controls. The underlying source is `art_prototypes/TYPE_E01_ELITE_20260906/stage_02_head/TYPE_E01_ELITE_HEAD_R02.blend` in the main art checkout. No additional third-party asset was downloaded. Source-copy hashes are recorded locally in `AuditEvidence/liquid-boss-v8/source-snapshot.json`.

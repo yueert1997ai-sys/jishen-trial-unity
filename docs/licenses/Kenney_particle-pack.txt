@@ -1,0 +1,27 @@
+	
+
+	Particle Pack (1.1)
+
+	by Kenney Vleugels (Kenney.nl)
+
+	Additional credit for creating filter templates:
+	Indigo Ray, Craig Nisbet, Zoltan Erdokovy, Heliagon, ThreeDee, Killst4r and Tim2501
+
+			------------------------------
+
+	License (Creative Commons Zero, CC0)
+	http://creativecommons.org/publicdomain/zero/1.0/
+
+	You may use these assets in personal and commercial projects.
+	Credit (Kenney or www.kenney.nl) would be nice but is not mandatory.
+
+			------------------------------
+
+	Downloaded from https://kenney.nl/assets/particle-pack on 2026-09-18
+	(slow mirror transfer completed via HTTP range resume; zip verified before extraction).
+
+Used sprites (unchanged, from "PNG (Transparent)"):
+light_01, fire_01, fire_02, circle_03, circle_05, muzzle_02, spark_01, star_01, smoke_05, dirt_01
+Copied into Assets/Resources/VFX/Sprites for runtime particle and telegraph use.
+
+	Donate:   http://support.kenney.nl

@@ -5,15 +5,16 @@ using UnityEngine;
 public sealed class EquipmentLoop : MonoBehaviour
 {
     public SalvageWarehouse Warehouse { get; private set; }
-    public SalvageGear Weapon => SalvageGear.Find(Warehouse.Profile.weapon);
-    public SalvageGear Backpack => SalvageGear.Find(Warehouse.Profile.backpack);
+    public SliceAbsorption Absorption { get; private set; }
+    public string ActiveRangedId {get;private set;}
+    public SalvageGear Weapon => SalvageGear.Find(ActiveRangedId??Warehouse.Profile.weapon);
+    public SalvageGear Backpack => SalvageGear.Find("standard");
     public EquipmentWarehouseUI UI { get; private set; }
     public GameManager Owner { get; private set; }
     public int NewThisRun { get; private set; }
     public readonly List<SalvagePickup> Pickups = new List<SalvagePickup>();
     public bool CanEquip => Owner != null && !Owner.IsPaused && (Owner.Phase == GamePhase.Hangar || Owner.Phase == GamePhase.Loadout);
     private GameObject weaponVisual, backpackVisual;
-    private int eliteIndex;
 
     public void Initialize(GameManager owner)
     {
@@ -23,6 +24,7 @@ public sealed class EquipmentLoop : MonoBehaviour
         Warehouse = new SalvageWarehouse(profile);
         UI = gameObject.AddComponent<EquipmentWarehouseUI>();
         UI.Initialize(this);
+        Absorption=gameObject.AddComponent<SliceAbsorption>();Absorption.Initialize(this);
     }
     private void Update()
     {
@@ -33,29 +35,33 @@ public sealed class EquipmentLoop : MonoBehaviour
     public void BeginRun()
     {
         NewThisRun = 0;
-        eliteIndex = 0;
+        ActiveRangedId=Warehouse.Profile.weapon;Absorption.ResetRun();
         ClearPickups();
         ApplyLoadout();
     }
     public bool TryEquip(string id)
     {
-        if (!CanEquip || !Warehouse.Owns(id)) return false;
+        if (!CanEquip || !Warehouse.Owns(id) || SalvageGear.Find(id)?.slot != SalvageSlot.Weapon) return false;
         if (!Warehouse.Equip(id)) { SaveFailure(); return false; }
+        if(SalvageGear.Find(id).slot==SalvageSlot.Weapon)ActiveRangedId=id;
+        if (SalvageGear.Find(id).slot == SalvageSlot.Weapon)
+            Owner.playerController.Loadout?.Select(PrimaryWeapon.Collection);
         ApplyLoadout();
         UI.Refresh();
         return true;
     }
     public void ApplyLoadout()
     {
-        Owner.playerStats.SetBackpackBonuses(Backpack.dashDistance, Backpack.dashCooldown, Backpack.moveSpeed);
+        Owner.playerStats.SetBackpackBonuses(0,0,0);
         if (weaponVisual != null) Destroy(weaponVisual);
         if (backpackVisual != null) Destroy(backpackVisual);
         var heldRifle=Owner.playerController.GetComponent<E01PlayerRifle>()??Owner.playerController.gameObject.AddComponent<E01PlayerRifle>();
-        heldRifle.SetEquipped(Weapon.id=="e01_rifle");
+        bool collection = Owner.playerController.Loadout == null || Owner.playerController.Loadout.Selected == PrimaryWeapon.Collection;
+        heldRifle.SetEquipped(collection && Weapon.id=="e01_rifle");
         var hardpoints = Owner.playerController.GetComponent<MechHardpointManager>();
         if (hardpoints == null) return;
         // Additive preview modules. No source model, skeleton, sword, or prefab is rewritten.
-        if (Weapon.id != "pulse" && Weapon.id != "e01_rifle")
+        if (collection && Weapon.id != "pulse" && Weapon.id != "e01_rifle")
         {
             weaponVisual = SalvageModuleVisual.Create(Weapon, hardpoints.GetSocket("RightShoulderSocket"));
             weaponVisual.name = "EquipmentPreview_" + Weapon.id;
@@ -85,61 +91,30 @@ public sealed class EquipmentLoop : MonoBehaviour
     }
     public void AttachCarrier(EnemyBase enemy)
     {
-        if(enemy.TrainingTarget)return;
-        var soldier=enemy.GetComponent<E01SoldierMotion>();
-        if(soldier!=null)
-        {
-            var rifleCarrier=enemy.GetComponent<SalvageCarrier>()??enemy.gameObject.AddComponent<SalvageCarrier>();
-            rifleCarrier.gear=SalvageGear.Find("e01_rifle");
-            rifleCarrier.visual=soldier.rifle.gameObject;
-            return;
-        }
-        string id = enemy.kind == EnemyKind.Ranged ? "scatter" : enemy.kind == EnemyKind.Drone ? "vector"
-            : enemy.kind == EnemyKind.Elite ? (eliteIndex++ % 2 == 0 ? "lance" : "salvo") : null;
-        if (id == null) return;
-        var carrier = enemy.gameObject.AddComponent<SalvageCarrier>();
-        carrier.gear = SalvageGear.Find(id);
-        carrier.visual = SalvageModuleVisual.Create(carrier.gear, enemy.transform);
-        carrier.visual.transform.localPosition = carrier.gear.slot == SalvageSlot.Weapon ? new Vector3(.65f, 1.4f, .2f) : new Vector3(0, 1.1f, -.55f);
-        carrier.visual.transform.localScale = Vector3.one * .75f;
+        if(CombatLabSettings.Active)return;
+        Absorption.Attach(enemy);return;
+
     }
     public void DropFrom(EnemyBase enemy)
     {
-        if (!Owner.IsCombatActive || enemy.TrainingTarget || Owner.WeaponTrialActive) return;
-        var carrier = enemy.GetComponent<SalvageCarrier>();
-        if (carrier == null || Warehouse.Owns(carrier.gear.id) || Pickups.Exists(p => p != null && p.Gear.id == carrier.gear.id)) return;
-        var root = new GameObject("Recoverable_" + carrier.gear.id);
-        root.transform.position = enemy.transform.position + Vector3.up * .6f;
-        var pickup = root.AddComponent<SalvagePickup>();
-        pickup.Initialize(this, carrier.gear, carrier.visual);
-        Pickups.Add(pickup);
-        UI.Notify(EquipmentWarehouseUI.T("部件脱落 · 靠近后按 F 吸收", "Part released · approach and press F"));
+        if(CombatLabSettings.Active)return;
+        if(Owner.IsCombatActive)Absorption.Drop(enemy);return;
+
     }
     public int AbsorbNearby(bool all = false)
     {
-        if (!Owner.IsCombatActive && !all) return 0;
-        int count = 0;
-        for (int i = Pickups.Count - 1; i >= 0; i--)
-        {
-            var pickup = Pickups[i];
-            if (pickup == null) { Pickups.RemoveAt(i); continue; }
-            if (!all && Vector3.Distance(pickup.transform.position, Owner.playerController.transform.position) > 10f) continue;
-            bool fresh = !Warehouse.Owns(pickup.Gear.id);
-            if (!Warehouse.Acquire(pickup.Gear.id)) { SaveFailure(); continue; }
-            Pickups.RemoveAt(i);
-            if (fresh) NewThisRun++;
-            count++;
-            pickup.Absorb(Owner.playerController.GetComponent<MechHardpointManager>().GetSocket("RightHandSocket"));
-            UI.Notify(pickup.Gear.Title + EquipmentWarehouseUI.T(" · 已永久入库", " · added to permanent collection"));
-            GameAudio.Play(GameAudioCue.Reward, .22f, 1.2f);
-        }
-        return count;
+        if(CombatLabSettings.Active)return 0;
+        return all?(Absorption.CollectWithoutInstalling()?1:0):(Absorption.TryBegin()?1:0);
+
     }
     public void ClearPickups()
     {
+        Absorption?.ClearOffer();
         foreach (var pickup in Pickups) if (pickup != null) Destroy(pickup.gameObject);
         Pickups.Clear();
     }
+    public void RecordAcquisition(bool fresh){if(fresh)NewThisRun++;}
+    public void InstallRecovered(string id){ActiveRangedId=id;Owner.playerController.Loadout.InstallRecoveredRifle();}
     private void SaveFailure()
     {
         UI.Notify(EquipmentWarehouseUI.T("仓库写入失败，部件仍可再次吸收。", "Save failed. The part can still be absorbed."));

@@ -1,0 +1,207 @@
+{
+  "version": 4,
+  "dashBuffer": 0.18,
+  "slashBuffer": 0.25,
+  "comboBuffer": 0.22,
+  "supportBuffer": 0.18,
+  "dashSlashWindow": 0.16,
+  "dashSlashAdvance": 0.55,
+  "stowSeconds": 0.075,
+  "drawSeconds": 0.065,
+  "spawnWarning": 0.32,
+  "spawnStagger": 0.08,
+  "clearDelay": 0.2,
+  "groupInterval": 3.2,
+  "encounterLimit": 120.0,
+  "labLimit": 30.0,
+  "maxHostiles": 5,
+  "bossHealth": 2200.0,
+  "bossCapacity": 420.0,
+  "bossBreakSeconds": 2.2,
+  "bossArmor": 0.35,
+  "rifleImpact": 30.6,
+  "heavyRifleImpact": 105.0,
+  "heavyRifleInterval": 0.75,
+  "heavyRiflePunish": 1.5,
+  "missileImpact": 20.0,
+  "eliteCapacity": 180.0,
+  "eliteFrontDamage": 0.45,
+  "eliteFlankDamage": 1.15,
+  "eliteTurnSpeed": 110.0,
+  "eliteRecovery": 0.7,
+  "missileEvadeSeconds": 0.45,
+  "missileEvadeCooldown": 3.2,
+  "meleeWindup": 0.38,
+  "rangedWindup": 0.55,
+  "eliteWindup": 0.65,
+  "meleeRecovery": 0.18,
+  "rangedRecovery": 0.22,
+  "maxConcurrentAttackers": 3,
+  "rangedBurstShots": 3,
+  "rangedBurstInterval": 0.26,
+  "rangedRepositionSeconds": 0.55,
+  "rangedAimLead": 0.55,
+  "surroundRadiusMelee": 2.7,
+  "surroundRadiusRanged": 7.6,
+  "meleeLungeRange": 4.5,
+  "meleeLungeDistance": 2.6,
+  "meleeLungeWindup": 0.5,
+  "meleeLungeDamage": 16.0,
+  "meleeLungeCooldown": 3.2,
+  "encounters": [
+    {
+      "id": "approach_1",
+      "center": {
+        "x": -8,
+        "y": 0,
+        "z": 3
+      },
+      "roles": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "crossfire_1",
+      "center": {
+        "x": 8,
+        "y": 0,
+        "z": 5
+      },
+      "roles": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "advance_1",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 10
+      },
+      "roles": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "armor_1",
+      "center": {
+        "x": 8,
+        "y": 0,
+        "z": 0
+      },
+      "roles": [
+        0,
+        0,
+        3
+      ]
+    },
+    {
+      "id": "final_pressure_1",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 9
+      },
+      "roles": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "crossfire_2",
+      "center": {
+        "x": -5,
+        "y": 0,
+        "z": 8
+      },
+      "roles": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "armor_2",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 8
+      },
+      "roles": [
+        0,
+        0,
+        3
+      ]
+    },
+    {
+      "id": "advance_3",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": -10
+      },
+      "roles": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "final_pressure_3",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": -9
+      },
+      "roles": [
+        0,
+        0,
+        1,
+        1
+      ]
+    }
+  ],
+  "lab": {
+    "id": "three_roles",
+    "center": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "roles": [
+      0,
+      1,
+      3
+    ],
+    "positions": [
+      {
+        "x": -5,
+        "y": 0,
+        "z": 3
+      },
+      {
+        "x": 5,
+        "y": 0,
+        "z": 5
+      },
+      {
+        "x": 0,
+        "y": 0,
+        "z": 10
+      }
+    ]
+  }
+}

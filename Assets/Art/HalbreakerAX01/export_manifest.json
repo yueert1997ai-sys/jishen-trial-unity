@@ -1,0 +1,47 @@
+{
+  "source": "D:\\project-mecha-design\\MECH ROUGE\\art_prototypes\\HALBREAKER_AX01_20260908\\VALKYR_AX01_SHOULDER_MASTER.blend",
+  "source_sha256": "d2118b5f5f4f98cfa73e7577025940660713279b4b85f050c4390dbbe8c0f9e6",
+  "exposed_barrel_m": 2.2,
+  "overall_length_m": 4.12019795,
+  "lods": [
+    {
+      "name": "HALBREAKER_LOD0",
+      "vertices": 105744,
+      "triangles": 191888
+    },
+    {
+      "name": "HALBREAKER_LOD1",
+      "vertices": 44341,
+      "triangles": 76755
+    },
+    {
+      "name": "HALBREAKER_LOD2",
+      "vertices": 16573,
+      "triangles": 23025
+    }
+  ],
+  "source_parts": 627,
+  "sockets_blender": {
+    "Grip": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Muzzle": [
+      -5.960464477539062e-07,
+      -2.231955051422119,
+      0.6914076805114746
+    ],
+    "ShoulderAnchor": [
+      0.0,
+      0.5926085114479065,
+      -0.022081851959228516
+    ]
+  },
+  "front_receiver": "Flat angular armor; circular auxiliary opening removed at user request",
+  "left_hand_bound": false,
+  "files": {
+    "HALBREAKER_AX01.fbx": "9235d03c7a75109209cb37464457368cb4e520f10310767cea23fd37b7b49862",
+    "materials.json": "caeede60184e3531f38a9dc88ff904053efa3852f2f7fad12e548cde73bda92b"
+  }
+}

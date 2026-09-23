@@ -5,29 +5,38 @@ using UnityEngine;
 public sealed class MechBladeHitReaction : MonoBehaviour
 {
     private Renderer[] renderers;
+    private bool authoredSoldier;
     private MaterialPropertyBlock[] original;
     private readonly MaterialPropertyBlock block=new MaterialPropertyBlock();
     private Transform chest,hips;
     private Quaternion chestBefore,hipsBefore;
     private Vector3 axis;
     private float remaining;
+    private float duration=.24f,weight=1;
     private bool posed,flashed;
     private void Awake()
     {
+        authoredSoldier=GetComponent<E01SoldierMotion>()!=null;
         renderers=GetComponentsInChildren<MeshRenderer>();original=new MaterialPropertyBlock[renderers.Length];
         for(int i=0;i<renderers.Length;i++){original[i]=new MaterialPropertyBlock();renderers[i].GetPropertyBlock(original[i]);}
         var rig=GetComponentInChildren<RiggedMechAnimator>();
         if(rig!=null){chest=rig.rigidPose!=null?rig.rigidPose.Resolve(rig.chest):rig.chest;hips=rig.rigidPose!=null?rig.rigidPose.Resolve(rig.hips):rig.hips;}
     }
-    public void Trigger(Vector3 direction){remaining=.24f;axis=Vector3.Cross(Vector3.up,direction).normalized;}
+    public void Trigger(Vector3 direction,bool heavy=false)
+    {
+        if(authoredSoldier)return; // The production soldier owns its pose and armor response.
+        duration=heavy?.30f:.16f;
+        weight=heavy?1.65f:.8f;
+        remaining=duration;axis=Vector3.Cross(Vector3.up,direction).normalized;
+    }
     private void Update(){RestorePose();}
     private void LateUpdate()
     {
         if(GameManager.Instance!=null&&GameManager.Instance.IsPaused)return;
         if(remaining<=0){RestoreColor();return;}
         remaining=Mathf.Max(0,remaining-Time.deltaTime);
-        float t=.24f-remaining;
-        if(t<.085f)
+        float t=duration-remaining;
+        if(t<(weight>1?.055f:.035f))
         {
             for(int i=0;i<renderers.Length;i++)if(renderers[i]!=null)
             {
@@ -37,7 +46,7 @@ public sealed class MechBladeHitReaction : MonoBehaviour
             flashed=true;
         }
         else RestoreColor();
-        float recoil=Mathf.Sin(Mathf.Clamp01(t/.24f)*Mathf.PI)*Mathf.Exp(-t*3);
+        float recoil=weight*(1-Mathf.Exp(-t*160))*Mathf.Pow(Mathf.Clamp01(1-t/duration),2);
         if(hips!=null){hipsBefore=hips.rotation;hips.rotation=Quaternion.AngleAxis(6*recoil,axis)*hips.rotation;}
         if(chest!=null){chestBefore=chest.rotation;chest.rotation=Quaternion.AngleAxis(15*recoil,axis)*chest.rotation;}
         posed=true;

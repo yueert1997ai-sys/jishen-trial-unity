@@ -12,6 +12,11 @@ public class WorldHealthBar : MonoBehaviour
     private Damageable damageable;
     private Canvas canvas;
     private RectTransform fill;
+    private RectTransform impactFill;
+    private Image impactImage;
+    private ArmorHealth armor;
+    private Text postureLabel;
+    private EnemyBase enemy;
 
     private void Awake()
     {
@@ -68,6 +73,27 @@ public class WorldHealthBar : MonoBehaviour
         fill.anchorMax = Vector2.one;
         fill.offsetMin = new Vector2(2f, 2f);
         fill.offsetMax = new Vector2(-2f, -2f);
+        armor = GetComponent<ArmorHealth>();
+        if (armor != null && armor.Maximum>0)
+        {
+            enemy = GetComponent<EnemyBase>();
+            var textObject = new GameObject("PostureStatus", typeof(RectTransform));
+            textObject.transform.SetParent(canvasRect, false);
+            postureLabel = textObject.AddComponent<Text>();
+            postureLabel.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            postureLabel.fontSize = 22; postureLabel.alignment = TextAnchor.MiddleCenter;
+            postureLabel.raycastTarget = false;
+            var labelRect = textObject.GetComponent<RectTransform>();
+            labelRect.anchorMin = new Vector2(0,1); labelRect.anchorMax = new Vector2(1,1);
+            labelRect.offsetMin = new Vector2(0,1); labelRect.offsetMax = new Vector2(0,29);
+            var bar = CreateImage(canvasRect, "ImpactBackground", new Color(.02f,.03f,.04f,.95f));
+            bar.anchorMin = new Vector2(0, -1.1f); bar.anchorMax = new Vector2(1, -.35f);
+            bar.offsetMin = bar.offsetMax = Vector2.zero;
+            impactFill = CreateImage(bar, "ImpactPressure", new Color(1,.65f,.1f));
+            impactFill.anchorMin = Vector2.zero; impactFill.anchorMax = Vector2.one;
+            impactFill.offsetMin = Vector2.one; impactFill.offsetMax = -Vector2.one;
+            impactImage = impactFill.GetComponent<Image>();
+        }
     }
 
     private void Refresh()
@@ -83,7 +109,15 @@ public class WorldHealthBar : MonoBehaviour
         fill.anchorMax = anchorMax;
         fill.offsetMin = new Vector2(2f, 2f);
         fill.offsetMax = new Vector2(-2f, -2f);
-        canvas.gameObject.SetActive(alwaysVisible || ratio < 0.999f);
+        if (armor != null && impactFill != null)
+        {
+            impactFill.parent.gameObject.SetActive(armor.Intact);
+            impactFill.anchorMax = new Vector2(armor.Ratio, 1);
+            impactImage.color = new Color(1,.65f,.1f);
+            postureLabel.text=armor.Intact?"ARMOR":"EXPOSED";
+            postureLabel.color=armor.Intact?new Color(1,.8f,.45f):new Color(.35f,1,1);
+        }
+        canvas.gameObject.SetActive(!damageable.IsDead && (alwaysVisible || ratio < 0.999f || (armor != null && armor.Intact)));
     }
 
     private static RectTransform CreateImage(Transform parent, string objectName, Color color)

@@ -12,6 +12,8 @@ public sealed class RaikenCombatVfx : MonoBehaviour
     public int ThrustParticles { get; private set; }
     public int FootfallBursts { get; private set; }
     public int ImpactBursts { get; private set; }
+    public int HeavyReleaseBursts { get; private set; }
+    public int HeavyImpactBursts { get; private set; }
     public bool Scraping { get; private set; }
     public float ScrapeGap { get; private set; }
     public int LiveParticles => energy.particleCount+metal.particleCount+wake.particleCount+dust.particleCount;
@@ -28,13 +30,16 @@ public sealed class RaikenCombatVfx : MonoBehaviour
     private Vector3 previousTip,previousGrip;
     private float slashBudget,scrapeBudget,thrustBudget;
     private bool wasLeft,wasRight;
+    private bool heavyReleased;
     private readonly RaycastHit[] floorHits=new RaycastHit[20];
     private Transform[] thrusters;
+    private bool amethyst;
 
     private void Start()
     {
         blade=GetComponent<RaikenBladePresentation>();motion=GetComponent<ValkyrMotionDriver>();
         player=GetComponentInParent<PlayerController>();health=player.GetComponent<Damageable>();
+        amethyst=GetComponent<NemesisMotionRig>()!=null;
         dotTexture=Falloff(false);stripTexture=Falloff(true);
         glow=new Material(Resources.Load<Shader>("MechActionGlow")){mainTexture=dotTexture};
         strip=new Material(glow){mainTexture=stripTexture};
@@ -50,7 +55,9 @@ public sealed class RaikenCombatVfx : MonoBehaviour
         thrusters=blade.rig.rigidPose.thrusters;
         previousTip=blade.tip.position;previousGrip=blade.grip.position;
         player.Melee.StrikeHit+=Impact;
+        player.Melee.AttackStarted+=ArmRelease;
     }
+    private void ArmRelease(){heavyReleased=false;}
     private Texture2D Falloff(bool line)
     {
         var tex=new Texture2D(32,32,TextureFormat.RGBA32,false){wrapMode=TextureWrapMode.Clamp};
@@ -108,6 +115,7 @@ public sealed class RaikenCombatVfx : MonoBehaviour
     }
     private LineRenderer EdgeLine(string name,float width,Color color)
     {
+        if(amethyst){float alpha=color.a;color=Color.Lerp(NemesisMotionRig.Amethyst,Color.white,width<.1f?.28f:0);color.a=alpha;}
         var line=new GameObject(name).AddComponent<LineRenderer>();line.transform.SetParent(blade.bladeRoot,false);
         line.sharedMaterial=strip;line.useWorldSpace=false;line.positionCount=edgePoints.Count;line.SetPositions(edgePoints.ToArray());
         // LineRenderer width is a world-space measurement even under the scaled weapon root.
@@ -116,6 +124,7 @@ public sealed class RaikenCombatVfx : MonoBehaviour
     }
     private void Emit(ParticleSystem ps,Vector3 position,Vector3 velocity,Color color,float size,float life)
     {
+        if(amethyst&&color.b>color.r*1.3f&&color.b>color.g){float alpha=color.a;color=Color.Lerp(NemesisMotionRig.Amethyst,Color.white,.10f);color.a=alpha;}
         ps.Emit(new ParticleSystem.EmitParams{position=position,velocity=velocity,startColor=color,startSize=size,startLifetime=life,rotation=Random.Range(0,360)},1);
     }
     private void LateUpdate()
@@ -125,16 +134,31 @@ public sealed class RaikenCombatVfx : MonoBehaviour
         bool active=GameManager.Instance.IsCombatActive&&!health.IsDead;
         bool cut=active&&blade.BeamEnabled&&player.Stance.CanMelee&&player.Melee.IsAttacking;
         float elapsed=player.Melee.AttackElapsed;
+        bool heavy=cut&&player.Melee.ComboStage==2;
+        if(heavy&&!heavyReleased&&elapsed>=player.Melee.CurrentStroke.contactStart)
+        {
+            heavyReleased=true;HeavyReleaseBursts++;
+            // Pressure leaves the planted chassis at release, never an explosion on empty air.
+            Vector3 forward=player.Melee.AttackForward,side=Vector3.Cross(Vector3.up,forward);
+            for(int i=0;i<28;i++)
+            {
+                Vector3 near=player.transform.position+side*Random.Range(-.8f,.8f);near.y+=.12f;
+                if(Floor(near,out var ground,out var normal))
+                    Emit(dust,ground+normal*.08f,-forward*Random.Range(2,5)+side*Random.Range(-3,3)+normal*.35f,
+                        new Color(.56f,.61f,.64f,.12f),Random.Range(.2f,.4f),Random.Range(.15f,.25f));
+            }
+        }
         edgeHalo.enabled=edgeCore.enabled=blade.BeamEnabled&&!health.IsDead;
-        float strength=cut?1.35f:1;
-        edgeHalo.startWidth=edgeHalo.endWidth=.19f*strength;
+        float charge=heavy?Mathf.SmoothStep(0,1,Mathf.InverseLerp(.08f,player.Melee.CurrentStroke.contactStart,elapsed)):0;
+        float strength=heavy?1.35f+charge*1.1f:cut?1.35f:1;
+        edgeHalo.startWidth=edgeHalo.endWidth=(.11f)*strength;
         edgeCore.startWidth=edgeCore.endWidth=.055f*strength;
         Vector3 tip=blade.tip.position,grip=blade.grip.position;
         Vector3 tipVelocity=(tip-previousTip)/dt;
         if(tipVelocity.magnitude>160)tipVelocity=tipVelocity.normalized*160;
         if(cut&&player.Melee.IsCutting&&!player.Melee.ImpactHeld)
         {
-            slashBudget+=dt*320;
+            slashBudget+=dt*(heavy?220:100);
             while(slashBudget>=1)
             {
                 slashBudget--;
@@ -217,6 +241,9 @@ public sealed class RaikenCombatVfx : MonoBehaviour
     {
         if(target==null)return;
         ImpactBursts++;
+        bool heavy=player.Melee.ComboStage==2;
+        if(heavy)HeavyImpactBursts++;
+        if(target.LastHit!=null && target.LastHit.HasContact)return;
         Vector3 axis=blade.tip.position-blade.grip.position;
         Vector3 onBlade=blade.grip.position+axis*Mathf.Clamp01(Vector3.Dot(target.AimCenter-blade.grip.position,axis)/axis.sqrMagnitude);
         Vector3 outward=(onBlade-target.AimCenter).normalized;if(outward.sqrMagnitude<.1f)outward=-player.Melee.AttackForward;
@@ -225,20 +252,28 @@ public sealed class RaikenCombatVfx : MonoBehaviour
         // outside so particles leave the contacted armor surface instead of dying inside it.
         Vector3 outside=target.AimCenter+outward*(collider!=null?collider.bounds.extents.magnitude+1:1);
         Vector3 point=(collider!=null?collider.ClosestPoint(outside):target.AimCenter)+outward*.12f;
-        for(int i=0;i<42;i++)
+        for(int i=0;i<(heavy?78:34);i++)
             Emit(metal,point+Random.insideUnitSphere*.07f,outward*Random.Range(2,5)+motion.BladeEdge*Random.Range(2,7)+Random.onUnitSphere*3.5f+Vector3.up,
-                new Color(1,Random.Range(.45f,.9f),.18f,1),Random.Range(.065f,.14f),Random.Range(.18f,.48f));
+                new Color(1,Random.Range(.45f,.9f),.18f,1),Random.Range(.065f,heavy?.22f:.14f),Random.Range(.18f,heavy?.62f:.40f));
         for(int i=0;i<30;i++)
             Emit(energy,point+Random.insideUnitSphere*.10f,motion.BladeEdge*Random.Range(2,7)+Random.onUnitSphere*4,
                 new Color(.025f,.5f,1,1),Random.Range(.085f,.18f),Random.Range(.15f,.34f));
-        Emit(flash,point,Vector3.zero,new Color(.12f,.58f,1,.9f),1.45f,.10f);
-        Emit(flash,point,Vector3.zero,new Color(.65f,.9f,1,1),.58f,.065f);
-        for(int i=0;i<8;i++)Emit(dust,point,Random.insideUnitSphere+Vector3.up*.5f,new Color(.25f,.31f,.36f,.32f),Random.Range(.25f,.5f),.45f);
-        if(!target.IsDead)(target.GetComponent<MechBladeHitReaction>()??target.gameObject.AddComponent<MechBladeHitReaction>()).Trigger(player.Melee.AttackForward);
+        Emit(flash,point,Vector3.zero,new Color(.12f,.58f,1,.5f),heavy?1.1f:.6f,heavy?.075f:.05f);
+        Emit(flash,point,Vector3.zero,new Color(.65f,.9f,1,.7f),.3f,.04f);
+        if(heavy)
+        {
+            // Cut-aligned hot fragments establish the force direction on contacted armor.
+            Vector3 tangent=Vector3.ProjectOnPlane(motion.BladeEdge,Vector3.up).normalized;
+            for(int i=0;i<24;i++)Emit(energy,point,tangent*Random.Range(8,17)+Random.insideUnitSphere*2,
+                new Color(.35f,.8f,1,1),Random.Range(.10f,.20f),Random.Range(.15f,.28f));
+        }
+        for(int i=0;i<5;i++)Emit(dust,point,Random.insideUnitSphere+Vector3.up*.5f,new Color(.25f,.31f,.36f,.12f),Random.Range(.15f,.3f),.25f);
+        if(!target.IsDead)(target.GetComponent<MechBladeHitReaction>()??target.gameObject.AddComponent<MechBladeHitReaction>()).Trigger(player.Melee.AttackForward,heavy);
     }
     private void OnDestroy()
     {
         if(player!=null&&player.Melee!=null)player.Melee.StrikeHit-=Impact;
+        if(player!=null&&player.Melee!=null)player.Melee.AttackStarted-=ArmRelease;
         if(edgeHalo!=null)Destroy(edgeHalo.gameObject);if(edgeCore!=null)Destroy(edgeCore.gameObject);
         if(glow!=null)Destroy(glow);if(strip!=null)Destroy(strip);if(smoke!=null)Destroy(smoke);
         if(dotTexture!=null)Destroy(dotTexture);if(stripTexture!=null)Destroy(stripTexture);

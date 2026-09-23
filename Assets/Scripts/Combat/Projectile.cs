@@ -8,6 +8,23 @@ public class Projectile : MonoBehaviour
     public int pierceCount;
     public Vector3 direction = Vector3.forward;
     protected Damageable source;
+    public float Impact { get; private set; } = -1f;
+    public float PunishMultiplier { get; private set; } = -1f;
+    public CombatHitKind HitKind { get; private set; }
+    public int LabEventId { get; private set; }
+    public void SetImpact(float impact, CombatHitKind kind, float punish=1.35f)
+    {
+        Impact=Mathf.Max(0,impact); HitKind=kind; PunishMultiplier=punish;
+        if(team==0&&LabEventId==0)LabEventId=CombatLabTelemetry.ProjectileReady(this);
+    }
+    DamageInfo ContactInfo(float amount, Vector3 point, float falloff=1f)
+    {
+        // Contact direction is captured at impact; moving the shooter cannot change which plate was hit.
+        return new DamageInfo(gameObject,point-direction,source,amount)
+        {Impact=Impact<0?-1:Impact*falloff,Kind=HitKind,DirectHitMultiplier=PunishMultiplier,
+         HeavyImpact=HitKind==CombatHitKind.HeavyRifle,HasContact=true,KineticRound=Kinetic,
+         ContactPoint=point,ContactNormal=-direction,ContactTangent=Vector3.Cross(Vector3.up,direction)};
+    }
     [System.NonSerialized] public ProjectilePool pool;
     private MaterialPropertyBlock visualBlock;
     public MaterialPropertyBlock VisualBlock => visualBlock ?? (visualBlock = new MaterialPropertyBlock());
@@ -15,6 +32,10 @@ public class Projectile : MonoBehaviour
     private readonly HashSet<Damageable> struck = new HashSet<Damageable>();
     private static readonly IComparer<RaycastHit> HitOrder = Comparer<RaycastHit>.Create((a, b) => a.distance.CompareTo(b.distance));
     private bool spent;
+    public bool Planar {get;private set;}
+    public bool Kinetic {get;set;}
+    private bool checkBarrel;
+    private readonly Collider[] overlaps=new Collider[24];
 
     private void Awake()
     {
@@ -32,19 +53,44 @@ public class Projectile : MonoBehaviour
         team = sourceTeam;
         source = sourceDamageable;
         direction = shotDirection.sqrMagnitude > 0.01f ? shotDirection.normalized : Vector3.forward;
+        Planar=!(this is MissileProjectile);
+        if(Planar)direction=PlanarCombat.Direction(direction,sourceDamageable!=null?sourceDamageable.transform.forward:Vector3.forward);
+        checkBarrel=Planar && sourceDamageable!=null;
+        transform.rotation=Quaternion.LookRotation(direction,Vector3.up);
         damage = shotDamage;
         speed = shotSpeed;
         lifetime = shotLifetime;
         explosionRadius = shotExplosionRadius;
         pierceCount = shotPierceCount;
+        Impact=-1f; PunishMultiplier=-1f; HitKind=CombatHitKind.Generic;
+        LabEventId=0;
         spent = false;
         struck.Clear();
+        var energy=GetComponent<EnergyBoltVisual>();
+        if(energy==null)energy=gameObject.AddComponent<EnergyBoltVisual>();
+        if(energy!=null)energy.Configure(this,true);
     }
 
     protected virtual void Update()
     {
         if (spent || (GameManager.Instance != null && !GameManager.Instance.IsCombatActive)) return;
         float distance = speed * Time.deltaTime;
+        if(Planar)
+        {
+            if(checkBarrel && source!=null)
+            {
+                checkBarrel=false;
+                Vector3 barrel=PlanarCombat.Point(transform.position)-PlanarCombat.Point(source.transform.position);
+                if(barrel.sqrMagnitude>.0001f)SweepPlanar(source.transform.position,barrel.normalized,barrel.magnitude);
+            }
+            if(!spent)SweepPlanar(transform.position,direction,distance);
+            if(!spent)
+            {
+                transform.position+=direction*distance;transform.rotation=Quaternion.LookRotation(direction,Vector3.up);
+                lifetime-=Time.deltaTime;if(lifetime<=0)Despawn();
+            }
+            return;
+        }
         // Sweep the entire travelled segment: fast shots must not tunnel through cover or targets.
         int count = Physics.SphereCastNonAlloc(transform.position, 0.09f, direction, sweepHits, distance, ~0, QueryTriggerInteraction.Ignore);
         System.Array.Sort(sweepHits, 0, count, HitOrder);
@@ -56,7 +102,39 @@ public class Projectile : MonoBehaviour
         if (lifetime <= 0f) Despawn();
     }
 
-    private void OnTriggerEnter(Collider other) { if (!spent) Hit(other, transform.position); }
+    private void OnTriggerEnter(Collider other) { if (!spent && !Planar) Hit(other, transform.position); }
+
+    private void SweepPlanar(Vector3 from,Vector3 heading,float distance)
+    {
+        from=PlanarCombat.Point(from);
+        int overlapCount=Physics.OverlapSphereNonAlloc(from,.09f,overlaps,~0,QueryTriggerInteraction.Ignore);
+        for(int i=0;i<overlapCount;i++)
+            if(overlaps[i].GetComponentInParent<Damageable>()==null){Hit(overlaps[i],from);return;}
+        if(overlapCount==overlaps.Length){Despawn();return;}
+        int count=Physics.SphereCastNonAlloc(from,.09f,heading,sweepHits,distance,~0,QueryTriggerInteraction.Ignore);
+        if(count==sweepHits.Length){Despawn();return;} // Saturation must never shoot through unreported cover.
+        float wallDistance=distance;Collider wall=null;
+        for(int i=0;i<count;i++)
+            if(sweepHits[i].collider.GetComponentInParent<Damageable>()==null && sweepHits[i].distance<=wallDistance)
+            {wallDistance=sweepHits[i].distance;wall=sweepHits[i].collider;}
+        // Actor footprints ignore cosmetic altitude; choose nearest contacts before the nearest solid cover.
+        int budget=Damageable.Active.Count;
+        while(!spent && budget-->0)
+        {
+            Collider nearest=null;float nearestAt=wallDistance;
+            var actors=Damageable.Active;
+            for(int i=0;i<actors.Count;i++)
+            {
+                var actor=actors[i];if(actor==null||actor.IsDead||actor.team==team||struck.Contains(actor))continue;
+                var shape=actor.GetComponent<Collider>();if(shape==null||!shape.enabled||shape.isTrigger)continue;
+                if(PlanarCombat.FootprintHit(shape,from,heading,nearestAt,.09f,out float at))
+                {nearest=shape;nearestAt=at;}
+            }
+            if(nearest==null)break;
+            var contact=from+heading*nearestAt;contact.y=transform.position.y;Hit(nearest,contact);
+        }
+        if(!spent && wall!=null){var point=from+heading*wallDistance;point.y=transform.position.y;Hit(wall,point);}
+    }
 
     private void Hit(Collider other, Vector3 point)
     {
@@ -65,22 +143,28 @@ public class Projectile : MonoBehaviour
         if (target != null && (target.team == team || target.IsDead || struck.Contains(target))) return;
         if (target == null)
         {
-            CombatFeedback.SpawnImpactPulse(point, new Color(1f, 0.72f, 0.22f), 0.2f);
+            if(Kinetic){ArmorContactVfx.Get().Wall(point,-direction);GameAudio.PlayAt(GameAudioCue.WallHit,point,.22f);}
+            else if(team==1){EnemyVfx.ImpactBurst(point,EnergyBoltVisual.EnemyRed);GameAudio.PlayAt(GameAudioCue.WallHit,point,.16f);}
+            else {CombatFeedback.SpawnImpactPulse(point, new Color(1f, 0.72f, 0.22f), 0.2f);BeamFxKit.StarGlare(point,new Color(1f,.72f,.22f),.7f,.1f);}
             Despawn();
             return;
         }
+        if(team==0)BeamFxKit.StarGlare(point,Kinetic?new Color(.1f,1f,.48f):VisualBlock.GetColor("_Color"),.9f,.10f);
+        if (team == 1 && target.team == 0)
+            EnemyVfx.ImpactBurst(point, EnergyBoltVisual.EnemyRed);
         if (explosionRadius > 0.05f)
         {
             struck.Add(target);
-            target.TakeDamage(damage, new DamageInfo(gameObject, point, source, damage));
+            target.TakeDamage(damage, ContactInfo(damage,point));
             ApplyExplosionDamage(point);
             CombatFeedback.SpawnImpactPulse(point, new Color(1f, 0.65f, 0.15f), explosionRadius);
+            BeamFxKit.ImpactBurst(point,direction,new Color(1f,.6f,.18f),.55f+explosionRadius*.15f);
             if (spent || pierceCount-- > 0) return;
             Despawn();
             return;
         }
         struck.Add(target);
-        target.TakeDamage(damage, new DamageInfo(gameObject, point, source, damage));
+        target.TakeDamage(damage, ContactInfo(damage,point));
         if (spent) return;
         if (pierceCount-- > 0) return;
         Despawn();
@@ -97,7 +181,10 @@ public class Projectile : MonoBehaviour
             if (distance > explosionRadius) continue;
             struck.Add(target);
             float amount = damage * (0.45f + Mathf.Clamp01(1f - distance / explosionRadius) * 0.55f);
-            target.TakeDamage(amount, new DamageInfo(gameObject, center, source, amount));
+            var splash = ContactInfo(amount,center,damage>0?amount/damage:0);
+            splash.SourcePosition=center;
+            splash.ContactNormal=Vector3.ProjectOnPlane(center-target.AimCenter,Vector3.up).normalized;
+            target.TakeDamage(amount, splash);
         }
     }
 

@@ -13,11 +13,12 @@ public sealed class WeaponTrial : MonoBehaviour
         owner=gm;
         canvas=RuntimeUIFactory.CreateCanvas("WeaponTrialCanvas",960);canvas.sortingOrder=80;
         var safe=SafeAreaLayout.Create(canvas);
-        var hint=RuntimeUIFactory.MenuText(safe,"TrialHint","",17,new Vector2(245,-45),new Vector2(450,74));
-        hint.text=EquipmentWarehouseUI.T("武器试场 · 靶机不会反击\nQ / 右键连按三刀 · 左键收刀射击 · R 重置", "WEAPON RANGE · Passive targets\nTap Q / RMB for a 3-hit combo · LMB fire · R reset");
-        hint.color=new Color(.05f,.10f,.15f);
-        RuntimeUIFactory.MenuButton(safe,"ResetTrial","重置靶机  [R]",new Vector2(115,-113),new Vector2(210,46)).onClick.AddListener(ResetTargets);
-        RuntimeUIFactory.MenuButton(safe,"LeaveTrial","返回机库",new Vector2(335,-113),new Vector2(195,46)).onClick.AddListener(()=>owner.EndWeaponTrial());
+        var strip=RuntimeUIFactory.CreatePanel(safe,"CompactRangeControls",Vector2.zero,Vector2.one,Vector2.zero,Vector2.zero,new Color(.035f,.055f,.079f,.94f));
+        RuntimeUIFactory.Place(strip,new Vector2(.5f,1),new Vector2(0,-42),new Vector2(790,52));
+        var hint=RuntimeUIFactory.MenuText(strip,"TrialHint","",15,new Vector2(235,-26),new Vector2(438,34));
+        hint.text=EquipmentWarehouseUI.T("武器试场 · 左键开火 / Q 挥刀", "WEAPON RANGE · LMB fire / Q slash");
+        RuntimeUIFactory.MenuButton(strip,"ResetTrial",EquipmentWarehouseUI.T("重置 [R]","Reset [R]"),new Vector2(550,-26),new Vector2(120,34)).onClick.AddListener(ResetTargets);
+        RuntimeUIFactory.MenuButton(strip,"LeaveTrial",EquipmentWarehouseUI.T("返回机库","Hangar"),new Vector2(699,-26),new Vector2(154,34)).onClick.AddListener(()=>owner.EndWeaponTrial());
         ResetTargets();
     }
     private void Update(){if(owner!=null&&!owner.IsPaused&&Input.GetKeyDown(KeyCode.R))ResetTargets();}
@@ -43,6 +44,12 @@ public sealed class WeaponTrial : MonoBehaviour
         CombatEffects.ClearTelegraphs();
         foreach(var projectile in FindObjectsByType<Projectile>(FindObjectsSortMode.None))projectile.Despawn();
         ClearTargets();owner.playerController.RestoreAt(new Vector3(0,.1f,-12));
+        if(owner.playerController.Loadout.Selected==PrimaryWeapon.Halbreaker)
+        {
+            foreach(float z in new[]{0f,3f,6f,9f})SpawnTarget(new Vector3(0,0,z),"");
+            owner.playerController.AimAt(new Vector3(0,1.7f,9));
+            return;
+        }
         SpawnTarget(new Vector3(0,0,-8.0f),"刀尖 / TIP");
         SpawnTarget(new Vector3(-4,0,-8.0f),"近身 / CLOSE");
         SpawnTarget(new Vector3(4,0,-8.0f),"距离 / RANGE");

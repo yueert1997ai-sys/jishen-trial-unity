@@ -14,16 +14,15 @@ public sealed class ValkyrComboProfile : ScriptableObject
     {
         public string label;
         public float contactStart,contactEnd,linkTime,duration,advance=.34f,hitHold=.065f;
+        public float movementScale=.82f, dashCancelFrom=0f, sheatheDelay=.02f;
         public Key[] keys;
     }
     public Stroke[] strokes;
+    public bool continuousBladePath;
     public Stroke Get(int stage)=>strokes[Mathf.Clamp(stage,0,2)];
     public static ValkyrComboProfile LoadActive()
     {
-        var profile=Resources.Load<ValkyrComboProfile>("ValkyrMotion/PowerComboV7");
-        if(profile==null)profile=Resources.Load<ValkyrComboProfile>("ValkyrMotion/ReverseCombo");
-        if(profile==null){profile=CreateInstance<ValkyrComboProfile>();profile.strokes=PowerDefaults();}
-        return profile;
+        return P0ComboProfile.Active;
     }
     public static Key Ready=>K(0,V(.93f,1.94f,.24f),V(1.06f,2.35f,-.46f),V(.16f,-.51f,-.85f),0,V(0,-.08f,0),-6,-8);
     static Vector3 V(float x,float y,float z)=>new Vector3(x,y,z);
@@ -129,7 +128,11 @@ public sealed class ValkyrComboProfile : ScriptableObject
         var a=keys[i];var b=keys[i+1];var p=keys[Mathf.Max(0,i-1)];var n=keys[Mathf.Min(keys.Length-1,i+2)];
         float t=Mathf.Clamp01((time-a.time)/(b.time-a.time));
         Vector3 M(Vector3 pv,Vector3 av,Vector3 bv,Vector3 nv)=>new Vector3(C(pv.x,av.x,bv.x,nv.x,p.time,a.time,b.time,n.time,t),C(pv.y,av.y,bv.y,nv.y,p.time,a.time,b.time,n.time,t),C(pv.z,av.z,bv.z,nv.z,p.time,a.time,b.time,n.time,t));
-        return new Key{time=time,wrist=M(p.wrist,a.wrist,b.wrist,n.wrist),elbow=M(p.elbow,a.elbow,b.elbow,n.elbow),blade=Vector3.Slerp(a.blade,b.blade,Mathf.SmoothStep(0,1,t)).normalized,
+        // A per-segment SmoothStep brakes the blade to zero at every interior key.
+        // Use the same time-aware monotone curve as the body for the P0 strike path.
+        Vector3 bladePath=continuousBladePath?M(p.blade,a.blade,b.blade,n.blade):Vector3.Slerp(a.blade,b.blade,Mathf.SmoothStep(0,1,t));
+        if(bladePath.sqrMagnitude<.01f)bladePath=Vector3.Slerp(a.blade,b.blade,t);
+        return new Key{time=time,wrist=M(p.wrist,a.wrist,b.wrist,n.wrist),elbow=M(p.elbow,a.elbow,b.elbow,n.elbow),blade=bladePath.normalized,
             forwardGrip=Mathf.Lerp(a.forwardGrip,b.forwardGrip,Mathf.SmoothStep(0,1,t)),open=Mathf.Lerp(a.open,b.open,t),
             pelvis=M(p.pelvis,a.pelvis,b.pelvis,n.pelvis),hips=M(p.hips,a.hips,b.hips,n.hips),waist=M(p.waist,a.waist,b.waist,n.waist),chest=M(p.chest,a.chest,b.chest,n.chest),
             leftFoot=M(p.leftFoot,a.leftFoot,b.leftFoot,n.leftFoot),rightFoot=M(p.rightFoot,a.rightFoot,b.rightFoot,n.rightFoot)};

@@ -9,10 +9,13 @@ public class PlayerController : MonoBehaviour
     public float acceleration = 42f;
     public float braking = 65f;
     public float dashDuration = 0.2f;
+    public float DashStartedAt {get;private set;}=-10;
     // Retained for serialized compatibility only. All live beam input is manual.
     [HideInInspector] public bool automaticFire;
     public PlayerMeleeController Melee { get; private set; }
     public PlayerWeaponStance Stance { get; private set; }
+    public PlayerLoadout Loadout { get; private set; }
+    public CombatActionQueue Actions { get; } = new CombatActionQueue();
 
     public PlayerInputRouter InputRouter { get; private set; }
     public AutoAimController AutoAim { get; private set; }
@@ -23,6 +26,10 @@ public class PlayerController : MonoBehaviour
     public Vector3 MoveDirection { get; private set; }
     public Vector3 Velocity { get; private set; }
     public bool IsDashing => dashRemaining > 0f;
+    public float DashTimeRemaining => dashRemaining;
+    public bool DashAttackReady => !IsDashing && Time.time<=dashAttackUntil;
+    float dashAttackUntil=-10;
+    public void ConsumeDashAttack(){dashAttackUntil=-10;}
     public bool IsBoosting { get; private set; }
     public float DashCooldownRemaining => Mathf.Max(0f, nextDashTime - Time.time);
     public bool IsDashReady => DashCooldownRemaining <= 0f;
@@ -33,9 +40,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 dashVelocity;
     private float dashRemaining;
     private float dashTotalDuration;
+    private float dashExitFraction;
     private float nextDashTime;
     private float boostHeldTime;
     private bool boostExhausted;
+    private float ThrusterCost=>weaponController?.upgradeSystem?.ThrusterCostMultiplier??1f;
     private readonly RaycastHit[] aimHits = new RaycastHit[32];
 
     private void Awake()
@@ -58,9 +67,14 @@ public class PlayerController : MonoBehaviour
             Motor.skinWidth = 0.04f;
             Motor.minMoveDistance = 0f;
         }
+        // Shared traversal clearance for both routes through the lunar yard.
+        Motor.stepOffset=.45f;
+        Motor.skinWidth=.08f;
         AimDirection = Vector3.forward;
+        Loadout = GetComponent<PlayerLoadout>() ?? gameObject.AddComponent<PlayerLoadout>();
         Melee = GetComponent<PlayerMeleeController>() ?? gameObject.AddComponent<PlayerMeleeController>();
         Stance = GetComponent<PlayerWeaponStance>() ?? gameObject.AddComponent<PlayerWeaponStance>();
+        if(GetComponent<CombatRecovery>()==null)gameObject.AddComponent<CombatRecovery>();
     }
 
     private void Start()
@@ -81,16 +95,30 @@ public class PlayerController : MonoBehaviour
             return;
         }
         if (deltaTime <= 0f) return;
+        if(command.Identity!=0 && (command.Cancellation!=CombatRuntime.ActionGeneration || Time.time-command.InputTime>.5f))return;
         command.Move = Vector2.ClampMagnitude(command.Move, 1f);
+        CombatLabTelemetry.Command(command);
         boostHeldTime = command.BoostHeld ? boostHeldTime + deltaTime : 0;
         if (!command.BoostHeld) boostExhausted = false;
-        IsBoosting = !boostExhausted && command.BoostHeld && boostHeldTime > .20f && gm != null && gm.IsCombatActive;
-        if (IsBoosting && stats != null && !stats.TrySpendEnergy(24 * deltaTime)) { IsBoosting = false; boostExhausted = true; }
-        if (command.Dash) TryDash(command.Move);
+        IsBoosting = !boostExhausted && command.BoostHeld && boostHeldTime > .12f && gm != null && gm.IsCombatActive;
+        if (IsBoosting && stats != null && !stats.TrySpendEnergy(24 * ThrusterCost * deltaTime)) { IsBoosting = false; boostExhausted = true; }
+        {
+            if(command.Dash)
+            {
+                Vector3 direction=new Vector3(command.Move.x,0,command.Move.y);
+                if(direction.sqrMagnitude<.01f)
+                    direction=command.HasAim?Vector3.ProjectOnPlane(command.AimPoint-transform.position,Vector3.up).normalized:AimDirection;
+                Actions.Enqueue(BufferedCombatAction.Dash,Time.time,CombatRules.Current.DashBuffer,direction,command.Move.sqrMagnitude>.01f);
+            }
+            if(Actions.TryPeek(BufferedCombatAction.Dash,Time.time,out var requestedDirection)
+                && TryDash(new Vector2(requestedDirection.x,requestedDirection.z),Actions.WasMoving(BufferedCombatAction.Dash)))
+                Actions.Cancel(BufferedCombatAction.Dash);
+        }
         float speed = stats != null ? stats.MoveSpeed : 7.4f;
-        if (IsBoosting) speed *= 1.32f;
+        if(Melee.IsAttacking && command.HasAim)Melee.Steer(ResolveManualAim(command.AimPoint),deltaTime);
+        if (IsBoosting) speed *= 1.6f;
         Vector3 desired = new Vector3(command.Move.x, 0f, command.Move.y) * speed * Melee.MovementScale;
-        planarVelocity = Vector3.MoveTowards(planarVelocity, desired, (desired.sqrMagnitude > 0f ? acceleration : braking) * deltaTime);
+        planarVelocity = Vector3.MoveTowards(planarVelocity, desired, (desired.sqrMagnitude > 0f ? (Vector3.Dot(planarVelocity, desired) < 0 ? 85f : acceleration) : braking) * deltaTime);
         if(Melee.IsAttacking && Melee.MovementScale==0) planarVelocity=Vector3.zero;
         float dashStep = Mathf.Min(dashRemaining, deltaTime);
         // Integrate the launch-heavy speed curve over the frame, preserving distance at any FPS.
@@ -99,8 +127,12 @@ public class PlayerController : MonoBehaviour
         {
             float from = 1 - dashRemaining / dashTotalDuration;
             float to = Mathf.Min(1, from + dashStep / dashTotalDuration);
-            dashTravelTime = dashTotalDuration * ((2 * to - to * to) - (2 * from - from * from));
+            // The integral remains one dash distance. Held movement exits at running speed,
+            // instead of braking to zero then snapping back to the locomotion velocity.
+            float Curve(float t)=>(2-dashExitFraction)*t-(1-dashExitFraction)*t*t;
+            dashTravelTime = dashTotalDuration * (Curve(to)-Curve(from));
         }
+        bool wasDashing=dashRemaining>0;
         Vector3 displacement = dashVelocity * dashTravelTime + planarVelocity * (deltaTime - dashStep);
         if(!IsDashing) displacement+=Melee.ConsumeRootAdvance();
         dashRemaining = Mathf.Max(0f, dashRemaining - deltaTime);
@@ -109,7 +141,14 @@ public class PlayerController : MonoBehaviour
         bounded.x = Mathf.Clamp(bounded.x, -27f, 27f);
         bounded.z = Mathf.Clamp(bounded.z, -27f, 27f);
         var collision = Motor.Move(bounded - before + Vector3.down * 2f * deltaTime);
-        if ((collision & CollisionFlags.Sides) != 0) dashRemaining = 0f;
+        if ((collision & CollisionFlags.Sides) != 0)
+        {
+            Vector3 planarTravel=Vector3.ProjectOnPlane(transform.position-before,Vector3.up);
+            // Let the controller slide along a wall or step past a small lunar detail.
+            // Stop a frontal blocked dash, not every grazing side contact.
+            if(dashStep>0 && planarTravel.sqrMagnitude<displacement.sqrMagnitude*.04f)dashRemaining=0f;
+        }
+        if(wasDashing && !IsDashing)dashAttackUntil=Time.time+CombatRules.Current.DashSlashWindow;
         Velocity = (transform.position - before) / deltaTime;
         Velocity = new Vector3(Velocity.x, 0f, Velocity.z);
         MoveDirection = Vector3.ClampMagnitude(Velocity / speed, 1f);
@@ -126,6 +165,7 @@ public class PlayerController : MonoBehaviour
             Stance.Process(command, target != null && AutoAim.IsValidTarget(target) ? target : null, deltaTime);
         }
         else AutoAim.Clear();
+        GetComponent<CombatRecovery>().Observe(command.Move,before,deltaTime);
     }
 
     public void AimAt(Vector3 worldPoint)
@@ -141,33 +181,29 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 ResolveManualAim(Vector3 point)
     {
-        // Converge the offset hand cannon on what the manual sight ray actually touches.
-        // This does not select or turn toward nearby targets outside that ray.
-        Vector3 origin = transform.position + Vector3.up * 1.1f;
-        Vector3 ray = point - origin;
-        float nearest = ray.magnitude;
-        int count = Physics.RaycastNonAlloc(origin, ray.normalized, aimHits, nearest, ~0, QueryTriggerInteraction.Ignore);
-        for (int i = 0; i < count; i++)
-        {
-            if (aimHits[i].collider.GetComponentInParent<Damageable>() == damageable || aimHits[i].distance >= nearest) continue;
-            nearest = aimHits[i].distance;
-            point = aimHits[i].point;
-        }
-        return point;
+        return PlanarCombat.Point(point);
+
     }
 
-    public bool TryDash(Vector2 movement)
+    public bool TryDash(Vector2 movement) => TryDash(movement,movement.sqrMagnitude>.01f);
+
+    private bool TryDash(Vector2 movement, bool moving)
     {
         var gm = GameManager.Instance;
         if ((gm != null && !gm.CanPlayerControl) || (damageable != null && damageable.IsDead) || Time.time < nextDashTime) return false;
-        if (stats != null && !stats.TrySpendEnergy(25f)) return false;
+        if (!Melee.CanDashCancel) return false;
+        if (stats != null && !stats.TrySpendEnergy(25f*ThrusterCost)) return false;
         Melee.CancelAttack();
+        Stance.ClearRequests();
         Vector3 direction = movement.sqrMagnitude > 0.01f ? new Vector3(movement.x, 0f, movement.y) : AimDirection;
         if (direction.sqrMagnitude < 0.01f) direction = transform.forward;
         direction.Normalize();
+        DashStartedAt=Time.time;
         dashRemaining = Mathf.Max(0.05f, dashDuration);
         dashTotalDuration = dashRemaining;
         dashVelocity = direction * (stats != null ? stats.DashDistance : 5f) / dashRemaining;
+        dashExitFraction=moving
+            ?Mathf.Clamp((stats!=null?stats.MoveSpeed:7.4f)*(IsBoosting ? 1.6f : 1f)/Mathf.Max(.01f,dashVelocity.magnitude),0,.6f):0;
         nextDashTime = Time.time + (stats != null ? stats.DashCooldown : 1.25f);
         if (damageable != null) damageable.SetInvulnerable(0.16f);
         Dashed?.Invoke(direction);
@@ -177,9 +213,11 @@ public class PlayerController : MonoBehaviour
 
     public void CancelMovement()
     {
+        dashAttackUntil=-10;
         planarVelocity = Velocity = MoveDirection = Vector3.zero;
         IsBoosting = false;
         boostHeldTime = 0;
+        Actions.Clear();
         dashRemaining = 0f;
         if (InputRouter != null) InputRouter.Clear();
         if (Melee != null) Melee.CancelAttack();
@@ -190,6 +228,8 @@ public class PlayerController : MonoBehaviour
     {
         CancelMovement();
         nextDashTime = 0f;
+        GetComponentInChildren<ValkyrMotionDriver>()?.ResetHitReaction();
+        GetComponentInChildren<NemesisMotionRig>()?.ResetDeployment();
         AutoAim.Clear();
         HasAimPoint = false;
         AimDirection = Vector3.forward;

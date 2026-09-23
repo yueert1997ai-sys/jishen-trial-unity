@@ -5,9 +5,12 @@ public class MissileProjectile : Projectile
     public Damageable target;
     public float turnRate = 8f;
     public float searchRadius = 32f;
+    private float nextThreatCheck;
+    private void OnEnable(){target=null;nextThreatCheck=0;}
 
     protected override void Update()
     {
+        if(GameManager.Instance!=null&&!GameManager.Instance.IsCombatActive)return;
         if (target == null || target.IsDead)
         {
             target = FindNearestTarget();
@@ -15,6 +18,11 @@ public class MissileProjectile : Projectile
 
         if (target != null)
         {
+            if(team==0 && HitKind==CombatHitKind.Missile && Time.time>=nextThreatCheck)
+            {
+                nextThreatCheck=Time.time+.08f;
+                target.GetComponent<EnemyBase>()?.TryEvadeMissile(transform.position,direction);
+            }
             Vector3 desired = target.AimCenter - transform.position;
             if (desired.sqrMagnitude > 0.01f)
             {

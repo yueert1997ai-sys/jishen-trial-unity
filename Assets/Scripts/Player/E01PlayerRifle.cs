@@ -27,6 +27,14 @@ public sealed class E01PlayerRifle : MonoBehaviour
         }
         Model.SetActive(false);
     }
+    public void Adopt(GameObject original)
+    {
+        if(Model!=null && Model!=original)Destroy(Model);
+        Model=original;Model.transform.SetParent(transform,true);
+        Model.transform.localScale=Vector3.one*1.25f;
+        muzzle=Model.transform.Find("Rifle_Muzzle");
+        Model.SetActive(true);
+    }
     private void LateUpdate()
     {
         if(!Equipped||Model==null||blade==null)return;

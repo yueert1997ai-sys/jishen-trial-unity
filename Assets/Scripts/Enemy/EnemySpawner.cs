@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +15,15 @@ public class EnemySpawner : MonoBehaviour
     public GameObject liquidBossPrefab;
     public GameObject DefaultBossPrefab => liquidBossPrefab != null ? liquidBossPrefab : bossPrefab;
     public float spawnRadius = 18f;
+    sealed class SpawnReservation
+    {
+        public int Generation;
+        public TelegraphVisual Warning;
+        public int WarningGeneration;
+    }
+    readonly List<SpawnReservation> pending = new List<SpawnReservation>();
+    public int PendingSpawns => pending.Count;
+    public int SpawnGeneration { get; private set; }
 
     public void SpawnGroup(EnemyKind kind, int count)
     {
@@ -53,13 +63,27 @@ public class EnemySpawner : MonoBehaviour
         }
 
         CombatFeedback.SpawnWarningDisc(position, kind == EnemyKind.Elite ? 1.25f : 0.75f, 0.18f, GetSpawnColor(kind));
-        return InstantiateEnemy(prefab, position);
+        return InstantiateEnemy(prefab, position, kind);
+    }
+
+    public void SpawnSliceEntry(EnemyKind kind, Vector3 position, float delay)
+    {
+        if (NavMesh.SamplePosition(position, out var point, 3f, NavMesh.AllAreas)) position = point.position;
+        QueueEnemy(kind, position, delay);
     }
 
     public void CancelPendingSpawns()
     {
+        SpawnGeneration++;
         StopAllCoroutines();
+        foreach(var reservation in pending)
+        {
+            if(reservation.Warning!=null)reservation.Warning.Cancel(reservation.WarningGeneration);
+            stageManager?.NotifyEnemyKilled(); // release only the reserved slot; this is not a gameplay kill
+        }
+        pending.Clear();
     }
+    private void OnDisable() { CancelPendingSpawns(); }
 
     public BossController SpawnBoss(GameObject prefabOverride = null)
     {
@@ -112,29 +136,39 @@ public class EnemySpawner : MonoBehaviour
             stageManager.NotifyEnemySpawned();
         }
 
-        StartCoroutine(SpawnAfterTelegraph(prefab, kind, position, stagger));
+        var reservation=new SpawnReservation { Generation=SpawnGeneration };
+        pending.Add(reservation);
+        StartCoroutine(SpawnAfterTelegraph(prefab, kind, position, stagger, reservation));
     }
 
-    private IEnumerator SpawnAfterTelegraph(GameObject prefab, EnemyKind kind, Vector3 position, float stagger)
+    private IEnumerator SpawnAfterTelegraph(GameObject prefab, EnemyKind kind, Vector3 position, float stagger, SpawnReservation reservation)
     {
         if (stagger > 0f)
         {
             yield return new WaitForSeconds(stagger);
         }
 
+        if(reservation.Generation!=SpawnGeneration)yield break;
         float radius = kind == EnemyKind.Elite ? 1.35f : kind == EnemyKind.Drone ? 0.65f : 0.85f;
-        CombatFeedback.SpawnWarningDisc(position, radius, 0.48f, GetSpawnColor(kind));
-        yield return new WaitForSeconds(0.48f);
-        InstantiateEnemy(prefab, position);
+        float warning=CombatRules.Current.SpawnWarning;
+        reservation.Warning=CombatEffects.Disc(position, radius, warning, GetSpawnColor(kind));
+        reservation.WarningGeneration=reservation.Warning.Generation;
+        yield return new WaitForSeconds(warning);
+        if(reservation.Generation!=SpawnGeneration)yield break;
+        pending.Remove(reservation);
+        if(GameManager.Instance!=null && !GameManager.Instance.IsCombatActive)
+        {stageManager?.NotifyEnemyKilled();yield break;}
+        InstantiateEnemy(prefab, position, kind);
     }
 
-    private EnemyBase InstantiateEnemy(GameObject prefab, Vector3 position)
+    private EnemyBase InstantiateEnemy(GameObject prefab, Vector3 position, EnemyKind kind)
     {
         if (NavMesh.SamplePosition(position, out var point, 5f, NavMesh.AllAreas)) position = point.position;
         GameObject enemyObject = Instantiate(prefab, position, Quaternion.identity);
         EnemyBase enemy = enemyObject.GetComponent<EnemyBase>();
         if (enemy != null)
         {
+            enemy.ConfigureP0Role(kind);
             enemy.Init(player, stageManager);
         }
 

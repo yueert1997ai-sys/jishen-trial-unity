@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b041bfd2054f47948115fa2ff97e6fc, type: 3}
+  m_Name: Armory
+  m_EditorClassIdentifier: Assembly-CSharp::HangarArmory
+  heroPrefab: {fileID: 1680734479710548386, guid: 4b1efccd2b39a904ab3e9064e26d3e8a, type: 3}
+  roomPrefab: {fileID: 1732218955826515675, guid: 2fb1ca26855b847248517de8122b3cd0, type: 3}
+  valkyrPrefab: {fileID: 7971656134755835938, guid: 4b0508598178839448ea5a760364e70a, type: 3}
+  valkyrRifle:
+    weapon: 1
+    prefab: {fileID: 721830052097736899, guid: 1e71be0bb73444a93b805b94c0b7c1af, type: 3}
+    damage: 18
+    interval: 0.18
+    speed: 38
+    pierce: 0
+    rightHandOnly: 0
+    blastRadius: 0
+  startingWeapon: 1
+  weapons:
+  - weapon: 1
+    prefab: {fileID: 1657166923640550134, guid: 49d03641c0605a84aa41207bdc8476fa, type: 3}
+    damage: 18
+    interval: 0.18
+    speed: 38
+    pierce: 0
+    rightHandOnly: 1
+    blastRadius: 0
+  - weapon: 2
+    prefab: {fileID: 8935201526683640194, guid: d2e6e9532f2f3a54ca1f515f600ab48f, type: 3}
+    damage: 42
+    interval: 0.68
+    speed: 0
+    pierce: 0
+    rightHandOnly: 0
+    blastRadius: 0
+  - weapon: 3
+    prefab: {fileID: 3897298395928869753, guid: e48afc2c60b8d434a93394ada5f1e712, type: 3}
+    damage: 46
+    interval: 0.48
+    speed: 48
+    pierce: 1
+    rightHandOnly: 0
+    blastRadius: 0
+  - weapon: 5
+    prefab: {fileID: 7287338774413734389, guid: 820fadddfa45a554b8c0b0b0451e1d11, type: 3}
+    damage: 120
+    interval: 1.1
+    speed: 0
+    pierce: 2
+    rightHandOnly: 1
+    blastRadius: 1.8
+  - weapon: 6
+    prefab: {fileID: 5967995983236991210, guid: 21513ab644e62234ebfe4b900231baf6, type: 3}
+    damage: 160
+    interval: 1.05
+    speed: 0
+    pierce: 99
+    rightHandOnly: 1
+    blastRadius: 1
+  - weapon: 7
+    prefab: {fileID: 5758866096036316628, guid: 18d4506a5131b8847acfb062f6778957, type: 3}
+    damage: 70
+    interval: 0.95
+    speed: 32
+    pierce: 0
+    rightHandOnly: 0
+    blastRadius: 1.8

@@ -34,6 +34,16 @@ public static class ProjectileVisuals
     public static void SpawnMuzzleFlash(Vector3 position, Color color, float size)
     {
         CombatFeedback.SpawnImpactPulse(position, color, size);
+        // Rifle bolts get the same layered glare as the heavy beams, scaled down.
+        BeamFxKit.StarGlare(position, color, size * 2.3f, .09f);
+    }
+
+    // Direction-aware enemy muzzle: textured sprite aligned with the shot.
+    public static void SpawnMuzzleFlash(Vector3 position, Vector3 direction, Color color, float size)
+    {
+        color=EnergyBoltVisual.EnemyRed;
+        EnemyVfx.MuzzleFlash(position, direction, color);
+        CombatFeedback.SpawnImpactPulse(position, color, size * 0.6f);
     }
 
     private static Material GetTrailMaterial()

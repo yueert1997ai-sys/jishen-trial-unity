@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -30,12 +31,19 @@ public class BossController : MonoBehaviour
     public float LockedLength { get; private set; }
     public float AttackWindup => winding ? Mathf.Clamp01((Time.time - windupStart) / windupDuration) : 0f;
 
+    public ImpactStability Stability {get;private set;}
+    public bool UsesPlayerBreak => false;
+    readonly List<(TelegraphVisual visual,int generation)> attackWarnings=new List<(TelegraphVisual,int)>();
+    void Track(TelegraphVisual visual){if(visual!=null)attackWarnings.Add((visual,visual.Generation));}
+    void ClearWarnings(){foreach(var item in attackWarnings)if(item.visual!=null)item.visual.Cancel(item.generation);attackWarnings.Clear();}
     private Damageable damageable;
     private NavMeshAgent navigation;
     private readonly RaycastHit[] coverHits = new RaycastHit[32];
     private float nextActionTime, nextPathTime, windupStart, windupDuration;
     private bool winding;
     private int actionIndex;
+    private int runGeneration;
+    private bool CanExecute=>!damageable.IsDead && CombatRuntime.Owns(runGeneration) && GameManager.Instance.IsCombatActive;
     private static readonly Color warning = new Color(1f, 0.27f, 0.08f);
 
     private void Awake()
@@ -56,6 +64,7 @@ public class BossController : MonoBehaviour
         StopAllCoroutines();
         winding = ActionRunning = false;
         damageable.OnDied -= OnDied;
+        ClearWarnings();CoreExposed=false;
         if (navigation != null && navigation.isOnNavMesh) navigation.ResetPath();
     }
 
@@ -65,6 +74,8 @@ public class BossController : MonoBehaviour
         stageManager = ownerStage;
         spawner = ownerSpawner;
         DifficultyHealthMultiplier = GameManager.Instance != null ? GameManager.Instance.EnemyHealthMultiplier : 1f;
+        runGeneration=CombatRuntime.Run.Generation;
+        IsPhaseTwo=CoreExposed=ActionRunning=winding=false; actionIndex=ActionsCompleted=0;
         damageable.SetMaxHealth(encounterHealth * DifficultyHealthMultiplier, true);
         damageable.IncomingDamageScale = armoredDamageScale;
         nextActionTime = Time.time + 1.8f;
@@ -73,15 +84,15 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         bool active = target != null && !damageable.IsDead && (GameManager.Instance == null || GameManager.Instance.IsCombatActive);
-        if (navigation.isOnNavMesh) navigation.isStopped = !active || ActionRunning;
+        if (navigation.isOnNavMesh) navigation.isStopped = !active || ActionRunning || CoreExposed;
         if (!active) return;
-        if (!IsPhaseTwo && damageable.CurrentHealth <= damageable.maxHealth * 0.5f)
+        if (!IsPhaseTwo && !ActionRunning && !CoreExposed && damageable.CurrentHealth <= damageable.maxHealth * 0.5f)
         {
             IsPhaseTwo = true;
             GameAudio.Play(GameAudioCue.Warning, 0.55f, 0.72f);
-            SetStatus("PHASE 2");
+            if(!CoreExposed)SetStatus("PHASE 2");
         }
-        if (ActionRunning) return;
+        if (ActionRunning || CoreExposed) return;
         Vector3 direction = target.position - transform.position;
         direction.y = 0;
         if (direction.sqrMagnitude > 0.01f) transform.rotation = Quaternion.LookRotation(direction);
@@ -95,7 +106,7 @@ public class BossController : MonoBehaviour
 
     public bool StartPattern(BossPattern pattern)
     {
-        if (ActionRunning || target == null || damageable.IsDead || (GameManager.Instance != null && !GameManager.Instance.IsCombatActive)) return false;
+        if (ActionRunning || CoreExposed || target == null || !CanExecute) return false;
         ActionRunning = true;
         CurrentPattern = pattern;
         if (navigation.isOnNavMesh) navigation.ResetPath();
@@ -114,15 +125,19 @@ public class BossController : MonoBehaviour
             case BossPattern.Charge: yield return Charge(); break;
             default:
                 SetStatus("REINFORCEMENTS");
-                if (spawner != null && (stageManager == null || stageManager.EnemiesAlive < 5))
+                if (spawner != null && stageManager!=null && stageManager.EnemiesAlive<CombatRules.Current.MaxHostiles)
                 {
-                    spawner.SpawnEntry(EnemyKind.Melee, IsPhaseTwo ? 3 : 2, actionIndex % 4);
-                    spawner.SpawnEntry(EnemyKind.Ranged, 1, (actionIndex + 2) % 4);
+                    int available=CombatRules.Current.MaxHostiles-stageManager.EnemiesAlive;
+                    int melee=Mathf.Min(IsPhaseTwo?3:2,Mathf.Max(0,available-1));
+                    if(melee>0)spawner.SpawnEntry(EnemyKind.Melee,melee,actionIndex%4);
+                    spawner.SpawnEntry(EnemyKind.Ranged,1,(actionIndex+2)%4);
                 }
                 yield return new WaitForSeconds(1.2f);
                 break;
         }
         winding = false;
+        if(!CanExecute){ActionRunning=false;yield break;}
+        ClearWarnings();
         CoreExposed = true;
         damageable.IncomingDamageScale = 1f;
         SetStatus("CORE EXPOSED");
@@ -150,13 +165,14 @@ public class BossController : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Vector3 direction = Quaternion.AngleAxis(Mathf.Lerp(-48, 48, i / (float)(count - 1)), Vector3.up) * volleyDirection;
-            CombatEffects.Line(LockedOrigin, direction, LockedLength, 0.25f, windupDuration, warning);
+            Track(CombatEffects.Line(LockedOrigin, direction, LockedLength, 0.25f, windupDuration, warning));
         }
         yield return new WaitForSeconds(windupDuration);
         winding = false;
         int bursts = mechDuel ? (IsPhaseTwo ? 2 : 1) : IsPhaseTwo ? 4 : 3;
         for (int burst = 0; burst < bursts; burst++)
         {
+            if(!CanExecute)yield break;
             for (int i = 0; i < count; i++)
             {
                 Vector3 direction = Quaternion.AngleAxis(Mathf.Lerp(-48, 48, i / (float)(count - 1)), Vector3.up) * volleyDirection;
@@ -178,11 +194,12 @@ public class BossController : MonoBehaviour
         for (int i = 1; i < count; i++) impacts[i] = LockedImpact + Vector3.right * (i == 1 ? -4.5f : 4.5f);
         SetStatus("ARTILLERY STRIKE");
         BeginWindup(1.05f);
-        for (int i = 0; i < impacts.Length; i++) CombatEffects.Disc(impacts[i], 2.4f, windupDuration + i * 0.6f, warning);
+        for (int i = 0; i < impacts.Length; i++) Track(CombatEffects.Disc(impacts[i], 2.4f, windupDuration + i * 0.6f, warning));
         yield return new WaitForSeconds(windupDuration);
         winding = false;
         foreach (var center in impacts)
         {
+            if(!CanExecute)yield break;
             DamageDisc(center, 2.4f, 22f);
             CombatEffects.Impact(center + Vector3.up * 0.5f, warning, 2.4f, true);
             GameAudio.Play(GameAudioCue.Death, 0.45f, 0.85f);
@@ -203,15 +220,16 @@ public class BossController : MonoBehaviour
                 LockedLength = Mathf.Min(LockedLength, Mathf.Max(0, coverHits[i].distance - 0.15f));
         SetStatus("RAM CHARGE");
         BeginWindup(0.95f);
-        CombatEffects.Line(LockedOrigin, LockedDirection, LockedLength, 4f, windupDuration, warning);
-        CombatEffects.Disc(LockedOrigin, 2, windupDuration, warning);
-        CombatEffects.Disc(LockedOrigin + LockedDirection * LockedLength, 2, windupDuration, warning);
+        Track(CombatEffects.Line(LockedOrigin, LockedDirection, LockedLength, 4f, windupDuration, warning));
+        Track(CombatEffects.Disc(LockedOrigin, 2, windupDuration, warning));
+        Track(CombatEffects.Disc(LockedOrigin + LockedDirection * LockedLength, 2, windupDuration, warning));
         yield return new WaitForSeconds(windupDuration);
         winding = false;
         bool hit = false;
         float traveled = 0;
         while (traveled < LockedLength)
         {
+            if(!CanExecute)yield break;
             Vector3 before = transform.position;
             traveled = Mathf.Min(LockedLength, traveled + 17f * Time.deltaTime);
             Vector3 next = LockedOrigin + LockedDirection * traveled;
@@ -226,7 +244,7 @@ public class BossController : MonoBehaviour
             yield return null;
         }
         Vector3 landing = transform.position;
-        CombatEffects.Disc(landing, 2.8f, 0.7f, warning);
+        Track(CombatEffects.Disc(landing, 2.8f, 0.7f, warning));
         if (mechDuel)
         {
             yield return new WaitForSeconds(.45f);
@@ -282,6 +300,11 @@ public class BossController : MonoBehaviour
     {
         StopAllCoroutines();
         winding = ActionRunning = false;
+        ClearWarnings();CoreExposed=false;
+        spawner?.CancelPendingSpawns();
+        foreach(var shot in FindObjectsByType<Projectile>(FindObjectsSortMode.None))if(shot.team==1)shot.Despawn();
+        foreach(var enemy in FindObjectsByType<EnemyBase>(FindObjectsSortMode.None))enemy.gameObject.SetActive(false);
+        if(navigation!=null&&navigation.isOnNavMesh){navigation.ResetPath();navigation.isStopped=true;}
         if (defeatDelay > 0 && !dead.destroyOnDeath) StartCoroutine(FinishDefeat());
         else CompleteDefeat();
     }

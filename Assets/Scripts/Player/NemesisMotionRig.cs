@@ -1,0 +1,75 @@
+using System;
+using System.Linq;
+using UnityEngine;
+
+// J-01 proportions and rigid appendages. The existing combat driver still owns
+// animation time, hit windows, planted feet, cancellation and the three-cut chain.
+[DefaultExecutionOrder(100)]
+public sealed class NemesisMotionRig : MonoBehaviour
+{
+    public string sourceSha256;
+    public static readonly Color Amethyst=new Color(.39f,.075f,.75f);
+    public PlayerController Player {get;private set;}
+    public Transform[] Drones {get;private set;}
+    public float Deployment {get;private set;}
+    public float WingOpen {get;private set;}
+    Transform[] skirts,wings,thighs,shins;
+    Quaternion[] skirtRest,wingRest,droneRest;
+    Vector3[] dronePosition;
+    Transform waist,thorax;
+    Vector3 waistRest;
+    NemesisDroneController support;
+    ValkyrMotionDriver motion;
+    RaikenBladePresentation blade;
+    Transform Part(string n)=>GetComponentsInChildren<Transform>(true).Single(t=>t.name==n);
+    void Awake()
+    {
+        Player=GetComponentInParent<PlayerController>();motion=GetComponent<ValkyrMotionDriver>();blade=GetComponent<RaikenBladePresentation>();
+        waist=Part("Waist");thorax=Part("Thorax");waistRest=waist.localPosition;
+        skirts=new[]{Part("SKIRT_FRONT_PIVOT.L"),Part("SKIRT_FRONT_PIVOT.R"),Part("SKIRT_SIDE_PIVOT.L"),Part("SKIRT_SIDE_PIVOT.R")};
+        thighs=new[]{Part("Thigh.L"),Part("Thigh.R")};shins=new[]{Part("Shin.L"),Part("Shin.R")};
+        wings=new[]{Part("WING_GIMBAL.L"),Part("WING_GIMBAL.R")};
+        Drones=Enumerable.Range(1,6).Select(i=>Part("DRONE_"+i.ToString("00")+"_ROOT")).ToArray();
+        skirtRest=skirts.Select(t=>t.localRotation).ToArray();wingRest=wings.Select(t=>t.localRotation).ToArray();
+        droneRest=Drones.Select(t=>t.localRotation).ToArray();dronePosition=Drones.Select(t=>t.localPosition).ToArray();
+    }
+    void Start()
+    {
+        support=GetComponent<NemesisDroneController>();
+    }
+    public void ResetDeployment(){support?.Cancel();Deployment=0;WingOpen=0;GetComponent<NemesisAfterimage>()?.Clear();}
+    public void ExtendLumbar(float pitch)
+    {waist.localPosition=waistRest+Vector3.up*Mathf.Min(.083f,Mathf.Max(0,Mathf.Abs(pitch)-3)*.0031f);}
+    public void ParkBlade()
+    {
+        var direction=Player.transform.TransformDirection(new Vector3(-.15f,-.985f,-.07f));
+        blade.bladeRoot.rotation=Quaternion.LookRotation(direction,Player.transform.right);
+        blade.bladeRoot.position=thorax.position+Player.transform.TransformDirection(new Vector3(-.65f,.20f,-.47f));
+    }
+    void LateUpdate()
+    {
+        if(GameManager.Instance==null||GameManager.Instance.IsPaused)return;
+        float deploy=support!=null?support.Deployment:0;
+        Deployment=deploy;
+        float air=motion.FlightBlend;
+        float targetWing=GameManager.Instance.IsCombatActive&&(Player.IsDashing||Player.IsBoosting)?1:0;
+        WingOpen=Mathf.MoveTowards(WingOpen,targetWing,Time.deltaTime*(targetWing>WingOpen?11:3.5f));
+        for(int i=0;i<2;i++)
+        {
+            float side=i==0?-1:1;
+            // Use the actual shin pivot, not a mesh child or the hip yaw, for skirt clearance.
+            var axis=Player.transform.InverseTransformDirection(shins[i].position-thighs[i].position);
+            float opening=Mathf.Clamp(Mathf.Atan2(axis.z,-axis.y)*Mathf.Rad2Deg,0,60);
+            skirts[i].localRotation=skirtRest[i]*Quaternion.Euler(-opening*.78f,0,0);
+            skirts[i+2].localRotation=skirtRest[i+2]*Quaternion.Euler(0,0,-side*(4+8*air));
+            wings[i].localRotation=wingRest[i]*Quaternion.Euler(WingOpen*10,0,side*(WingOpen*52+deploy*11));
+        }
+        for(int i=0;i<6;i++)
+        {
+            float side=i<3?1:-1;int rank=i%3;
+            Drones[i].localPosition=dronePosition[i];
+            Drones[i].localRotation=droneRest[i]*Quaternion.Euler(0,0,side*(rank-1)*WingOpen*14);
+        }
+        if(GameManager.Instance.Phase==GamePhase.Hangar)ParkBlade();
+    }
+}

@@ -39,12 +39,14 @@ public class GameManager : MonoBehaviour
     public ArenaSector arenaSector;
     public SettingsUI settingsUI;
     public EquipmentLoop equipmentLoop;
+    public HangarPresentation Hangar { get; private set; }
     public string LastRunUpgradeSummary { get; private set; }
     public bool WeaponTrialActive => weaponTrial != null;
     private WeaponTrial weaponTrial;
 
     public int Coins { get; private set; }
     public int Kills { get; private set; }
+    public Vector3 LastKillPosition {get;private set;}
     public GamePhase Phase { get; private set; }
     public string ProgressText { get; private set; }
     public bool IsPaused { get; private set; }
@@ -52,6 +54,7 @@ public class GameManager : MonoBehaviour
     public int CompletedEncounters { get; private set; }
     public bool ContinueUsed { get; private set; }
     public bool LastResultVictory { get; private set; }
+    public bool AwaitingContinue=>Phase==GamePhase.Combat && stageManager.Flow?.Phase==EncounterPhase.RewardHold;
     public bool CanContinue => equipmentLoop == null && Phase == GamePhase.Result && !LastResultVictory && !ContinueUsed
         && Difficulty == RunDifficulty.Cadet && checkpoint != null;
     public int CheckpointEncounter => checkpoint != null ? checkpoint.encounter : -1;
@@ -94,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     public bool CanPlayerControl
     {
-        get { return !IsPaused && (equipmentLoop == null || !equipmentLoop.UI.IsVisible) && (Phase == GamePhase.Hangar || Phase == GamePhase.Combat); }
+        get { return !IsPaused && (equipmentLoop == null || !equipmentLoop.UI.IsVisible) && Phase == GamePhase.Combat; }
     }
 
     private void Awake()
@@ -105,6 +108,7 @@ public class GameManager : MonoBehaviour
         FindMissingReferences();
         equipmentLoop = GetComponent<EquipmentLoop>() ?? gameObject.AddComponent<EquipmentLoop>();
         equipmentLoop.Initialize(this);
+        Hangar = GetComponent<HangarPresentation>() ?? gameObject.AddComponent<HangarPresentation>();
     }
 
     private void Start()
@@ -139,6 +143,7 @@ public class GameManager : MonoBehaviour
         {
             BeginRun();
         }
+        if(!IsPaused && AwaitingContinue && Input.GetKeyDown(KeyCode.Return))ContinueAfterSalvage();
     }
 
     private void OnDestroy()
@@ -155,7 +160,13 @@ public class GameManager : MonoBehaviour
     public void EnterHangar()
     {
         SetPaused(false);
+        GameAudio.ResetCombatSound();
         Phase = GamePhase.Hangar;
+        var playerDamageable=playerController.GetComponent<Damageable>();
+        if(playerDamageable!=null&&playerDamageable.IsDead)
+            playerDamageable.RestoreLife(playerStats.MaxHp,playerStats.MaxHp);
+        playerController.Loadout.EnterHangar();
+        Hangar.Show(this);
         ProgressText = "Hangar ready - press E to start";
         if (equipmentLoop != null) equipmentLoop.ApplyLoadout();
         if (combatHUD != null)
@@ -184,14 +195,47 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void BeginRun()
+    public void BeginP0Combat()
     {
-        if (PrepareRun()) StartEncounter(0, true);
+        if(!PrepareRun(CombatMode.ShortCombat))return;
+        stageManager.StopStage();Phase=GamePhase.Combat;arenaSector.ShowSector(1);
+        GameAudio.ResetCombatSound();
+        ArmorContactVfx.Get().Clear();
+        playerStats.baseDashCooldown=.48f;playerStats.ResetStats();
+        playerController.RestoreAt(arenaSector.PlayerEntry);
+        combatHUD.SetVisible(false);
+    }
+    public void BeginRun(){BeginFullDemo();}
+    public void BeginFullDemo()
+    {
+        if(!PrepareRun(CombatMode.FullDemo))return;
+        ClosePractice();StartEncounter(0,true);
+    }
+    void ClosePractice()
+    {
+        foreach(var range in FindObjectsByType<WeaponTrial>(FindObjectsSortMode.None))
+        {range.enabled=false;Destroy(range);}
+        weaponTrial=null;
+        foreach(var demo in FindObjectsByType<P0CombatDemo>(FindObjectsSortMode.None))
+        {demo.enabled=false;Destroy(demo.gameObject);}
+        CombatLabSettings.Exit();
+    }
+    public void ExitPractice(){ClosePractice();CombatRuntime.EndRun();StopCombat();EnterHangar();}
+    public void BeginShortCombat()
+    {
+        if(Phase!=GamePhase.Hangar||IsPaused)return;
+        var demo=FindFirstObjectByType<P0CombatDemo>();
+        if(demo==null)new GameObject("Combat practice").AddComponent<P0CombatDemo>();else demo.Restart();
+    }
+    public void ReplayCurrentRun()
+    {
+        if(Phase!=GamePhase.Result)return;
+        EnterHangar();playerController.Loadout.Select(PrimaryWeapon.M7);BeginFullDemo();
     }
 
-    private bool PrepareRun()
+    private bool PrepareRun(CombatMode mode=CombatMode.FullDemo)
     {
-        if (Phase != GamePhase.Hangar || IsPaused || (equipmentLoop != null && equipmentLoop.UI.IsVisible))
+        if (Phase != GamePhase.Hangar || IsPaused || !playerController.Loadout.CanDeploy || (equipmentLoop != null && equipmentLoop.UI.IsVisible))
         {
             return false;
         }
@@ -206,8 +250,11 @@ public class GameManager : MonoBehaviour
             combatHUD.SetVisible(true);
         }
 
+        CombatRuntime.BeginRun(mode:mode);UnityEngine.Random.InitState(CombatRuntime.Run.Seed);
+        GameAudio.ResetCombatSound();OverdriveVfx.Clear();ArmorContactVfx.Get().Clear();
         Coins = 0;
-        Kills = 0;
+        Hangar.Hide();
+        Kills = 0;LastKillPosition=Vector3.zero;
         CompletedEncounters = 0;
         ContinueUsed = false;
         checkpoint = null;
@@ -218,13 +265,14 @@ public class GameManager : MonoBehaviour
 
         if (playerStats != null)
         {
+            playerStats.baseDashCooldown=.48f;
             playerStats.ResetStats();
             playerStats.Heal(9999f);
         }
 
         if (upgradeSystem != null)
         {
-            upgradeSystem.ResetUpgrades();
+            upgradeSystem.ResetUpgrades(CombatRuntime.Run!=null?CombatRuntime.Run.Seed:0);
         }
 
         if (equipmentLoop != null) equipmentLoop.BeginRun();
@@ -260,7 +308,7 @@ public class GameManager : MonoBehaviour
         if (arenaSector != null) arenaSector.ShowSector(index < 3 ? 1 : 2);
         if (index == 0 || index == 3 || index == 6)
         {
-            playerController.RestoreAt(new Vector3(0f, 0.1f, index == 6 ? -6f : -4f));
+            playerController.RestoreAt(index==6?new Vector3(0,.1f,-6):arenaSector.PlayerEntry);
             if (saveCheckpoint)
             {
                 playerStats.Heal(playerStats.MaxHp);
@@ -270,15 +318,24 @@ public class GameManager : MonoBehaviour
             }
         }
         stageManager.StartEncounter(index, bossOverride);
+        if(CombatRuntime.Run!=null)CombatRuntime.Run.Encounter=index;
     }
 
     public void OnEncounterCleared(int index)
     {
         if (Phase != GamePhase.Combat || stageManager.CurrentEncounter != index || CompletedEncounters != index) return;
         CompletedEncounters++;
+        CombatFeedback.EncounterCleared(LastKillPosition);
         AddCoins(30 + index * 10);
-        if (equipmentLoop != null) equipmentLoop.AbsorbNearby(true);
-        EnterReward();
+        SetProgress("清场完成 · F 试装残骸武器 · Enter 继续并选择强化");
+        foreach(var shot in FindObjectsByType<Projectile>(FindObjectsSortMode.None))shot.Despawn();
+    }
+    public bool ContinueAfterSalvage()
+    {
+        if(IsPaused||!AwaitingContinue||equipmentLoop.Absorption.Busy)return false;
+        if(!equipmentLoop.Absorption.CollectWithoutInstalling())return false;
+        if(!stageManager.Flow.ContinueRoom())return false;
+        EnterReward();return true;
     }
 
     public void OnStageCleared(int stageIndex)
@@ -293,7 +350,7 @@ public class GameManager : MonoBehaviour
         if (Phase != GamePhase.Combat) return;
         SetPaused(false);
         Phase = GamePhase.Reward;
-        StopCombat();
+        CombatRuntime.InvalidateActions();ResetPlayerInput();GameAudio.ResetCombatSound();
         if (combatHUD != null) combatHUD.SetVisible(false);
         ProgressText = "ENCOUNTER " + CompletedEncounters + " / 6 CLEARED";
         GameAudio.Play(GameAudioCue.Reward, 0.45f, 1f);
@@ -311,12 +368,8 @@ public class GameManager : MonoBehaviour
             rewardUI.Hide();
         }
 
-        if (equipmentLoop != null)
-        {
-            Phase = GamePhase.Loadout;
-            equipmentLoop.OpenWarehouse();
-        }
-        else StartEncounter(CompletedEncounters, true);
+        if(stageManager.Flow!=null&&!stageManager.Flow.CompleteReward())return;
+        StartEncounter(CompletedEncounters, true);
     }
 
     public void BeginBossPreview()
@@ -348,7 +401,9 @@ public class GameManager : MonoBehaviour
     }
     public void BeginWeaponTrial()
     {
-        if(Phase!=GamePhase.Hangar || IsPaused)return;
+        if(Phase!=GamePhase.Hangar || IsPaused || !playerController.Loadout.CanDeploy)return;
+        Hangar.Hide();
+        if (arenaSector != null) arenaSector.ShowSector(1);
         StopCombat();equipmentLoop.ClearPickups();
         Phase=GamePhase.Combat;hangarUI.Hide();combatHUD.SetVisible(false);
         playerController.RestoreAt(new Vector3(0,.1f,-12));
@@ -392,9 +447,11 @@ public class GameManager : MonoBehaviour
     public void EnterResult(bool victory)
     {
         if (Phase == GamePhase.Result) return;
+        if(!victory && stageManager.Flow?.Phase==EncounterPhase.BossDefeat)return;
         SetPaused(false);
         Phase = GamePhase.Result;
         LastResultVictory = victory;
+        CombatRuntime.EndRun();
         LastRunUpgradeSummary = upgradeSystem != null ? upgradeSystem.GetSummary() : "";
         StopCombat();
         if (equipmentLoop != null)
@@ -402,12 +459,12 @@ public class GameManager : MonoBehaviour
             equipmentLoop.UI.Hide();
             equipmentLoop.ClearPickups();
             checkpoint = null;
-            if (upgradeSystem != null) upgradeSystem.ResetUpgrades();
+            if (upgradeSystem != null) upgradeSystem.ResetUpgrades(CombatRuntime.Run!=null?CombatRuntime.Run.Seed:0);
         }
         if (combatHUD != null) combatHUD.SetVisible(false);
         if (rewardUI != null) rewardUI.Hide();
         if (shopUI != null) shopUI.Hide();
-        GameAudio.Play(victory ? GameAudioCue.Victory : GameAudioCue.Defeat, 0.55f, 1f);
+        if(!CombatLabSettings.Active)GameAudio.Play(victory ? GameAudioCue.Victory : GameAudioCue.Defeat, 0.55f, 1f);
         if (runManager != null)
         {
             runManager.EndRun();
@@ -419,8 +476,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RegisterKill(int rewardCoins)
+    public void RegisterKill(int rewardCoins,Vector3? position=null)
     {
+        if(position.HasValue)LastKillPosition=position.Value;
         if (Phase != GamePhase.Combat) return;
         Kills++;
         if (rewardCoins > 0)
@@ -436,6 +494,8 @@ public class GameManager : MonoBehaviour
 
     private void StopCombat()
     {
+        CombatRuntime.InvalidateActions();
+        GameAudio.ResetCombatSound();
         ResetPlayerInput();
         CombatEffects.ClearTelegraphs();
         if (stageManager != null) stageManager.StopStage();
@@ -499,6 +559,7 @@ public class GameManager : MonoBehaviour
 
         if (paused)
         {
+            CombatRuntime.InvalidateActions();
             timeScaleBeforePause = Mathf.Max(0.0001f, Time.timeScale);
             IsPaused = true;
             ResetPlayerInput();
@@ -523,6 +584,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartRun()
     {
+        CombatRuntime.EndRun();
         IsPaused = false;
         Time.timeScale = 1f;
         AudioListener.pause = false;

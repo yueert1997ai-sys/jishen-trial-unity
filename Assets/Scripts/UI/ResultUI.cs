@@ -13,7 +13,7 @@ public class ResultUI : MonoBehaviour
     private void Update()
     {
         if (canvas != null && canvas.gameObject.activeSelf && Input.GetKeyDown(KeyCode.R))
-            gameManager.RestartRun();
+            gameManager.ReplayCurrentRun();
     }
 
     public void Show(GameManager owner, bool victory)
@@ -46,10 +46,13 @@ public class ResultUI : MonoBehaviour
         canvas.sortingOrder = 30;
         var panel = RuntimeUIFactory.CreateMenuSurface(canvas, "ResultPanel", new Vector2(640, 420));
         title = RuntimeUIFactory.MenuText(panel, "ResultTitle", "", 28, new Vector2(320, -54), new Vector2(560, 48));
+        var hangar = RuntimeUIFactory.MenuButton(panel,"ResultHangarButton","出击准备",new Vector2(544,-22),new Vector2(124,32));
+        hangar.GetComponentInChildren<Text>().fontSize=14;
+        hangar.onClick.AddListener(()=>gameManager.EnterHangar());
         resultText = RuntimeUIFactory.MenuText(panel, "ResultText", "", 18, new Vector2(320, -220), new Vector2(560, 246), TextAnchor.UpperLeft);
         continueButton = RuntimeUIFactory.MenuButton(panel, "ContinueRunButton", "Retry sector (1)", new Vector2(178, -370), new Vector2(276, 56));
         continueButton.onClick.AddListener(() => gameManager.ContinueRun());
-        returnButton = RuntimeUIFactory.MenuButton(panel, "ReturnHangarButton", "Return to hangar", new Vector2(320, -370), new Vector2(560, 56));
-        returnButton.onClick.AddListener(() => gameManager.RestartRun());
+        returnButton = RuntimeUIFactory.MenuButton(panel, "ReturnHangarButton", "重新出击 [R]", new Vector2(320, -370), new Vector2(560, 56));
+        returnButton.onClick.AddListener(() => gameManager.ReplayCurrentRun());
     }
 }

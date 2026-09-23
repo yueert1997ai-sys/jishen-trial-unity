@@ -1,0 +1,6 @@
+Assets/Art/NemesisM02/J01.j01mesh filter=lfs diff=lfs merge=lfs -text
+Assets/Art/NemesisM01/Meshes/J01_Body_LOD0.asset filter=lfs diff=lfs merge=lfs -text
+Assets/Art/NemesisM01/Meshes/J01_Body_LOD1.asset filter=lfs diff=lfs merge=lfs -text
+Assets/Art/NemesisM01/J01.j01mesh filter=lfs diff=lfs merge=lfs -text
+Assets/Art/NemesisM02/Meshes/J01_Body_LOD0.asset filter=lfs diff=lfs merge=lfs -text
+Assets/Art/NemesisM02/Meshes/J01_Body_LOD1.asset filter=lfs diff=lfs merge=lfs -text

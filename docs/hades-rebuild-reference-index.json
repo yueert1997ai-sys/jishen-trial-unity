@@ -1,0 +1,1120 @@
+[
+  {
+    "id": "E01",
+    "title": "发行材料、二进制与匹配 PDB",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\x64\\Hades.exe",
+        "line": null
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\x64\\Hades.pdb",
+        "line": null
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\x64\\EngineWin64.dll",
+        "line": null
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\x64\\EngineWin64.pdb",
+        "line": null
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\x64\\EngineWin64s.dll",
+        "line": null
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\x64\\EngineWin64s.pdb",
+        "line": null
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\x64\\Engine.dll",
+        "line": null
+      }
+    ]
+  },
+  {
+    "id": "E02",
+    "title": "初始化与数据回调体系",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunData.lua",
+        "line": 59
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 5044
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyData.lua",
+        "line": 22309
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyData.lua",
+        "line": 26724
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\WeaponData.lua",
+        "line": 16995
+      }
+    ]
+  },
+  {
+    "id": "E03",
+    "title": "时钟、协程、等待、通知与延迟表现",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 20
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 28
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 406
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 481
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 498
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 575
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 611
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 655
+      }
+    ]
+  },
+  {
+    "id": "E04",
+    "title": "换房状态交接与清理",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 669
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 5590
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 4906
+      }
+    ]
+  },
+  {
+    "id": "E05",
+    "title": "Lua 数据继承与加工",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunData.lua",
+        "line": 59
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunData.lua",
+        "line": 477
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunData.lua",
+        "line": 502
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunData.lua",
+        "line": 518
+      }
+    ]
+  },
+  {
+    "id": "E06",
+    "title": "地图事件与游戏／当局初始化",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 141
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 219
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 114
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 217
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 1820
+      }
+    ]
+  },
+  {
+    "id": "E07",
+    "title": "各类遭遇事件的明确顺序",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EncounterSets.lua",
+        "line": 39
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EncounterSets.lua",
+        "line": 49
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EncounterSets.lua",
+        "line": 59
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EncounterSets.lua",
+        "line": 71
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EncounterSets.lua",
+        "line": 84
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EncounterSets.lua",
+        "line": 130
+      }
+    ]
+  },
+  {
+    "id": "E08",
+    "title": "遭遇开始、清场、完成与出口资格",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 2421
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomEvents.lua",
+        "line": 874
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomEvents.lua",
+        "line": 927
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 3655
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 1695
+      }
+    ]
+  },
+  {
+    "id": "E09",
+    "title": "死亡、归档与再次出发",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\DeathLoop.lua",
+        "line": 2
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\DeathLoop.lua",
+        "line": 47
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\DeathLoop.lua",
+        "line": 322
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 1721
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 1933
+      }
+    ]
+  },
+  {
+    "id": "E10",
+    "title": "地图模板与区域结构",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Maps\\A_Combat01.map_text",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Maps\\A_Combat01.thing_text",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomData.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomDataTartarus.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomDataAsphodel.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomDataElysium.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomDataStyx.lua",
+        "line": 594
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomDataStyx.lua",
+        "line": 1091
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomDataSurface.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomDataSecrets.lua",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "E11",
+    "title": "下一房间选择及门绑定",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 515
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 591
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 652
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 4888
+      }
+    ]
+  },
+  {
+    "id": "E12",
+    "title": "遭遇预算、类型、数量与敌人成本",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 898
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 1050
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 1200
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyData.lua",
+        "line": 352
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyData.lua",
+        "line": 794
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyData.lua",
+        "line": 1673
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyData.lua",
+        "line": 2813
+      }
+    ]
+  },
+  {
+    "id": "E13",
+    "title": "分波生成、同屏上限与生成点",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomEvents.lua",
+        "line": 399
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomEvents.lua",
+        "line": 699
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomEvents.lua",
+        "line": 734
+      }
+    ]
+  },
+  {
+    "id": "E14",
+    "title": "普通敌人攻击链路",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyAI.lua",
+        "line": 729
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyAI.lua",
+        "line": 750
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyAI.lua",
+        "line": 1017
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyAI.lua",
+        "line": 1359
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyAI.lua",
+        "line": 4460
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyAI.lua",
+        "line": 4478
+      }
+    ]
+  },
+  {
+    "id": "E15",
+    "title": "Boss 阶段及死亡门槛",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyAI.lua",
+        "line": 4207
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomEvents.lua",
+        "line": 1843
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\EnemyData.lua",
+        "line": 22328
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 714
+      }
+    ]
+  },
+  {
+    "id": "E16",
+    "title": "原生输入、武器、生命与脚本桥接口",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\x64\\EngineWin64.pdb",
+        "line": null
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\x64\\EngineWin64.dll",
+        "line": null
+      }
+    ]
+  },
+  {
+    "id": "E17",
+    "title": "冲刺基础定义及可取消效果",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 6
+      }
+    ]
+  },
+  {
+    "id": "E18",
+    "title": "剑连段、冲刺攻击和六族武器定义",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 1622
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 1828
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 1949
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 1747
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 520
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 1125
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 834
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 2231
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 2996
+      }
+    ]
+  },
+  {
+    "id": "E19",
+    "title": "弹体类型、投弹和武器集合",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Weapons\\PlayerWeapons.sjson",
+        "line": 450
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Projectiles\\PlayerProjectiles.sjson",
+        "line": 2377
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Projectiles\\PlayerProjectiles.sjson",
+        "line": 3557
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\WeaponSets.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "E20",
+    "title": "24 形态及应用机制",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\WeaponUpgradeData.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\WeaponUpgradeScripts.lua",
+        "line": 823
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitData.lua",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "E21",
+    "title": "命中与 Lua 伤害链路",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 2597
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 384
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 714
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 836
+      }
+    ]
+  },
+  {
+    "id": "E22",
+    "title": "护甲、抗硬直、累计受伤保护与复活",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 1050
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 1088
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 1096
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 1244
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 1431
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\HeroData.lua",
+        "line": 29
+      }
+    ]
+  },
+  {
+    "id": "E23",
+    "title": "能力钩子及状态事件",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Powers.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 3448
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 3512
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 3635
+      }
+    ]
+  },
+  {
+    "id": "E24",
+    "title": "神力资源与技能执行",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\ShoutScripts.lua",
+        "line": 9
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\ShoutScripts.lua",
+        "line": 65
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\ShoutScripts.lua",
+        "line": 110
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\ShoutScripts.lua",
+        "line": 275
+      }
+    ]
+  },
+  {
+    "id": "E25",
+    "title": "伙伴和赠礼",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\AssistScripts.lua",
+        "line": 26
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\GiftScripts.lua",
+        "line": 28
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\GiftScripts.lua",
+        "line": 129
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\GiftData.lua",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "E26",
+    "title": "奖励袋、资格、抽取与补充",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 1507
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 1516
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 1543
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\LootData.lua",
+        "line": 20549
+      }
+    ]
+  },
+  {
+    "id": "E27",
+    "title": "长期与当局奖励比例纠偏",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 4744
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 217
+      }
+    ]
+  },
+  {
+    "id": "E28",
+    "title": "神系、槽位、替换、前置与选择确认",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 1709
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\UpgradeChoice.lua",
+        "line": 628
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\UpgradeChoice.lua",
+        "line": 666
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\UpgradeChoice.lua",
+        "line": 695
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitScripts.lua",
+        "line": 1531
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\UpgradeChoice.lua",
+        "line": 879
+      }
+    ]
+  },
+  {
+    "id": "E29",
+    "title": "代表性神系 Trait 与奖励来源",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitData.lua",
+        "line": 764
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitData.lua",
+        "line": 1901
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitData.lua",
+        "line": 3457
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitData.lua",
+        "line": 5601
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitData.lua",
+        "line": 7585
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitData.lua",
+        "line": 9443
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitData.lua",
+        "line": 11838
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitData.lua",
+        "line": 13339
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\LootData.lua",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "E30",
+    "title": "Trait 数值加工与完整生命周期",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitScripts.lua",
+        "line": 341
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitScripts.lua",
+        "line": 573
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitScripts.lua",
+        "line": 825
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\TraitScripts.lua",
+        "line": 1164
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\UpgradeManager.lua",
+        "line": 17
+      }
+    ]
+  },
+  {
+    "id": "E31",
+    "title": "镜子选项及切换应用",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\MetaUpgradeData.lua",
+        "line": 884
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\MetaUpgrades.lua",
+        "line": 1664
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\UpgradeManager.lua",
+        "line": 431
+      }
+    ]
+  },
+  {
+    "id": "E32",
+    "title": "纪念品装备与房间进度",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\KeepsakeScripts.lua",
+        "line": 80
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\KeepsakeScripts.lua",
+        "line": 105
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\KeepsakeScripts.lua",
+        "line": 132
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\GiftData.lua",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "id": "E33",
+    "title": "契约和分武器进度",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\MetaUpgradeData.lua",
+        "line": 926
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 1933
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 2203
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 2233
+      }
+    ]
+  },
+  {
+    "id": "E34",
+    "title": "经济、资源、特殊事件与钓鱼",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\ConsumableData.lua",
+        "line": 1904
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\StoreScripts.lua",
+        "line": 2
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\StoreScripts.lua",
+        "line": 324
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\SellTraitScripts.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\MarketScreen.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\GhostAdminScreen.lua",
+        "line": 490
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomEvents.lua",
+        "line": 1661
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomEvents.lua",
+        "line": 1612
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomEvents.lua",
+        "line": 1914
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\FishingScripts.lua",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "E35",
+    "title": "共享状态资格检查",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RunManager.lua",
+        "line": 2567
+      }
+    ]
+  },
+  {
+    "id": "E36",
+    "title": "叙事选择、播放与条件记录",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Narrative.lua",
+        "line": 10
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Narrative.lua",
+        "line": 411
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\NPCData.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\DeathLoopData.lua",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "E37",
+    "title": "图鉴、预言和临时目标",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\CodexScripts.lua",
+        "line": 16
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\CodexScripts.lua",
+        "line": 53
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\QuestLogScreen.lua",
+        "line": 791
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\QuestLogScreen.lua",
+        "line": 223
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Objectives.lua",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "E38",
+    "title": "开火表现分支与交接",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 2242
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 2278
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 2287
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 2304
+      }
+    ]
+  },
+  {
+    "id": "E39",
+    "title": "命中停顿、优先减速与最后击杀",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\CombatPresentation.lua",
+        "line": 2067
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\CombatPresentation.lua",
+        "line": 2119
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\CombatPresentation.lua",
+        "line": 2127
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\CombatPresentation.lua",
+        "line": 2156
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomEvents.lua",
+        "line": 927
+      }
+    ]
+  },
+  {
+    "id": "E40",
+    "title": "表现预算",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\CombatPresentation.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\CombatPresentation.lua",
+        "line": 26
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\CombatPresentation.lua",
+        "line": 46
+      }
+    ]
+  },
+  {
+    "id": "E41",
+    "title": "房间镜头与绘制组",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomPresentation.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\RoomManager.lua",
+        "line": 1532
+      }
+    ]
+  },
+  {
+    "id": "E42",
+    "title": "冲刺动画资源、方向、帧与碰撞信息",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Game\\Animations\\CharacterAnimationsHero.sjson",
+        "line": 7713
+      }
+    ]
+  },
+  {
+    "id": "E43",
+    "title": "音乐分轨、事件与语音资格",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\AudioScripts.lua",
+        "line": 273
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\AudioScripts.lua",
+        "line": 242
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\AudioScripts.lua",
+        "line": 318
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\AudioScripts.lua",
+        "line": 910
+      }
+    ]
+  },
+  {
+    "id": "E44",
+    "title": "序列化与随机状态",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 976
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 1008
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Main.lua",
+        "line": 1075
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Random.lua",
+        "line": 54
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Random.lua",
+        "line": 85
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Random.lua",
+        "line": 100
+      }
+    ]
+  },
+  {
+    "id": "E45",
+    "title": "UI 系统、输入提示与辅助减伤",
+    "locations": [
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\UIScripts.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\UIScripts.lua",
+        "line": 2920
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\UIData.lua",
+        "line": 1
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\Combat.lua",
+        "line": 828
+      },
+      {
+        "file": "D:\\BaiduNetdiskDownload\\Hades.Multi.9\\Content\\Scripts\\HeroData.lua",
+        "line": 1
+      }
+    ]
+  }
+]

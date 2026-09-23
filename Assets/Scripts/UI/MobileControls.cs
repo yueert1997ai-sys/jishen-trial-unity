@@ -15,6 +15,7 @@ public class MobileControls : MonoBehaviour
     private Text skillLabel;
     private MobileActionButton dashAction;
     private float nextRefresh;
+    private float touchVisibleUntil;
 
     private void Start()
     {
@@ -77,22 +78,24 @@ public class MobileControls : MonoBehaviour
     {
         if (canvas == null) return;
         var gm = GameManager.Instance;
+        if (Input.touchCount > 0) touchVisibleUntil = Time.unscaledTime + 4f;
         bool show = gm != null && gm.IsCombatActive;
         SetVisible(show);
         if (!show || Time.unscaledTime < nextRefresh) return;
         nextRefresh = Time.unscaledTime + 0.1f;
         dash.interactable = dashAction.IsHoldingBoost || (player.IsDashReady && player.stats.CurrentEnergy >= 25f);
-        melee.interactable = player.Melee.CooldownRemaining <= 0 && !player.IsDashing;
+        melee.interactable = (player.Loadout == null || player.Loadout.CanUseSword) && player.Melee.CooldownRemaining <= 0 && !player.IsDashing;
         meleeLabel.text = player.Melee.CooldownRemaining > 0 ? player.Melee.CooldownRemaining.ToString("0.0") : GameText.T("SLASH");
-        skill.interactable = player.weaponController.SkillCooldownRemaining <= 0f && player.AutoAim.CurrentTarget != null;
+        skill.interactable = player.weaponController.SkillCooldownRemaining <= 0f && (player.Loadout.IsNemesis||player.AutoAim.CurrentTarget != null);
         dashLabel.text = player.IsBoosting ? EquipmentWarehouseUI.T("推进", "BOOST")
             : player.IsDashReady ? GameText.T("DASH") : player.DashCooldownRemaining.ToString("0.0");
         float cooldown = player.weaponController.SkillCooldownRemaining;
-        skillLabel.text = cooldown > 0f ? cooldown.ToString("0.0") : GameText.T("SALVO");
+        skillLabel.text = cooldown > 0f ? cooldown.ToString("0.0") : player.Loadout.IsNemesis?EquipmentWarehouseUI.T("浮游炮","DRONES"):GameText.T("SALVO");
     }
 
     public void SetVisible(bool visible)
     {
+        visible &= Application.isMobilePlatform || Time.unscaledTime < touchVisibleUntil;
         if (canvas != null && canvas.gameObject.activeSelf != visible) canvas.gameObject.SetActive(visible);
         if (!visible && Joystick != null) Joystick.ResetInput();
         if (!visible && AimJoystick != null) AimJoystick.ResetInput();

@@ -24,6 +24,7 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
     public bool LeftPlanted=>legL.planted;
     public bool RightPlanted=>legR.planted;
     private PlayerController player;
+    private NemesisMotionRig nemesis;
     private Damageable health;
     private RiggedMechAnimator rig;
     private RigidMechPoseDriver pose;
@@ -42,6 +43,18 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
     private float accelerationLean;
     private Quaternion weaponInHand,attackHeading,heldRotation,rootInFrame;
     private float cycle,death,recoil,previousPoseTime;
+    private float hitAge=1f,hitDuration=.26f,hitStrength;
+    private Vector3 hitDirection;
+    public float HitReactionWeight => health!=null&&!health.IsDead ? hitStrength*(1-Mathf.Exp(-hitAge*150))*Mathf.Pow(Mathf.Clamp01(1-hitAge/hitDuration),2) : 0;
+    public void ResetHitReaction(){hitAge=1;hitStrength=0;death=0;}
+    private void OnDamage(Damageable target,DamageInfo info)
+    {
+        if(info.Amount<=0)return;
+        hitDirection=Vector3.ProjectOnPlane(target.transform.position-info.SourcePosition,Vector3.up).normalized;
+        if(hitDirection.sqrMagnitude<.01f)hitDirection=-player.transform.forward;
+        hitStrength=Mathf.Clamp(.65f+info.Amount/30f,.65f,1.4f);
+        hitDuration=info.HeavyImpact?.32f:.26f;hitAge=0;
+    }
     private Vector3 heldPosition;
     private E01PlayerRifle recoveredRifle;
     private Leg legL,legR;
@@ -64,6 +77,7 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
     {
         rig=GetComponent<RiggedMechAnimator>();pose=GetComponent<RigidMechPoseDriver>();blade=GetComponent<RaikenBladePresentation>();
         player=GetComponentInParent<PlayerController>();health=GetComponentInParent<Damageable>();
+        nemesis=GetComponent<NemesisMotionRig>();
         foreach(var s in pose.segments)Remember(s.target);
         pelvis=Part("Pelvis");waist=Part("Waist");chest=Part("Thorax");head=Part("Head");Remember(waist);
         armR=Part("UpperArm.R");foreR=Part("Forearm.R");handR=Part("Hand.R");
@@ -92,7 +106,7 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         heldPosition=blade.bladeRoot.localPosition;heldRotation=blade.bladeRoot.localRotation;
         rootInFrame=Quaternion.Inverse(oldFrame)*blade.bladeRoot.rotation;
         legL=MakeLeg(-1,"L");legR=MakeLeg(1,"R");lastPosition=player.transform.position;
-        combo=ValkyrComboProfile.LoadActive();
+        combo=nemesis!=null?NemesisComboProfile.Active:ValkyrComboProfile.LoadActive();
         displayedKey=ValkyrComboProfile.Ready;
         rig.animator.enabled=false;
     }
@@ -102,9 +116,14 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         foreach(var c in pose.soleContacts)if(c.part.IsChildOf(foot))points.Add(foot.InverseTransformPoint(c.part.TransformPoint(c.localPoint)));
         return new Leg{side=side,thigh=Part("Thigh."+suffix),knee=Part("Shin."+suffix),foot=foot,sole=points.ToArray()};
     }
-    private void Start(){player.weaponController.BeamFired+=OnShot;player.Melee.AttackStarted+=BeginStrike;player.Melee.AttackCancelled+=BeginReturn;}
+    private void Start()
+    {
+        player.Melee.ConfigureMotionProfile(combo);
+        health.OnDamaged+=OnDamage;player.weaponController.BeamFired+=OnShot;
+        player.Melee.AttackStarted+=BeginStrike;player.Melee.AttackCancelled+=BeginReturn;
+    }
     private void BeginReturn(){cancelKey=displayedKey;cancelBlend=.18f;}
-    private void OnShot(){recoil=.055f;}
+    private void OnShot(){recoil=nemesis!=null?.105f:.055f;}
     private void BeginStrike()
     {
         entryKey=displayedKey;entryEdge=shownEdge;cancelBlend=0;
@@ -119,10 +138,12 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
     {
         if(player==null||(GameManager.Instance!=null&&GameManager.Instance.IsPaused))return;
         float dt=Time.deltaTime,speed=player.Velocity.magnitude;
+        hitAge+=dt;
         float acceleration=Vector3.Dot(player.Velocity-previousVelocity,player.transform.forward)/Mathf.Max(dt,.001f);
         previousVelocity=player.Velocity;
         accelerationLean=Mathf.Lerp(accelerationLean,Mathf.Clamp(acceleration*.22f,-6,7),1-Mathf.Exp(-12*dt));
         Vector3 displacement=player.transform.position-lastPosition;displacement.y=0;lastPosition=player.transform.position;
+        if(player.Melee.IsAttacking)attackOrigin+=displacement;
         bool attacking=player.Melee.IsAttacking;
         RunBlend=Mathf.MoveTowards(RunBlend,Mathf.Clamp01(speed/5.5f),dt*7);
         FlightBlend=Mathf.MoveTowards(FlightBlend,player.IsDashing||player.IsBoosting?1:0,dt*(player.IsDashing?15:6));
@@ -130,18 +151,19 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         if(!attacking&&FlightBlend<.1f&&displacement.magnitude<1)cycle+=displacement.magnitude/3.9f;
         recoil=Mathf.MoveTowards(recoil,0,dt*.8f);
         cancelBlend=Mathf.Max(0,cancelBlend-dt);
-        if(attacking)
+        if(attacking && !player.Melee.ImpactHeld)
         {
             float end=Mathf.Min(player.Melee.CurrentStroke.contactEnd,player.Melee.AttackElapsed);
             float start=Mathf.Max(player.Melee.CurrentStroke.contactStart,previousPoseTime);
             if(end>=start)
             {
                 int count=Mathf.Max(1,Mathf.CeilToInt((end-start)*240));
-                for(int i=0;i<=count;i++)
+                for(int i=previousPoseTime>=player.Melee.CurrentStroke.contactStart?1:0;i<=count;i++)
                 {
                     float time=Mathf.Lerp(start,end,i/(float)count);
                     ApplyPose(0,time);
-                    blade.RecordCutSample(blade.grip.position,blade.tip.position);
+                    blade.RecordCutSample(blade.grip.position,blade.tip.position,Time.time-(player.Melee.AttackElapsed-time)/player.Melee.AttackSpeed);
+                    if(player.Melee.ImpactHeld){player.Melee.LockContactPose(time);break;}
                 }
             }
             previousPoseTime=player.Melee.AttackElapsed;
@@ -155,11 +177,23 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         foreach(var item in rest)item.Key.SetLocalPositionAndRotation(item.Value.position,item.Value.local);
         pose.assemblyRoot.localPosition=pose.assemblyRestPosition;
         blade.bladeRoot.SetLocalPositionAndRotation(heldPosition,heldRotation);
+        if(nemesis!=null&&GameManager.Instance!=null&&GameManager.Instance.Phase==GamePhase.Hangar)
+        {nemesis.ParkBlade();MotionState="Hangar";rig.RefreshSockets();return;}
         var m=attacking?combo.Evaluate(player.Melee.ComboStage,poseTime):ValkyrComboProfile.Ready;
-        if(attacking&&poseTime<.08f)m=ValkyrComboProfile.Blend(entryKey,m,Mathf.SmoothStep(0,1,poseTime/.08f));
+        if(attacking)
+        {
+            // Chest leads the arm by 22 ms, elbow by 10 ms. The offset vanishes at link boundaries.
+            float span=player.Melee.CurrentStroke.linkTime;
+            float pulse=Mathf.Sin(Mathf.Clamp01(poseTime/span)*Mathf.PI);
+            var lead=combo.Evaluate(player.Melee.ComboStage,poseTime+.022f*pulse);
+            m.chest=lead.chest;m.waist=lead.waist;m.hips=lead.hips;
+            m.elbow=combo.Evaluate(player.Melee.ComboStage,poseTime+.010f*pulse).elbow;
+        }
+        float entryDuration=.04f;
+        if(attacking&&poseTime<entryDuration)m=ValkyrComboProfile.Blend(entryKey,m,Mathf.SmoothStep(0,1,poseTime/entryDuration));
         if(!attacking&&cancelBlend>0)m=ValkyrComboProfile.Blend(cancelKey,m,Mathf.SmoothStep(0,1,1-cancelBlend/.18f));
         var k=m.Body;
-        float run=RunBlend*(1-FlightBlend)*(attacking?0:1),lift=.85f*FlightBlend;
+        float run=RunBlend*(1-FlightBlend)*(attacking?0:1),lift=(.28f)*FlightBlend;
         Vector3 travel=speed>.15f?player.Velocity.normalized:player.transform.forward;
         Vector3 localTravel=transform.InverseTransformDirection(travel),sideways=Vector3.Cross(Vector3.up,travel);
         float travelYaw=Vector3.SignedAngle(transform.forward,travel,Vector3.up),swing=Mathf.Sin(cycle*Mathf.PI*2);
@@ -171,14 +205,24 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
             k.hips=Vector3.Lerp(k.hips,new Vector3(0,Mathf.Clamp(travelYaw,-65,65)+swing*10,-swing*4),run);
             k.waist=Vector3.Lerp(k.waist,new Vector3(0,Mathf.Clamp(travelYaw,-38,38)+swing*3,-swing*3),run);
             k.chest=Vector3.Lerp(k.chest,new Vector3(3,-swing*15,swing*4),run);
+            if(nemesis!=null&&player.Stance.State==WeaponStance.Ranged&&!health.IsDead&&player.Loadout.Selected==PrimaryWeapon.M7)
+            {k.hips.y-=12;k.waist.y-=28;k.chest.y-=54;k.chest.z+=6;k.pelvis.x-=.07f*(1-run);}
         }
         Vector3 leanAxis=Vector3.Cross(Vector3.up,travel);
-        float lean=run*(23+accelerationLean)+FlightBlend*(attacking?12:25);
+        float lean=run*(23+accelerationLean)+FlightBlend*(attacking?12:34);
         pelvis.position=World(pelvisRest+k.pelvis)+Vector3.up*(lift-death*1.1f)+travel*(run*.10f)+sideways*(-Mathf.Cos(cycle*Mathf.PI*2)*.13f*run);
         pelvis.rotation=Quaternion.AngleAxis(lean,leanAxis)*transform.rotation*Quaternion.Euler(k.hips+Vector3.right*death*72)*rest[pelvis].world;
         waist.rotation=Quaternion.AngleAxis(lean,leanAxis)*transform.rotation*Quaternion.Euler(k.waist)*rest[waist].world;
+        if(nemesis!=null)nemesis.ExtendLumbar(lean+k.chest.x);
         chest.rotation=Quaternion.AngleAxis(lean*1.05f,leanAxis)*transform.rotation*Quaternion.Euler(k.chest+Vector3.right*recoil*35)*rest[chest].world;
         head.rotation=transform.rotation*Quaternion.Euler(-4,k.chest.y*.20f,k.chest.z*.2f)*rest[head].world;
+        // Apply armor recoil before limb solving so feet and weapon grips remain constrained.
+        float impact=HitReactionWeight;
+        Vector3 impactAxis=Vector3.Cross(Vector3.up,hitDirection);
+        pelvis.rotation=Quaternion.AngleAxis(3f*impact,impactAxis)*pelvis.rotation;
+        waist.rotation=Quaternion.AngleAxis(6f*impact,impactAxis)*waist.rotation;
+        chest.rotation=Quaternion.AngleAxis(13f*impact,impactAxis)*chest.rotation;
+        head.rotation=Quaternion.AngleAxis(5f*impact,impactAxis)*head.rotation;
         PlantSlip=0;
         PoseLeg(legL,k.leftFoot,k.leftFootAngles,run,lift,localTravel,attacking);
         PoseLeg(legR,k.rightFoot,k.rightFootAngles,run,lift,localTravel,attacking);
@@ -197,10 +241,22 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         if(recoveredRifle==null)recoveredRifle=player.GetComponent<E01PlayerRifle>();
         Vector3 freeRight=World(new Vector3(.73f,1.91f+lift-swing*.14f,.15f-swing*.33f));
         Quaternion freeRightRotation=transform.rotation*Quaternion.Euler(-18+swing*18,0,12)*rest[handR].world;
+        if(nemesis!=null&&health.IsDead)
+        {
+            wrist=new Vector3(.68f,1.92f-death*.98f,.24f+death*.38f);
+            pole=new Vector3(.96f,2.30f-death*.92f,.08f);
+            freeRight=World(wrist);
+        }
         if(recoveredRifle!=null && recoveredRifle.Equipped)
         {
             freeRightRotation=transform.rotation*Quaternion.Euler(-78,0,10)*rest[handR].world;
             freeRight=World(new Vector3(.78f,2.61f+lift-run*.06f,.60f))-freeRightRotation*palmR;
+        }
+        var intake=GameManager.Instance?.equipmentLoop?.Absorption;
+        if(intake!=null && intake.Busy)
+        {
+            freeRightRotation=transform.rotation*Quaternion.Euler(-78,0,10)*rest[handR].world;
+            freeRight=World(new Vector3(.78f,2.61f+lift,.80f-.20f*Mathf.SmoothStep(0,1,intake.Progress)-.08f*intake.CatchPulse))-freeRightRotation*palmR;
         }
         // The wrist and elbow are authored first. The blade is mounted to the resulting
         // natural fist; an unreachable sword target never pulls the arm out of its pose.
@@ -242,6 +298,7 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         float cut=attacking?Mathf.Sin(Mathf.InverseLerp(.08f,player.Melee.CurrentStroke.linkTime,poseTime)*Mathf.PI):0;
         float balance=attacking?Mathf.Sin(k.chest.y*Mathf.Deg2Rad):0;
         Vector3 freeHand=World(new Vector3(-.81f-cut*.48f,2.02f+lift+swing*.17f+cut*.42f,.14f+swing*.50f+balance*.72f));
+        if(nemesis!=null&&health.IsDead)freeHand=World(new Vector3(-.68f,2.02f-death*1.00f,.22f+death*.36f));
         Quaternion freeRotation=transform.rotation*Quaternion.Euler(-25-swing*22-cut*25,cut*-30,-12)*rest[handL].world;
         PoseArm(armL,foreL,handL,freeHand,freeRotation,palmL,-1);
         handL.rotation=foreL.rotation*Quaternion.Inverse(rest[foreL].world)*rest[handL].world;
@@ -250,7 +307,7 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         {
             Quaternion torso=chest.rotation*Quaternion.Inverse(rest[chest].world);
             Quaternion back=torso*ValkyrMotionProfile.Frame(new Vector3(-.20f,-.97f,-.10f),Vector3.right);
-            Vector3 backGrip=chest.position+torso*new Vector3(.34f,.65f,-.98f);
+            Vector3 backGrip=chest.position+torso*(nemesis!=null?new Vector3(-.65f,.20f,-.47f):new Vector3(.34f,.65f,-.98f));
             Vector3 backTip=backGrip+back*Vector3.forward*blade.Reach;
             backGrip.y+=Mathf.Max(0,player.transform.position.y+.16f-backTip.y);
             Vector3 contact=Vector3.Lerp(blade.grip.position,backGrip,stow);
@@ -308,6 +365,7 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         float phase=Mathf.Repeat(cycle+(leg.side==1?.5f:0),1);
         Vector3 sole=new Vector3(leg.side*.48f,.025f,leg.side<0?.26f:-.25f);
         Vector3 angles=new Vector3(0,leg.side<0?-10:18,0);
+        if(nemesis!=null){sole.x=leg.side*.38f;angles.y=0;}
         Quaternion orientation;
         Vector3 target;
         bool plantThisFrame=false;
@@ -316,9 +374,17 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         {
             float start=Mathf.SmoothStep(0,1,Mathf.Clamp01(player.Melee.AttackElapsed/.13f));
             sole=Vector3.Lerp(leg.side<0?attackFootL:attackFootR,strikeFoot,start);sole.y+=.025f;
-            orientation=attackHeading*Quaternion.Euler(strikeAngles)*rest[leg.foot].world;
-            target=attackOrigin+attackHeading*sole;
-            leg.planted=sole.y<.06f;
+            orientation=player.transform.rotation*Quaternion.Euler(nemesis!=null?strikeAngles*.35f:strikeAngles)*rest[leg.foot].world;
+            target=attackOrigin+player.transform.rotation*sole;
+            bool support=leg.side==(player.Melee.ComboStage==1?1:-1);
+            bool contact=player.Melee.AttackElapsed>=player.Melee.CurrentStroke.contactStart
+                && player.Melee.AttackElapsed<=player.Melee.CurrentStroke.contactEnd;
+            if(support&&contact)
+            {
+                if(!leg.planted){leg.plant=target;leg.plantRotation=orientation;}
+                target=leg.plant;orientation=leg.plantRotation;
+            }
+            leg.planted=support&&contact;
         }
         else
         {
@@ -345,6 +411,8 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         Vector3 pole=World(new Vector3(leg.side*.56f,1.18f+lift,1.40f));
         if(run>.6f)pole=pelvis.position+transform.TransformDirection(travel)*1.6f+transform.right*leg.side*.2f;
         Solve(leg.thigh,leg.knee,leg.foot,target,pole,orientation);
+        if(plantThisFrame&&!wasPlanted&&!player.IsBoosting&&!player.IsDashing&&GameManager.Instance!=null&&GameManager.Instance.IsCombatActive)
+            GameAudio.PlayAt(GameAudioCue.Footstep,leg.foot.position,.23f);
         if(plantThisFrame&&wasPlanted)
         {
             Vector3 drift=leg.foot.position-leg.previousAnkle;drift.y=0;
@@ -380,6 +448,7 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
     }
     private void OnDestroy()
     {
+        if(health!=null)health.OnDamaged-=OnDamage;
         if(player!=null){if(player.weaponController!=null)player.weaponController.BeamFired-=OnShot;if(player.Melee!=null){player.Melee.AttackStarted-=BeginStrike;player.Melee.AttackCancelled-=BeginReturn;}}
     }
 }

@@ -46,6 +46,8 @@ public sealed class PlayerAudioCapture
     }
     public void Save(string path)
     {
+        // Stop offline rendering only after muting the listener, so disk IO cannot resume speaker playback.
+        AudioListener.volume=0;
         AudioRenderer.Stop();
         using(var writer=new BinaryWriter(File.Create(path)))
         {
