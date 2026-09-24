@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsUI : MonoBehaviour
@@ -11,6 +11,7 @@ public class SettingsUI : MonoBehaviour
     private Slider master, music, effects;
     private Toggle shake;
     private Button english, chinese, balanced, high, creditsButton;
+    private Button battery;
     private Text masterValue, musicValue, effectsValue, title;
     private static readonly Color selected = GameUITheme.Accent;
     private static readonly Color unselected = GameUITheme.Button;
@@ -56,6 +57,13 @@ public class SettingsUI : MonoBehaviour
         chinese.GetComponent<Image>().color = GamePreferences.Chinese ? selected : unselected;
         balanced.GetComponent<Image>().color = GamePreferences.Quality == 0 ? selected : unselected;
         high.GetComponent<Image>().color = GamePreferences.Quality == 1 ? selected : unselected;
+        if (battery != null)
+        {
+            battery.GetComponent<Image>().color = GamePreferences.BatterySaver ? selected : unselected;
+            battery.GetComponentInChildren<Text>().text = GamePreferences.BatterySaver
+                ? EquipmentWarehouseUI.T("省电 · 30 帧", "Battery · 30 FPS")
+                : EquipmentWarehouseUI.T("流畅 · 60 帧", "Smooth · 60 FPS");
+        }
         title.text = GameText.T(credits.gameObject.activeSelf ? "Credits" : "SETTINGS");
         creditsButton.GetComponentInChildren<Text>().text = GameText.T(credits.gameObject.activeSelf ? "Settings" : "Credits");
     }
@@ -97,9 +105,16 @@ public class SettingsUI : MonoBehaviour
         high = RuntimeUIFactory.MenuButton(fields, "HighButton", "High", new Vector2(546, -358), new Vector2(184, 48));
         balanced.onClick.AddListener(() => { GamePreferences.SetQuality(0); Refresh(); });
         high.onClick.AddListener(() => { GamePreferences.SetQuality(1); Refresh(); });
+        if (MobilePlatform.UsesTouch)
+        {
+            battery = RuntimeUIFactory.MenuButton(fields, "MobileBatteryButton", "", new Vector2(340, -410), new Vector2(250, 40));
+            battery.onClick.AddListener(() => { GamePreferences.SetBatterySaver(!GamePreferences.BatterySaver); Refresh(); });
+            panel.sizeDelta = new Vector2(680, 514);
+        }
         RuntimeUIFactory.MenuText(credits, "CreditsText", GameText.Credits, 17,
             new Vector2(340, -232), new Vector2(596, 290), TextAnchor.UpperLeft);
-        creditsButton = RuntimeUIFactory.MenuButton(panel, "CreditsButton", "Credits", new Vector2(145, -434), new Vector2(206, 52));
+        float footer = MobilePlatform.UsesTouch ? -476 : -434;
+        creditsButton = RuntimeUIFactory.MenuButton(panel, "CreditsButton", "Credits", new Vector2(145, footer), new Vector2(206, 52));
         creditsButton.onClick.AddListener(() =>
         {
             bool show = !credits.gameObject.activeSelf;
@@ -107,7 +122,7 @@ public class SettingsUI : MonoBehaviour
             fields.gameObject.SetActive(!show);
             Refresh();
         });
-        RuntimeUIFactory.MenuButton(panel, "CloseSettingsButton", "Done", new Vector2(533, -434), new Vector2(210, 52)).onClick.AddListener(Hide);
+        RuntimeUIFactory.MenuButton(panel, "CloseSettingsButton", "Done", new Vector2(533, footer), new Vector2(210, 52)).onClick.AddListener(Hide);
     }
 
     private void Label(string key, float y)
@@ -130,6 +145,7 @@ public class SettingsUI : MonoBehaviour
         var slider = rect.gameObject.AddComponent<Slider>();
         slider.fillRect = fill;
         slider.handleRect = thumb;
+        if (MobilePlatform.UsesTouch) thumb.sizeDelta = new Vector2(22, -12);
         slider.targetGraphic = graphic;
         slider.minValue = 0;
         slider.maxValue = 1;

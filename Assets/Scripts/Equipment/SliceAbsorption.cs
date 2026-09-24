@@ -176,7 +176,11 @@ public sealed class SliceAbsorption : MonoBehaviour
         loop.RecordAcquisition(fresh);Destroy(pickup);pickup=module=null;NextOffer();
         return CollectWithoutInstalling();
     }
-    private void Notice(string message){notice=message;noticeUntil=Time.time+2.5f;}
-    public string StatusText=>Busy?(Phase==Step.Pull?"牵引中":Phase==Step.Catch?"接住":Phase==Step.Lock?"机械锁定":"能量启动")+" · 空格取消":Time.time<noticeUntil?notice:null;
+    private void Notice(string message)
+    {
+        notice = MobilePlatform.UsesTouch ? message.Replace("按 F", "点回收按钮").Replace("左键开火", "右摇杆射击") : message;
+        noticeUntil=Time.time+2.5f;
+    }
+    public string StatusText=>Busy?(Phase==Step.Pull?"牵引中":Phase==Step.Catch?"接住":Phase==Step.Lock?"机械锁定":"能量启动")+(MobilePlatform.UsesTouch?" · 推进取消":" · 空格取消"):Time.time<noticeUntil?notice:null;
     private void OnDestroy(){if(player!=null){player.Dashed-=OnDash;player.GetComponent<Damageable>().OnDamaged-=OnHit;}ClearOffer();}
 }

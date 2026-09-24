@@ -50,6 +50,7 @@ public class PlayerInputRouter : MonoBehaviour
 
     public PlayerCommand ReadCommand()
     {
+        bool desktopInput = readKeyboard && !MobilePlatform.UsesTouch;
         var gm = GameManager.Instance;
         if (gm != null && !gm.CanPlayerControl)
         {
@@ -58,7 +59,7 @@ public class PlayerInputRouter : MonoBehaviour
         }
         Vector2 move = touchMove;
         bool overUI = false;
-        if (readKeyboard && Input.touchCount == 0 && EventSystem.current != null)
+        if (desktopInput && Input.touchCount == 0 && EventSystem.current != null)
         {
             if (pointerSystem != EventSystem.current)
             {
@@ -70,9 +71,9 @@ public class PlayerInputRouter : MonoBehaviour
             pointerSystem.RaycastAll(mousePointer, uiHits);
             overUI = uiHits.Count > 0;
         }
-        if (!Input.GetMouseButton(0)) mouseFire = false;
-        if (readKeyboard && Input.GetMouseButtonDown(0) && Input.touchCount == 0 && !overUI) mouseFire = true;
-        if (readKeyboard)
+        if (!desktopInput || !Input.GetMouseButton(0)) mouseFire = false;
+        if (desktopInput && Input.GetMouseButtonDown(0) && Input.touchCount == 0 && !overUI) mouseFire = true;
+        if (desktopInput)
         {
             Vector2 keys = new Vector2((Input.GetKey(KeyCode.D) ? 1 : 0) - (Input.GetKey(KeyCode.A) ? 1 : 0),
                 (Input.GetKey(KeyCode.W) ? 1 : 0) - (Input.GetKey(KeyCode.S) ? 1 : 0));
@@ -82,15 +83,15 @@ public class PlayerInputRouter : MonoBehaviour
         {
             Identity=++sequence, InputTime=CombatRuntime.SimulationTime, Cancellation=CombatRuntime.ActionGeneration,
             Move = Vector2.ClampMagnitude(move, 1f),
-            Dash = dashQueued || (readKeyboard && Input.GetKeyDown(KeyCode.Space)),
-            BoostHeld = boostHeld || (readKeyboard && Input.GetKey(KeyCode.Space)),
-            Skill = skillQueued || (readKeyboard && Input.GetKeyDown(KeyCode.E)),
-            Melee = meleeQueued || (readKeyboard && Input.GetKeyDown(KeyCode.Q)),
+            Dash = dashQueued || (desktopInput && Input.GetKeyDown(KeyCode.Space)),
+            BoostHeld = boostHeld || (desktopInput && Input.GetKey(KeyCode.Space)),
+            Skill = skillQueued || (desktopInput && Input.GetKeyDown(KeyCode.E)),
+            Melee = meleeQueued || (desktopInput && Input.GetKeyDown(KeyCode.Q)),
             HasAim = touchFire,
             Fire = touchFire,
             AimPoint = transform.position + new Vector3(touchAim.x, 0, touchAim.y).normalized * 14f + Vector3.up * 1.1f
         };
-        if (readKeyboard && Input.touchCount == 0 && !touchFire
+        if (desktopInput && Input.touchCount == 0 && !touchFire
             && !overUI)
         {
             if (aimCamera == null) aimCamera = Camera.main;

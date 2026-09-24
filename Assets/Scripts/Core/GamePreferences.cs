@@ -10,6 +10,7 @@ public static class GamePreferences
     public static float Effects { get; private set; } = 1f;
     public static bool Shake { get; private set; } = true;
     public static int Quality { get; private set; } = 1;
+    public static bool BatterySaver { get; private set; }
     public static event Action LanguageChanged;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -23,7 +24,8 @@ public static class GamePreferences
         Music = Mathf.Clamp01(PlayerPrefs.GetFloat(Prefix + "Music", 1));
         Effects = Mathf.Clamp01(PlayerPrefs.GetFloat(Prefix + "Effects", 1));
         Shake = PlayerPrefs.GetInt(Prefix + "Shake", 1) == 1;
-        Quality = Mathf.Clamp(PlayerPrefs.GetInt(Prefix + "Quality", 1), 0, 1);
+        Quality = Mathf.Clamp(PlayerPrefs.GetInt(Prefix + "Quality", MobilePlatform.UsesTouch ? 0 : 1), 0, 1);
+        BatterySaver = PlayerPrefs.GetInt(Prefix + "BatterySaver", 0) == 1;
         AudioListener.volume = Master;
         ApplyQuality();
     }
@@ -40,6 +42,7 @@ public static class GamePreferences
     public static void SetEffects(float value) { Effects = Mathf.Clamp01(value); if (GameAudio.Instance != null) GameAudio.Instance.RefreshMix(); }
     public static void SetShake(bool value) { Shake = value; }
     public static void SetQuality(int value) { Quality = Mathf.Clamp(value, 0, 1); ApplyQuality(); }
+    public static void SetBatterySaver(bool value) { BatterySaver = value; ApplyQuality(); Save(); }
 
     private static void ApplyQuality()
     {
@@ -49,9 +52,8 @@ public static class GamePreferences
         QualitySettings.shadowDistance = Quality == 1 ? 65f : 35f;
         QualitySettings.lodBias = Quality == 1 ? 1.35f : 0.85f;
         QualitySettings.vSyncCount = 0;
-        // Desktop is uncapped; phones follow their display refresh instead of Unity's 30fps default.
-        Application.targetFrameRate = Application.isMobilePlatform
-            ? Mathf.Max(60, Mathf.RoundToInt((float)Screen.currentResolution.refreshRateRatio.value)) : -1;
+        // Phones use a bounded target, including ProMotion devices, instead of chasing 120Hz.
+        Application.targetFrameRate = MobilePlatform.UsesTouch ? (BatterySaver ? 30 : 60) : -1;
     }
 
     public static void Save()
@@ -62,6 +64,7 @@ public static class GamePreferences
         PlayerPrefs.SetFloat(Prefix + "Effects", Effects);
         PlayerPrefs.SetInt(Prefix + "Shake", Shake ? 1 : 0);
         PlayerPrefs.SetInt(Prefix + "Quality", Quality);
+        PlayerPrefs.SetInt(Prefix + "BatterySaver", BatterySaver ? 1 : 0);
         PlayerPrefs.Save();
     }
 }

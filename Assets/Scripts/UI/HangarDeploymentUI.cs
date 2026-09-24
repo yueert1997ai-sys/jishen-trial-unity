@@ -55,6 +55,8 @@ public class HangarDeploymentUI : MonoBehaviour
             loadout.Selected==PrimaryWeapon.Greatsword ? T("逐刀三连斩","Three-hit blade combo") :
             loadout.CanDeploy ? T("左键枪 · 右键刀 · 空格冲刺 · E 支援","LMB gun · RMB blade · Space dash · E support") : T("请先选择武器","Select a weapon first");
         for(int i=0;i<3;i++) difficulties[i].GetComponent<Image>().color=i==(int)gameManager.Difficulty ? Accent : ButtonColor;
+        if (MobilePlatform.UsesTouch && loadout.CanDeploy)
+            details.text = T("左摇杆移动 · 右摇杆瞄准射击 · 按钮斩击 / 推进 / 技能", "Left stick: move · Right stick: aim / fire · Buttons: slash / boost / skill");
         deploy.interactable=range.interactable=veteran.interactable=loadout.CanDeploy;
         liquid.interactable=loadout.CanDeploy && gameManager.stageManager.enemySpawner.liquidBossPrefab!=null;
         unload.interactable=loadout.Selected!=PrimaryWeapon.None;

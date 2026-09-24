@@ -1,5 +1,7 @@
 # M1 Mac 接续：机神试炼 iPhone
 
+目标手机已确认：**iPhone 17 Pro Max**。手机触控、后台暂停、回收按钮、30/60 帧设置与安全区修复见 [MOBILE_TRAVEL_R1.md](MOBILE_TRAVEL_R1.md)。已克隆此分支的 Mac 先执行 `git pull --ff-only` 和 `git lfs pull`，再生成新的构建副本。
+
 本次交付为 2026-09-24 当前源码开发快照，位于私有仓库的 `codex/iphone-testflight-handoff-20260924` 分支。最新已发布桌面版为 CombatContact_R1；源码还含后续开发改动。历史桌面测试不代表此快照已通过 iOS 编译或真机验收。
 
 ## 今晚先在 Mac 打开工程

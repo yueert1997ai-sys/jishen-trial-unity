@@ -12,6 +12,7 @@ public class VirtualJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     public void OnPointerDown(PointerEventData data)
     {
+        if (!isActiveAndEnabled || input == null || handle == null || radius <= 0) return;
         if (data.button != PointerEventData.InputButton.Left) return;
         if (PointerId != int.MinValue) return;
         PointerId = data.pointerId;
@@ -20,6 +21,7 @@ public class VirtualJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     public void OnDrag(PointerEventData data)
     {
+        if (!isActiveAndEnabled || input == null || handle == null || radius <= 0) return;
         if (PointerId != data.pointerId) return;
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)transform, data.position, data.pressEventCamera, out Vector2 position)) return;
         Vector2 displacement = Vector2.ClampMagnitude(position, radius);
@@ -34,6 +36,7 @@ public class VirtualJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler,
     public void OnCancel(BaseEventData data) { ResetInput(); }
     private void OnDisable() { ResetInput(); }
     private void OnApplicationFocus(bool focus) { if (!focus) ResetInput(); }
+    private void OnApplicationPause(bool paused) { if (paused) ResetInput(); }
     public void ResetInput()
     {
         PointerId = int.MinValue;

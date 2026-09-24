@@ -124,6 +124,7 @@ public static class RuntimeUIFactory
         var safe = SafeAreaLayout.Create(canvas);
         var surface = CreatePanel(safe, name, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, GameUITheme.Surface);
         Place(surface, Vector2.one * 0.5f, Vector2.zero, size);
+        if (MobilePlatform.UsesTouch) surface.gameObject.AddComponent<MobileMenuFit>();
         var rule=CreatePanel(surface,"MenuAccent",new Vector2(0,1),Vector2.one,new Vector2(24,-3),new Vector2(-24,-1),GameUITheme.Accent);
         rule.GetComponent<Image>().raycastTarget=false;
         return surface;

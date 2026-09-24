@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -57,6 +57,7 @@ public class CombatHUD : MonoBehaviour
         continueButton.gameObject.SetActive((gameManager.AwaitingContinue||collect)&&!gameManager.IsPaused);
         continueButton.interactable=!gameManager.equipmentLoop.Absorption.Busy;
         continueButton.GetComponentInChildren<Text>().text=collect?T("只收藏并继续  [Enter]","Collect & continue  [Enter]"):T("继续 · 选择强化  [Enter]","Continue · upgrade  [Enter]");
+        if(MobilePlatform.UsesTouch)continueButton.GetComponentInChildren<Text>().text=continueButton.GetComponentInChildren<Text>().text.Replace("  [Enter]", "");
         UpdateWeaponStatus();
         if(Time.unscaledTime<nextRefresh)return;
         nextRefresh=Time.unscaledTime+.1f;
@@ -75,9 +76,9 @@ public class CombatHUD : MonoBehaviour
         timerText.text=(seconds/60).ToString("00")+":"+(seconds%60).ToString("00");
         string gun=player.Loadout.Selected==PrimaryWeapon.Collection?gameManager.equipmentLoop.Weapon.Title:player.Loadout.Selected.ToString();
         if(player.Loadout.IsNemesis&&player.Loadout.Selected==PrimaryWeapon.M7)gun=T("光束步枪","BEAM RIFLE");
-        buildText.text=T("左键  ","LMB  ")+gun+"    ·    "+T("右键  ","RMB  ")+T("斩舰刀","RAIKEN");
-        dashText.text=T("空格 · 冲刺  ","SPACE · DASH  ")+(dash>.01f?dash.ToString("F1")+"s":T("就绪","READY"));
-        supportText.text="E · "+(player.Loadout.IsNemesis?T("浮游炮  ","DRONES  "):T("背炮齐射  ","BACK CANNON  "))+(support>.01f?support.ToString("F1")+"s":T("就绪","READY"));
+        buildText.text=(MobilePlatform.UsesTouch?"":T("左键  ","LMB  "))+gun+"    ·    "+(MobilePlatform.UsesTouch?"":T("右键  ","RMB  "))+T("斩舰刀","RAIKEN");
+        dashText.text=(MobilePlatform.UsesTouch?T("推进  ","BOOST  "):T("空格 · 冲刺  ","SPACE · DASH  "))+(dash>.01f?dash.ToString("F1")+"s":T("就绪","READY"));
+        supportText.text=(MobilePlatform.UsesTouch?"":"E · ")+(player.Loadout.IsNemesis?T("浮游炮  ","DRONES  "):T("背炮齐射  ","BACK CANNON  "))+(support>.01f?support.ToString("F1")+"s":T("就绪","READY"));
         bool showBoss=bossDamageable!=null&&!bossDamageable.IsDead;bossPanel.gameObject.SetActive(showBoss);
         if(showBoss)
         {
@@ -130,8 +131,16 @@ public class CombatHUD : MonoBehaviour
         bossPanel=Panel(safeRoot,"BossPanel",new Vector2(.5f,1),new Vector2(0,-110),new Vector2(354,55));
         bossText=Label(bossPanel,"BossText",12,new Vector2(12,-8),new Vector2(330,22));bossText.alignment=TextAnchor.MiddleCenter;
         bossFill=Fill(Track(bossPanel,"BossHealth",new Vector2(12,-42),new Vector2(330,6)),"Fill",GameUITheme.Danger);bossPanel.gameObject.SetActive(false);
-        var pause=RuntimeUIFactory.CreateButton(safeRoot,"PauseButton",T("暂停  Esc","Pause  Esc"));
+        var pause=RuntimeUIFactory.CreateButton(safeRoot,"PauseButton",MobilePlatform.UsesTouch?T("暂停","Pause"):T("暂停  Esc","Pause  Esc"));
         RuntimeUIFactory.Place(pause.GetComponent<RectTransform>(),Vector2.one,new Vector2(-64,-35),new Vector2(88,30));pause.GetComponentInChildren<Text>().fontSize=12;pause.onClick.AddListener(()=>gameManager.TogglePause());
+        if(MobilePlatform.UsesTouch)
+        {
+            // Keep information above the thumb zone while leaving the center for combat.
+            RuntimeUIFactory.Place(vitality,new Vector2(0,1),new Vector2(166,-143),new Vector2(292,116));
+            RuntimeUIFactory.Place(actions,Vector2.one,new Vector2(-183,-127),new Vector2(326,112));
+            RuntimeUIFactory.Place(pause.GetComponent<RectTransform>(),Vector2.one,new Vector2(-64,-37),new Vector2(88,44));
+            RuntimeUIFactory.Place(bossPanel,new Vector2(.5f,1),new Vector2(0,-48),new Vector2(354,55));
+        }
         continueButton=RuntimeUIFactory.CreateButton(safeRoot,"ContinueAfterSalvage","");
         RuntimeUIFactory.Place(continueButton.GetComponent<RectTransform>(),new Vector2(.5f,0),new Vector2(0,139),new Vector2(240,34));continueButton.GetComponentInChildren<Text>().fontSize=13;
         continueButton.onClick.AddListener(()=>{if(gameManager.AwaitingContinue)gameManager.ContinueAfterSalvage();else gameManager.equipmentLoop.Absorption.CollectWithoutInstalling();});continueButton.gameObject.SetActive(false);

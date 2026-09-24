@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MobileActionButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class MobileActionButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, ICancelHandler
 {
     public PlayerInputRouter input;
     public bool isDash;
@@ -11,6 +11,7 @@ public class MobileActionButton : MonoBehaviour, IPointerDownHandler, IPointerUp
     public bool IsHoldingBoost => boostPointer.HasValue;
     public void OnPointerDown(PointerEventData data)
     {
+        if (input == null || !isActiveAndEnabled) return;
         if (data.button != PointerEventData.InputButton.Left) return;
         if (!GetComponent<Button>().IsInteractable()) return;
         if (isMelee) input.QueueMelee();
@@ -35,4 +36,7 @@ public class MobileActionButton : MonoBehaviour, IPointerDownHandler, IPointerUp
         if (input != null) input.SetBoostHeld(false);
     }
     private void OnDisable() { ReleaseBoost(); }
+    public void OnCancel(BaseEventData data) { ReleaseBoost(); }
+    private void OnApplicationFocus(bool focused) { if (!focused) ReleaseBoost(); }
+    private void OnApplicationPause(bool paused) { if (paused) ReleaseBoost(); }
 }

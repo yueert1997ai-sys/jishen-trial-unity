@@ -47,6 +47,8 @@ public sealed class P0CombatCheck : MonoBehaviour
         blade=p.GetComponentInChildren<RaikenBladePresentation>();motion=p.GetComponentInChildren<ValkyrMotionDriver>();visual=p.GetComponentInChildren<LoadoutVisual>();
         Check(blade!=null&&motion!=null&&visual!=null,"current hero body and full-body driver loaded");
         Check(p.Loadout.CanUseRifle&&p.Loadout.CanUseSword,"M7 and saber available on one mech");
+        if(CombatRuntime.HasArgument("-mobileTravelCheck"))
+        {var mobile=MobileTravelChecks.Run(gm,p,output,Check,Capture);while(mobile.MoveNext())yield return mobile.Current;yield break;}
         if(CombatRuntime.HasArgument("-contactIntegrityCheck"))
         {var contact=ContactIntegrityChecks.Run(gm,p,Check,Capture);while(contact.MoveNext())yield return contact.Current;yield break;}
         if(CombatRuntime.HasArgument("-weaponHandlingCheck"))

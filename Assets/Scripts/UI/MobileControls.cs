@@ -11,6 +11,7 @@ public class MobileControls : MonoBehaviour
     private Canvas canvas;
     private Button dash;
     private Button skill;
+    private Button recover;
     private Text dashLabel;
     private Text skillLabel;
     private MobileActionButton dashAction;
@@ -51,6 +52,13 @@ public class MobileControls : MonoBehaviour
         dashLabel = dash.GetComponentInChildren<Text>();
         dashAction = dash.GetComponent<MobileActionButton>();
         skillLabel = skill.GetComponentInChildren<Text>();
+        recover = RuntimeUIFactory.CreateButton(root, "MobileRecoverButton", "");
+        Place(recover.GetComponent<RectTransform>(), new Vector2(0, 0), new Vector2(244, 72), new Vector2(146, 58));
+        recover.onClick.AddListener(() => {
+            var gm = GameManager.Instance;
+            if (gm != null && gm.CanPlayerControl) gm.equipmentLoop?.AbsorbNearby();
+        });
+        recover.gameObject.SetActive(false);
     }
 
     private Button CreateAction(Transform root, string name, string label, Vector2 position, float size, bool isDash)
@@ -79,10 +87,15 @@ public class MobileControls : MonoBehaviour
         if (canvas == null) return;
         var gm = GameManager.Instance;
         if (Input.touchCount > 0) touchVisibleUntil = Time.unscaledTime + 4f;
-        bool show = gm != null && gm.IsCombatActive;
+        bool show = gm != null && gm.CanPlayerControl;
         SetVisible(show);
         if (!show || Time.unscaledTime < nextRefresh) return;
         nextRefresh = Time.unscaledTime + 0.1f;
+        var absorption = gm.equipmentLoop != null ? gm.equipmentLoop.Absorption : null;
+        recover.gameObject.SetActive(absorption != null && (absorption.Offering || absorption.Busy));
+        recover.interactable = absorption != null && absorption.CanAbsorb && !player.IsDashing;
+        recover.GetComponentInChildren<Text>().text = absorption != null && absorption.Busy
+            ? EquipmentWarehouseUI.T("装配中", "INSTALLING") : EquipmentWarehouseUI.T("回收并安装", "RECOVER / EQUIP");
         dash.interactable = dashAction.IsHoldingBoost || (player.IsDashReady && player.stats.CurrentEnergy >= 25f);
         melee.interactable = (player.Loadout == null || player.Loadout.CanUseSword) && player.Melee.CooldownRemaining <= 0 && !player.IsDashing;
         meleeLabel.text = player.Melee.CooldownRemaining > 0 ? player.Melee.CooldownRemaining.ToString("0.0") : GameText.T("SLASH");
@@ -95,11 +108,14 @@ public class MobileControls : MonoBehaviour
 
     public void SetVisible(bool visible)
     {
-        visible &= Application.isMobilePlatform || Time.unscaledTime < touchVisibleUntil;
+        visible &= MobilePlatform.UsesTouch || Time.unscaledTime < touchVisibleUntil;
         if (canvas != null && canvas.gameObject.activeSelf != visible) canvas.gameObject.SetActive(visible);
         if (!visible && Joystick != null) Joystick.ResetInput();
         if (!visible && AimJoystick != null) AimJoystick.ResetInput();
     }
+
+    private void OnDisable() { SetVisible(false); }
+    private void OnDestroy() { if (canvas != null) Destroy(canvas.gameObject); }
 
     private static void Place(RectTransform rect, Vector2 anchor, Vector2 position, Vector2 size)
     {
