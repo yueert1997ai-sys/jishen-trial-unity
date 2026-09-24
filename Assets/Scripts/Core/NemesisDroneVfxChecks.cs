@@ -15,7 +15,7 @@ public static class NemesisDroneVfxChecks
         var camera=Camera.main;var follow=camera.GetComponent<CameraFollow>();follow.enabled=false;
         void View(bool production=false)
         {
-            camera.orthographic=true;camera.orthographicSize=production?11.25f:9;
+            camera.orthographic=true;camera.orthographicSize=production?CameraFollow.StandardCombatSize:9;
             if(production){camera.transform.rotation=Quaternion.Euler(68,0,0);camera.transform.position=p.transform.position-camera.transform.forward*24;}
             else {camera.transform.position=new Vector3(11,17,-15);camera.transform.LookAt(new Vector3(0,1.6f,4));}
         }

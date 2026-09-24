@@ -13,7 +13,7 @@ public sealed class P0CombatCheck : MonoBehaviour
     readonly List<string> report=new List<string>();
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Bootstrap()
-    {if(Array.IndexOf(Environment.GetCommandLineArgs(),"-p0Check")>=0)DontDestroyOnLoad(new GameObject("P0Check").AddComponent<P0CombatCheck>());}
+    {if(Array.IndexOf(Environment.GetCommandLineArgs(),"-p0Check")>=0){AudioListener.volume=0;DontDestroyOnLoad(new GameObject("P0Check").AddComponent<P0CombatCheck>());}}
     void Awake(){Application.logMessageReceived+=Log;}
     void Start()
     {
@@ -47,6 +47,28 @@ public sealed class P0CombatCheck : MonoBehaviour
         blade=p.GetComponentInChildren<RaikenBladePresentation>();motion=p.GetComponentInChildren<ValkyrMotionDriver>();visual=p.GetComponentInChildren<LoadoutVisual>();
         Check(blade!=null&&motion!=null&&visual!=null,"current hero body and full-body driver loaded");
         Check(p.Loadout.CanUseRifle&&p.Loadout.CanUseSword,"M7 and saber available on one mech");
+        if(CombatRuntime.HasArgument("-contactIntegrityCheck"))
+        {var contact=ContactIntegrityChecks.Run(gm,p,Check,Capture);while(contact.MoveNext())yield return contact.Current;yield break;}
+        if(CombatRuntime.HasArgument("-weaponHandlingCheck"))
+        {var arms=WeaponHandlingChecks.Run(gm,p,output,Check,Capture);while(arms.MoveNext())yield return arms.Current;yield break;}
+        if(CombatRuntime.HasArgument("-weaponHudCheck"))
+        {var arms=WeaponHandlingChecks.Hud(gm,p,output,Check,Capture);while(arms.MoveNext())yield return arms.Current;yield break;}
+        if(CombatRuntime.HasArgument("-enemyInteractionCheck"))
+        {var interaction=EnemyInteractionChecks.Run(gm,p,output,Check,Capture);while(interaction.MoveNext())yield return interaction.Current;yield break;}
+        if(CombatRuntime.HasArgument("-combatArsenalCheck"))
+        {var arsenal=CombatArsenalChecks.Run(gm,p,Check,Capture);while(arsenal.MoveNext())yield return arsenal.Current;yield break;}
+        if(CombatRuntime.HasArgument("-valkyrCannonCheck"))
+        {var cannon=ValkyrCannonChecks.Run(gm,p,Check,Capture);while(cannon.MoveNext())yield return cannon.Current;yield break;}
+        if(CombatRuntime.HasArgument("-nemesisRaikenCheck"))
+        {var raiken=NemesisRaikenChecks.Run(gm,p,output,Check,Capture);while(raiken.MoveNext())yield return raiken.Current;yield break;}
+        if(CombatRuntime.HasArgument("-combatVelocityCheck"))
+        {var velocity=CombatVelocityChecks.Run(gm,p,output,Check,Capture);while(velocity.MoveNext())yield return velocity.Current;yield break;}
+        if(CombatRuntime.HasArgument("-importedMotionCheck"))
+        {var imported=ImportedMotionChecks.Run(gm,p,output,Check,Capture);while(imported.MoveNext())yield return imported.Current;yield break;}
+        if(CombatRuntime.HasArgument("-aiUiCheck"))
+        {var aiui=AiUiChecks.Run(gm,p,output,Check,Capture);while(aiui.MoveNext())yield return aiui.Current;yield break;}
+        if(CombatRuntime.HasArgument("-lunarBasinCheck"))
+        {var lunar=LunarBasinChecks.Run(gm,p,output,Check,Capture);while(lunar.MoveNext())yield return lunar.Current;yield break;}
         if(CombatRuntime.HasArgument("-arenaTacticsCheck"))
         {var arena=ArenaTacticsChecks.Run(gm,p,output,Check,Capture);while(arena.MoveNext())yield return arena.Current;yield break;}
         if(CombatRuntime.HasArgument("-combatPunchCheck"))

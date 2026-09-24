@@ -1,6 +1,6 @@
 """Promote a verified build without changing the permanent desktop shortcut."""
 from pathlib import Path
-import argparse, datetime, hashlib, json, shutil
+import argparse, datetime, hashlib, json, shutil, os
 
 root = Path(__file__).resolve().parents[2]
 parser = argparse.ArgumentParser()
@@ -9,10 +9,15 @@ parser.add_argument('--evidence', required=True)
 parser.add_argument('--require', nargs='+', required=True)
 parser.add_argument('--check-only', action='store_true')
 args = parser.parse_args()
-build = (root / args.build).resolve()
-evidence = (root / args.evidence).resolve()
-assert build.is_relative_to(root / 'Builds'), 'Build must be inside project Builds'
-assert evidence.is_relative_to(root / 'AuditEvidence'), 'Evidence must be inside project AuditEvidence'
+# Entries stay inside the project's named containers. Directory junctions can
+# place large build/evidence payloads on another local volume; verify the resolved
+# payloads but retain stable project-relative entries in the launcher manifest.
+build_entry = Path(os.path.abspath(root / args.build))
+evidence_entry = Path(os.path.abspath(root / args.evidence))
+assert build_entry.is_relative_to(root / 'Builds'), 'Build entry must be inside project Builds'
+assert evidence_entry.is_relative_to(root / 'AuditEvidence'), 'Evidence entry must be inside project AuditEvidence'
+build = build_entry.resolve()
+evidence = evidence_entry.resolve()
 assert (build / 'MECH_TRIAL_P0.exe').is_file(), 'Missing executable'
 assert (build / 'MECH_TRIAL_P0_Data/Managed/Assembly-CSharp.dll').is_file(), 'Missing game assembly'
 assert (evidence / 'build-result.txt').read_text(encoding='utf-8-sig').startswith('Succeeded errors=0'), 'Build failed'
@@ -40,8 +45,8 @@ for mode in args.require:
     assert run['exit'] == 0 and Path(run['args'][0]).resolve() == build / 'MECH_TRIAL_P0.exe', f'Wrong tested build for {mode}'
     if 'assembly_sha256' in run:
         assert run['assembly_sha256'] == hashlib.sha256((build / 'MECH_TRIAL_P0_Data/Managed/Assembly-CSharp.dll').read_bytes()).hexdigest(), f'Tested assembly changed for {mode}'
-    tests[mode] = latest.relative_to(root).as_posix()
-release = {'version': build.name, 'build': build.relative_to(root).as_posix(),
+    tests[mode] = (evidence_entry / latest.relative_to(evidence)).relative_to(root).as_posix()
+release = {'version': build_entry.name, 'build': build_entry.relative_to(root).as_posix(),
            'verifiedFiles': checked, 'tests': tests,
            'publishedAt': datetime.datetime.now().astimezone().isoformat()}
 if not args.check_only:

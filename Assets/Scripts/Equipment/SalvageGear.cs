@@ -9,6 +9,21 @@ public sealed class SalvageGear
 {
     public string id, name, english, description, englishDescription, source, englishSource;
     public SalvageSlot slot;
+    public PrimaryWeapon primaryWeapon;public string primaryPrefab;
+    HangarArmory.Entry entry;
+    public HangarArmory.Entry PrimaryEntry
+    {
+        get
+        {
+            if(string.IsNullOrEmpty(primaryPrefab))return null;
+            if(entry==null)
+            {
+                var original=Resources.Load<HangarArmory>("Hangar/Armory").Find(primaryWeapon);
+                entry=new HangarArmory.Entry{weapon=primaryWeapon,prefab=Resources.Load<GameObject>("Hangar/"+primaryPrefab),damage=damage,interval=interval,speed=original.speed,pierce=pierce,blastRadius=original.blastRadius,rightHandOnly=original.rightHandOnly};
+            }
+            return entry;
+        }
+    }
     public int projectiles = 1, pierce, missiles = 4;
     public float damage = 18f, interval = .18f, spread, dashDistance, dashCooldown, moveSpeed, skillCooldown = 10f;
     public Color color = new Color(.24f, .72f, .92f);
@@ -17,6 +32,13 @@ public sealed class SalvageGear
     public string Source => GamePreferences.Chinese ? source : englishSource;
 
     public static readonly SalvageGear[] All = {
+        new SalvageGear{id="back_cannon",name="钢加农双背炮",english="Guncannon twin back cannons",primaryWeapon=PrimaryWeapon.Type08,primaryPrefab="GC_BACK_CANNON",damage=120,interval=1.1f,description="回收的双炮管，以胸背支点同步齐射。",englishDescription="Recovered paired barrels, braced against the torso.",source="钢加农回收",englishSource="Guncannon recovery"},
+        new SalvageGear{id="m7",name="M7 突击步枪",english="M7 assault rifle",primaryWeapon=PrimaryWeapon.M7,primaryPrefab="M7",damage=18,interval=.18f,description="近中距连射，18 发后自动整备；远距伤害衰减。",englishDescription="Close-range automatic fire. Auto reload after 18 shots; damage falls off at range.",source="战场回收",englishSource="Battlefield recovery"},
+        new SalvageGear{id="m14",name="M14 精准步枪",english="M14 precision rifle",primaryWeapon=PrimaryWeapon.M14,primaryPrefab="M14",damage=46,interval=.48f,pierce=1,description="远距贯穿重弹，4 发后自动整备。",englishDescription="Long-range piercing rounds. Auto reload after four shots.",source="战场回收",englishSource="Battlefield recovery"},
+        new SalvageGear{id="type08",name="TYPE-08 粒子炮",english="TYPE-08 particle cannon",primaryWeapon=PrimaryWeapon.Type08,primaryPrefab="TYPE08",damage=120,interval=1.1f,description="短暂聚能后释放粒子束。",englishDescription="Charged particle discharge.",source="战场回收",englishSource="Battlefield recovery"},
+        new SalvageGear{id="ax01",name="AX-01 贯穿炮",english="AX-01 Halbreaker",primaryWeapon=PrimaryWeapon.Halbreaker,primaryPrefab="HALBREAKER",damage=160,interval=1.05f,pierce=3,description="肩部支撑的高密度贯穿炮。",englishDescription="Shoulder supported piercing cannon.",source="战场回收",englishSource="Battlefield recovery"},
+        new SalvageGear{id="rocket",name="重型火箭发射器",english="Heavy rocket launcher",primaryWeapon=PrimaryWeapon.NemesisLauncher,primaryPrefab="J01_LAUNCHER",damage=70,interval=.95f,description="直射火箭与范围爆破。",englishDescription="Direct fire explosive rockets.",source="战场回收",englishSource="Battlefield recovery"},
+        new SalvageGear{id="missile_rack",name="导弹发射器",english="Missile launcher",primaryWeapon=PrimaryWeapon.NemesisLauncher,primaryPrefab="J01_LAUNCHER",damage=24,interval=.95f,projectiles=3,description="三联制导导弹。",englishDescription="Three guided missiles per salvo.",source="战场回收",englishSource="Battlefield recovery"},
         new SalvageGear { id = "e01_rifle", name = "E-01 制式步枪", english = "E-01 service rifle", damage = 22f, interval = .22f,
             description = "稳定的单发连射。击败白色步枪兵后吸收入库。", englishDescription = "Steady automatic fire. Recover from E-01 rifle soldiers.",
             source = "击败 E-01 步枪兵后吸收", englishSource = "Absorb from E-01 soldiers", color = new Color(.65f,.85f,1f) },

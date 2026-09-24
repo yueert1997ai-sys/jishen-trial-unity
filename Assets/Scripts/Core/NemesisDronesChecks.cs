@@ -36,12 +36,14 @@ public static class NemesisDronesChecks
         for(int i=0;i<10;i++)yield return null;
         check(age==drones.Age&&shots==drones.ShotsFired&&rig.Drones.Select((t,i)=>Vector3.Distance(t.position,positions[i])).All(d=>d<.0001f),"pause freezes flight, fire and support lifetime");gm.SetPaused(false);
         var previous=rig.Drones[0].position;var start=p.transform.position;
-        for(int i=0;i<35;i++){Command(Vector2.right);yield return null;}
-        check(Vector3.Distance(p.transform.position,start)>1&&Vector3.Distance(rig.Drones[0].position,previous)>1
-            &&rig.Drones.All(t=>Vector3.Distance(t.position,p.transform.position)<7),"six support units follow a moving player and remain in formation");
+        // Traverse a fixed clear corridor distance: fixed frame counts move a faster
+        // motor behind the lunar ridge and change a reacquisition probe into a cover test.
+        for(int i=0;i<60&&Vector3.Distance(p.transform.position,start)<3f;i++){Command(Vector2.right);yield return null;}
+        check(Vector3.Distance(p.transform.position,start)>1&&rig.Drones.Any(t=>Vector3.Distance(t.position,p.transform.position)>7)
+            &&Enumerable.Range(0,6).All(i=>Vector3.Distance(rig.Drones[i].position,drones.Target(i).transform.position)<8),"six units keep enemy-side firing positions independently of player movement");
         a.Kill(new DamageInfo(p.gameObject,p.transform.position,p.GetComponent<Damageable>(),9999));
         for(int i=0;i<25;i++){Command();yield return null;}
-        check(Enumerable.Range(0,6).All(i=>drones.Target(i)==b),"destroyed target is abandoned and every unit reacquires the surviving enemy");
+        check(Enumerable.Range(0,6).All(i=>drones.Target(i)==b),"destroyed target is abandoned and every unit reacquires the surviving enemy; player="+p.transform.position+" locks="+string.Join(",",Enumerable.Range(0,6).Select(i=>drones.Target(i)==b?"live":drones.Target(i)==null?"none":"other")));
         int beams=rig.GetComponentsInChildren<LineRenderer>(true).Count(l=>l.name.StartsWith("Drone beam"));
         check(beams==6*NemesisDroneVfx.BeamLinesPerUnit,"beam geometry is a fixed pool of three beam layers and two ion filaments for each of six units");
         while(drones.Active){Command();yield return null;}
@@ -52,7 +54,7 @@ public static class NemesisDronesChecks
         trial.ClearTargets();yield return null;p.RestoreAt(new Vector3(0,.1f,0));
         var blocked=trial.SpawnTarget(new Vector3(0,.1f,12),"",1000).GetComponent<Damageable>();
         var wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.name="Drone check cover";
-        wall.transform.position=new Vector3(0,2,6);wall.transform.localScale=new Vector3(20,6,.5f);Physics.SyncTransforms();
+        wall.transform.position=new Vector3(0,2,6);wall.transform.localScale=new Vector3(70,12,.5f);Physics.SyncTransforms();
         p.weaponController.ResetCooldowns();Command(skill:true);yield return null;
         for(int i=0;i<120;i++){Command();yield return null;}
         check(blocked.CurrentHealth==1000,"solid cover blocks drone target acquisition and damage");

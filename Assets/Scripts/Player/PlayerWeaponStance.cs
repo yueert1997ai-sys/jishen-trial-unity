@@ -54,13 +54,13 @@ public sealed class PlayerWeaponStance : MonoBehaviour
         {StowBlend=Mathf.MoveTowards(StowBlend,0,dt/CombatRules.Current.DrawSeconds);if(StowBlend<=0)State=WeaponStance.Sword;}
         if(slash && CanMelee && player.Melee.CooldownRemaining<=0)
         {
-            player.AimAt(slashAim);
+            player.AimAt(slashAim,0,720);
             if(player.Melee.TryAttack())queue.Cancel(BufferedCombatAction.Slash);
         }
         if(!command.Melee && !slash && CanFire && (shot || command.Fire&&command.HasAim))
         {
             if(shot && !command.Fire)player.AimAt(shotAim);
-            player.weaponController.TryFireBeam(command.Fire&&!pressed&&!shot);
+            player.weaponController.RequestPrimary(command.Fire&&!pressed&&!shot);
             queue.Cancel(BufferedCombatAction.Primary);
         }
     }

@@ -7,7 +7,8 @@ public sealed class HangarPresentation : MonoBehaviour
     private GameObject room;
     private readonly List<Light> hiddenLights = new List<Light>();
     private Color ambient;
-    private float yaw = -28, pitch = 9, distance = 8.4f;
+    private const float DisplayDistance=10.5f;
+    private float yaw = -28, pitch = 9, distance = DisplayDistance;
     private Vector2 previous;
     private bool dragging;
     private bool showing;
@@ -27,7 +28,7 @@ public sealed class HangarPresentation : MonoBehaviour
         if (gm.arenaSector != null && gm.arenaSector.lunar != null) gm.arenaSector.lunar.SetActive(false);
         if (gm.arenaSector != null && gm.arenaSector.commonDeck != null) gm.arenaSector.commonDeck.SetActive(false);
         gm.playerController.RestoreAt(new Vector3(0,.38f,0));
-        yaw = -28; pitch = 9; distance = 8.4f;
+        yaw = -28; pitch = 9; distance = DisplayDistance;
     }
     public void Hide()
     {
@@ -38,7 +39,7 @@ public sealed class HangarPresentation : MonoBehaviour
         hiddenLights.Clear(); RenderSettings.ambientLight = ambient;
         dragging = false;
     }
-    public void Closeup(bool close) { distance = close ? 3.3f : 8.4f; }
+    public void Closeup(bool close) { distance = close ? 3.3f : DisplayDistance; }
     public void UpdateCamera(Camera camera, Transform target)
     {
         bool active = GameManager.Instance != null && !GameManager.Instance.IsPaused && !GameManager.Instance.settingsUI.IsVisible && !GameManager.Instance.equipmentLoop.UI.IsVisible;
@@ -51,7 +52,7 @@ public sealed class HangarPresentation : MonoBehaviour
             Vector2 delta = pointer - previous; previous = pointer;
             yaw -= delta.x * .22f; pitch = Mathf.Clamp(pitch + delta.y * .12f, -5, 25);
         }
-        if (active && !overUI) distance = Mathf.Clamp(distance - Input.mouseScrollDelta.y * .35f, 3.3f, 8.5f);
+        if (active && !overUI) distance = Mathf.Clamp(distance - Input.mouseScrollDelta.y * .35f, 3.3f, 12f);
         float y = yaw * Mathf.Deg2Rad, p = pitch * Mathf.Deg2Rad;
         Vector3 direction = new Vector3(Mathf.Sin(y)*Mathf.Cos(p),Mathf.Sin(p),Mathf.Cos(y)*Mathf.Cos(p));
         Vector3 right = new Vector3(Mathf.Cos(y),0,-Mathf.Sin(y));

@@ -23,6 +23,7 @@ public class StageManager : MonoBehaviour
     public void StartEncounter(int index,GameObject bossOverride=null)
     {
         StopStage();CurrentEncounter=Mathf.Clamp(index,0,6);
+        GameManager.Instance.equipmentLoop.Absorption.BeginEncounter();
         if(index==0){WaveRepairsGranted=0;System.Array.Clear(EncounterSeconds,0,6);}
         Director=new CombatEncounterDirector(GameManager.Instance,false,CurrentEncounter,bossOverride);
         GameManager.Instance.SetProgress(index<6?EncounterCatalog.Rooms[index].Title+"  /  "+(index+1)+" / 6":"液态核心 / 首领战");

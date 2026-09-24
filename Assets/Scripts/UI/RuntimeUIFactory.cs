@@ -90,11 +90,13 @@ public static class RuntimeUIFactory
         GameObject buttonObject = new GameObject(name, typeof(RectTransform));
         buttonObject.transform.SetParent(parent, false);
         Image image = buttonObject.AddComponent<Image>();
-        image.color = new Color(0.18f, 0.2f, 0.2f, 0.94f);
+        image.color = GameUITheme.Button;
         Button button = buttonObject.AddComponent<Button>();
         ColorBlock colors = button.colors;
-        colors.highlightedColor = new Color(0.65f, 0.71f, 0.7f, 1f);
-        colors.pressedColor = new Color(0.3f, 0.35f, 0.34f, 1f);
+        colors.highlightedColor = new Color(1.3f,1.3f,1.3f,1);
+        colors.selectedColor=colors.highlightedColor;
+        colors.pressedColor = new Color(.7f,.8f,.9f,1);
+        colors.disabledColor=new Color(.55f,.55f,.55f,.75f);
         button.colors = colors;
 
         Text text = CreateText(buttonObject.transform, "Label", label, 24, TextAnchor.MiddleCenter, Color.white);
@@ -103,6 +105,7 @@ public static class RuntimeUIFactory
         textRect.anchorMax = Vector2.one;
         textRect.offsetMin = Vector2.zero;
         textRect.offsetMax = Vector2.zero;
+        text.color=GameUITheme.Text;text.raycastTarget=false;
 
         return button;
     }
@@ -119,14 +122,16 @@ public static class RuntimeUIFactory
     {
         CreatePanel(canvas.transform, name + "Shade", Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.01f, 0.025f, 0.03f, 0.8f));
         var safe = SafeAreaLayout.Create(canvas);
-        var surface = CreatePanel(safe, name, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.075f, 0.085f, 0.085f, 1f));
+        var surface = CreatePanel(safe, name, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, GameUITheme.Surface);
         Place(surface, Vector2.one * 0.5f, Vector2.zero, size);
+        var rule=CreatePanel(surface,"MenuAccent",new Vector2(0,1),Vector2.one,new Vector2(24,-3),new Vector2(-24,-1),GameUITheme.Accent);
+        rule.GetComponent<Image>().raycastTarget=false;
         return surface;
     }
 
     public static Text MenuText(Transform parent, string name, string value, int size, Vector2 position, Vector2 dimensions, TextAnchor alignment = TextAnchor.MiddleLeft)
     {
-        var text = CreateText(parent, name, value, size, alignment, Color.white);
+        var text = CreateText(parent, name, value, size, alignment, GameUITheme.Text);
         text.raycastTarget = false;
         text.verticalOverflow = VerticalWrapMode.Truncate;
         Place(text.rectTransform, new Vector2(0, 1), position, dimensions);

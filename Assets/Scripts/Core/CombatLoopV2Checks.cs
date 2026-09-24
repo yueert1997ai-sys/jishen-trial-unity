@@ -71,11 +71,11 @@ public static class CombatLoopV2Checks
                 for(int i=0;i<10&&!p.Melee.IsAttacking;i++){Drive(p,hp.AimCenter);yield return null;}
                 check(p.Melee.IsAttacking,"blade is live before support command");
                 p.AutoAim.Clear();Drive(p,hp.AimCenter,skill:true);yield return null;
-                check(p.weaponController.SkillCooldownRemaining>9&&p.Melee.IsAttacking,"SALVO launches from live melee without canceling blade");
-                check(UnityEngine.Object.FindObjectsByType<MissileProjectile>(FindObjectsSortMode.None).Length==4,"SALVO launches four actual missiles");
+                check(p.weaponController.SkillCooldownRemaining>9&&p.Melee.IsAttacking,"back cannons deploy from live melee without canceling blade");
+                check(p.GetComponentInChildren<ValkyrBackCannon>().Active&&UnityEngine.Object.FindObjectsByType<MissileProjectile>(FindObjectsSortMode.None).Length==0,"back cannons replace the four missiles");
                 int previousHits=hitCount;
-                for(int i=0;i<100&&hitCount<previousHits+4;i++){Drive(p,hp.AimCenter);yield return null;}
-                check(hitCount>=previousHits+4&&last.Kind==CombatHitKind.Missile,"support missiles reach target through actual homing and collision");
+                for(int i=0;i<100&&hitCount<previousHits+2;i++){Drive(p,hp.AimCenter);yield return null;}
+                check(hitCount>=previousHits+2&&last.Kind==CombatHitKind.HeavyRifle,"two back cannon beams reach target through actual collision hits="+hitCount+" before="+previousHits+" cannon="+p.GetComponentInChildren<ValkyrBackCannon>().Hits+" kind="+last.Kind);
                 ClearShots();hp.RestoreLife(100,100);hp.SetInvulnerable(.1f);
                 hp.TakeDamage(1,new DamageInfo(p.gameObject,p.transform.position,source,1){Impact=999});
                 check(hp.CurrentHealth==100&&enemy.Armor.Current==enemy.Armor.Maximum,"invulnerability rejects both HP and armor damage");

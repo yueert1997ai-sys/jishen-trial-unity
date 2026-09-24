@@ -68,11 +68,11 @@ public class WorldHealthBar : MonoBehaviour
         background.offsetMin = Vector2.zero;
         background.offsetMax = Vector2.zero;
 
-        fill = CreateImage(background, "Fill", alwaysVisible ? new Color(1f, 0.18f, 0.08f, 1f) : new Color(1f, 0.32f, 0.12f, 1f));
+        fill = CreateImage(background, "Fill", GameUITheme.Danger);
         fill.anchorMin = new Vector2(0f, 0f);
         fill.anchorMax = Vector2.one;
-        fill.offsetMin = new Vector2(2f, 2f);
-        fill.offsetMax = new Vector2(-2f, -2f);
+        fill.offsetMin = new Vector2(0f, 2f);
+        fill.offsetMax = new Vector2(0f, -2f);
         armor = GetComponent<ArmorHealth>();
         if (armor != null && armor.Maximum>0)
         {
@@ -80,8 +80,8 @@ public class WorldHealthBar : MonoBehaviour
             var textObject = new GameObject("PostureStatus", typeof(RectTransform));
             textObject.transform.SetParent(canvasRect, false);
             postureLabel = textObject.AddComponent<Text>();
-            postureLabel.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            postureLabel.fontSize = 22; postureLabel.alignment = TextAnchor.MiddleCenter;
+            postureLabel.font = RuntimeUIFactory.DefaultFont;
+            postureLabel.fontSize = 16; postureLabel.alignment = TextAnchor.MiddleCenter;
             postureLabel.raycastTarget = false;
             var labelRect = textObject.GetComponent<RectTransform>();
             labelRect.anchorMin = new Vector2(0,1); labelRect.anchorMax = new Vector2(1,1);
@@ -89,9 +89,9 @@ public class WorldHealthBar : MonoBehaviour
             var bar = CreateImage(canvasRect, "ImpactBackground", new Color(.02f,.03f,.04f,.95f));
             bar.anchorMin = new Vector2(0, -1.1f); bar.anchorMax = new Vector2(1, -.35f);
             bar.offsetMin = bar.offsetMax = Vector2.zero;
-            impactFill = CreateImage(bar, "ImpactPressure", new Color(1,.65f,.1f));
+            impactFill = CreateImage(bar, "ImpactPressure", GameUITheme.Armor);
             impactFill.anchorMin = Vector2.zero; impactFill.anchorMax = Vector2.one;
-            impactFill.offsetMin = Vector2.one; impactFill.offsetMax = -Vector2.one;
+            impactFill.offsetMin = Vector2.zero; impactFill.offsetMax = Vector2.zero;
             impactImage = impactFill.GetComponent<Image>();
         }
     }
@@ -107,15 +107,15 @@ public class WorldHealthBar : MonoBehaviour
         Vector2 anchorMax = fill.anchorMax;
         anchorMax.x = Mathf.Clamp01(ratio);
         fill.anchorMax = anchorMax;
-        fill.offsetMin = new Vector2(2f, 2f);
-        fill.offsetMax = new Vector2(-2f, -2f);
+        fill.offsetMin = new Vector2(0f, 2f);
+        fill.offsetMax = new Vector2(0f, -2f);
         if (armor != null && impactFill != null)
         {
             impactFill.parent.gameObject.SetActive(armor.Intact);
             impactFill.anchorMax = new Vector2(armor.Ratio, 1);
-            impactImage.color = new Color(1,.65f,.1f);
-            postureLabel.text=armor.Intact?"ARMOR":"EXPOSED";
-            postureLabel.color=armor.Intact?new Color(1,.8f,.45f):new Color(.35f,1,1);
+            impactImage.color = GameUITheme.Armor;
+            postureLabel.text=armor.Intact?EquipmentWarehouseUI.T("装甲","ARMOR"):EquipmentWarehouseUI.T("破甲","EXPOSED");
+            postureLabel.color=armor.Intact?GameUITheme.Armor:GameUITheme.Energy;
         }
         canvas.gameObject.SetActive(!damageable.IsDead && (alwaysVisible || ratio < 0.999f || (armor != null && armor.Intact)));
     }

@@ -14,7 +14,12 @@ public sealed class SliceAbsorption : MonoBehaviour
     public bool Offering => pickup!=null && !Busy;
     public GameObject Pickup => pickup;
     public GameObject Module => module;
+    public string OfferedId=>offeredId;
+    public string OfferedTitle=>SalvageGear.Find(offeredId)?.Title??"";
     public bool CanAbsorb => !Busy && pickup!=null && VisibleNearby();
+    private string offeredId="e01_rifle";
+    readonly System.Collections.Generic.Queue<(GameObject root,GameObject module,string id)> offers=new System.Collections.Generic.Queue<(GameObject,GameObject,string)>();
+    readonly System.Collections.Generic.HashSet<string> dropped=new System.Collections.Generic.HashSet<string>();
     private EquipmentLoop loop;
     private PlayerController player;
     private GameObject pickup,module;
@@ -36,7 +41,9 @@ public sealed class SliceAbsorption : MonoBehaviour
     }
     public void Attach(EnemyBase enemy)
     {
-        if(CarrierAssigned||enemy.TrainingTarget||enemy.kind!=EnemyKind.Ranged)return;
+        if(enemy.TrainingTarget)return;
+        var arsenal=enemy.GetComponent<EnemyArsenal>();if(arsenal!=null){CarrierAssigned=true;return;}
+        if(CarrierAssigned||enemy.kind!=EnemyKind.Ranged)return;
         if(CombatRuntime.Run?.Mode==CombatMode.FullDemo && loop.Owner.CompletedEncounters!=1)return;
         var soldier=enemy.GetComponent<E01SoldierMotion>();
         if(soldier==null||soldier.rifle==null)return;
@@ -47,16 +54,24 @@ public sealed class SliceAbsorption : MonoBehaviour
     public void Drop(EnemyBase enemy)
     {
         var carrier=enemy.GetComponent<SalvageCarrier>();
-        if(enemy.TrainingTarget||Installed||pickup!=null||carrier==null||carrier.visual==null)return;
-        pickup=new GameObject("Slice_E01_Recovery");pickup.transform.position=enemy.transform.position+Vector3.up*.65f;
-        module=carrier.visual;module.transform.SetParent(pickup.transform,true);
+        if(enemy.TrainingTarget||carrier==null||carrier.visual==null||carrier.gear==null||dropped.Contains(carrier.gear.id))return;
+        dropped.Add(carrier.gear.id);
+        var root=new GameObject("Recovery_"+carrier.gear.id);root.transform.position=enemy.transform.position+Vector3.up*.65f;
+        var part=enemy.GetComponent<EnemyArsenal>()?.DetachWeapon()??carrier.visual;
+        var soldier=enemy.GetComponent<E01SoldierMotion>();if(soldier!=null)soldier.rifle=null;part.SetActive(true);part.transform.SetParent(root.transform,true);
+        if(pickup!=null){offers.Enqueue((root,part,carrier.gear.id));return;}
+        Offer(root,part,carrier.gear.id);
+    }
+    void Offer(GameObject root,GameObject part,string id)
+    {
+        pickup=root;module=part;offeredId=id;
         module.transform.localPosition=Vector3.zero;module.transform.localRotation=Quaternion.Euler(0,35,12);
-        var soldier=enemy.GetComponent<E01SoldierMotion>();if(soldier!=null)soldier.rifle=null;
+
         foreach(var c in module.GetComponentsInChildren<Collider>())c.enabled=false;
         initialScale=module.transform.localScale;
         armor=module.GetComponentsInChildren<Renderer>();saved=new MaterialPropertyBlock[armor.Length];
         for(int i=0;i<armor.Length;i++){saved[i]=new MaterialPropertyBlock();armor[i].GetPropertyBlock(saved[i]);}
-        Notice("步枪脱落 · 靠近后按 F 牵引装配");
+        Notice(SalvageGear.Find(offeredId).Title+"脱落 · 靠近后按 F 牵引装配");
     }
     private bool VisibleNearby()
     {
@@ -74,9 +89,9 @@ public sealed class SliceAbsorption : MonoBehaviour
     {
         if(!CanAbsorb||player.IsDashing)return false;
         hand=player.GetComponent<MechHardpointManager>()?.GetSocket("RightHandSocket");
-        if(hand==null||Resources.Load<GameObject>("E01/Rifle")==null)return false;
-        bool known=loop.Warehouse.Owns("e01_rifle");
-        if(!loop.Warehouse.Acquire("e01_rifle")){Notice("保存失败 · 武器保留，可再次按 F");return false;}
+        if(hand==null)return false;
+        bool known=loop.Warehouse.Owns(offeredId);
+        if(!loop.Warehouse.Acquire(offeredId)){Notice("保存失败 · 武器保留，可再次按 F");return false;}
         loop.RecordAcquisition(!known);
         start=pickup.transform.position;initialRotation=module.transform.rotation;
         elapsed=0;duration=known?.65f:1.05f;Phase=Step.Pull;
@@ -122,10 +137,10 @@ public sealed class SliceAbsorption : MonoBehaviour
         {armor[i].GetPropertyBlock(block);block.SetColor("_EmissionColor",new Color(.12f,.45f,.7f)*Mathf.SmoothStep(0,1,Mathf.InverseLerp(.84f,1,t)));armor[i].SetPropertyBlock(block);}
         if(t<1)return;
         RestoreArmor();Installed=true;
-        loop.InstallRecovered("e01_rifle");
-        player.GetComponent<E01PlayerRifle>().Adopt(module);
+        loop.InstallRecovered(offeredId);
+        if(offeredId=="e01_rifle")player.GetComponent<E01PlayerRifle>().Adopt(module);else Destroy(module);
         module=null;Destroy(pickup);pickup=null;Phase=Step.Idle;
-        player.Stance.FinishAbsorptionPose();Notice("E-01 步枪就绪 · 左键开火 · 斩舰刀保留");
+        player.Stance.FinishAbsorptionPose();Notice(SalvageGear.Find(offeredId).Title+"就绪 · 左键开火");NextOffer();
     }
     private void RestoreArmor(){if(armor!=null)for(int i=0;i<armor.Length;i++)if(armor[i]!=null)armor[i].SetPropertyBlock(saved[i]);}
     private void OnHit(Damageable target,DamageInfo hit){if(Busy)Cancel();}
@@ -142,22 +157,26 @@ public sealed class SliceAbsorption : MonoBehaviour
     }
     public void ResetRun()
     {
-        ClearOffer();Installed=false;CarrierAssigned=false;noticeUntil=0;
+        ClearOffer();dropped.Clear();Installed=false;CarrierAssigned=false;noticeUntil=0;
     }
+    public void BeginEncounter(){dropped.Clear();CarrierAssigned=false;}
     public void ClearOffer()
     {
         Cancel();
         if(pickup!=null)Destroy(pickup);pickup=module=null;
+        while(offers.Count>0){var offer=offers.Dequeue();if(offer.root!=null)Destroy(offer.root);}
     }
+    void NextOffer(){if(offers.Count>0){var item=offers.Dequeue();Offer(item.root,item.module,item.id);}}
     public bool CollectWithoutInstalling()
     {
         if(Busy)return false;
         if(pickup==null)return true;
-        bool fresh=!loop.Warehouse.Owns("e01_rifle");
-        if(!loop.Warehouse.Acquire("e01_rifle")){Notice("保存失败 · 请重试继续，武器仍保留");return false;}
-        loop.RecordAcquisition(fresh);ClearOffer();return true;
+        bool fresh=!loop.Warehouse.Owns(offeredId);
+        if(!loop.Warehouse.Acquire(offeredId)){Notice("保存失败 · 请重试继续，武器仍保留");return false;}
+        loop.RecordAcquisition(fresh);Destroy(pickup);pickup=module=null;NextOffer();
+        return CollectWithoutInstalling();
     }
     private void Notice(string message){notice=message;noticeUntil=Time.time+2.5f;}
     public string StatusText=>Busy?(Phase==Step.Pull?"牵引中":Phase==Step.Catch?"接住":Phase==Step.Lock?"机械锁定":"能量启动")+" · 空格取消":Time.time<noticeUntil?notice:null;
-    private void OnDestroy(){if(player!=null){player.Dashed-=OnDash;player.GetComponent<Damageable>().OnDamaged-=OnHit;}if(pickup!=null)Destroy(pickup);}
+    private void OnDestroy(){if(player!=null){player.Dashed-=OnDash;player.GetComponent<Damageable>().OnDamaged-=OnHit;}ClearOffer();}
 }

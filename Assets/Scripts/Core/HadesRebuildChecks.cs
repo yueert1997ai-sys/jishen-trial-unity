@@ -32,11 +32,11 @@ public static class HadesRebuildChecks
         if(module>=2)
         {
             var follow=Camera.main.GetComponent<CameraFollow>();
-            check(Mathf.Approximately(follow.CombatSize,11.25f),"default battle view uses the shared C profile");
+            check(Mathf.Approximately(follow.CombatSize,CameraFollow.StandardCombatSize),"default battle view uses the shared C profile");
             follow.AddShake(20,5);
             check(follow.ShakeAmplitude<=.24f,"camera bounds extreme feedback amplitude");
             for(int i=0;i<45;i++)yield return null;
-            check(Camera.main.orthographic&&Mathf.Abs(Camera.main.orthographicSize-11.25f)<.05f,"hit feedback cannot zoom the normal battle camera");
+            check(Camera.main.orthographic&&Mathf.Abs(Camera.main.orthographicSize-CameraFollow.StandardCombatSize)<.05f,"hit feedback cannot zoom the normal battle camera");
             p.RestoreAt(new Vector3(25,.1f,22));for(int i=0;i<60;i++)yield return null;
             check(Mathf.Abs(follow.Focus.x)+Camera.main.orthographicSize*(16f/9f)<30f&&Mathf.Abs(follow.Focus.z)<17,"camera clamps the viewport footprint, including at the arena edge");
             capture("v4-edge-camera.png");p.RestoreAt(new Vector3(0,.1f,-4));

@@ -33,7 +33,7 @@ public static class R9AudioChecks
             check(JsonUtility.ToJson(previous)==JsonUtility.ToJson(UnityEngine.Random.state),"sound variation does not change gameplay RNG");
             p.RestoreAt(new Vector3(0,.1f,0));p.stats.ResetStats();p.Stance.ResetStance();yield return null;
             p.weaponController.ResetCooldowns();p.AimAt(new Vector3(0,1,18));p.weaponController.TryFireBeam();
-            var body=a.GetComponents<AudioSource>().First(v=>v.clip!=null&&v.clip.name.StartsWith("m7_attack")&&v.volume>0);
+            var body=a.GetComponents<AudioSource>().First(v=>v.clip!=null&&a.SliceClips(GameAudioCue.RifleShot).Contains(v.clip)&&v.volume>0);
             float before=body.volume;
             enemyObject=UnityEngine.Object.Instantiate(gm.stageManager.enemySpawner.meleePrefab,new Vector3(0,.1f,3),Quaternion.identity);
             var enemy=enemyObject.GetComponent<EnemyBase>();enemy.ConfigureP0Role(EnemyKind.Melee);enemy.Init(p.transform,null);enemy.enabled=false;
@@ -58,7 +58,9 @@ public static class R9AudioChecks
             check(a.BoostLevel==0,"released propulsion leaves no motor level");
             heard.Clear();p.RestoreAt(new Vector3(0,.1f,0));yield return null;
             for(int f=0;f<75;f++){p.Simulate(new PlayerCommand{Move=Vector2.up},Time.deltaTime);yield return null;}
-            check(heard.Contains(GameAudioCue.Footstep),"actual planted run feet produce mechanical ground contacts");
+            if(p.Loadout.IsNemesis)
+                check(!heard.Contains(GameAudioCue.Footstep)&&a.BoostLevel>.015f&&p.GetComponentInChildren<ValkyrMotionDriver>().FlightBlend>.5f,"ordinary hover has propulsion sound and no false ground contacts");
+            else check(heard.Contains(GameAudioCue.Footstep),"actual planted run feet produce mechanical ground contacts");
             p.CancelMovement();for(int f=0;f<30;f++)yield return null;heard.Clear();
             for(int f=0;f<30;f++)yield return null;
             check(!heard.Contains(GameAudioCue.Footstep),"stationary mech has no timer-driven footsteps");
@@ -78,7 +80,7 @@ public static class R9AudioChecks
             UnityEngine.Object.Destroy(enemyObject);enemyObject=null;
             GameAudio.Play(GameAudioCue.SwordCut3,.8f);GameAudio.Play(GameAudioCue.ArmorFinish,.8f);
             GamePreferences.SetEffects(0);
-            check(a.GetComponentsInChildren<AudioSource>().Where(v=>v.clip!=null&&v.clip.name!="P0_HeavyBattle").All(v=>v.volume==0),"effects slider mutes every new mechanism, threat, propulsion and tail channel");
+            check(a.GetComponentsInChildren<AudioSource>().Where(v=>v.clip!=null&&v.clip.name!="Velocity_Overdrive").All(v=>v.volume==0),"effects slider mutes every new mechanism, threat, propulsion and tail channel");
             GamePreferences.SetEffects(1);gm.EnterHangar();yield return null;
             check(voices.All(v=>v.volume==0)&&a.BoostLevel==0,"hangar clears transient gains and engine from previous combat");
             gm.BeginP0Combat();yield return null;

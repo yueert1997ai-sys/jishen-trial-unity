@@ -19,6 +19,7 @@ public sealed class EnemyAttackCycle
     }
     public float Progress(float now) => Phase==EnemyAttackPhase.Windup?Mathf.Clamp01((now-started)/Duration):0;
     public bool IsCommitted(int token) => token==Generation && cancellation==CombatRuntime.ActionGeneration && Phase==EnemyAttackPhase.Commit;
+    public bool CurrentActionValid => cancellation==CombatRuntime.ActionGeneration;
     public bool TryCommit(int token, float now, bool canAct)
     {
         if(token!=Generation || cancellation!=CombatRuntime.ActionGeneration || Phase!=EnemyAttackPhase.Windup || !canAct || now+.00001f<started+Duration)return false;

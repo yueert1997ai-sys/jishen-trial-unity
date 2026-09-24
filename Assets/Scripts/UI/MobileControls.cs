@@ -86,11 +86,11 @@ public class MobileControls : MonoBehaviour
         dash.interactable = dashAction.IsHoldingBoost || (player.IsDashReady && player.stats.CurrentEnergy >= 25f);
         melee.interactable = (player.Loadout == null || player.Loadout.CanUseSword) && player.Melee.CooldownRemaining <= 0 && !player.IsDashing;
         meleeLabel.text = player.Melee.CooldownRemaining > 0 ? player.Melee.CooldownRemaining.ToString("0.0") : GameText.T("SLASH");
-        skill.interactable = player.weaponController.SkillCooldownRemaining <= 0f && (player.Loadout.IsNemesis||player.AutoAim.CurrentTarget != null);
+        skill.interactable = player.weaponController.SkillCooldownRemaining <= 0f;
         dashLabel.text = player.IsBoosting ? EquipmentWarehouseUI.T("推进", "BOOST")
             : player.IsDashReady ? GameText.T("DASH") : player.DashCooldownRemaining.ToString("0.0");
         float cooldown = player.weaponController.SkillCooldownRemaining;
-        skillLabel.text = cooldown > 0f ? cooldown.ToString("0.0") : player.Loadout.IsNemesis?EquipmentWarehouseUI.T("浮游炮","DRONES"):GameText.T("SALVO");
+        skillLabel.text = cooldown > 0f ? cooldown.ToString("0.0") : player.Loadout.IsNemesis?EquipmentWarehouseUI.T("浮游炮","DRONES"):EquipmentWarehouseUI.T("背炮","CANNON");
     }
 
     public void SetVisible(bool visible)

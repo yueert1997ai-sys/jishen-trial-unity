@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CombatHUD : MonoBehaviour
 {
@@ -7,170 +8,182 @@ public class CombatHUD : MonoBehaviour
     public PlayerStats playerStats;
     public EquipmentManager equipmentManager;
     public RunUpgradeSystem upgradeSystem;
-
     public bool IsVisible => canvas != null && canvas.gameObject.activeSelf;
-    private Canvas canvas;
-    private RectTransform safeRoot;
-    private Text hpText, energyText, statusText, objectiveText, buildText, bossText;
-    private RectTransform hpFill, energyFill, bossFill, bossPanel, lockRing;
-    private Damageable playerDamageable, bossDamageable;
-    private BossController boss;
-    private PlayerController player;
-    private Image damageOverlay;
-    private Button continueButton;
-    private float flash;
-    private float nextRefresh;
-    private float nextBossLookup;
+    Canvas canvas;
+    RectTransform safeRoot, hpFill, hpTrail, energyFill, bossFill, bossPanel, crosshair, dashFill, supportFill;
+    Text hpText, energyText, statusText, objectiveText, buildText, bossText, mechText, dashText, supportText, timerText, weaponStateText;
+    readonly System.Collections.Generic.List<Image> aimMarks=new System.Collections.Generic.List<Image>(9);
+    Damageable playerDamageable, bossDamageable;
+    PlayerController player;
+    BossController boss;
+    P0CombatDemo demo;
+    Image damageOverlay;
+    Button continueButton;
+    float flash, nextRefresh, nextLookup, trailingHp=1, trailHold, supportDuration=1;
+    float nextWeaponRefresh;int lastWeaponRounds=-1,lastRangeBand=-1;bool lastServicing;
+    static string T(string zh,string en) => EquipmentWarehouseUI.T(zh,en);
 
-    private void Start()
+    void Start()
     {
-        BuildUI();
-        player = playerStats != null ? playerStats.GetComponent<PlayerController>() : null;
-        playerDamageable = playerStats != null ? playerStats.GetComponent<Damageable>() : null;
-        if (playerDamageable != null) playerDamageable.OnDamaged += HandleDamage;
-        SetVisible(gameManager != null && gameManager.Phase == GamePhase.Combat);
+        BuildUI();player=playerStats!=null?playerStats.GetComponent<PlayerController>():null;
+        playerDamageable=playerStats!=null?playerStats.GetComponent<Damageable>():null;
+        if(playerDamageable!=null)playerDamageable.OnDamaged+=OnDamage;
+        SetVisible(gameManager!=null && gameManager.Phase==GamePhase.Combat);
     }
-
-    private void OnDestroy()
-    {
-        if (playerDamageable != null) playerDamageable.OnDamaged -= HandleDamage;
-        Cursor.visible = true;
-    }
-
+    void OnDestroy(){if(playerDamageable!=null)playerDamageable.OnDamaged-=OnDamage;Cursor.visible=true;}
     public void SetVisible(bool value)
     {
-        BuildUI();
-        canvas.gameObject.SetActive(value);nextRefresh=nextBossLookup=0;
-        if (!value) flash = 0f;
+        BuildUI();canvas.gameObject.SetActive(value);nextRefresh=nextLookup=nextWeaponRefresh=0;lastWeaponRounds=-1;
+        if(!value){flash=0;trailingHp=1;supportDuration=1;Cursor.visible=true;}
     }
-
-    private void Update()
+    void Update()
     {
-        if (canvas == null || !IsVisible) return;
-        if (gameManager == null) gameManager = GameManager.Instance;
-        flash = Mathf.MoveTowards(flash, 0f, Time.unscaledDeltaTime * 4f);
-        damageOverlay.color = new Color(0.95f, 0.08f, 0.04f, flash * 0.1f);
-        Cursor.visible = true;
-        UpdateLock();
-        continueButton.gameObject.SetActive(gameManager.AwaitingContinue&&!gameManager.IsPaused);
-        continueButton.interactable=gameManager.equipmentLoop.Absorption.Busy==false;
-        if (Time.unscaledTime < nextRefresh) return;
-        nextRefresh = Time.unscaledTime + 0.1f;
-        if (playerStats != null)
+        if(!IsVisible)return;
+        if(gameManager==null)gameManager=GameManager.Instance;
+        if(player==null && gameManager!=null)player=gameManager.playerController;
+        if(player==null || gameManager==null || playerStats==null)return;
+        flash=Mathf.MoveTowards(flash,0,Time.unscaledDeltaTime*3);
+        damageOverlay.color=new Color(.8f,.13f,.08f,flash*.08f);UpdateAim();
+        float hp=Mathf.Clamp01(playerStats.CurrentHp/Mathf.Max(1,playerStats.MaxHp));
+        if(hp>=trailingHp)trailingHp=hp;
+        else if(Time.unscaledTime>trailHold)trailingHp=Mathf.MoveTowards(trailingHp,hp,Time.unscaledDeltaTime*.65f);
+        SetFill(hpFill,hp);SetFill(hpTrail,trailingHp);
+        hpFill.GetComponent<Image>().color=hp<=.25f?GameUITheme.Danger:GameUITheme.Health;
+        SetFill(energyFill,playerStats.CurrentEnergy/Mathf.Max(1,playerStats.MaxEnergy));
+        float dash=player.DashCooldownRemaining,support=player.weaponController.SkillCooldownRemaining;
+        supportDuration=Mathf.Max(supportDuration,support);
+        SetFill(dashFill,1-dash/Mathf.Max(.01f,playerStats.DashCooldown));SetFill(supportFill,1-support/supportDuration);
+        bool collect=demo!=null && gameManager.stageManager.EnemiesAlive==0 && gameManager.equipmentLoop.Absorption.Offering;
+        continueButton.gameObject.SetActive((gameManager.AwaitingContinue||collect)&&!gameManager.IsPaused);
+        continueButton.interactable=!gameManager.equipmentLoop.Absorption.Busy;
+        continueButton.GetComponentInChildren<Text>().text=collect?T("只收藏并继续  [Enter]","Collect & continue  [Enter]"):T("继续 · 选择强化  [Enter]","Continue · upgrade  [Enter]");
+        UpdateWeaponStatus();
+        if(Time.unscaledTime<nextRefresh)return;
+        nextRefresh=Time.unscaledTime+.1f;
+        if(Time.unscaledTime>=nextLookup)
         {
-            hpText.text = "HP  " + Mathf.CeilToInt(playerStats.CurrentHp) + " / " + Mathf.CeilToInt(playerStats.MaxHp);
-            energyText.text = "EN  " + Mathf.CeilToInt(playerStats.CurrentEnergy);
-            SetFill(hpFill, playerStats.CurrentHp / Mathf.Max(1f, playerStats.MaxHp));
-            SetFill(energyFill, playerStats.CurrentEnergy / Mathf.Max(1f, playerStats.MaxEnergy));
+            nextLookup=Time.unscaledTime+.3f;demo=FindFirstObjectByType<P0CombatDemo>();
+            boss=FindFirstObjectByType<BossController>();bossDamageable=boss!=null?boss.GetComponent<Damageable>():null;
         }
-        if (gameManager != null)
-        {
-            objectiveText.text = GameText.Progress(gameManager.ProgressText);
-            statusText.text = GameText.T("Kills") + " " + gameManager.Kills + "    " + GameText.T("Hostiles") + " " + (gameManager.stageManager != null ? gameManager.stageManager.EnemiesAlive : 0);
-        }
+        mechText.text=(player.Loadout.IsNemesis?"J-01  NEMESIS":"VALKYR")+"  /  "+T("机体状态","SYSTEM STATUS");
+        hpText.text=Mathf.CeilToInt(playerStats.CurrentHp)+" <size=12>/ "+Mathf.CeilToInt(playerStats.MaxHp)+"</size>";
+        energyText.text=T("推进能量  ","ENERGY  ")+Mathf.CeilToInt(playerStats.CurrentEnergy);
+        statusText.text=T("击破  ","KILLS  ")+gameManager.Kills+"     "+T("敌机  ","HOSTILES  ")+gameManager.stageManager.EnemiesAlive;
+        bool shortCombat=CombatRuntime.Run!=null&&CombatRuntime.Run.Mode==CombatMode.ShortCombat;
+        objectiveText.text=shortCombat?(CombatLabSettings.Active?T("对照试场","COMBAT LAB"):T("基础战斗试场","COMBAT TRIAL"))+(demo!=null?"   "+Mathf.Min(demo.SliceGroup,P0CombatDemo.SliceGroupCount)+" / "+P0CombatDemo.SliceGroupCount:""):GameText.Progress(gameManager.ProgressText);
+        int seconds=Mathf.FloorToInt(demo!=null?demo.Elapsed:gameManager.GetRunTime());
+        timerText.text=(seconds/60).ToString("00")+":"+(seconds%60).ToString("00");
         string gun=player.Loadout.Selected==PrimaryWeapon.Collection?gameManager.equipmentLoop.Weapon.Title:player.Loadout.Selected.ToString();
-        float support=player.weaponController.SkillCooldownRemaining;
-        if(player.Loadout.IsNemesis&&player.Loadout.Selected==PrimaryWeapon.M7)gun="J-01 光束步枪";
-        buildText.text=gun+(player.Loadout.IsNemesis?" + 光束剑   ·   E 浮游炮 ":" + 斩舰刀   ·   E 支援 ")+(support>0?support.ToString("F1")+"s":"就绪")+"\n"+(upgradeSystem!=null?upgradeSystem.GetSummary():"");
-        if (Time.unscaledTime >= nextBossLookup)
+        if(player.Loadout.IsNemesis&&player.Loadout.Selected==PrimaryWeapon.M7)gun=T("光束步枪","BEAM RIFLE");
+        buildText.text=T("左键  ","LMB  ")+gun+"    ·    "+T("右键  ","RMB  ")+T("斩舰刀","RAIKEN");
+        dashText.text=T("空格 · 冲刺  ","SPACE · DASH  ")+(dash>.01f?dash.ToString("F1")+"s":T("就绪","READY"));
+        supportText.text="E · "+(player.Loadout.IsNemesis?T("浮游炮  ","DRONES  "):T("背炮齐射  ","BACK CANNON  "))+(support>.01f?support.ToString("F1")+"s":T("就绪","READY"));
+        bool showBoss=bossDamageable!=null&&!bossDamageable.IsDead;bossPanel.gameObject.SetActive(showBoss);
+        if(showBoss)
         {
-            nextBossLookup = Time.unscaledTime + 0.25f;
-            boss = FindFirstObjectByType<BossController>();
-            bossDamageable = boss != null ? boss.GetComponent<Damageable>() : null;
-        }
-        bool showBoss = bossDamageable != null && !bossDamageable.IsDead;
-        bossPanel.gameObject.SetActive(showBoss);
-        if (showBoss)
-        {
-            bossText.text = boss.DisplayName + "   /   " + GameText.T(boss.CoreExposed ? "CORE EXPOSED" : boss.IsPhaseTwo ? "ARMORED II" : "ARMORED I");
-            bossFill.GetComponent<Image>().color = boss.CoreExposed ? new Color(0.2f, 0.95f, 0.8f) : new Color(1f, 0.26f, 0.17f);
-            SetFill(bossFill, bossDamageable.CurrentHealth / bossDamageable.maxHealth);
+            bossText.text=boss.DisplayName+"   ·   "+(boss.CoreExposed?T("露核","CORE EXPOSED"):T("装甲","ARMORED"));
+            SetFill(bossFill,bossDamageable.CurrentHealth/Mathf.Max(1,bossDamageable.maxHealth));
+            bossFill.GetComponent<Image>().color=boss.CoreExposed?GameUITheme.Energy:GameUITheme.Danger;
         }
     }
-
-    private void BuildUI()
+    void UpdateWeaponStatus()
     {
-        if (canvas != null) return;
-        canvas = RuntimeUIFactory.CreateCanvas("CombatHUDCanvas", 960f);
-        canvas.sortingOrder = 3;
-        var overlay = RuntimeUIFactory.CreatePanel(canvas.transform, "DamageOverlay", Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, Color.clear);
-        damageOverlay = overlay.GetComponent<Image>();
-        damageOverlay.raycastTarget = false;
-        safeRoot = SafeAreaLayout.Create(canvas);
-        var plate = Panel(safeRoot, "StatusPanel", new Vector2(0, 1), new Vector2(16, -112), new Vector2(226, -14));
-        hpText = Label(plate, "HpText", 18, new Vector2(10, -29), new Vector2(196, -1));
-        hpFill = Bar(plate, "HpBar", new Vector2(10, -36), new Vector2(196, -31), new Color(0.58f, 0.72f, 0.62f));
-        energyText = Label(plate, "EnergyText", 13, new Vector2(10, -61), new Vector2(196, -40));
-        energyFill = Bar(plate, "EnergyBar", new Vector2(10, -69), new Vector2(196, -66), new Color(0.58f, 0.7f, 0.76f));
-        statusText = Label(plate, "StatusText", 12, new Vector2(10, -93), new Vector2(198, -73));
-        var objectiveBand = Panel(safeRoot, "ObjectiveBand", new Vector2(0.5f, 1), new Vector2(-204, -40), new Vector2(204, -10));
-        objectiveText = Label(objectiveBand, "ObjectiveText", 14, new Vector2(8, -28), new Vector2(400, -2), null, TextAnchor.MiddleCenter);
-        bossPanel = Panel(safeRoot, "BossPanel", new Vector2(0.5f, 1), new Vector2(-180, -82), new Vector2(180, -43));
-        bossText = Label(bossPanel, "BossText", 13, new Vector2(10, -24), new Vector2(350, -3), null, TextAnchor.MiddleCenter);
-        bossFill = Bar(bossPanel, "BossHealth", new Vector2(10, -33), new Vector2(350, -28), new Color(1f, 0.26f, 0.17f));
-        bossPanel.gameObject.SetActive(false);
-        var buildBand = Panel(safeRoot, "BuildBand", new Vector2(0.5f, 0), new Vector2(-230, 12), new Vector2(230, 56));
-        buildText = Label(buildBand, "BuildText", 13, new Vector2(8, -42), new Vector2(452, -2), null, TextAnchor.MiddleCenter);
-        continueButton=RuntimeUIFactory.CreateButton(safeRoot,"ContinueAfterSalvage","继续 · 三选一 [Enter]");
-        RuntimeUIFactory.Place(continueButton.GetComponent<RectTransform>(),new Vector2(.5f,0),new Vector2(0,140),new Vector2(260,42));
-        continueButton.onClick.AddListener(()=>gameManager.ContinueAfterSalvage());continueButton.gameObject.SetActive(false);
-        var pause = RuntimeUIFactory.CreateButton(safeRoot, "PauseButton", "II");
-        var pauseRect = pause.GetComponent<RectTransform>();
-        pauseRect.anchorMin = pauseRect.anchorMax = new Vector2(1, 1);
-        pauseRect.offsetMin = new Vector2(-64, -62);
-        pauseRect.offsetMax = new Vector2(-16, -14);
-        pause.onClick.AddListener(() => GameManager.Instance.TogglePause());
-        lockRing = new GameObject("CombatCrosshair", typeof(RectTransform), typeof(ControlRingGraphic)).GetComponent<RectTransform>();
-        lockRing.SetParent(safeRoot, false);
-        lockRing.anchorMin = lockRing.anchorMax = new Vector2(0.5f, 0.5f);
-        lockRing.sizeDelta = new Vector2(28, 28);
-        var graphic = lockRing.GetComponent<ControlRingGraphic>();
-        graphic.color = new Color(0.8f, 0.9f, 0.88f, 0.9f);
-        graphic.thickness = 1.5f;
-        graphic.raycastTarget = false;
+        var weapon=player.weaponController;var handling=weapon.Handling;
+        float recovery=weapon.PrimaryRecoveryRemaining;
+        float distance=Vector3.Distance(PlanarCombat.Point(player.transform.position),PlanarCombat.Point(player.AimPoint));
+        int band=!handling.HasRange||!player.HasAimPoint||distance<=handling.OptimalRange?0:distance>handling.MaximumRange?2:1;
+        int rounds=weapon.PrimaryRoundsRemaining;bool servicing=recovery>0;
+        // State changes are immediate; countdowns share the simulation clock they describe.
+        if(rounds==lastWeaponRounds&&band==lastRangeBand&&servicing==lastServicing&&Time.time<nextWeaponRefresh)return;
+        lastWeaponRounds=rounds;lastRangeBand=band;lastServicing=servicing;nextWeaponRefresh=Time.time+.05f;
+        weaponStateText.color=servicing||band>0?GameUITheme.Armor:GameUITheme.Muted;
+        weaponStateText.text=servicing?T("自动整备  ","AUTO RELOAD  ")+recovery.ToString("F1")+"s":
+            handling.Capacity>0?rounds+" / "+handling.Capacity+"   ·   "+
+                (band>0?(band==2?T("超出射程","OUT OF RANGE"):T("远距衰减","RANGE FALLOFF")):T("有效射程 ","OPTIMAL ")+handling.OptimalRange.ToString("F0")+"m"):
+                weapon.PrimaryCooldownRemaining>.01f?T("冷却  ","COOLDOWN  ")+weapon.PrimaryCooldownRemaining.ToString("F1")+"s":T("射击就绪","WEAPON READY");
     }
-
-    private RectTransform Panel(Transform parent, string name, Vector2 anchor, Vector2 min, Vector2 max)
+    void BuildUI()
     {
-        var rect = RuntimeUIFactory.CreatePanel(parent, name, anchor, anchor, min, max, new Color(0.045f, 0.055f, 0.055f, 0.94f));
-        rect.GetComponent<Image>().raycastTarget = false;
-        return rect;
+        if(canvas!=null)return;
+        canvas=RuntimeUIFactory.CreateCanvas("CombatHUDCanvas",960);canvas.sortingOrder=3;
+        damageOverlay=RuntimeUIFactory.CreatePanel(canvas.transform,"DamageOverlay",Vector2.zero,Vector2.one,Vector2.zero,Vector2.zero,Color.clear).GetComponent<Image>();damageOverlay.raycastTarget=false;
+        safeRoot=SafeAreaLayout.Create(canvas);
+        var mission=Panel(safeRoot,"MissionPanel",new Vector2(0,1),new Vector2(150,-48),new Vector2(260,58));
+        objectiveText=Label(mission,"ObjectiveText",15,new Vector2(12,-10),new Vector2(238,23));
+        statusText=Label(mission,"StatusText",11,new Vector2(12,-35),new Vector2(178,17));statusText.color=GameUITheme.Muted;
+        timerText=Label(mission,"TimerText",12,new Vector2(204,-34),new Vector2(44,19));timerText.alignment=TextAnchor.MiddleRight;
+        var vitality=Panel(safeRoot,"StatusPanel",Vector2.zero,new Vector2(166,64),new Vector2(292,116));
+        mechText=Label(vitality,"MechText",11,new Vector2(14,-9),new Vector2(264,22));mechText.color=GameUITheme.Muted;
+        var hpLabel=Label(vitality,"HealthLabel",12,new Vector2(14,-36),new Vector2(70,24));hpLabel.text=T("耐久","HULL");
+        hpText=Label(vitality,"HpText",24,new Vector2(84,-19),new Vector2(194,48));hpText.alignment=TextAnchor.MiddleRight;
+        var healthTrack=Track(vitality,"HpBar",new Vector2(14,-70),new Vector2(264,10));
+        hpTrail=Fill(healthTrack,"DamageTrail",GameUITheme.Armor);hpFill=Fill(healthTrack,"Fill",GameUITheme.Health);
+        energyText=Label(vitality,"EnergyText",11,new Vector2(14,-78),new Vector2(264,17));energyText.color=GameUITheme.Muted;
+        energyFill=Fill(Track(vitality,"EnergyBar",new Vector2(14,-104),new Vector2(264,4)),"Fill",GameUITheme.Energy);
+        var actions=Panel(safeRoot,"ActionPanel",new Vector2(1,0),new Vector2(-183,78),new Vector2(326,112));
+        buildText=Label(actions,"BuildText",12,new Vector2(14,-10),new Vector2(298,23));
+        weaponStateText=Label(actions,"WeaponStateText",11,new Vector2(14,-34),new Vector2(298,18));
+        dashText=Label(actions,"DashText",11,new Vector2(14,-63),new Vector2(144,23));
+        supportText=Label(actions,"SupportText",11,new Vector2(176,-63),new Vector2(138,23));
+        dashFill=Fill(Track(actions,"DashBar",new Vector2(14,-96),new Vector2(132,3)),"Fill",GameUITheme.Energy);
+        supportFill=Fill(Track(actions,"SupportBar",new Vector2(176,-96),new Vector2(136,3)),"Fill",GameUITheme.Health);
+        bossPanel=Panel(safeRoot,"BossPanel",new Vector2(.5f,1),new Vector2(0,-110),new Vector2(354,55));
+        bossText=Label(bossPanel,"BossText",12,new Vector2(12,-8),new Vector2(330,22));bossText.alignment=TextAnchor.MiddleCenter;
+        bossFill=Fill(Track(bossPanel,"BossHealth",new Vector2(12,-42),new Vector2(330,6)),"Fill",GameUITheme.Danger);bossPanel.gameObject.SetActive(false);
+        var pause=RuntimeUIFactory.CreateButton(safeRoot,"PauseButton",T("暂停  Esc","Pause  Esc"));
+        RuntimeUIFactory.Place(pause.GetComponent<RectTransform>(),Vector2.one,new Vector2(-64,-35),new Vector2(88,30));pause.GetComponentInChildren<Text>().fontSize=12;pause.onClick.AddListener(()=>gameManager.TogglePause());
+        continueButton=RuntimeUIFactory.CreateButton(safeRoot,"ContinueAfterSalvage","");
+        RuntimeUIFactory.Place(continueButton.GetComponent<RectTransform>(),new Vector2(.5f,0),new Vector2(0,139),new Vector2(240,34));continueButton.GetComponentInChildren<Text>().fontSize=13;
+        continueButton.onClick.AddListener(()=>{if(gameManager.AwaitingContinue)gameManager.ContinueAfterSalvage();else gameManager.equipmentLoop.Absorption.CollectWithoutInstalling();});continueButton.gameObject.SetActive(false);
+        crosshair=new GameObject("CombatCrosshair",typeof(RectTransform)).GetComponent<RectTransform>();crosshair.SetParent(safeRoot,false);
+        RuntimeUIFactory.Place(crosshair,Vector2.one*.5f,Vector2.zero,new Vector2(16,16));
+        for(int y=-1;y<=1;y+=2)for(int x=-1;x<=1;x+=2)
+        {Mark(new Vector2(x*6,y*8),new Vector2(5,1.5f));Mark(new Vector2(x*8,y*6),new Vector2(1.5f,5));}
+        Mark(Vector2.zero,new Vector2(2,2));
     }
-
-    private Text Label(Transform parent, string name, int size, Vector2 min, Vector2 max, Vector2? anchor = null, TextAnchor alignment = TextAnchor.MiddleLeft)
+    void Mark(Vector2 at,Vector2 size)
     {
-        var text = RuntimeUIFactory.CreateText(parent, name, "", size, alignment, new Color(0.94f, 0.98f, 1f));
-        text.raycastTarget = false;
-        text.verticalOverflow = VerticalWrapMode.Truncate;
-        text.rectTransform.anchorMin = text.rectTransform.anchorMax = anchor ?? new Vector2(0, 1);
-        text.rectTransform.offsetMin = min;
-        text.rectTransform.offsetMax = max;
-        return text;
+        var mark=RuntimeUIFactory.CreatePanel(crosshair,"AimMark",Vector2.zero,Vector2.one,Vector2.zero,Vector2.zero,GameUITheme.Text);
+        RuntimeUIFactory.Place(mark,Vector2.one*.5f,at,size);mark.GetComponent<Image>().raycastTarget=false;
+        aimMarks.Add(mark.GetComponent<Image>());
+        var shadow=mark.gameObject.AddComponent<Shadow>();shadow.effectColor=new Color(0,0,0,.8f);shadow.effectDistance=new Vector2(1,-1);
     }
-
-    private RectTransform Bar(Transform parent, string name, Vector2 min, Vector2 max, Color color)
+    static RectTransform Panel(Transform parent,string name,Vector2 anchor,Vector2 at,Vector2 size)
     {
-        var background = RuntimeUIFactory.CreatePanel(parent, name, new Vector2(0, 1), new Vector2(0, 1), min, max, new Color(0.12f, 0.18f, 0.2f));
-        background.GetComponent<Image>().raycastTarget = false;
-        var fill = RuntimeUIFactory.CreatePanel(background, "Fill", Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, color);
-        fill.GetComponent<Image>().raycastTarget = false;
-        return fill;
+        var panel=RuntimeUIFactory.CreatePanel(parent,name,Vector2.zero,Vector2.one,Vector2.zero,Vector2.zero,GameUITheme.Panel);
+        RuntimeUIFactory.Place(panel,anchor,at,size);panel.GetComponent<Image>().raycastTarget=false;return panel;
     }
-
-    private void UpdateLock()
+    static Text Label(Transform parent,string name,int size,Vector2 topLeft,Vector2 dimensions)
     {
-        lockRing.gameObject.SetActive(player != null && player.HasAimPoint && Camera.main != null && !gameManager.IsPaused);
-        if (!lockRing.gameObject.activeSelf) return;
-        Vector3 screen = Camera.main.WorldToScreenPoint(player.AimPoint);
-        Camera uiCamera = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(safeRoot, screen, uiCamera, out Vector2 point))
-            lockRing.anchoredPosition = point;
+        var text=RuntimeUIFactory.CreateText(parent,name,"",size,TextAnchor.MiddleLeft,GameUITheme.Text);text.raycastTarget=false;
+        text.horizontalOverflow=HorizontalWrapMode.Wrap;text.verticalOverflow=VerticalWrapMode.Truncate;
+        RuntimeUIFactory.Place(text.rectTransform,new Vector2(0,1),topLeft+new Vector2(dimensions.x*.5f,-dimensions.y*.5f),dimensions);return text;
     }
-
-    private void HandleDamage(Damageable target, DamageInfo info) { flash = 1f; }
-    private static void SetFill(RectTransform fill, float ratio)
+    static RectTransform Track(Transform parent,string name,Vector2 topLeft,Vector2 size)
     {
-        fill.anchorMax = new Vector2(Mathf.Clamp01(ratio), 1f);
-        fill.offsetMin = fill.offsetMax = Vector2.zero;
+        var rect=Panel(parent,name,new Vector2(0,1),topLeft+new Vector2(size.x*.5f,-size.y*.5f),size);rect.GetComponent<Image>().color=GameUITheme.Track;return rect;
     }
+    static RectTransform Fill(Transform parent,string name,Color color)
+    {
+        var rect=RuntimeUIFactory.CreatePanel(parent,name,Vector2.zero,Vector2.one,Vector2.zero,Vector2.zero,color);rect.GetComponent<Image>().raycastTarget=false;return rect;
+    }
+    void UpdateAim()
+    {
+        bool show=player.HasAimPoint&&Camera.main!=null&&!gameManager.IsPaused
+            && !(EventSystem.current!=null&&EventSystem.current.IsPointerOverGameObject());
+        Vector3 screen=show?Camera.main.WorldToScreenPoint(player.AimPoint):Vector3.zero;
+        show=show&&screen.z>0&&screen.x>=0&&screen.x<=Screen.width&&screen.y>=0&&screen.y<=Screen.height;
+        crosshair.gameObject.SetActive(show);Cursor.visible=!show;
+        if(show)
+        {
+            var handling=player.weaponController.Handling;
+            float distance=Vector3.Distance(PlanarCombat.Point(player.transform.position),PlanarCombat.Point(player.AimPoint));
+            Color tint=player.weaponController.PrimaryRecoveryRemaining>0?GameUITheme.Muted:
+                handling.HasRange&&distance>handling.OptimalRange?GameUITheme.Armor:GameUITheme.Text;
+            foreach(var mark in aimMarks)mark.color=tint;
+        }
+        if(show&&RectTransformUtility.ScreenPointToLocalPointInRectangle(safeRoot,screen,null,out Vector2 point))crosshair.anchoredPosition=point;
+    }
+    void OnDamage(Damageable target,DamageInfo info){flash=1;trailHold=Time.unscaledTime+.3f;}
+    static void SetFill(RectTransform fill,float ratio){fill.anchorMax=new Vector2(Mathf.Clamp01(ratio),1);fill.offsetMin=fill.offsetMax=Vector2.zero;}
 }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[DefaultExecutionOrder(130)]
 public class WeaponController : MonoBehaviour
 {
     public Transform muzzle;
@@ -16,13 +17,29 @@ public class WeaponController : MonoBehaviour
     public event Action BeamFired;
     public event Action SkillFired;
     private NemesisDroneController activeSupport;
+    private ValkyrBackCannon activeCannon;
     // Cooldown upgrades cannot label the same six occupied units "ready" before recall.
     public float SkillCooldownRemaining => Mathf.Max(0f, Mathf.Max(nextSkillTime - Time.time,
-        activeSupport!=null&&activeSupport.Active?NemesisDroneController.Duration-activeSupport.Age:0f));
+        Mathf.Max(activeSupport!=null&&activeSupport.Active?NemesisDroneController.Duration-activeSupport.Age:0f,
+        activeCannon!=null&&activeCannon.Active?ValkyrBackCannon.Duration-activeCannon.Age:0f)));
     private float nextSkillTime;
 
+    bool pendingPrimary,heldPrimary;int primaryGeneration;
+    public void RequestPrimary(bool held)
+    {pendingPrimary=true;heldPrimary=held;primaryGeneration=CombatRuntime.ActionGeneration;}
+    void LateUpdate()
+    {
+        if(!pendingPrimary)return;pendingPrimary=false;
+        if(primaryGeneration==CombatRuntime.ActionGeneration)TryFireBeam(heldPrimary);
+    }
     private float nextBeamTime;
     private float nextMissileTime;
+    private int primaryShots;
+    private float primaryRecoveryUntil;
+    public WeaponHandlingProfile Handling => WeaponHandling.For(playerController!=null&&playerController.Loadout!=null?playerController.Loadout.EffectiveWeapon:PrimaryWeapon.None);
+    public float PrimaryRecoveryRemaining => Mathf.Max(0,primaryRecoveryUntil-Time.time);
+    public float PrimaryCooldownRemaining => Mathf.Max(0,nextBeamTime-Time.time);
+    public int PrimaryRoundsRemaining => Handling.Capacity==0?0:primaryRecoveryUntil>0&&Time.time>=primaryRecoveryUntil?Handling.Capacity:Mathf.Max(0,Handling.Capacity-primaryShots);
     private float temporaryFireRateMultiplier = 1f;
     private float temporaryFireRateTimer;
     private SalvageGear LoadoutWeapon => GameManager.Instance != null && GameManager.Instance.equipmentLoop != null ? GameManager.Instance.equipmentLoop.Weapon : null;
@@ -75,7 +92,9 @@ public class WeaponController : MonoBehaviour
 
     public void ResetCooldowns()
     {
+        pendingPrimary=false;
         nextBeamTime = nextMissileTime = nextSkillTime = 0f;
+        primaryShots=0;primaryRecoveryUntil=0;
         temporaryFireRateMultiplier = 1f;
         temporaryFireRateTimer = 0f;
     }
@@ -89,6 +108,8 @@ public class WeaponController : MonoBehaviour
     public void TryFireBeam(bool continuous=false)
     {
         if (!CanFire() || (playerController.Loadout != null && !playerController.Loadout.CanUseRifle)) return;
+        if(Time.time<primaryRecoveryUntil)return;
+        if(primaryRecoveryUntil>0){primaryRecoveryUntil=0;primaryShots=0;}
         float fireRate = GetFireRateMultiplier();
         if (Time.time < nextBeamTime)
         {
@@ -113,7 +134,7 @@ public class WeaponController : MonoBehaviour
         if (primary != null)
         {
             interval=(primary.weapon==PrimaryWeapon.M14 ? CombatRules.Current.HeavyRifleInterval : primary.interval) / fireRate;
-            shotCount = 1 + (upgradeSystem != null ? upgradeSystem.BonusBeamProjectiles : 0);
+            shotCount = (LoadoutWeapon?.id=="missile_rack"&&playerController.Loadout.Selected==PrimaryWeapon.Collection?3:1) + (upgradeSystem != null ? upgradeSystem.BonusBeamProjectiles : 0);
             baseDamage = primary.damage;
             pierce = primary.pierce + (upgradeSystem != null ? upgradeSystem.BonusPierce : 0);
             explosionRadius = Mathf.Max(primary.blastRadius, explosionRadius);
@@ -124,8 +145,21 @@ public class WeaponController : MonoBehaviour
         // A fresh tap or a long interruption starts a fresh clock; never emit catch-up bursts.
         bool carryCadence=continuous&&nextBeamTime>0&&Time.time-nextBeamTime<Mathf.Min(interval,.1f);
         nextBeamTime=carryCadence?nextBeamTime+interval:Time.time+interval;
+        var handling=Handling;
+        // One trigger consumes one cycle unit, including split shots. Service never locks the blade or dash.
+        if(handling.Capacity>0&&++primaryShots>=handling.Capacity)
+        {
+            primaryRecoveryUntil=Time.time+Mathf.Max(interval,handling.Recovery/fireRate);
+            nextBeamTime=primaryRecoveryUntil;
+        }
 
         GetComponentInChildren<LoadoutVisual>()?.SynchronizeForFire();
+        var backMount=GetComponentInChildren<LoadoutVisual>()?.WeaponObject?.GetComponent<BackCannonMount>();
+        if(backMount!=null)
+        {
+            foreach(var port in backMount.muzzles)ArsenalBeam.Fire(port.position,port.forward,damageable,baseDamage*GetDamageMultiplier()*.5f,40,.65f,.3f);
+            BeamFired?.Invoke();GameAudio.Play(GameAudioCue.Beam,.5f,.84f);return;
+        }
         for (int i = 0; i < shotCount; i++)
         {
             float angle = gear != null ? Mathf.Max(6f, gear.spread) : 6f;
@@ -188,6 +222,14 @@ public class WeaponController : MonoBehaviour
         {
             if(!drones.Deploy(18f*count*GetDamageMultiplier(),CombatLoopV2.MissileImpact*count))return false;
             activeSupport=drones;
+            nextSkillTime=Time.time+(pack!=null?pack.skillCooldown:10f)*(upgradeSystem!=null?upgradeSystem.SupportCooldownMultiplier:1f);
+            SkillFired?.Invoke();return true;
+        }
+        var cannon=GetComponentInChildren<ValkyrBackCannon>();
+        if(cannon!=null)
+        {
+            if(!cannon.Deploy(target,18f*count*GetDamageMultiplier(),CombatLoopV2.MissileImpact*count))return false;
+            activeCannon=cannon;
             nextSkillTime=Time.time+(pack!=null?pack.skillCooldown:10f)*(upgradeSystem!=null?upgradeSystem.SupportCooldownMultiplier:1f);
             SkillFired?.Invoke();return true;
         }
@@ -273,35 +315,39 @@ public class WeaponController : MonoBehaviour
     private void CreateBeamProjectile(Vector3 origin, Vector3 direction, float damage, int pierce, float explosionRadius, float impactShare=1f)
     {
         var nemesis=GetComponentInChildren<NemesisMotionRig>();
+        if(playerController.Loadout.Selected==PrimaryWeapon.Collection&&LoadoutWeapon?.id=="missile_rack")
+        {CreateMissileProjectile(origin,direction,damage,1.3f,FindNearestEnemy());return;}
         if(nemesis!=null&&playerController.Loadout!=null&&
-            (playerController.Loadout.Selected==PrimaryWeapon.M7||playerController.Loadout.Selected==PrimaryWeapon.NemesisLauncher))
+            (playerController.Loadout.EffectiveWeapon==PrimaryWeapon.M7||playerController.Loadout.EffectiveWeapon==PrimaryWeapon.NemesisLauncher))
         {
-            bool rocket=playerController.Loadout.Selected==PrimaryWeapon.NemesisLauncher;
+            bool rocket=playerController.Loadout.EffectiveWeapon==PrimaryWeapon.NemesisLauncher;
             var entry=playerController.Loadout.Equipped;
             var packet=ProjectilePool.Spawn(false,rocket?"J01_Rocket":"J01_BeamRifle",origin,NemesisMotionRig.Amethyst,rocket?.19f:.095f);
             packet.Init(team,damageable,PlanarCombat.Direction(direction,GetAimDirection()),damage,rocket?entry.speed:72f,2.1f,explosionRadius,pierce);
+            packet.SetHandling(Handling);
             packet.SetImpact((rocket?CombatLoopV2.HeavyRifleImpact:CombatLoopV2.RifleImpact)*impactShare,rocket?CombatHitKind.HeavyRifle:CombatHitKind.Rifle);
             BeamFxKit.MuzzleBlast(origin,packet.direction,NemesisMotionRig.Amethyst,rocket?.7f:.42f);
             return;
         }
-        if(playerController.Loadout!=null && playerController.Loadout.Selected==PrimaryWeapon.M7)
+        if(playerController.Loadout!=null && playerController.Loadout.EffectiveWeapon==PrimaryWeapon.M7)
         {
             var bullet=ProjectilePool.SpawnKinetic(origin);
             bullet.Init(team,damageable,PlanarCombat.Direction(direction,GetAimDirection()),damage,72f,.8f,0,pierce);
+            bullet.SetHandling(Handling);
             bullet.SetImpact(CombatLoopV2.RifleImpact*impactShare,CombatHitKind.Rifle);
             var feedback=GetComponent<KineticRifleFeedback>()??gameObject.AddComponent<KineticRifleFeedback>();
             feedback.Shot(origin,bullet.direction,playerController.GetComponentInChildren<LoadoutVisual>()?.EjectionPort);
             BeamFxKit.MuzzleBlast(origin,bullet.direction,new Color(.12f,1f,.56f),.42f);
             return;
         }
-        if (playerController.Loadout != null && playerController.Loadout.Selected == PrimaryWeapon.Halbreaker)
+        if (playerController.Loadout != null && playerController.Loadout.EffectiveWeapon == PrimaryWeapon.Halbreaker)
         {
             Vector3 aim = playerController.HasAimPoint ? playerController.AimPoint : origin + direction * HalbreakerBeam.MaximumRange;
             if (Vector3.Angle(direction, (aim-origin).normalized) > .1f) aim = origin + direction * HalbreakerBeam.MaximumRange;
             HalbreakerBeam.Fire(muzzle, origin, direction, aim, team, damageable, damage, pierce, explosionRadius);
             return;
         }
-        if (playerController.Loadout != null && playerController.Loadout.Selected == PrimaryWeapon.Type08)
+        if (playerController.Loadout != null && playerController.Loadout.EffectiveWeapon == PrimaryWeapon.Type08)
         {
             Vector3 aim = playerController.HasAimPoint ? playerController.AimPoint : origin + direction * MinovskyBeam.MaximumRange;
             // Preserve split-shot directions while each beam starts at the cannon's visible muzzle.
@@ -310,9 +356,10 @@ public class WeaponController : MonoBehaviour
             return;
         }
         var primary = playerController.Loadout != null && playerController.Loadout.IsRifle ? playerController.Loadout.Equipped : null;
-        Color color = primary != null ? (primary.weapon == PrimaryWeapon.M14 ? new Color(1,.73f,.35f) : new Color(.72f,.9f,1)) : LoadoutWeapon != null ? LoadoutWeapon.color : new Color(0.1f, 0.8f, 1f);
+        Color color = nemesis!=null?MechEnergyPalette.Nemesis:primary != null ? (primary.weapon == PrimaryWeapon.M14 ? new Color(1,.73f,.35f) : new Color(.72f,.9f,1)) : LoadoutWeapon != null ? LoadoutWeapon.color : new Color(0.1f, 0.8f, 1f);
         var projectile = ProjectilePool.Spawn(false, "BeamProjectile", origin, color);
         projectile.Init(team, damageable, direction, damage, primary != null ? primary.speed : 30f, 2.1f, explosionRadius, pierce);
+        projectile.SetHandling(Handling);
         {
             bool heavy=primary!=null && primary.weapon==PrimaryWeapon.M14;
             projectile.SetImpact((heavy?CombatLoopV2.HeavyRifleImpact:CombatLoopV2.RifleImpact)*impactShare,

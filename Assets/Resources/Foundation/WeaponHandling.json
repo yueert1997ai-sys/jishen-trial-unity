@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "weapons": [
+    { "weapon": "M7", "capacity": 18, "recovery": 0.65, "optimalRange": 14, "falloffRange": 28, "maximumRange": 36, "minimumDamage": 0.55 },
+    { "weapon": "M14", "capacity": 4, "recovery": 1.1, "optimalRange": 24, "falloffRange": 40, "maximumRange": 48, "minimumDamage": 0.75 }
+  ]
+}

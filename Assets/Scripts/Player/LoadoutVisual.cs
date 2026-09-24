@@ -10,6 +10,9 @@ public sealed class LoadoutVisual : MonoBehaviour
     public Transform upperR, lowerR, handR, upperL, lowerL, handL, assembly;
     public Vector3 gripOffsetR, gripOffsetL;
     public Quaternion handRestR, handRestL;
+    public bool authoredGripFrames;
+    public Quaternion rightGripInWeapon=Quaternion.identity, leftGripInWeapon=Quaternion.identity;
+    public Quaternion rifleSupportInWeapon=Quaternion.identity;
     public RiggedMechAnimator adapter;
     public GameObject WeaponObject { get; private set; }
     public Transform WeaponMuzzle { get; private set; }
@@ -47,16 +50,17 @@ public sealed class LoadoutVisual : MonoBehaviour
         if (loadout.IsRifle && loadout.Equipped?.prefab != null)
         {
             WeaponObject = Instantiate(loadout.Equipped.prefab, transform);
-            WeaponObject.name = "Equipped_" + loadout.Selected;
+            WeaponObject.name = "Equipped_" + loadout.EffectiveWeapon;
             WeaponMuzzle = Find(WeaponObject.transform, "Muzzle");
             EjectionPort=Find(WeaponObject.transform,"EjectionPort");
             // Imported M7 sockets inherited the mesh's -90 degree conversion; +Z must denote the barrel.
-            if(loadout.Selected==PrimaryWeapon.M7 && WeaponMuzzle!=null)WeaponMuzzle.rotation=WeaponObject.transform.rotation;
+            if(loadout.EffectiveWeapon==PrimaryWeapon.M7 && WeaponMuzzle!=null)WeaponMuzzle.rotation=WeaponObject.transform.rotation;
             support = Find(WeaponObject.transform, "Support");
             shoulderMount = WeaponObject.GetComponent<HalbreakerMount>();
             thorax = Find(assembly, "Thorax");
             if (shoulderMount != null) WeaponObject.transform.SetParent(thorax, true);
         }
+        if(nemesis!=null&&WeaponObject!=null)MechEnergyPalette.Apply(WeaponObject.transform);
         blade.bladeRoot.gameObject.SetActive(loadout.CanUseSword);
         blade.SetBeamEnabled(loadout.CanUseSword);
     }
@@ -82,7 +86,14 @@ public sealed class LoadoutVisual : MonoBehaviour
                 WeaponObject.SetActive(false);adapter.RefreshSockets();return;
             }
             WeaponObject.SetActive(true);
-            if(nemesis!=null&&(loadout.Selected==PrimaryWeapon.M7||loadout.Selected==PrimaryWeapon.NemesisLauncher))
+            var recoveredBack=WeaponObject.GetComponent<BackCannonMount>();
+            if(recoveredBack!=null)
+            {
+                var aim=hangar?player.transform.forward:player.AimDirection;
+                WeaponObject.transform.SetPositionAndRotation(thorax.position+thorax.up*.68f-player.transform.forward*.30f,Quaternion.LookRotation(aim,thorax.up));
+                RightGripError=LeftGripError=ShoulderContactError=0;player.weaponController.muzzle=recoveredBack.muzzles[0];adapter.RefreshSockets();return;
+            }
+            if(nemesis!=null&&(loadout.EffectiveWeapon==PrimaryWeapon.M7||loadout.EffectiveWeapon==PrimaryWeapon.NemesisLauncher))
             {PoseNemesis(hangar);adapter.RefreshSockets();return;}
             if (shoulderMount != null)
             {
@@ -93,16 +104,28 @@ public sealed class LoadoutVisual : MonoBehaviour
             float lift = GetComponent<ValkyrMotionDriver>().FlightBlend * .85f;
             // Larger rifles sit ahead of the waist armor; the support marker remains on the rear handguard.
             Vector3 grip = hangar ? new Vector3(.46f, 2.22f, .34f) : new Vector3(.08f, 2.45f + lift, .06f);
+            if(authoredGripFrames)
+            {
+                // Follow the moving shoulder midpoint, outside the chest armor.
+                // The support wrist faces back along the rifle, not ahead of it.
+                Vector3 shoulders=player.transform.InverseTransformPoint((upperR.position+upperL.position)*.5f);
+                grip=hangar?new Vector3(.85f,2.30f,.48f):shoulders+new Vector3(.70f,-.12f,.39f);
+            }
             Quaternion angle = hangar ? player.transform.rotation * Quaternion.Euler(16, -68, 0) :
                 Quaternion.LookRotation(player.HasAimPoint ? (player.AimPoint-player.transform.TransformPoint(grip)).normalized : player.transform.forward);
             if(!hangar)
                 angle=PlanarCombat.Rotation(player.transform.TransformPoint(grip),player.AimPoint,player.AimDirection);
-            bool rightHandOnly = loadout.Equipped != null && loadout.Equipped.rightHandOnly;
+            bool rightHandOnly = (loadout.Equipped != null && loadout.Equipped.rightHandOnly)||(authoredGripFrames&&hangar);
             float rightSide = Mathf.Sign(player.transform.InverseTransformPoint(upperR.position).x);
             if (rightHandOnly)
             {
-                grip = new Vector3(rightSide * 1.06f, 2.25f + lift, .48f);
+                grip = player.transform.InverseTransformPoint(upperR.position)+new Vector3(rightSide*.24f,-.58f,.53f);
                 angle = player.transform.rotation * Quaternion.Euler(8, -rightSide * 12, 0);
+                if(authoredGripFrames&&hangar)
+                {
+                    grip=player.transform.InverseTransformPoint(upperR.position)+new Vector3(.23f,-1.33f,.44f);
+                    angle=player.transform.rotation*Quaternion.Euler(65,0,0);
+                }
             }
             WeaponObject.transform.SetPositionAndRotation(player.transform.TransformPoint(grip) - angle * Vector3.forward * recoil, angle);
             if (rightHandOnly && !hangar && player.HasAimPoint && WeaponMuzzle != null)
@@ -111,7 +134,7 @@ public sealed class LoadoutVisual : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     Vector3 aim = player.AimPoint - WeaponObject.transform.TransformPoint(localMuzzle);
-                    aim=PlanarCombat.Direction(aim,player.AimDirection);
+                    aim=PlanarCombat.AimDirection(WeaponMuzzle.position,player.AimPoint,player.AimDirection);
                     if (aim.sqrMagnitude > .25f) WeaponObject.transform.rotation = Quaternion.LookRotation(aim.normalized, player.transform.up);
                 }
             }
@@ -122,16 +145,19 @@ public sealed class LoadoutVisual : MonoBehaviour
             }
             Quaternion rightRotation = player.transform.rotation * handRestR;
             Quaternion leftRotation = player.transform.rotation * handRestL;
+            if(authoredGripFrames){rightRotation=WeaponObject.transform.rotation*rightGripInWeapon;leftRotation=WeaponObject.transform.rotation*(loadout.EffectiveWeapon==PrimaryWeapon.M7?rifleSupportInWeapon:leftGripInWeapon);}
+            if(authoredGripFrames&&!rightHandOnly)FitTwoHandReach(rightRotation,leftRotation);
             Vector3 leftGrip = support != null ? support.position : WeaponObject.transform.position;
             SolveArm(upperR, lowerR, handR, WeaponObject.transform.position - rightRotation * gripOffsetR,
-                player.transform.TransformPoint(rightHandOnly ? new Vector3(rightSide * 1.38f, 2.01f + lift, -.02f) : new Vector3(1.1f, 2.0f + lift, -.1f)));
+                player.transform.TransformPoint(rightHandOnly ? new Vector3(rightSide * 1.38f, 2.01f + lift, -.02f) : authoredGripFrames?grip+new Vector3(.85f,-.62f,-.05f):new Vector3(1.1f, 2.0f + lift, -.1f)));
             handR.rotation = rightRotation;
             if (!rightHandOnly)
             {
                 SolveArm(upperL, lowerL, handL, leftGrip - leftRotation * gripOffsetL,
-                    player.transform.TransformPoint(new Vector3(-1.1f, 2.05f + lift, .3f)));
+                    player.transform.TransformPoint(authoredGripFrames?grip+new Vector3(-1.35f,-.70f,.85f):new Vector3(-1.1f, 2.05f + lift, .3f)));
                 handL.rotation = leftRotation;
             }
+            else if(authoredGripFrames&&hangar)FreeArm(upperL,lowerL,handL,-1);
             RightGripError = Vector3.Distance(handR.TransformPoint(gripOffsetR), WeaponObject.transform.position);
             LeftGripError = rightHandOnly ? 0f : Vector3.Distance(handL.TransformPoint(gripOffsetL), leftGrip);
             player.weaponController.muzzle = WeaponMuzzle;
@@ -143,7 +169,7 @@ public sealed class LoadoutVisual : MonoBehaviour
         float side = Mathf.Sign(player.transform.InverseTransformPoint(upperR.position).x);
         // The saddle follows the chest, including running lean and boost lift. The hand never carries the root.
         Vector3 anchor = thorax.TransformPoint(new Vector3(side * .84f, .576385f, .008546f));
-        Quaternion angle = player.transform.rotation;
+        Quaternion angle = Quaternion.LookRotation(player.transform.forward,thorax.up);
         Vector3 shoulderLocal = shoulderMount.shoulder.localPosition;
         Vector3 muzzleLocal = shoulderMount.muzzle.localPosition;
         var root = WeaponObject.transform;
@@ -153,7 +179,7 @@ public sealed class LoadoutVisual : MonoBehaviour
             if (!hangar && player.HasAimPoint)
             {
                 Vector3 direction = PlanarCombat.AimDirection(root.TransformPoint(muzzleLocal),player.AimPoint,player.AimDirection);
-                if (direction.sqrMagnitude > .04f) angle = Quaternion.LookRotation(direction.normalized, player.transform.up);
+                if (direction.sqrMagnitude > .04f) angle = Quaternion.LookRotation(direction.normalized, thorax.up);
             }
         }
         root.SetPositionAndRotation(anchor - angle * shoulderLocal, angle);
@@ -171,7 +197,7 @@ public sealed class LoadoutVisual : MonoBehaviour
     }
     private void PoseNemesis(bool hangar)
     {
-        bool launcher=loadout.Selected==PrimaryWeapon.NemesisLauncher;
+        bool launcher=loadout.EffectiveWeapon==PrimaryWeapon.NemesisLauncher;
         bool down=player.GetComponent<Damageable>().IsDead;
         float lift=GetComponent<ValkyrMotionDriver>().FlightBlend*.28f;
         Vector3 grip=hangar?new Vector3(.84f,2.00f,.28f):launcher?new Vector3(.40f,2.76f+lift,.20f):new Vector3(.58f,2.85f+lift,1.42f);
@@ -182,7 +208,7 @@ public sealed class LoadoutVisual : MonoBehaviour
             // with a relaxed elbow, instead of anchoring a bent fist to the chest.
             float reach=Vector3.Distance(upperR.position,lowerR.position)+Vector3.Distance(lowerR.position,handR.position);
             angle=player.transform.rotation*Quaternion.AngleAxis(-16,Vector3.forward);
-            var handAngle=angle*Quaternion.LookRotation(Vector3.left,new Vector3(0,-.242f,-.970f));
+            var handAngle=angle*(authoredGripFrames?rightGripInWeapon:Quaternion.LookRotation(Vector3.left,new Vector3(0,-.242f,-.970f)));
             var wrist=upperR.position+player.transform.forward*(reach*.96f)-player.transform.up*.085f;
             grip=player.transform.InverseTransformPoint(wrist+handAngle*gripOffsetR);
         }
@@ -205,7 +231,8 @@ public sealed class LoadoutVisual : MonoBehaviour
         for(int pass=0;pass<4;pass++)
         {
             angle=WeaponObject.transform.rotation;
-            right=angle*Quaternion.LookRotation(Vector3.left,new Vector3(0,-.242f,-.970f));
+            right=angle*(authoredGripFrames?rightGripInWeapon:Quaternion.LookRotation(Vector3.left,new Vector3(0,-.242f,-.970f)));
+            if(authoredGripFrames&&launcher&&!hangar&&!down)FitTwoHandReach(right,angle*leftGripInWeapon);
             SolveArm(upperR,lowerR,handR,WeaponObject.transform.position-right*gripOffsetR,
                 player.transform.TransformPoint(launcher||hangar?new Vector3(1.04f,2.18f+lift,-.02f):new Vector3(.92f,2.56f+lift,.68f)));
             handR.rotation=right;
@@ -217,13 +244,30 @@ public sealed class LoadoutVisual : MonoBehaviour
         LeftGripError=0;
         if(launcher&&!hangar&&!down)
         {
-            Quaternion left=angle*Quaternion.LookRotation(Vector3.up,Vector3.left);
+            Quaternion left=angle*(authoredGripFrames?leftGripInWeapon:Quaternion.LookRotation(Vector3.up,Vector3.left));
             SolveArm(upperL,lowerL,handL,support.position-left*gripOffsetL,
                 player.transform.TransformPoint(new Vector3(-.89f,2.26f+lift,.26f)));
             handL.rotation=left;handL.GetComponent<ValkyrHandGrip>()?.Pose(.10f);
             LeftGripError=Vector3.Distance(handL.TransformPoint(gripOffsetL),support.position);
         }
         player.weaponController.muzzle=WeaponMuzzle;
+    }
+    private void FitTwoHandReach(Quaternion right,Quaternion left)
+    {
+        if(support==null)return;
+        var root=WeaponObject.transform;
+        Vector3 supportOffset=support.position-root.position;
+        Vector3 rightCenter=upperR.position+right*gripOffsetR;
+        Vector3 leftCenter=upperL.position+left*gripOffsetL-supportOffset;
+        float rightReach=Vector3.Distance(upperR.position,lowerR.position)+Vector3.Distance(lowerR.position,handR.position)-.02f;
+        float leftReach=Vector3.Distance(upperL.position,lowerL.position)+Vector3.Distance(lowerL.position,handL.position)-.02f;
+        Vector3 position=root.position;
+        for(int i=0;i<8;i++)
+        {
+            position=rightCenter+Vector3.ClampMagnitude(position-rightCenter,rightReach);
+            position=leftCenter+Vector3.ClampMagnitude(position-leftCenter,leftReach);
+        }
+        root.position=position;
     }
     private Quaternion NemesisAim(float cant)
     {

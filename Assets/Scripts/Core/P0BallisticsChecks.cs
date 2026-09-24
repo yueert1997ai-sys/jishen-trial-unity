@@ -70,11 +70,11 @@ public static class P0BallisticsChecks
                 var clip=Resources.Load<AudioClip>("Audio/Combat/"+(name=="saber_load"||name=="m7_tail"?"R9/":"ImpactR2/")+name);
                 check(clip!=null&&clip.loadState==AudioDataLoadState.Loaded,$"material ready: {name}, {clip?.length:F3}s");
             }
-            var music=GameAudio.Instance.GetComponents<AudioSource>().Where(s=>s.clip!=null&&s.clip.name=="P0_HeavyBattle").ToArray();
+            var music=GameAudio.Instance.GetComponents<AudioSource>().Where(s=>s.clip!=null&&s.clip.name=="Velocity_Overdrive").ToArray();
             var activeSources=GameAudio.Instance.GetComponents<AudioSource>();
-            foreach(var cut in new[]{"saber_swing_1","saber_swing_2","saber_heavy"})
-                check(activeSources.Any(s=>s.clip==Resources.Load<AudioClip>("Audio/Combat/ImpactR2/"+cut)),"actual sword voice uses authored swing material: "+cut);
-            check(activeSources.Count(s=>s.clip!=null&&s.clip.name.StartsWith("m7_attack")&&s.pitch==1f&&!s.loop)==2,"rifle has dedicated original-pitch non-looping shot voices");
+            foreach(var cue in new[]{GameAudioCue.SwordCut1,GameAudioCue.SwordCut2,GameAudioCue.SwordCut3})
+                check(activeSources.Any(s=>GameAudio.Instance.SliceClips(cue).Contains(s.clip)),"actual sword voice uses the processed swing bank: "+cue);
+            check(activeSources.Count(s=>s.clip!=null&&GameAudio.Instance.SliceClips(GameAudioCue.RifleShot).Contains(s.clip)&&s.pitch==1f&&!s.loop)==2,"rifle has dedicated original-pitch non-looping shot voices");
             check(music.Length==2&&music.All(s=>s.loop&&s.clip.length>80),"new battle score loaded as an intact musical loop");
             check(!GameAudio.Instance.GetComponents<AudioSource>().Any(s=>s.clip!=null&&s.clip.name=="Subspace_Loop"),"rejected BGM is absent from active P0 mix");
         }

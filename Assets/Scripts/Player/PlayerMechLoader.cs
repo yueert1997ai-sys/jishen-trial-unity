@@ -27,7 +27,7 @@ public class PlayerMechLoader : MonoBehaviour
         if(armory==null||(hero==HeroMech.Valkyr?armory.valkyrPrefab:armory.heroPrefab)==null)return false;
         SelectionBusy=true;SelectedHero=hero;
         var player=GetComponent<PlayerController>();player.CancelMovement();player.Melee.ResetCooldown();player.Stance.ResetStance();
-        LoadVisualModel();StartCoroutine(RebindPresentation());return true;
+        player.weaponController.ResetCooldowns();LoadVisualModel();StartCoroutine(RebindPresentation());return true;
     }
     IEnumerator RebindPresentation()
     {
@@ -41,6 +41,8 @@ public class PlayerMechLoader : MonoBehaviour
 
     private void Awake()
     {
+        var groundMarker=transform.Find("PlayerGroundMarker");
+        if(groundMarker!=null)groundMarker.gameObject.SetActive(false);
         hardpoints = GetComponent<MechHardpointManager>();
         if (hardpoints == null)
         {
@@ -53,6 +55,9 @@ public class PlayerMechLoader : MonoBehaviour
     public void LoadVisualModel()
     {
         hardpoints.EnsureDefaultHardpoints();
+        GetComponent<PlayerStats>()?.ConfigureHero(SelectedHero);
+        var motor=GetComponent<PlayerController>();var profile=MechMovementProfile.For(SelectedHero);
+        if(motor!=null){motor.acceleration=profile.acceleration;motor.braking=profile.braking;motor.dashDuration=profile.dashSeconds;}
 
         Transform visualRoot = hardpoints.visualRoot;
         for (int i = visualRoot.childCount - 1; i >= 0; i--)
@@ -85,6 +90,7 @@ public class PlayerMechLoader : MonoBehaviour
         visual.name = usingCustomPrefab ? "CustomMechModel" : "DefaultMechModel";
         visual.transform.localPosition = Vector3.zero;
         visual.transform.localRotation = Quaternion.identity;
+        if(SelectedHero==HeroMech.Nemesis)MechEnergyPalette.Apply(visual.transform);
     }
 
     private static void CreateEmergencyVisual(Transform parent)

@@ -21,10 +21,7 @@ public static class RebuildPlayChecks
     }
     static bool Covered(Vector3 from,Damageable target)
     {
-        var delta=target.AimCenter-from;
-        foreach(var hit in Physics.RaycastAll(from,delta.normalized,delta.magnitude,~0,QueryTriggerInteraction.Ignore))
-            if(hit.collider.GetComponentInParent<Damageable>()==null)return true;
-        return false;
+        return !EnemyTactics.ClearSight(from,target.transform.position);
     }
     // Respond to the same visible warning fills the player sees. The previous
     // replay never dodged ordinary enemies, even during a stationary combo.
@@ -44,6 +41,9 @@ public static class RebuildPlayChecks
         foreach(var actor in Damageable.Active)
         {
             if(actor==null||actor.team==0||actor.IsDead)continue;
+            var fazz=actor.GetComponent<FazzBossController>();
+            if(fazz!=null&&fazz.Active&&fazz.Pattern<2&&fazz.Age>=(fazz.Pattern==0?.40f:.12f)&&fazz.Age<(fazz.Pattern==0?.67f:.34f))
+                return DodgeSide(p,actor.transform.forward,closeIn);
             var enemy=actor.GetComponent<EnemyBase>();
             if(enemy==null||!enemy.HasAttackWarning||enemy.AttackWindup<.62f)continue;
             float distance=Vector3.Distance(position,actor.transform.position);
@@ -94,7 +94,7 @@ public static class RebuildPlayChecks
             float bladeStandOff=Mathf.Min(2.5f,slashDistance-.8f);
             float approachMargin=Mathf.Min(1,slashDistance*.22f);
             float start=Time.time,nextDash=0,nextPicture=12,lowestHp=p.stats.CurrentHp,bossStart=-1,clearAt=-1,gun=0,blade=0;
-            int shots=0,blades=0,armorBreaks=0,maxOccupied=0,rewardCount=0,dashes=0;
+            int shots=0,blades=0,armorBreaks=0,maxOccupied=0,rewardCount=0,dashes=0,maxHeavy=0,maxAttackers=0;
             bool installed=false,sawCore=false;float soundPeak=0;
             var seen=new HashSet<Damageable>();
             var trace=new List<string>{"seconds,encounter,hp,kills,occupied,x,z,distance,stance,bladeStage,bossHealth"};
@@ -107,6 +107,8 @@ public static class RebuildPlayChecks
                 for(int frame=0;frame<(full?1200:240)*60&&gm.Phase!=GamePhase.Result;frame++)
                 {
                     float elapsed=Time.time-start;
+                    int heavyAlive=0;foreach(var actor in Damageable.Active)if(actor!=null&&!actor.IsDead&&actor.GetComponent<EnemyArsenal>()?.Heavy==true)heavyAlive++;
+                    maxHeavy=Mathf.Max(maxHeavy,heavyAlive);maxAttackers=Mathf.Max(maxAttackers,EnemyTactics.AttackersActive);
                     foreach(var actor in Damageable.Active)
                     {
                         if(actor==null||actor.team==0||!seen.Add(actor))continue;
@@ -200,6 +202,7 @@ public static class RebuildPlayChecks
                 File.AppendAllText(Path.Combine(output,"natural-results.txt"),"\nOrdinary PlayerCommand inputs only; no direct health edits, invulnerability, forced kills, timed waits to pad combat, or spawn suppression. Not human feel approval.\n");
                 check(gm.Phase==GamePhase.Result&&gm.LastResultVictory&&p.stats.CurrentHp>0,"natural control policy completes "+summary);
                 check(maxOccupied<=CombatRules.Current.MaxHostiles,"ordinary run respects live and reserved enemy budget");
+                check(maxHeavy<=1&&maxAttackers<=3,"ordinary run respects one heavy and three attackers: heavy="+maxHeavy+" attackers="+maxAttackers);
                 if(!full)check(gm.upgradeSystem.Count==0,"base-gear trial has zero upgrades");
                 if(style==Style.Rifle)check(gun>0&&blade==0,"rifle-only run needs no blade execution");
                 if(style==Style.Blade)check(blade>0&&gun==0,"blade-only run needs no gun pressure");

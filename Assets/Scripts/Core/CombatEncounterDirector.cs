@@ -10,14 +10,16 @@ public sealed class CombatEncounterDirector : IDisposable
     bool disposed;
     readonly int roomIndex,runGeneration;
     readonly GameObject bossOverride;
-    Damageable bossHealth;
+    Damageable bossHealth;readonly EncounterRoster roster;
     public EncounterFlow Flow { get; }
     public BossController Boss { get; private set; }
     public CombatEncounterDirector(GameManager gm, bool lab,int roomIndex=-1,GameObject bossOverride=null)
     {
         this.gm=gm;this.lab=lab;this.roomIndex=roomIndex;this.bossOverride=bossOverride;
         runGeneration=CombatRuntime.Run.Generation;rules=CombatRules.Current;
-        Flow=new EncounterFlow(rules,lab,roomIndex>=0&&roomIndex<6?EncounterCatalog.Rooms[roomIndex].Beats:null,roomIndex==6);
+        var beats=roomIndex>=0&&roomIndex<6?EncounterCatalog.Rooms[roomIndex].Beats:rules.Encounters;
+        if(!lab&&roomIndex!=6)roster=new EncounterRoster(CombatRuntime.Run.Seed,roomIndex,beats);
+        Flow=new EncounterFlow(rules,lab,roomIndex>=0&&roomIndex<6?beats:null,roomIndex==6,!lab&&roomIndex<3);
         if(roomIndex==6)BeginBoss();
     }
     public EncounterStep Tick(float dt)
@@ -41,7 +43,7 @@ public sealed class CombatEncounterDirector : IDisposable
             for(int i=0;i<beat.Roles.Count;i++) spawner.SpawnSliceEntry(beat.Roles[i],beat.Positions[i]*side,i*rules.SpawnStagger);
             return;
         }
-        Vector3 center=beat.Center;
+        Vector3 center=roster!=null?roster.Entry(Flow.Groups-1):beat.Center;
         if(gm.arenaSector!=null&&gm.arenaSector.ActiveLunarLayout!=null)
             center=gm.arenaSector.ActiveLunarLayout.SelectEntry(center,player);
         if(Vector3.Distance(center,player)<6)center=-center;
@@ -56,16 +58,20 @@ public sealed class CombatEncounterDirector : IDisposable
             // same five-hostile occupancy and warning budget still applies.
             Vector3 point=center+tangent*side*(ranged?3.4f:1.1f)
                 -center.normalized*(ranged?0:1.1f);
-            spawner.SpawnSliceEntry(beat.Roles[i],point,i*rules.SpawnStagger);
+            if(roster!=null)spawner.SpawnArsenalEntry(roster.Group(Flow.Groups-1)[i],point,i*rules.SpawnStagger);
+            else spawner.SpawnSliceEntry(beat.Roles[i],point,i*rules.SpawnStagger);
         }
     }
     public void BeginBoss()
     {
-        if(disposed || !Flow.BeginBoss())return;
+        if(disposed)return;
+        if(gm.equipmentLoop.Absorption.Busy)return;
+        if(roomIndex<0&&!gm.equipmentLoop.Absorption.CollectWithoutInstalling())return;
+        if(!Flow.BeginBoss())return;
         if(roomIndex<0)gm.stageManager.StopStage();
         foreach(var shot in UnityEngine.Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None))shot.Despawn();
-        gm.equipmentLoop.ClearPickups();
-        Boss=gm.stageManager.enemySpawner.SpawnBoss(bossOverride);
+        if(roomIndex<0)gm.equipmentLoop.ClearPickups();
+        Boss=roomIndex<3&&bossOverride==null?gm.stageManager.enemySpawner.SpawnFazz(Mathf.Max(0,roomIndex)):gm.stageManager.enemySpawner.SpawnBoss(bossOverride);
         if(Boss==null){Flow.Fail();Debug.LogError("Combat encounter Boss is missing");return;}
         bossHealth=Boss.GetComponent<Damageable>();bossHealth.OnDied+=OnBossDied;
     }

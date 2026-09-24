@@ -10,6 +10,17 @@ public sealed class LunarArenaLayout : MonoBehaviour
     public Vector3[] landmarks;
     public Vector3 coverNear, coverFar;
     public float cameraPitch = 62f;
+    Collider cameraTerrain;
+    public Bounds CameraGroundBounds
+    {
+        get
+        {
+            if(cameraTerrain==null)
+                foreach(var c in GetComponentsInChildren<MeshCollider>(true))
+                    if(c.name=="LunarRegolith"){cameraTerrain=c;break;}
+            return cameraTerrain!=null?cameraTerrain.bounds:new Bounds(transform.position,new Vector3(116,1,116));
+        }
+    }
 
     public Vector3 SelectEntry(Vector3 intended, Vector3 player)
     {

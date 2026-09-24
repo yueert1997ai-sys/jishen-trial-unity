@@ -10,7 +10,7 @@ public static class NemesisMotionChecks
     public static IEnumerator Run(GameManager gm,PlayerController p,string output,Action<bool,string> check,Action<string> capture)
     {
         var rig=p.GetComponentInChildren<NemesisMotionRig>();var driver=p.GetComponentInChildren<ValkyrMotionDriver>();var visual=p.GetComponentInChildren<LoadoutVisual>();var blade=p.GetComponentInChildren<RaikenBladePresentation>();
-        check(rig!=null&&rig.sourceSha256=="f96ae5690dbda520fd940f72be7734d063f8f0363d8f354ee5ff8b495e8c94ca","B20 NEMESIS source is the actual player, with M01 motion rig");
+        check(rig!=null&&rig.sourceSha256=="d0a86ccc942a6edb18f0a2c24b3083db88e35daa701058667549675e5d33f8c9","extracted R07 NEMESIS source with the corrected original eye surfaces is the actual player");
         var joints=rig.GetComponentsInChildren<Transform>(true).GroupBy(t=>t.name).ToDictionary(g=>g.Key,g=>g.First());
         var cam=Camera.main;var follow=cam.GetComponent<CameraFollow>();
         void View(Vector3 from,Vector3 at,float size=2.5f)
@@ -74,7 +74,7 @@ public static class NemesisMotionChecks
         gm.SetPaused(true);int frozenGhosts=afterimage.ActiveCount;float frozenWing=rig.WingOpen;
         for(int i=0;i<6;i++)yield return null;
         check(afterimage.ActiveCount==frozenGhosts&&rig.WingOpen==frozenWing,"pause freezes wing motion and afterimage lifetimes");gm.SetPaused(false);
-        for(int i=0;i<35;i++){Command();yield return null;}
+        for(int i=0;i<55;i++){Command();yield return null;}
         check(rig.WingOpen==0&&afterimage.ActiveCount==0,"released boost folds wings and clears afterimages");
         for(int fpsIndex=0;fpsIndex<3;fpsIndex++)
         {

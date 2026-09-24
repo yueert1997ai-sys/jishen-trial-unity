@@ -35,7 +35,7 @@ public class CombatEffects : MonoBehaviour
         smokeMaterial = new Material(material);
         smokeMaterial.mainTexture = smokeTexture;
         fillMaterial = new Material(Shader.Find("MECH ROUGE/Particle Additive"));
-        fillMaterial.mainTexture = Resources.Load<Texture2D>("VFX/Sprites/circle_05");
+        fillMaterial.mainTexture = smokeTexture;
         sparks = Particles("ArmorSparks", 2048, true);
         smoke = Particles("DebrisSmoke", 512, false);
         warnings = new ObjectPool<TelegraphVisual>(() =>
@@ -145,6 +145,7 @@ public class CombatEffects : MonoBehaviour
         var warning = Get().warnings.Get();
         warning.Arm(duration, color);
         warning.ArmFill(position, radius);
+        warning.line.enabled=false;
         warning.line.loop = true;
         warning.line.positionCount = 48;
         warning.line.startWidth = warning.line.endWidth = 0.09f;
@@ -161,6 +162,7 @@ public class CombatEffects : MonoBehaviour
         var warning = Get().warnings.Get();
         warning.Arm(duration, color);
         warning.line.loop = false;
+        warning.line.enabled=true;
         warning.line.positionCount = 2;
         warning.line.startWidth = warning.line.endWidth = width;
         origin.y = 0.075f;

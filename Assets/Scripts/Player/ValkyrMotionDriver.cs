@@ -3,7 +3,7 @@ using UnityEngine;
 
 // The full pose is authored first; IK resolves contact without inventing the action.
 [DefaultExecutionOrder(75)]
-public sealed class ValkyrMotionDriver : MonoBehaviour
+public sealed partial class ValkyrMotionDriver : MonoBehaviour
 {
     public const float SlashDuration=.72f, ContactStart=.20f, ContactEnd=.40f;
     public float FlightBlend {get;private set;}
@@ -32,6 +32,7 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
     private ValkyrComboProfile combo;
     private ValkyrHandGrip articulatedHand;
     private ValkyrComboProfile.Key displayedKey,entryKey,cancelKey;
+    private const float CancelReturnSeconds=.07f;
     private float cancelBlend;
     private Vector3 shownEdge=Vector3.down,entryEdge=Vector3.down;
     public float ForwardGrip {get;private set;}
@@ -108,6 +109,7 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         legL=MakeLeg(-1,"L");legR=MakeLeg(1,"R");lastPosition=player.transform.position;
         combo=nemesis!=null?NemesisComboProfile.Active:ValkyrComboProfile.LoadActive();
         displayedKey=ValkyrComboProfile.Ready;
+        InitializeImportedMotion();
         rig.animator.enabled=false;
     }
     private Leg MakeLeg(int side,string suffix)
@@ -122,10 +124,11 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         health.OnDamaged+=OnDamage;player.weaponController.BeamFired+=OnShot;
         player.Melee.AttackStarted+=BeginStrike;player.Melee.AttackCancelled+=BeginReturn;
     }
-    private void BeginReturn(){cancelKey=displayedKey;cancelBlend=.18f;}
+    private void BeginReturn(){cancelKey=displayedKey;cancelBlend=CancelReturnSeconds;CaptureImportedEntry();}
     private void OnShot(){recoil=nemesis!=null?.105f:.055f;}
     private void BeginStrike()
     {
+        CaptureImportedEntry();
         entryKey=displayedKey;entryEdge=shownEdge;cancelBlend=0;
         previousPoseTime=0;
         attackOrigin=player.transform.position;attackHeading=player.transform.rotation;
@@ -145,10 +148,11 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         Vector3 displacement=player.transform.position-lastPosition;displacement.y=0;lastPosition=player.transform.position;
         if(player.Melee.IsAttacking)attackOrigin+=displacement;
         bool attacking=player.Melee.IsAttacking;
-        RunBlend=Mathf.MoveTowards(RunBlend,Mathf.Clamp01(speed/5.5f),dt*7);
-        FlightBlend=Mathf.MoveTowards(FlightBlend,player.IsDashing||player.IsBoosting?1:0,dt*(player.IsDashing?15:6));
+        RunBlend=Mathf.MoveTowards(RunBlend,Mathf.Clamp01(speed/7f),dt*12);
+        float flightTarget=player.IsDashing||player.IsBoosting?1:nemesis!=null&&!attacking?Mathf.SmoothStep(0,.78f,Mathf.InverseLerp(1.2f,7f,speed)):!attacking?Mathf.SmoothStep(0,.72f,Mathf.InverseLerp(4f,7f,speed)):0;
+        FlightBlend=Mathf.MoveTowards(FlightBlend,flightTarget,dt*(flightTarget>FlightBlend?12:9));
         if(health.IsDead){death=Mathf.Min(1,death+dt*1.5f);FlightBlend=0;}
-        if(!attacking&&FlightBlend<.1f&&displacement.magnitude<1)cycle+=displacement.magnitude/3.9f;
+        if(!attacking&&FlightBlend<.1f&&displacement.magnitude<1)cycle+=displacement.magnitude/(nemesis==null?2.535f:3.9f);
         recoil=Mathf.MoveTowards(recoil,0,dt*.8f);
         cancelBlend=Mathf.Max(0,cancelBlend-dt);
         if(attacking && !player.Melee.ImpactHeld)
@@ -177,8 +181,10 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         foreach(var item in rest)item.Key.SetLocalPositionAndRotation(item.Value.position,item.Value.local);
         pose.assemblyRoot.localPosition=pose.assemblyRestPosition;
         blade.bladeRoot.SetLocalPositionAndRotation(heldPosition,heldRotation);
-        if(nemesis!=null&&GameManager.Instance!=null&&GameManager.Instance.Phase==GamePhase.Hangar)
-        {nemesis.ParkBlade();MotionState="Hangar";rig.RefreshSockets();return;}
+        if(GameManager.Instance!=null&&GameManager.Instance.Phase==GamePhase.Hangar)
+        {ApplyKatokiPose();return;}
+        if(importedMotion!=null&&!health.IsDead&&GameManager.Instance!=null&&GameManager.Instance.IsCombatActive)
+        {ApplyImportedMotion(dt,poseTime);return;}
         var m=attacking?combo.Evaluate(player.Melee.ComboStage,poseTime):ValkyrComboProfile.Ready;
         if(attacking)
         {
@@ -191,7 +197,7 @@ public sealed class ValkyrMotionDriver : MonoBehaviour
         }
         float entryDuration=.04f;
         if(attacking&&poseTime<entryDuration)m=ValkyrComboProfile.Blend(entryKey,m,Mathf.SmoothStep(0,1,poseTime/entryDuration));
-        if(!attacking&&cancelBlend>0)m=ValkyrComboProfile.Blend(cancelKey,m,Mathf.SmoothStep(0,1,1-cancelBlend/.18f));
+        if(!attacking&&cancelBlend>0)m=ValkyrComboProfile.Blend(cancelKey,m,Mathf.SmoothStep(0,1,1-cancelBlend/CancelReturnSeconds));
         var k=m.Body;
         float run=RunBlend*(1-FlightBlend)*(attacking?0:1),lift=(.28f)*FlightBlend;
         Vector3 travel=speed>.15f?player.Velocity.normalized:player.transform.forward;

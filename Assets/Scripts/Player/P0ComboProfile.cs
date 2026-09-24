@@ -24,13 +24,13 @@ public static class P0ComboProfile
         ValkyrComboProfile.Key At(ValkyrComboProfile.Key k,float t){k.time=t;return k;}
         // A small counter wind-up, then chest -> elbow -> wrist. No neutral key between cuts.
         var prep=ValkyrComboProfile.Blend(ready,source[0].keys[1],.38f);
-        var first=new ValkyrComboProfile.Stroke{label="快 · 斜斩",contactStart=.075f,contactEnd=.19f,linkTime=.23f,duration=.42f,advance=.44f,hitHold=.032f,
+        var first=new ValkyrComboProfile.Stroke{label="快 · 斜斩",contactStart=.075f,contactEnd=.19f,linkTime=.23f,duration=.42f,advance=.44f,hitHold=.045f,
             keys=new[]{At(ready,0),At(prep,.045f),At(source[0].keys[2],.075f),At(source[0].keys[3],.125f),At(source[0].keys[4],.185f),At(a,.23f),At(a,.29f),At(ready,.42f)}};
         // Reverse directly from the last blade location; remove the long open-handed grip flourish.
         var middle=source[1].keys[4];middle.forwardGrip=0;middle.open=0;
         b.forwardGrip=0;b.open=0;
         var loaded=a;loaded.chest.y+=14;loaded.waist.y+=8;loaded.hips.y+=4;
-        var second=new ValkyrComboProfile.Stroke{label="快 · 反向回斩",contactStart=.035f,contactEnd=.15f,linkTime=.19f,duration=.39f,advance=.38f,hitHold=.028f,
+        var second=new ValkyrComboProfile.Stroke{label="快 · 反向回斩",contactStart=.035f,contactEnd=.15f,linkTime=.19f,duration=.39f,advance=.38f,hitHold=.040f,
             keys=new[]{At(a,0),At(loaded,.025f),At(middle,.09f),At(b,.15f),At(b,.19f),At(b,.25f),At(ready,.39f)}};
         // Second follow-through feeds the overhead load, retaining the proven heavy blade plane.
         var third=source[2];third.label="重 · 推进终结斩";third.contactStart=.24f;third.contactEnd=.40f;

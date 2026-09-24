@@ -5,13 +5,15 @@ root = Path(__file__).resolve().parents[2]
 mode = sys.argv[1] if len(sys.argv) > 1 else 'vfx'
 baseline = '--baseline' in sys.argv
 build = root / ('Builds/Arena_Tactics_R1' if baseline else 'Builds/AI_UI_R2')
-evidence = root / 'AuditEvidence/ai-ui-r2' / ('baseline' if baseline else 'release')
+candidate = '--candidate' in sys.argv
+if candidate: build = root / 'Builds/Lunar_Basin_R1'
+evidence = root / 'AuditEvidence/ai-ui-r2' / ('candidate' if candidate else 'baseline' if baseline else 'release')
 evidence.mkdir(parents=True, exist_ok=True)
 env = os.environ.copy()
 env.update(MECH_LOOP_V2_BUILD=str(build), MECH_LOOP_V2_EVIDENCE=str(evidence), MECH_LOOP_V2_VERSION='ai-ui-r2')
 if mode == 'build':
-    if baseline:
-        raise RuntimeError('Combat Punch R1 is the retained baseline and cannot be rebuilt by this runner.')
+    if baseline or candidate:
+        raise RuntimeError('This runner builds only AI_UI_R2; baseline and map candidate builds remain retained.')
     out = evidence
     args = ['D:/Editor/6000.3.18f1/Editor/Unity.exe', '-batchmode', '-quit', '-projectPath', str(root), '-executeMethod', 'CombatLoopV2Build.Build', '-logFile', str(out/'unity-build.log')]
 else:
@@ -19,7 +21,7 @@ else:
     out.mkdir()
     env.update(MECH_EQUIPMENT_PROFILE=str(out/'profile.json'), MECH_LOOP_V2_EVIDENCE=str(out))
     args = [str(build/'MECH_TRIAL_P0.exe'), '-batchmode', '-noaudio', '-p0Check', '-combatSeed', '9172026', '-screen-width', '1600', '-screen-height', '900', '-logFile', str(out/'player.log')]
-    flags = {'aiui':'-aiUiCheck', 'arena':'-arenaTacticsCheck', 'terrain':'-p0TerrainAudit', 'punch':'-combatPunchCheck', 'punchperf':'-combatPunchPerformance', 'vfx':'-nemesisDroneVfxCheck', 'nemesis':'-nemesisCheck', 'foundation':'-foundationCheck', 'tactics':'-tacticsCheck', 'impact':'-enemyImpactCheck', 'melee':'-meleeFeelCheck', 'beam':'-beamVfxCheck', 'performance':'-nemesisPerformance', 'drones':'-nemesisDronesCheck', 'heroes':'-heroSelectionCheck', 'loopv2':'-loopV2Check'}
+    flags = {'aiui':'-aiUiCheck', 'lunar':'-lunarBasinCheck', 'arena':'-arenaTacticsCheck', 'terrain':'-p0TerrainAudit', 'punch':'-combatPunchCheck', 'punchperf':'-combatPunchPerformance', 'vfx':'-nemesisDroneVfxCheck', 'nemesis':'-nemesisCheck', 'foundation':'-foundationCheck', 'tactics':'-tacticsCheck', 'impact':'-enemyImpactCheck', 'melee':'-meleeFeelCheck', 'beam':'-beamVfxCheck', 'performance':'-nemesisPerformance', 'drones':'-nemesisDronesCheck', 'heroes':'-heroSelectionCheck', 'loopv2':'-loopV2Check'}
     if baseline and mode == 'arena':
         raise RuntimeError('The retained baseline predates the arena suite.')
     if mode in flags:

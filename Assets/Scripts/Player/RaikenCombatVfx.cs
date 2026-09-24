@@ -115,7 +115,7 @@ public sealed class RaikenCombatVfx : MonoBehaviour
     }
     private LineRenderer EdgeLine(string name,float width,Color color)
     {
-        if(amethyst){float alpha=color.a;color=Color.Lerp(NemesisMotionRig.Amethyst,Color.white,width<.1f?.28f:0);color.a=alpha;}
+        if(amethyst){float alpha=color.a;color=Color.Lerp(MechEnergyPalette.Nemesis,MechEnergyPalette.NemesisCore,width<.1f?1:0);color.a=alpha;}
         var line=new GameObject(name).AddComponent<LineRenderer>();line.transform.SetParent(blade.bladeRoot,false);
         line.sharedMaterial=strip;line.useWorldSpace=false;line.positionCount=edgePoints.Count;line.SetPositions(edgePoints.ToArray());
         // LineRenderer width is a world-space measurement even under the scaled weapon root.
@@ -124,7 +124,7 @@ public sealed class RaikenCombatVfx : MonoBehaviour
     }
     private void Emit(ParticleSystem ps,Vector3 position,Vector3 velocity,Color color,float size,float life)
     {
-        if(amethyst&&color.b>color.r*1.3f&&color.b>color.g){float alpha=color.a;color=Color.Lerp(NemesisMotionRig.Amethyst,Color.white,.10f);color.a=alpha;}
+        if(amethyst&&color.b>color.r*1.3f&&color.b>color.g){float alpha=color.a;color=Color.Lerp(MechEnergyPalette.Nemesis,MechEnergyPalette.NemesisCore,.15f);color.a=alpha;}
         ps.Emit(new ParticleSystem.EmitParams{position=position,velocity=velocity,startColor=color,startSize=size,startLifetime=life,rotation=Random.Range(0,360)},1);
     }
     private void LateUpdate()
@@ -243,7 +243,7 @@ public sealed class RaikenCombatVfx : MonoBehaviour
         ImpactBursts++;
         bool heavy=player.Melee.ComboStage==2;
         if(heavy)HeavyImpactBursts++;
-        if(target.LastHit!=null && target.LastHit.HasContact)return;
+        bool resolvedContact=target.LastHit!=null&&target.LastHit.HasContact;
         Vector3 axis=blade.tip.position-blade.grip.position;
         Vector3 onBlade=blade.grip.position+axis*Mathf.Clamp01(Vector3.Dot(target.AimCenter-blade.grip.position,axis)/axis.sqrMagnitude);
         Vector3 outward=(onBlade-target.AimCenter).normalized;if(outward.sqrMagnitude<.1f)outward=-player.Melee.AttackForward;
@@ -252,7 +252,8 @@ public sealed class RaikenCombatVfx : MonoBehaviour
         // outside so particles leave the contacted armor surface instead of dying inside it.
         Vector3 outside=target.AimCenter+outward*(collider!=null?collider.bounds.extents.magnitude+1:1);
         Vector3 point=(collider!=null?collider.ClosestPoint(outside):target.AimCenter)+outward*.12f;
-        for(int i=0;i<(heavy?78:34);i++)
+        if(resolvedContact){point=target.LastHit.ContactPoint+target.LastHit.ContactNormal*.04f;outward=target.LastHit.ContactNormal;}
+        for(int i=0;i<(heavy?58:24);i++)
             Emit(metal,point+Random.insideUnitSphere*.07f,outward*Random.Range(2,5)+motion.BladeEdge*Random.Range(2,7)+Random.onUnitSphere*3.5f+Vector3.up,
                 new Color(1,Random.Range(.45f,.9f),.18f,1),Random.Range(.065f,heavy?.22f:.14f),Random.Range(.18f,heavy?.62f:.40f));
         for(int i=0;i<30;i++)
@@ -262,6 +263,8 @@ public sealed class RaikenCombatVfx : MonoBehaviour
         Emit(flash,point,Vector3.zero,new Color(.65f,.9f,1,.7f),.3f,.04f);
         if(heavy)
         {
+            BeamFxKit.ImpactBurst(point,player.Melee.AttackForward,amethyst?MechEnergyPalette.Nemesis:new Color(.06f,.65f,1),1.35f);
+            for(int i=0;i<24;i++){float a=i*Mathf.PI/12;var radial=new Vector3(Mathf.Cos(a),0,Mathf.Sin(a));Emit(dust,new Vector3(point.x,player.transform.position.y+.08f,point.z)+radial*.3f,radial*5+Vector3.up*.4f,new Color(.48f,.51f,.55f,.32f),.38f,.45f);}
             // Cut-aligned hot fragments establish the force direction on contacted armor.
             Vector3 tangent=Vector3.ProjectOnPlane(motion.BladeEdge,Vector3.up).normalized;
             for(int i=0;i<24;i++)Emit(energy,point,tangent*Random.Range(8,17)+Random.insideUnitSphere*2,

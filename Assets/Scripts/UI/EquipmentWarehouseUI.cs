@@ -18,7 +18,7 @@ public sealed class EquipmentWarehouseUI : MonoBehaviour
         hud = RuntimeUIFactory.CreateCanvas("EquipmentLoopHUD", 960);
         hud.sortingOrder = 28;
         notification = RuntimeUIFactory.MenuText(hud.transform, "AbsorptionNotice", "", 19, Vector2.zero, new Vector2(660, 38), TextAnchor.MiddleCenter);
-        RuntimeUIFactory.Place(notification.rectTransform, new Vector2(.5f, 1), new Vector2(0, -114), new Vector2(660, 38));
+        RuntimeUIFactory.Place(notification.rectTransform, new Vector2(.5f, 1), new Vector2(0, -164), new Vector2(660, 38));
         loadout = RuntimeUIFactory.MenuText(hud.transform, "CurrentLoadout", "", 15, Vector2.zero, new Vector2(610, 30), TextAnchor.MiddleCenter);
         RuntimeUIFactory.Place(loadout.rectTransform, new Vector2(.5f, 1), new Vector2(0, -80), new Vector2(560, 28));
         absorbButton = RuntimeUIFactory.MenuButton(hud.transform, "AbsorbButton", "", Vector2.zero, new Vector2(220, 46));
@@ -44,7 +44,8 @@ public sealed class EquipmentWarehouseUI : MonoBehaviour
             var intake=loop.Absorption;
             absorbButton.gameObject.SetActive(intake.Offering);
             absorbButton.interactable=intake.CanAbsorb;
-            absorbButton.GetComponentInChildren<Text>().text=intake.CanAbsorb?T("F  夺取并试装", "F  RECOVER AND INSTALL"):T("靠近步枪残骸 · 5.5m", "APPROACH RIFLE · 5.5m");
+            absorbButton.GetComponentInChildren<Text>().text=intake.CanAbsorb?T("F  试装 ","F  INSTALL ")+intake.OfferedTitle:T("靠近 ","APPROACH ")+intake.OfferedTitle;
+            absorbButton.GetComponentInChildren<Text>().fontSize=14;
             absorptionStatus.text=intake.StatusText;
             absorptionStatus.gameObject.SetActive(!string.IsNullOrEmpty(intake.StatusText));
         }
@@ -80,16 +81,18 @@ public sealed class EquipmentWarehouseUI : MonoBehaviour
         RuntimeUIFactory.MenuText(cards, "WeaponColumn", T("射击武器", "CANNON"), 16, new Vector2(228, -106), new Vector2(398, 26));
         RuntimeUIFactory.MenuText(cards, "BackpackColumn", T("背包", "BACKPACK"), 16, new Vector2(661, -106), new Vector2(398, 26));
         int weaponRow = 0, backpackRow = 0;
+        int weaponCount=System.Array.FindAll(SalvageGear.All,g=>g.slot==SalvageSlot.Weapon).Length;
+        var weapons=ScrollColumn(cards,"WeaponScroll",29,weaponCount);var backpacks=ScrollColumn(cards,"BackpackScroll",462,SalvageGear.All.Length-weaponCount);
         for (int i = 0; i < SalvageGear.All.Length; i++)
         {
             var gear = SalvageGear.All[i];
             bool owned = loop.Warehouse.Owns(gear.id);
             bool selected = (gear.id == loop.Warehouse.Profile.weapon && loop.Owner.playerController.Loadout.Selected == PrimaryWeapon.Collection) || gear.id == loop.Backpack.id;
-            var card = RuntimeUIFactory.CreatePanel(cards, "GearCard_" + gear.id, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero,
+            var card = RuntimeUIFactory.CreatePanel(gear.slot==SalvageSlot.Weapon?weapons:backpacks, "GearCard_" + gear.id, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero,
                 selected ? new Color(.11f, .24f, .25f) : owned ? new Color(.13f, .16f, .18f) : new Color(.09f, .11f, .13f));
             bool isWeapon = gear.slot == SalvageSlot.Weapon;
             int row = isWeapon ? weaponRow++ : backpackRow++;
-            RuntimeUIFactory.Place(card, new Vector2(0, 1), new Vector2(isWeapon ? 228 : 661, -165 - row * 82), new Vector2(398, 74));
+            RuntimeUIFactory.Place(card, new Vector2(0, 1), new Vector2(199, -37 - row * 82), new Vector2(398, 74));
             var heading = RuntimeUIFactory.MenuText(card, "GearName", gear.Title, 19, new Vector2(150, -22), new Vector2(270, 28));
             heading.color = owned ? Color.white : new Color(.55f, .59f, .62f);
             RuntimeUIFactory.MenuText(card, "GearDescription", owned ? gear.Description : gear.Source, 13, new Vector2(150, -52), new Vector2(270, 34));
@@ -101,6 +104,13 @@ public sealed class EquipmentWarehouseUI : MonoBehaviour
         RuntimeUIFactory.MenuText(cards, "PersistenceNote", T("收藏永久保留 · 当前机体使用固定背包\n强化仅本局生效，结算后清空", "Collection persists. This mech uses a fixed backpack.\nUpgrades expire when this run ends."), 15, new Vector2(296, -484), new Vector2(534, 46));
         continueButton.GetComponentInChildren<Text>().text = loop.Owner.Phase == GamePhase.Loadout ? T("保持当前搭配 · 继续", "CONTINUE WITH LOADOUT") : T("返回出击准备", "BACK TO DEPLOYMENT");
         continueButton.transform.SetAsLastSibling();
+    }
+    static RectTransform ScrollColumn(RectTransform parent,string name,float x,int count)
+    {
+        var go=new GameObject(name,typeof(RectTransform),typeof(Image),typeof(RectMask2D),typeof(ScrollRect));var viewport=go.GetComponent<RectTransform>();viewport.SetParent(parent,false);
+        viewport.anchorMin=viewport.anchorMax=viewport.pivot=new Vector2(0,1);viewport.anchoredPosition=new Vector2(x,-128);viewport.sizeDelta=new Vector2(398,320);go.GetComponent<Image>().color=new Color(0,0,0,.02f);
+        var content=new GameObject("Content",typeof(RectTransform)).GetComponent<RectTransform>();content.SetParent(viewport,false);content.anchorMin=content.anchorMax=content.pivot=new Vector2(0,1);content.sizeDelta=new Vector2(398,Mathf.Max(320,count*82));
+        var scroll=go.GetComponent<ScrollRect>();scroll.viewport=viewport;scroll.content=content;scroll.horizontal=false;scroll.vertical=true;scroll.movementType=ScrollRect.MovementType.Clamped;scroll.scrollSensitivity=32;scroll.inertia=true;return content;
     }
     private void OnDestroy()
     {

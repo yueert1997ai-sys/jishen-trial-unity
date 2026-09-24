@@ -31,7 +31,7 @@ public class PlayerStats : MonoBehaviour
     public float baseMaxHp = 180f;
     public float baseEnergy = 100f;
     public float energyRegenPerSecond = 34f;
-    public float baseMoveSpeed = 7.4f;
+    public float baseMoveSpeed = 10.4f;
     public float baseDashDistance = 5f;
     public float baseDashCooldown = 1.25f;
     public float incomingDamageMultiplier = 0.85f;
@@ -68,6 +68,12 @@ public class PlayerStats : MonoBehaviour
         RaiseChanged();
     }
 
+    public void ConfigureHero(HeroMech hero)
+    {
+        var profile=MechMovementProfile.For(hero);
+        MoveSpeed+=profile.speed-baseMoveSpeed;DashDistance+=profile.dashDistance-baseDashDistance;
+        baseMoveSpeed=profile.speed;baseDashDistance=profile.dashDistance;
+    }
     public void ResetStats()
     {
         runHealthBonus = runDashBonus = runCooldownBonus = 0f;

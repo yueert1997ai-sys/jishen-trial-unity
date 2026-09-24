@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum BossPattern { Scatter, Mortar, Charge, Reinforcements }
+public enum BossPattern { Scatter, Mortar, Charge, Reinforcements, FazzMega, FazzTwin, FazzMissiles }
 
 public class BossController : MonoBehaviour
 {
@@ -73,7 +73,7 @@ public class BossController : MonoBehaviour
         target = targetTransform;
         stageManager = ownerStage;
         spawner = ownerSpawner;
-        DifficultyHealthMultiplier = GameManager.Instance != null ? GameManager.Instance.EnemyHealthMultiplier : 1f;
+        DifficultyHealthMultiplier = GetComponent<FazzBossController>()!=null?1f:GameManager.Instance != null ? GameManager.Instance.EnemyHealthMultiplier : 1f;
         runGeneration=CombatRuntime.Run.Generation;
         IsPhaseTwo=CoreExposed=ActionRunning=winding=false; actionIndex=ActionsCompleted=0;
         damageable.SetMaxHealth(encounterHealth * DifficultyHealthMultiplier, true);
@@ -81,11 +81,14 @@ public class BossController : MonoBehaviour
         nextActionTime = Time.time + 1.8f;
     }
 
+    public void SetFazzAction(bool running,bool exposed,BossPattern pattern)
+    {ActionRunning=running;CoreExposed=exposed;CurrentPattern=pattern;if(!running)ActionsCompleted++;}
     private void Update()
     {
         bool active = target != null && !damageable.IsDead && (GameManager.Instance == null || GameManager.Instance.IsCombatActive);
         if (navigation.isOnNavMesh) navigation.isStopped = !active || ActionRunning || CoreExposed;
         if (!active) return;
+        var fazz=GetComponent<FazzBossController>();if(fazz!=null){fazz.Tick();return;}
         if (!IsPhaseTwo && !ActionRunning && !CoreExposed && damageable.CurrentHealth <= damageable.maxHealth * 0.5f)
         {
             IsPhaseTwo = true;
@@ -106,6 +109,7 @@ public class BossController : MonoBehaviour
 
     public bool StartPattern(BossPattern pattern)
     {
+        if(GetComponent<FazzBossController>()!=null)return false;
         if (ActionRunning || CoreExposed || target == null || !CanExecute) return false;
         ActionRunning = true;
         CurrentPattern = pattern;

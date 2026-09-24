@@ -821,7 +821,7 @@ MonoBehaviour:
   baseMaxHp: 180
   baseEnergy: 100
   energyRegenPerSecond: 34
-  baseMoveSpeed: 7.4
+  baseMoveSpeed: 10.4
   baseDashDistance: 5
   baseDashCooldown: 1.25
   incomingDamageMultiplier: 0.85
@@ -839,9 +839,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   stats: {fileID: 4148473797485524122}
   weaponController: {fileID: 3570538421483383881}
-  acceleration: 42
-  braking: 65
-  dashDuration: 0.2
+  acceleration: 90
+  braking: 125
+  dashDuration: 0.16
   automaticFire: 1
 --- !u!114 &3570538421483383881
 MonoBehaviour:

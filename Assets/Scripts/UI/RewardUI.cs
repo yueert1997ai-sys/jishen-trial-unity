@@ -104,7 +104,7 @@ public class RewardUI : MonoBehaviour
         for (int i = 0; i < options.Count; i++)
         {
             RunUpgradeOption option = options[i];
-            RectTransform card = RuntimeUIFactory.CreatePanel(panel, "RewardCard" + i, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.10f, 0.16f, 0.18f));
+            RectTransform card = RuntimeUIFactory.CreatePanel(panel, "RewardCard" + i, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, GameUITheme.Panel);
             RuntimeUIFactory.Place(card, new Vector2(0, 1), new Vector2(150 + i * 260, -242), new Vector2(244, 300));
             RuntimeUIFactory.MenuText(card, "UpgradeTitle", option.title, 21, new Vector2(122, -49), new Vector2(208, 68));
             RuntimeUIFactory.MenuText(card, "Text", option.description, 17, new Vector2(122, -162), new Vector2(208, 132), TextAnchor.UpperLeft);

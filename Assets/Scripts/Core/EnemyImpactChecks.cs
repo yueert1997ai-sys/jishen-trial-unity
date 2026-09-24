@@ -55,9 +55,9 @@ public static class EnemyImpactChecks
                 if(heavy){var layer=go.GetComponent<ArmorHealth>()??go.AddComponent<ArmorHealth>();layer.Configure(1);hp.ApplyDamage(1,new DamageInfo(p.gameObject,go.transform.position-Vector3.right*5,source,1){HeavyImpact=true});}
                 enemy.ReceiveMeleeImpact(Vector3.right,heavy);Vector3 start=go.transform.position;
                 check(enemy.HitStaggerRemaining>0,"melee hit opens brief reaction window");
-                for(int i=0;i<Mathf.CeilToInt((heavy?.24f:.14f)*fps);i++)yield return null;
+                for(int i=0;i<Mathf.CeilToInt((heavy?.30f:.18f)*fps);i++)yield return null;
                 float distance=Vector3.Dot(go.transform.position-start,Vector3.right);
-                check(distance>(heavy?.80f:.22f)&&distance<(heavy?1.12f:.30f),"frame-independent "+(heavy?"heavy":"light")+" push at "+fps+": "+distance.ToString("F3"));
+                check(distance>(heavy?1.40f:.47f)&&distance<(heavy?1.60f:.54f),"frame-independent "+(heavy?"heavy":"light")+" push at "+fps+": "+distance.ToString("F3"));
                 check(NavMesh.SamplePosition(go.transform.position,out var landed,.15f,NavMesh.AllAreas),"knockback stays on production navigation surface");
                 if(heavy)check(!go.GetComponent<ArmorHealth>().Intact,"heavy impulse works after armor depletion without regenerating the layer");
                 rows.Add(string.Format(CultureInfo.InvariantCulture,"{0},{1},{2:F4}",fps,heavy?"heavy":"light",distance));

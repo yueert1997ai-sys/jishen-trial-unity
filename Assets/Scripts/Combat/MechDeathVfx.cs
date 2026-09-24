@@ -52,10 +52,11 @@ public sealed class MechDeathVfx : MonoBehaviour
     Vector3 Scatter()=>new Vector3(R(-1,1),R(-.3f,1),R(-1,1)).normalized;
     void Emit(ParticleSystem ps,Vector3 p,Vector3 v,Color c,float size,float life)
     {ps.Emit(new ParticleSystem.EmitParams{position=p,velocity=v,startColor=c,startSize=size,startLifetime=life,rotation=R(0,360)},1);}
+    static Vector3 Reactor(Damageable target)=>target.GetComponentInChildren<ImportedEnemyModel>()?.Chest.position??target.GetComponent<E01SoldierMotion>()?.ReactorCenter??target.AimCenter;
     void Begin(Damageable target)
     {
         if(generation!=CombatRuntime.Generation){Clear();generation=CombatRuntime.Generation;}
-        var e=events[next++%Capacity];e.target=target;e.center=target.GetComponent<E01SoldierMotion>().ReactorCenter;e.age=0;e.active=true;e.main=e.secondary=false;e.generation=generation;
+        var e=events[next++%Capacity];e.target=target;e.center=Reactor(target);e.age=0;e.active=true;e.main=e.secondary=false;e.generation=generation;
         e.scale=target.GetComponent<EnemyBase>()?.kind==EnemyKind.Elite?1.2f:1;
         var info=target.LastHit;e.direction=info!=null?Vector3.ProjectOnPlane(target.transform.position-info.SourcePosition,Vector3.up).normalized:target.transform.forward;
         if(info!=null&&info.MeleeStrike&&info.ContactTangent.sqrMagnitude>.01f)e.direction=info.ContactTangent.normalized;
@@ -95,7 +96,7 @@ public sealed class MechDeathVfx : MonoBehaviour
             if(!e.active)continue;
             if(e.target!=null&&!e.target.IsDead){e.active=false;continue;}
             e.age+=Time.deltaTime;
-            if(e.target!=null)e.center=e.target.GetComponent<E01SoldierMotion>().ReactorCenter;
+            if(e.target!=null)e.center=Reactor(e.target);
             if(!e.main&&e.age>=.14f){e.main=true;Detonate(e,false);}
             if(!e.secondary&&e.age>=.34f){e.secondary=true;Detonate(e,true);}
             if(e.age>=.55f){e.active=false;e.target=null;}

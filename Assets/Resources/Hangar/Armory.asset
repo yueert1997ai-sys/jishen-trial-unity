@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b041bfd2054f47948115fa2ff97e6fc, type: 3}
   m_Name: Armory
   m_EditorClassIdentifier: Assembly-CSharp::HangarArmory
-  heroPrefab: {fileID: 1680734479710548386, guid: 4b1efccd2b39a904ab3e9064e26d3e8a, type: 3}
+  heroPrefab: {fileID: 1270258930838209509, guid: 160537ee304ebaf479ef567687577501, type: 3}
   roomPrefab: {fileID: 1732218955826515675, guid: 2fb1ca26855b847248517de8122b3cd0, type: 3}
-  valkyrPrefab: {fileID: 7971656134755835938, guid: 4b0508598178839448ea5a760364e70a, type: 3}
+  valkyrPrefab: {fileID: 5915434341834026654, guid: 74985b2867d35b94c850d7428dba85dc, type: 3}
   valkyrRifle:
     weapon: 1
-    prefab: {fileID: 721830052097736899, guid: 1e71be0bb73444a93b805b94c0b7c1af, type: 3}
+    prefab: {fileID: 8352125639268473462, guid: 6089a15bdec52b442b6ba4193ff300d8, type: 3}
     damage: 18
     interval: 0.18
     speed: 38
@@ -27,7 +27,7 @@ MonoBehaviour:
   startingWeapon: 1
   weapons:
   - weapon: 1
-    prefab: {fileID: 1657166923640550134, guid: 49d03641c0605a84aa41207bdc8476fa, type: 3}
+    prefab: {fileID: 1909129322780508296, guid: 94d31aadf97303b4a85dc971c1c1df7e, type: 3}
     damage: 18
     interval: 0.18
     speed: 38

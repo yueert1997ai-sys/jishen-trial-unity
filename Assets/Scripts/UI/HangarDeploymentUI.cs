@@ -11,9 +11,9 @@ public class HangarDeploymentUI : MonoBehaviour
     PrimaryWeapon[] choices;
     bool nemesis;
     Button deploy, unload, liquid, veteran, range;
-    static readonly Color PanelColor = new Color(.035f,.055f,.079f,.95f);
-    static readonly Color ButtonColor = new Color(.12f,.17f,.22f,.94f);
-    static readonly Color Accent = new Color(.17f,.54f,.79f);
+    static readonly Color PanelColor = GameUITheme.Panel;
+    static readonly Color ButtonColor = GameUITheme.Button;
+    static readonly Color Accent = GameUITheme.Accent;
     public bool IsVisible => canvas != null && canvas.gameObject.activeSelf;
     public bool EquipmentExpanded => equipmentPanel != null && equipmentPanel.gameObject.activeSelf;
     public bool MoreExpanded => morePanel != null && morePanel.gameObject.activeSelf;
@@ -49,7 +49,7 @@ public class HangarDeploymentUI : MonoBehaviour
             weapons[i].GetComponent<Image>().color=active ? new Color(.12f,.34f,.49f) : ButtonColor;
             if(active) selected=T(zh[i],en[i]);
         }
-        equipped.text=selected+(nemesis?T(" + 光束剑"," + BEAM BLADE"):T(" + 斩舰刀"," + RAIKEN"));
+        equipped.text=selected+T(" + 斩舰刀"," + RAIKEN");
         details.text=nemesis?T("左键枪 · 右键三连斩 · 空格冲刺 · E 浮游炮","LMB gun · RMB combo · Space dash · E drones"):loadout.Selected==PrimaryWeapon.Halbreaker ? T("蓝色贯穿激光 · 右手肩扛","Blue piercing laser · shoulder mounted") :
             loadout.Selected==PrimaryWeapon.Type08 ? T("粉色贯穿光束","Pink piercing beam") :
             loadout.Selected==PrimaryWeapon.Greatsword ? T("逐刀三连斩","Three-hit blade combo") :

@@ -24,7 +24,8 @@ public static class ArenaTacticsChecks
                 check((sector==1?gm.arenaSector.tacticalMaintenance:gm.arenaSector.tacticalReactor).activeSelf,"new tactical sector active "+sector);
                 check(!gm.arenaSector.lunar.activeSelf&&!gm.arenaSector.commonDeck.activeSelf,"legacy floor and colliders disabled "+sector);
                 var path=new NavMeshPath();int routes=0;
-                var points=new[]{new Vector3(0,0,-12),new Vector3(0,0,18),new Vector3(-15,0,-15),new Vector3(15,0,-15),new Vector3(-15,0,18),new Vector3(15,0,18),new Vector3(-11,0,5),new Vector3(11,0,5)};
+                var points=gm.arenaSector.ActiveLunarLayout!=null?gm.arenaSector.ActiveLunarLayout.landmarks:
+                    new[]{new Vector3(0,0,-12),new Vector3(0,0,18),new Vector3(-15,0,-15),new Vector3(15,0,-15),new Vector3(-15,0,18),new Vector3(15,0,18),new Vector3(-11,0,5),new Vector3(11,0,5)};
                 foreach(var a in points)foreach(var b in points)
                 {
                     if(a==b)continue;
@@ -48,7 +49,7 @@ public static class ArenaTacticsChecks
                 for(int n=0;n<fps;n++)
                 {p.Simulate(new PlayerCommand{Move=Vector2.right},1f/fps);yield return null;}
                 float measured=enemy.ObservedTargetVelocity.x;
-                check(measured>5&&measured<=8.01f,"actual moving player is sampled at "+fps+" FPS: "+measured.ToString("F2"));
+                check(measured>p.stats.MoveSpeed*.6f&&measured<=p.stats.MoveSpeed+.1f,"actual moving player is sampled at "+fps+" FPS: "+measured.ToString("F2"));
                 metrics.Add("fps="+fps+" observedVelocity="+measured.ToString("F3"));
                 Clear(enemy);enemy=null;yield return null;
 
@@ -76,8 +77,9 @@ public static class ArenaTacticsChecks
 
             // Real authored obstacle, baked path and live AI: it must first leave
             // cover and find a sight line rather than spending volleys on a wall.
-            p.RestoreAt(new Vector3(-4.5f,.1f,2.5f));p.GetComponent<Damageable>().SetInvulnerable(120);
-            enemy=gm.stageManager.enemySpawner.SpawnEnemy(EnemyKind.Ranged,new Vector3(-12,0,2.5f));
+            var layout=gm.arenaSector.ActiveLunarLayout;
+            p.RestoreAt(layout!=null?layout.coverNear+Vector3.up*.15f:new Vector3(-4.5f,.1f,2.5f));p.GetComponent<Damageable>().SetInvulnerable(120);
+            enemy=gm.stageManager.enemySpawner.SpawnEnemy(EnemyKind.Ranged,layout!=null?layout.coverFar:new Vector3(-12,0,2.5f));
             Vector3 start=enemy.transform.position;
             check(!EnemyTactics.ClearSight(start,p.transform.position),"authored relay blocks sight at projectile height");
             for(int n=0;n<12;n++)yield return null;

@@ -33,7 +33,7 @@ public static class MeleeFeelChecks
                     {heading=Vector3.SignedAngle(Vector3.forward,p.Melee.AttackForward,Vector3.up);capture("feel-turn-"+fps+".png");break;}
                 }
                 check(heading!=-999,"next cut reached for retarget comparison at "+fps+" heading="+heading);
-                if(!baseline)check(heading>45,"next cut follows fresh manual aim instead of locking the whole combo at "+fps);
+                if(!baseline)check(heading>20&&heading<65,"next cut retargets within the 360 recovery / 540 preparation rate limits at "+fps);
                 p.RestoreAt(new Vector3(0,.1f,0));yield return null;
                 actor=UnityEngine.Object.Instantiate(gm.stageManager.enemySpawner.meleePrefab,new Vector3(0,.1f,3.2f),Quaternion.identity);
                 var enemy=actor.GetComponent<EnemyBase>();enemy.ConfigureP0Role(EnemyKind.Melee);enemy.TrainingTarget=true;enemy.Init(p.transform,null);enemy.enabled=false;

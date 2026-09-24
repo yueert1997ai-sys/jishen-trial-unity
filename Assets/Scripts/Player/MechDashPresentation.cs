@@ -17,10 +17,11 @@ public sealed class MechDashPresentation : MonoBehaviour
     private float started = -10, pulse;
     private bool integratedNozzles;
     private float exhaustBudget;
+    private int exhaustJet;
     private ValkyrMotionDriver authored;
     private bool amethyst;
     public float Pulse => pulse;
-    public int ActiveTrailCount => trails == null ? 0 : (trails[0].emitting ? 2 : 0);
+    public int ActiveTrailCount {get {int count=0;if(trails!=null)foreach(var trail in trails)if(trail!=null&&trail.emitting)count++;return count;}}
 
     private void Awake() { player = GetComponent<PlayerController>(); health = GetComponent<Damageable>(); }
     private void OnEnable() { if (player != null) player.Dashed += OnDash; }
@@ -38,19 +39,20 @@ public sealed class MechDashPresentation : MonoBehaviour
 
     public void RebindVisuals()
     {
-        ReleaseVisuals();started=-10;pulse=exhaustBudget=0;
+        ReleaseVisuals();started=-10;pulse=exhaustBudget=0;exhaustJet=0;
         rig = GetComponentInChildren<RiggedMechAnimator>();
         authored = GetComponentInChildren<ValkyrMotionDriver>();
         amethyst=GetComponentInChildren<NemesisMotionRig>()!=null;
         Transform anchor = rig != null ? (rig.rigidPose != null ? rig.rigidPose.Resolve(rig.chest) : rig.chest) : transform;
-        integratedNozzles = rig != null && rig.rigidPose != null && rig.rigidPose.thrusters.Length == 2;
+        integratedNozzles = rig != null && rig.rigidPose != null && rig.rigidPose.thrusters.Length > 0;
         glow = OverdriveVfx.CreateJetMaterial();
         housing = new Material(Shader.Find("Standard"));
         housing.color = new Color(.13f, .17f, .19f);
         housing.SetFloat("_Metallic", .65f);
         housing.SetFloat("_Glossiness", .45f);
-        jets = new Transform[2]; flames = new LineRenderer[4]; trails = new TrailRenderer[2];
-        for (int i = 0; i < 2; i++)
+        int count=integratedNozzles?rig.rigidPose.thrusters.Length:2;
+        jets = new Transform[count]; flames = new LineRenderer[count*2]; trails = new TrailRenderer[count];
+        for (int i = 0; i < count; i++)
         {
             var jet = new GameObject("DashGimbal_" + i).transform;
             if (integratedNozzles) jet.SetParent(rig.rigidPose.thrusters[i], false);
@@ -60,6 +62,7 @@ public sealed class MechDashPresentation : MonoBehaviour
                 jet.SetParent(anchor, true);
             }
             jets[i] = jet;
+            if(!amethyst)jet.gameObject.AddComponent<IonThrusterVfx>().Initialize(player,this,glow);
             if (!integratedNozzles)
             {
                 var nozzle = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
@@ -117,11 +120,13 @@ public sealed class MechDashPresentation : MonoBehaviour
         bool alive = health == null || !health.IsDead;
         bool active = alive && GameManager.Instance != null && GameManager.Instance.IsCombatActive;
         float age = Time.time - started;
-        float attack = Mathf.SmoothStep(0, 1, age / (.016f));
+        float attack = 1f;
         float release = Mathf.Clamp01(1 - (age - player.dashDuration) / .14f);
         pulse = active && age >= 0 ? attack * release : 0;
-        if (!player.IsDashing) pulse = Mathf.Min(pulse, .6f * release);
-        if (player.IsBoosting) pulse = Mathf.Max(pulse, .72f);
+        if (!player.IsDashing && age>player.dashDuration) pulse = Mathf.Min(pulse, .8f * release);
+        if (active&&player.IsBoosting) pulse = Mathf.Max(pulse, .85f);
+        if(active&&authored!=null&&!player.Melee.IsAttacking)pulse=Mathf.Max(pulse,authored.FlightBlend*.38f);
+        if(active&&amethyst&&!player.Melee.IsAttacking) pulse=Mathf.Max(pulse,Mathf.Clamp01(player.Velocity.magnitude/10.4f)*.28f);
         if(player.Melee.IsAttacking && player.Melee.ComboStage==2)
         {
             float t=player.Melee.AttackElapsed,s=player.Melee.CurrentStroke.contactStart;
@@ -144,7 +149,7 @@ public sealed class MechDashPresentation : MonoBehaviour
             rig.RefreshSockets();
         }
         Vector3 exhaust = -(player.IsDashing ? direction : player.Velocity.sqrMagnitude > .1f ? player.Velocity.normalized : transform.forward) + Vector3.down * .24f;
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < jets.Length; i++)
         {
             jets[i].rotation = Quaternion.Slerp(jets[i].rotation, Quaternion.LookRotation(exhaust), 1 - Mathf.Exp(-40 * Time.deltaTime));
             bool fast=player.IsDashing||player.IsBoosting;
@@ -156,9 +161,9 @@ public sealed class MechDashPresentation : MonoBehaviour
             {
                 var flame = flames[i * 2 + layer];
                 flame.enabled = active;
-                float length = (.18f + (3.3f) * pulse) * (layer == 0 ? 1 : .66f);
+                float length = (.22f + 4.6f * pulse) * (layer == 0 ? 1 : .66f);
                 length *= 1 + Mathf.Sin(Time.time * 90 + i) * .06f;
-                flame.startWidth = (.07f + .3f * pulse) * (layer == 0 ? 1 : .45f);
+                flame.startWidth = (.10f + .5f * pulse) * (layer == 0 ? 1 : .45f);
                 flame.endWidth = .008f;
                 float start = integratedNozzles ? 0 : .17f;
                 // World lengths: imported rig scale must not shrink booster plumes.
@@ -170,9 +175,11 @@ public sealed class MechDashPresentation : MonoBehaviour
         }
         if(active && pulse>.3f)
         {
-            exhaustBudget+=Time.deltaTime*90;
-            int n=Mathf.Min(12,Mathf.FloorToInt(exhaustBudget));exhaustBudget-=n;
-            for(int j=0;j<n;j++)for(int i=0;i<2;i++)OverdriveVfx.Exhaust(jets[i].position,exhaust.normalized,pulse,amethyst);
+            // Keep the previous total particle budget while distributing it over
+            // the actual backpack and rear-calf ports of the selected machine.
+            exhaustBudget+=Time.deltaTime*180;
+            int n=Mathf.Min(24,Mathf.FloorToInt(exhaustBudget));exhaustBudget-=n;
+            for(int j=0;j<n;j++){int i=exhaustJet++%jets.Length;OverdriveVfx.Exhaust(jets[i].position,exhaust.normalized,pulse,amethyst);}
         }
         else exhaustBudget=0;
     }

@@ -30,7 +30,7 @@ public partial class GameAudio : MonoBehaviour
         bool active=gm!=null&&gm.IsCombatActive&&!gm.IsPaused&&player!=null;
         if(!active){boostLevel=0;boostLoop.Stop();boostLoop.volume=0;wasBoosting=false;return;}
         UpdateBoostEdges(player);
-        float target=player.IsDashing?.14f:player.IsBoosting?.09f:0;
+        float target=player.IsDashing?.14f:player.IsBoosting?.09f:player.Loadout.IsNemesis&&player.Velocity.sqrMagnitude>2?.026f:0;
         boostLevel=Mathf.MoveTowards(boostLevel,target,Time.deltaTime*(target>boostLevel?2f:.9f));
         boostLoop.pitch=Mathf.Lerp(boostLoop.pitch,player.IsDashing?1.35f:1.05f,1-Mathf.Exp(-20*Time.deltaTime));
         boostLoop.volume=boostLevel*GamePreferences.Effects*SliceBackgroundGain;
@@ -100,7 +100,7 @@ public partial class GameAudio : MonoBehaviour
             boostLoop=engine.AddComponent<AudioSource>();boostLoop.playOnAwake=false;boostLoop.loop=true;
             boostLoop.clip=ambience.clip;boostLoop.spatialBlend=0;boostLoop.dopplerLevel=0;boostLoop.volume=0;
         }
-        var score = Resources.Load<AudioClip>("Audio/Music/P0_HeavyBattle");
+        var score = Resources.Load<AudioClip>("Audio/Music/Velocity_Overdrive");
         for (int i = 0; i < music.Length; i++)
         {
             music[i] = gameObject.AddComponent<AudioSource>();
@@ -112,6 +112,7 @@ public partial class GameAudio : MonoBehaviour
         if (score != null) music[0].Play();
         else Debug.LogError("Missing combat music.");
         LoadSliceBank();
+        LoadVelocityBank();
     }
 
     private void Load(GameAudioCue cue, params string[] names)
@@ -135,8 +136,8 @@ public partial class GameAudio : MonoBehaviour
         ambience.volume = Mathf.MoveTowards(ambience.volume, level, AudioDelta * 0.08f);
         var gm = GameManager.Instance;
         float targetLevel = gm != null && gm.Phase == GamePhase.Combat ? 0.17f : 0.07f;
-        if (AudioClock < duckUntil) targetLevel *= 0.4f;
-        targetLevel*=Mathf.Lerp(1,.48f,1-SliceBackgroundGain);
+        if (AudioClock < duckUntil) targetLevel *= 0.82f;
+        targetLevel*=Mathf.Lerp(1,.78f,1-SliceBackgroundGain);
         float mixSpeed=targetLevel<musicLevel?3f:.3f;
         musicLevel = Mathf.MoveTowards(musicLevel, targetLevel, AudioDelta * mixSpeed);
         if (!MusicLoaded || (gm != null && gm.IsPaused)) return;

@@ -25,6 +25,6 @@ public class PauseUI : MonoBehaviour
         RuntimeUIFactory.MenuButton(panel, "RecoverButton", "脱困 / F4", new Vector2(180, -286), new Vector2(280, 56))
             .onClick.AddListener(() => gameManager.playerController.GetComponent<CombatRecovery>().TryRecover(true));
         RuntimeUIFactory.MenuButton(panel, "RestartButton", "Return to hangar", new Vector2(180, -360), new Vector2(280, 56))
-            .onClick.AddListener(() => gameManager.RestartRun());
+            .onClick.AddListener(() => gameManager.ExitPractice());
     }
 }

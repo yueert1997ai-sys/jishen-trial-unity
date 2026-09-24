@@ -89,6 +89,8 @@ public class CombatFeedback : MonoBehaviour
             EnemyVfx.MetalHit(info.ContactPoint,info.ContactNormal,info.HeavyImpact,true);
             if(info.HeavyImpact && !info.BrokeArmor)
                 Camera.main?.GetComponent<CameraFollow>()?.AddShake(.14f,.09f);
+            if(!info.HeavyImpact&&GetComponent<EnemyBase>()?.HitStaggerRemaining>0)
+                Camera.main?.GetComponent<CameraFollow>()?.AddShake(.065f,.045f);
             if(info.MeleeStrike||info.BrokeArmor)SpawnDamageNumber(target.AimCenter+Vector3.up*.5f,info.Amount,info.BrokeArmor?Color.cyan:new Color(1,.78f,.35f));
             if(!info.MeleeStrike&&!info.BrokeArmor)GameAudio.PlayAt(info.HeavyImpact?GameAudioCue.ArmorClash:(info.ArmorDamage>0?GameAudioCue.Hit:GameAudioCue.HullHit),info.ContactPoint,.4f,Random.Range(.95f,1.05f));
             return;

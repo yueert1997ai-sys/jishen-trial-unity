@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRadius = 18f;
     sealed class SpawnReservation
     {
-        public int Generation;
+        public int Generation;public EnemySpawnSpec? Arsenal;
         public TelegraphVisual Warning;
         public int WarningGeneration;
     }
@@ -72,6 +72,23 @@ public class EnemySpawner : MonoBehaviour
         QueueEnemy(kind, position, delay);
     }
 
+    public void SpawnArsenalEntry(EnemySpawnSpec spec,Vector3 position,float delay)
+    {
+        if(NavMesh.SamplePosition(position,out var point,3f,NavMesh.AllAreas))position=point.position;
+        QueueEnemy(spec.role,position,delay,spec);
+    }
+    public BossController SpawnFazz(int room)
+    {
+        var go=new GameObject("FAZZ HG_2250");go.SetActive(false);
+        var position=new Vector3(0,0,18);if(NavMesh.SamplePosition(position,out var at,6,NavMesh.AllAreas))position=at.position;
+        go.transform.position=position;var health=go.AddComponent<Damageable>();health.team=1;health.destroyOnDeath=false;
+        var collider=go.AddComponent<CapsuleCollider>();collider.height=5.6f;collider.center=Vector3.up*2.8f;collider.radius=1.15f;
+        var fazz=go.AddComponent<FazzBossController>();var boss=go.AddComponent<BossController>();
+        boss.displayName="FAZZ · 重装火力试验机";boss.encounterHealth=new FazzBossProfile(room).health;boss.armoredDamageScale=1;boss.defeatDelay=1;
+        fazz.model=Instantiate(Resources.Load<GameObject>("Enemies/Arsenal/FAZZ"),go.transform).GetComponent<ImportedEnemyModel>();
+        EnemyArmorPalette.Apply(go);
+        go.SetActive(true);fazz.Configure(room);boss.Init(player,stageManager,this);stageManager?.NotifyBossSpawned();return boss;
+    }
     public void CancelPendingSpawns()
     {
         SpawnGeneration++;
@@ -94,6 +111,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         GameObject bossObject = Instantiate(prefab, new Vector3(0f, 0f, 18f), Quaternion.identity);
+        EnemyArmorPalette.Apply(bossObject);
         BossController boss = bossObject.GetComponent<BossController>();
         if (boss != null)
         {
@@ -123,7 +141,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void QueueEnemy(EnemyKind kind, Vector3 position, float stagger)
+    private void QueueEnemy(EnemyKind kind, Vector3 position, float stagger,EnemySpawnSpec? arsenal=null)
     {
         GameObject prefab = GetPrefab(kind);
         if (prefab == null)
@@ -136,7 +154,7 @@ public class EnemySpawner : MonoBehaviour
             stageManager.NotifyEnemySpawned();
         }
 
-        var reservation=new SpawnReservation { Generation=SpawnGeneration };
+        var reservation=new SpawnReservation { Generation=SpawnGeneration,Arsenal=arsenal };
         pending.Add(reservation);
         StartCoroutine(SpawnAfterTelegraph(prefab, kind, position, stagger, reservation));
     }
@@ -149,6 +167,11 @@ public class EnemySpawner : MonoBehaviour
         }
 
         if(reservation.Generation!=SpawnGeneration)yield break;
+        if(reservation.Arsenal.HasValue&&reservation.Arsenal.Value.Heavy)
+        {
+            while(HeavyOccupied(reservation))
+            {yield return null;if(reservation.Generation!=SpawnGeneration)yield break;}
+        }
         float radius = kind == EnemyKind.Elite ? 1.35f : kind == EnemyKind.Drone ? 0.65f : 0.85f;
         float warning=CombatRules.Current.SpawnWarning;
         reservation.Warning=CombatEffects.Disc(position, radius, warning, GetSpawnColor(kind));
@@ -158,10 +181,10 @@ public class EnemySpawner : MonoBehaviour
         pending.Remove(reservation);
         if(GameManager.Instance!=null && !GameManager.Instance.IsCombatActive)
         {stageManager?.NotifyEnemyKilled();yield break;}
-        InstantiateEnemy(prefab, position, kind);
+        InstantiateEnemy(prefab, position, kind,reservation.Arsenal);
     }
 
-    private EnemyBase InstantiateEnemy(GameObject prefab, Vector3 position, EnemyKind kind)
+    private EnemyBase InstantiateEnemy(GameObject prefab, Vector3 position, EnemyKind kind,EnemySpawnSpec? arsenal=null)
     {
         if (NavMesh.SamplePosition(position, out var point, 5f, NavMesh.AllAreas)) position = point.position;
         GameObject enemyObject = Instantiate(prefab, position, Quaternion.identity);
@@ -169,12 +192,21 @@ public class EnemySpawner : MonoBehaviour
         if (enemy != null)
         {
             enemy.ConfigureP0Role(kind);
+            if(arsenal.HasValue&&arsenal.Value.body!="DRONE")enemy.gameObject.AddComponent<EnemyArsenal>().Configure(arsenal.Value);
             enemy.Init(player, stageManager);
         }
 
         return enemy;
     }
 
+    bool HeavyOccupied(SpawnReservation current)
+    {
+        foreach(var actor in Damageable.Active)
+            if(actor!=null&&!actor.IsDead&&actor.GetComponent<EnemyArsenal>()?.Heavy==true)return true;
+        foreach(var reservation in pending)
+        {if(reservation==current)break;if(reservation.Arsenal.HasValue&&reservation.Arsenal.Value.Heavy)return true;}
+        return false;
+    }
     private static Color GetSpawnColor(EnemyKind kind)
     {
         if (kind == EnemyKind.Elite)

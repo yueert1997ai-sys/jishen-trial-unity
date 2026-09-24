@@ -5,7 +5,7 @@ public class CameraFollow : MonoBehaviour
     public Transform target;
     public Vector3 offset = new Vector3(0f, 18f, -10.4f);
     public float followSpeed = 9f;
-    public const float StandardCombatSize = 11.25f;
+    public const float StandardCombatSize = 17f;
     public float normalSize = StandardCombatSize;
     public bool screenShake = true;
     public float p0Size = 9f;
@@ -68,16 +68,17 @@ public class CameraFollow : MonoBehaviour
         if (boss != null && GameManager.Instance != null && GameManager.Instance.IsCombatActive)
         {
             Vector3 toBoss = boss.transform.position - target.position; toBoss.y = 0;
-            desiredFocus = target.position + Vector3.ClampMagnitude(toBoss * .35f, 3f);
-            desiredSize = Mathf.Clamp(toBoss.magnitude * .35f + 7f, CombatSize, 13.5f);
+            desiredFocus = target.position;
+            desiredSize = CombatSize;
         }
         var lunar=GameManager.Instance!=null&&GameManager.Instance.arenaSector!=null?GameManager.Instance.arenaSector.ActiveLunarLayout:null;
         float pitch=lunar!=null?lunar.cameraPitch:68f;
         // The lunar apron outside the play boundary fills the camera footprint.
-        float extentX=Mathf.Max(0,30f-desiredSize*(16f/9f)-.5f);
-        float extentZ=Mathf.Max(0,30f-desiredSize/Mathf.Sin(pitch*Mathf.Deg2Rad)-2f);
-        desiredFocus.x=Mathf.Clamp(desiredFocus.x,-extentX,extentX);
-        desiredFocus.z=Mathf.Clamp(desiredFocus.z,-extentZ,extentZ);
+        var ground=lunar!=null?lunar.CameraGroundBounds:new Bounds(Vector3.zero,new Vector3(116,1,116));
+        float extentX=Mathf.Max(0,ground.extents.x-desiredSize*Mathf.Max(16f/9f,Screen.width/(float)Mathf.Max(1,Screen.height))-.5f);
+        float extentZ=Mathf.Max(0,ground.extents.z-desiredSize/Mathf.Sin(pitch*Mathf.Deg2Rad)-2f);
+        desiredFocus.x=Mathf.Clamp(desiredFocus.x,ground.center.x-extentX,ground.center.x+extentX);
+        desiredFocus.z=Mathf.Clamp(desiredFocus.z,ground.center.z-extentZ,ground.center.z+extentZ);
         float blend = 1f - Mathf.Exp(-followSpeed * Time.deltaTime);
         focus = initialized ? Vector3.Lerp(focus, desiredFocus, blend) : desiredFocus;
         initialized = true;

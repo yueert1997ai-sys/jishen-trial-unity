@@ -69,7 +69,7 @@ public static partial class LunarBasinBuild
         sector.ShowSector(1);EditorUtility.SetDirty(sector);
         var light=Object.FindObjectsByType<Light>(FindObjectsSortMode.None).FirstOrDefault(l=>l.type==LightType.Directional);
         if(light!=null)
-        {light.transform.rotation=Quaternion.Euler(47,-38,0);light.intensity=1.23f;light.color=new Color(1,.93f,.81f);light.shadows=LightShadows.Soft;light.shadowStrength=.83f;light.shadowBias=.025f;}
+        {light.transform.rotation=Quaternion.Euler(47,-38,0);light.intensity=1.23f;light.color=new Color(1,.98f,.93f);light.shadows=LightShadows.Soft;light.shadowStrength=.83f;light.shadowBias=.025f;}
         RenderSettings.ambientMode=AmbientMode.Trilight;
         RenderSettings.ambientSkyColor=new Color(.26f,.32f,.43f);RenderSettings.ambientEquatorColor=new Color(.18f,.22f,.30f);RenderSettings.ambientGroundColor=new Color(.10f,.12f,.16f);
         RenderSettings.fog=false;Camera.main.backgroundColor=new Color(.009f,.014f,.025f);
@@ -109,9 +109,9 @@ public static partial class LunarBasinBuild
             Vector3 from=rim[i],to=rim[(i+1)%rim.Length],delta=to-from;
             float length=delta.magnitude;float height=(from.z+to.z)<-15?1.65f:3.5f;
             float yaw=Mathf.Atan2(delta.x,delta.z)*Mathf.Rad2Deg;
-            // Continuous physical bedrock beneath the visible irregular chunks
-            // prevents tiny cracks from becoming accidental playable exits.
-            Box("RimBedrock",(from+to)*.5f+Vector3.up*height*.5f,new Vector3(2.3f,height,length+1),rock,true,yaw);
+            // The visible faceted escarpment is also the continuous collider;
+            // no exposed box or invisible gaps separate art from the boundary.
+            RockBoundary((from+to)*.5f,length+1,height,yaw,i);
             int count=Mathf.CeilToInt(length/2.8f);
             for(int n=0;n<=count;n++)
             {
@@ -178,7 +178,7 @@ public static partial class LunarBasinBuild
         foreach(var mf in root.GetComponentsInChildren<MeshFilter>())
         {
             var renderer=mf.GetComponent<MeshRenderer>();
-            if(renderer==null||renderer.sharedMaterials.Length!=1||mf.sharedMesh==null)continue;
+            if(renderer==null||!renderer.enabled||renderer.sharedMaterials.Length!=1||mf.sharedMesh==null)continue;
             Material mat=renderer.sharedMaterial;
             if(!groups.TryGetValue(mat,out var list))groups[mat]=list=new List<MeshFilter>();list.Add(mf);
         }

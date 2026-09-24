@@ -30,10 +30,20 @@ public static class NemesisPerformanceChecks
         Time.captureDeltaTime=1f/60;Application.targetFrameRate=-1;QualitySettings.vSyncCount=0;
         try
         {
-            foreach(var phase in new[]{"idle","boost-no-ghost","boost-ghost","boost-support"})
+            foreach(var phase in new[]{"idle","boost-no-ghost","boost-ghost","boost-support","arsenal-crossfire","fazz-missiles"})
             {
                 p.RestoreAt(new Vector3(0,.1f,-4));p.stats.ResetStats();p.weaponController.ResetCooldowns();
+                p.GetComponent<Damageable>().SetInvulnerable(1000);
                 ghost.enabled=phase!="boost-no-ghost";
+                if(phase=="arsenal-crossfire")
+                {
+                    string[] bodies={"E01","GM","ZAKU","DOM","GUNCANNON"};EnemyWeapon[] weapons={EnemyWeapon.M7,EnemyWeapon.M14,EnemyWeapon.Rocket,EnemyWeapon.Missiles,EnemyWeapon.BackCannon};
+                    for(int i=0;i<5;i++)
+                    {var enemy=gm.stageManager.enemySpawner.SpawnEnemy(EnemyKind.Ranged,new Vector3((i-2)*4,0,8));enemy.gameObject.AddComponent<EnemyArsenal>().Configure(new EnemySpawnSpec(bodies[i],weapons[i],EnemyKind.Ranged));enemy.GetComponent<Damageable>().RestoreLife(100000,100000);}
+                    yield return null;p.weaponController.TryFireSkill(null);
+                }
+                if(phase=="fazz-missiles")
+                {var boss=gm.stageManager.enemySpawner.SpawnFazz(0);boss.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(new Vector3(0,0,8));yield return null;boss.GetComponent<FazzBossController>().Begin(2);}
                 if(phase=="boost-support")
                 {
                     var trial=Object.FindFirstObjectByType<WeaponTrial>();
@@ -54,7 +64,7 @@ public static class NemesisPerformanceChecks
                     p.Simulate(new PlayerCommand{Move=move,BoostHeld=boost,Dash=boost&&frame==0,
                         HasAim=true,AimPoint=p.transform.position+Vector3.forward*16},Time.deltaTime);
                     yield return null;
-                    cam.orthographic=true;cam.orthographicSize=11.25f;
+                    cam.orthographic=true;cam.orthographicSize=CameraFollow.StandardCombatSize;
                     cam.transform.rotation=Quaternion.Euler(68,0,0);cam.transform.position=p.transform.position-cam.transform.forward*24;
                     cam.targetTexture=rt;cam.Render();RenderTexture.active=rt;
                     pixel.ReadPixels(new Rect(800,450,1,1),0,0);RenderTexture.active=oldActive;
@@ -69,6 +79,7 @@ public static class NemesisPerformanceChecks
                     $"{phase}: measured simulation + synchronized scene frame mean={sample.meanMs:F2} ms p95={sample.p95Ms:F2} ms; ghosts={maxGhost}");
                 cam.targetTexture=original;capture("performance-"+phase+".png");
                 Object.FindFirstObjectByType<WeaponTrial>().ClearTargets();
+                gm.stageManager.StopStage();
             }
         }
         finally

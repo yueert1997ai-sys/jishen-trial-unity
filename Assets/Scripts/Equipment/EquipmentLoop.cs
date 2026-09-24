@@ -61,7 +61,7 @@ public sealed class EquipmentLoop : MonoBehaviour
         var hardpoints = Owner.playerController.GetComponent<MechHardpointManager>();
         if (hardpoints == null) return;
         // Additive preview modules. No source model, skeleton, sword, or prefab is rewritten.
-        if (collection && Weapon.id != "pulse" && Weapon.id != "e01_rifle")
+        if (collection && Weapon.PrimaryEntry==null && Weapon.id != "pulse" && Weapon.id != "e01_rifle")
         {
             weaponVisual = SalvageModuleVisual.Create(Weapon, hardpoints.GetSocket("RightShoulderSocket"));
             weaponVisual.name = "EquipmentPreview_" + Weapon.id;
@@ -115,6 +115,7 @@ public sealed class EquipmentLoop : MonoBehaviour
     }
     public void RecordAcquisition(bool fresh){if(fresh)NewThisRun++;}
     public void InstallRecovered(string id){ActiveRangedId=id;Owner.playerController.Loadout.InstallRecoveredRifle();}
+    public void RestoreRetryWeapon(string id){if(SalvageGear.Find(id)!=null)ActiveRangedId=id;}
     private void SaveFailure()
     {
         UI.Notify(EquipmentWarehouseUI.T("仓库写入失败，部件仍可再次吸收。", "Save failed. The part can still be absorbed."));

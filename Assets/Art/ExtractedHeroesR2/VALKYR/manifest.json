@@ -1,0 +1,747 @@
+{
+  "hero": "VALKYR",
+  "sourceFile": "E:\\SteamLibrary\\GameStudyExports\\MechaRefinement_R04\\outputs\\R05_WEAPONS\\VALKYR_EXTRACTED_GUN_R05.blend",
+  "sourceSha256": "def0a2eeeddf72780cbbf1ba55b6a6c0450869de978e89e24bc4e08af2884c74",
+  "sourceWeapon": "EqHG_Lrw038",
+  "standaloneShoulderCannon": false,
+  "scale": 2.3,
+  "bones": [
+    {
+      "name": "Pelvis",
+      "parent": -1,
+      "position": [
+        -4.091703917959849e-13,
+        2.842409610748291,
+        0.06449195742607117
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Waist",
+      "parent": 0,
+      "position": [
+        -4.091703917959849e-13,
+        2.9344096183776855,
+        0.06449195742607117
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Thorax",
+      "parent": 1,
+      "position": [
+        -4.091703917959849e-13,
+        3.1414096355438232,
+        0.06449195742607117
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": 2,
+      "position": [
+        -1.0352313353344939e-13,
+        3.9154727458953857,
+        -1.306577132709208e-06
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "UpperArm.R",
+      "parent": 2,
+      "position": [
+        0.6724280118942261,
+        3.718731164932251,
+        0.03157774731516838
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Forearm.R",
+      "parent": 4,
+      "position": [
+        0.6724279522895813,
+        3.058032751083374,
+        -0.006941871251910925
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Hand.R",
+      "parent": 5,
+      "position": [
+        0.6638948917388916,
+        2.4250431060791016,
+        0.024345219135284424
+      ],
+      "rotation": [
+        0.0,
+        -0.7071067690849304,
+        -0.0,
+        0.7071067690849304
+      ]
+    },
+    {
+      "name": "Shoulder_Armor_Floating_Pivot.R",
+      "parent": 2,
+      "position": [
+        0.6724280118942261,
+        3.8174471855163574,
+        0.03157775104045868
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Thigh.R",
+      "parent": 0,
+      "position": [
+        0.32199999690055847,
+        2.4824135303497314,
+        4.284049115454991e-09
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Shin.R",
+      "parent": 8,
+      "position": [
+        0.32199978828430176,
+        1.4975392818450928,
+        -0.035713162273168564
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Foot.R",
+      "parent": 9,
+      "position": [
+        0.3219996988773346,
+        0.2890016734600067,
+        -0.12727175652980804
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "SKIRT_FRONT_PIVOT.R",
+      "parent": 0,
+      "position": [
+        0.27089399099349976,
+        2.792407751083374,
+        0.31006303429603577
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "SKIRT_SIDE_PIVOT.R",
+      "parent": 0,
+      "position": [
+        0.3972100019454956,
+        2.792407751083374,
+        8.56822435224558e-09
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "UpperArm.L",
+      "parent": 2,
+      "position": [
+        -0.6724280118942261,
+        3.718731164932251,
+        0.03157774731516838
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Forearm.L",
+      "parent": 13,
+      "position": [
+        -0.6724280118942261,
+        3.058032751083374,
+        -0.006941871251910925
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Hand.L",
+      "parent": 14,
+      "position": [
+        -0.6638950705528259,
+        2.4250431060791016,
+        0.024345215409994125
+      ],
+      "rotation": [
+        0.0,
+        0.7071067690849304,
+        0.0,
+        0.7071067690849304
+      ]
+    },
+    {
+      "name": "Shoulder_Armor_Floating_Pivot.L",
+      "parent": 2,
+      "position": [
+        -0.6724279522895813,
+        3.8174471855163574,
+        0.03157775104045868
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Thigh.L",
+      "parent": 0,
+      "position": [
+        -0.32199999690055847,
+        2.4824135303497314,
+        4.284042898206053e-09
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Shin.L",
+      "parent": 17,
+      "position": [
+        -0.3220002353191376,
+        1.4975392818450928,
+        -0.035713162273168564
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Foot.L",
+      "parent": 18,
+      "position": [
+        -0.3220004737377167,
+        0.28900155425071716,
+        -0.12727177143096924
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "SKIRT_FRONT_PIVOT.L",
+      "parent": 0,
+      "position": [
+        -0.27089399099349976,
+        2.792407751083374,
+        0.31006303429603577
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "SKIRT_SIDE_PIVOT.L",
+      "parent": 0,
+      "position": [
+        -0.3972100019454956,
+        2.792407751083374,
+        8.56822435224558e-09
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "BACKPACK_MOUNT",
+      "parent": 2,
+      "position": [
+        -1.0352313353344939e-13,
+        3.749987840652466,
+        -0.2848791182041168
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "Cannon_Pitch_Trunnion",
+      "parent": 2,
+      "position": [
+        -1.0352313353344939e-13,
+        3.749987840652466,
+        -0.2848791182041168
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "VALKYR_HG_1671",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.2199999988079071,
+      "roughness": 0.36000001430511475,
+      "emission": [
+        1,
+        1,
+        1
+      ],
+      "albedo": "Textures/HG_1671_albedo.png",
+      "emissionMap": "Textures/HG_1671_emissionMap.png",
+      "normal": "Textures/HG_1671_normal.png"
+    },
+    {
+      "name": "VALKYR_HG_1672",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.2199999988079071,
+      "roughness": 0.36000001430511475,
+      "emission": [
+        1,
+        1,
+        1
+      ],
+      "albedo": "Textures/HG_1672_albedo.png",
+      "emissionMap": "Textures/HG_1672_emissionMap.png",
+      "normal": "Textures/HG_1672_normal.png"
+    },
+    {
+      "name": "VALKYR_HG_1673",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.2199999988079071,
+      "roughness": 0.36000001430511475,
+      "emission": [
+        1,
+        1,
+        1
+      ],
+      "albedo": "Textures/HG_1673_albedo.png",
+      "emissionMap": "Textures/HG_1673_emissionMap.png",
+      "normal": "Textures/HG_1673_normal.png"
+    },
+    {
+      "name": "VALKYR_HG_1674",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.2199999988079071,
+      "roughness": 0.36000001430511475,
+      "emission": [
+        1,
+        1,
+        1
+      ],
+      "albedo": "Textures/HG_1674_albedo.png",
+      "emissionMap": "Textures/HG_1674_emissionMap.png",
+      "normal": "Textures/HG_1674_normal.png"
+    },
+    {
+      "name": "VALKYR_HG_1675",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.2199999988079071,
+      "roughness": 0.36000001430511475,
+      "emission": [
+        1,
+        1,
+        1
+      ],
+      "albedo": "Textures/HG_1675_albedo.png",
+      "emissionMap": "Textures/HG_1675_emissionMap.png",
+      "normal": "Textures/HG_1675_normal.png"
+    },
+    {
+      "name": "VALKYR_HG_2316",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.2199999988079071,
+      "roughness": 0.36000001430511475,
+      "emission": [
+        1,
+        1,
+        1
+      ],
+      "albedo": "Textures/HG_2316_albedo.png",
+      "emissionMap": "Textures/HG_2316_emissionMap.png",
+      "normal": "Textures/HG_2316_normal.png"
+    },
+    {
+      "name": "R04 silver",
+      "color": [
+        0.38642942905426025,
+        0.4564110338687897,
+        0.5583403706550598,
+        1.0
+      ],
+      "metallic": 0.5799999833106995,
+      "roughness": 0.2800000011920929,
+      "emission": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "albedo": "",
+      "emissionMap": "",
+      "normal": ""
+    },
+    {
+      "name": "R04 cyan",
+      "color": [
+        0.0382043719291687,
+        0.6239603757858276,
+        1.0,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.2199999988079071,
+      "emission": [
+        0.1146131157875061,
+        1.871881127357483,
+        3.0
+      ],
+      "albedo": "",
+      "emissionMap": "",
+      "normal": ""
+    },
+    {
+      "name": "R04 steel",
+      "color": [
+        0.14995978772640228,
+        0.1946178376674652,
+        0.26635560393333435,
+        1.0
+      ],
+      "metallic": 0.75,
+      "roughness": 0.25999999046325684,
+      "emission": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "albedo": "",
+      "emissionMap": "",
+      "normal": ""
+    },
+    {
+      "name": "R04 navy",
+      "color": [
+        0.011612244881689548,
+        0.03433980792760849,
+        0.09084171056747437,
+        1.0
+      ],
+      "metallic": 0.4000000059604645,
+      "roughness": 0.3400000035762787,
+      "emission": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "albedo": "",
+      "emissionMap": "",
+      "normal": ""
+    },
+    {
+      "name": "R04 gold",
+      "color": [
+        0.6239603757858276,
+        0.40724021196365356,
+        0.13013647496700287,
+        1.0
+      ],
+      "metallic": 0.6800000071525574,
+      "roughness": 0.3400000035762787,
+      "emission": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "albedo": "",
+      "emissionMap": "",
+      "normal": ""
+    },
+    {
+      "name": "R04 graphite",
+      "color": [
+        0.01850022003054619,
+        0.024157632142305374,
+        0.03688944876194,
+        1.0
+      ],
+      "metallic": 0.4000000059604645,
+      "roughness": 0.3400000035762787,
+      "emission": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "albedo": "",
+      "emissionMap": "",
+      "normal": ""
+    },
+    {
+      "name": "R04 white",
+      "color": [
+        0.6038273572921753,
+        0.6795424818992615,
+        0.7529422044754028,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.3400000035762787,
+      "emission": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "albedo": "",
+      "emissionMap": "",
+      "normal": ""
+    },
+    {
+      "name": "R04 recess",
+      "color": [
+        0.005181516520678997,
+        0.006995410192757845,
+        0.012983032502233982,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.5,
+      "emission": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "albedo": "",
+      "emissionMap": "",
+      "normal": ""
+    },
+    {
+      "name": "R04 blue",
+      "color": [
+        0.021219009533524513,
+        0.09989872574806213,
+        0.34670406579971313,
+        1.0
+      ],
+      "metallic": 0.4000000059604645,
+      "roughness": 0.3400000035762787,
+      "emission": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "albedo": "",
+      "emissionMap": "",
+      "normal": ""
+    },
+    {
+      "name": "VALKYR_EqHG_Lrw038_palette",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.4000000059604645,
+      "roughness": 0.3400000035762787,
+      "emission": [
+        1,
+        1,
+        1
+      ],
+      "albedo": "Textures/EqHG_Lrw038_albedo.png",
+      "emissionMap": "Textures/EqHG_Lrw038_emissionMap.png",
+      "normal": "Textures/EqHG_Lrw038_normal.png"
+    }
+  ],
+  "markers": {
+    "rightGrip": [
+      0.5749078392982483,
+      2.203537702560425,
+      0.1707858443260193
+    ],
+    "leftGrip": [
+      -0.5749081373214722,
+      2.203537702560425,
+      0.1707858443260193
+    ],
+    "cannonMuzzle": [
+      -1.0352313353344939e-13,
+      3.4739878177642822,
+      -0.7448791265487671
+    ],
+    "rifleMuzzle": [
+      -7.176399958552793e-05,
+      0.04628485441207886,
+      1.8254592418670654
+    ],
+    "rifleSupport": [
+      -3.051758176297881e-05,
+      -0.18400004506111145,
+      0.8395000696182251
+    ],
+    "swordTip": [
+      -1.1920928955078125e-07,
+      -4.1604042053222656e-05,
+      1.902201533317566
+    ],
+    "droneMuzzles": []
+  },
+  "surfaces": [
+    {
+      "kind": "Body",
+      "lod": 0,
+      "vertices": 149228,
+      "triangles": 68478
+    },
+    {
+      "kind": "Body",
+      "lod": 1,
+      "vertices": 123252,
+      "triangles": 41084
+    },
+    {
+      "kind": "Body",
+      "lod": 2,
+      "vertices": 65736,
+      "triangles": 21912
+    },
+    {
+      "kind": "Ghost",
+      "lod": 0,
+      "vertices": 16497,
+      "triangles": 5499
+    },
+    {
+      "kind": "RIFLE",
+      "lod": 0,
+      "vertices": 2061,
+      "triangles": 687
+    },
+    {
+      "kind": "SWORD",
+      "lod": 0,
+      "vertices": 3788,
+      "triangles": 1932
+    }
+  ]
+}

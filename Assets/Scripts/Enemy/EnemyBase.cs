@@ -45,7 +45,8 @@ public class EnemyBase : MonoBehaviour
     public ImpactStability Stability { get; private set; }
     public ArmorHealth Armor {get;private set;}
     private float recoveryUntil, evasionUntil, nextEvasionTime;
-    private float nextStaggerTime,nextMeleeStaggerTime;
+    private float nextStaggerTime,nextMeleeStaggerTime,nextHeavyStaggerTime;
+    private int hitReactionPriority;
     private int evasionSide=1;
     private Vector3 repositionGoal; private float repositionUntil, nextLungeTime;
     private Vector3 observedTargetVelocity; private Vector3 lastTargetPosition; private float lastTargetSample;
@@ -53,16 +54,20 @@ public class EnemyBase : MonoBehaviour
     private float nextSenseTime, nextDecisionTime;
     private bool hasContact, hasTacticalGoal;
     private bool disengaging;
+    public EnemyCombatBrain CombatBrain {get;set;}
+    public Vector3 LastKnownTarget=>knownTarget;
     private Vector3 goalContact;
     private readonly HashSet<Damageable> lungeVictims = new HashSet<Damageable>();
     public Vector3 WeaponAimDirection { get; private set; }
     public bool IsDetonating => detonating;
     public int MeleeStrikesCompleted { get; private set; }
+    private float strikePoseUntil;
+    public float StrikePose => Mathf.Clamp01((strikePoseUntil-Time.time)/.24f);
     private TelegraphVisual lungeLandingWarning;
     private int lungeWarningGeneration;
     public bool TargetVisible { get; private set; }
     public Vector3 ObservedTargetVelocity => observedTargetVelocity;
-    public Vector3 TacticalGoal => tacticalGoal;
+    public Vector3 TacticalGoal => CombatBrain!=null&&CombatBrain.HasGoal?CombatBrain.Destination:tacticalGoal;
     public int LungesCompleted { get; private set; }
     private readonly RaycastHit[] sightHits=new RaycastHit[16];
     public bool UsesDirectionalArmor => kind==EnemyKind.Elite;
@@ -73,6 +78,7 @@ public class EnemyBase : MonoBehaviour
     public int EvasionsStarted { get; private set; }
     public Vector3 CommittedShotDirection { get; private set; }
     public int ShotsCommitted { get; private set; }
+    public int ShotsEmitted { get; private set; }
 
     public float ResolveDirectionalArmor(float amount, DamageInfo info)
     {
@@ -112,11 +118,12 @@ public class EnemyBase : MonoBehaviour
     }
 
     private void ResetTactics()
-    {CancelAttackWork();evasionUntil=recoveryUntil=nextEvasionTime=nextStaggerTime=nextMeleeStaggerTime=0;meleeStagger=0;meleePush=Vector3.zero;EvasionsStarted=ShotsCommitted=MeleeStrikesCompleted=0;evasionSide=1;
+    {CancelAttackWork();evasionUntil=recoveryUntil=nextEvasionTime=nextStaggerTime=nextMeleeStaggerTime=nextHeavyStaggerTime=0;hitReactionPriority=0;meleeStagger=0;meleePush=Vector3.zero;EvasionsStarted=ShotsEmitted=ShotsCommitted=MeleeStrikesCompleted=0;strikePoseUntil=0;evasionSide=1;
      repositionUntil=nextLungeTime=0;repositionGoal=Vector3.zero;observedTargetVelocity=Vector3.zero;lastTargetSample=-1;
      nextSenseTime=nextDecisionTime=0;hasContact=hasTacticalGoal=TargetVisible=false;LungesCompleted=0;EnemyTactics.ReleaseAttackSlot(this);}
     private void CancelAttackWork()
     {attackCycle.Cancel();ClearAttackWarning();detonating=false;disengaging=false;repositionUntil=0;hasTacticalGoal=false;nextDecisionTime=nextPathTime=0;WeaponAimDirection=Vector3.zero;
+     CombatBrain?.CancelMovement();
      if(lungeLandingWarning!=null)lungeLandingWarning.Cancel(lungeWarningGeneration);lungeLandingWarning=null;
      StopAllCoroutines();EnemyTactics.ReleaseAttackSlot(this);}
     public void ConfigureP0Role(EnemyKind role)
@@ -129,19 +136,20 @@ public class EnemyBase : MonoBehaviour
         if (role != EnemyKind.Drone)
         {
             var bar = GetComponent<WorldHealthBar>() ?? gameObject.AddComponent<WorldHealthBar>();
-            bar.height = 3.3f; bar.width = role == EnemyKind.Elite ? 2.1f : 1.7f;
+            bar.height = GetComponent<E01SoldierMotion>()!=null?4.9f:3.3f; bar.width = role == EnemyKind.Elite ? 2.35f : 2.0f;
             bar.alwaysVisible = true;
         }
-        if (navigation != null) navigation.radius = role == EnemyKind.Elite ? .8f : .6f;
-        if (role == EnemyKind.Melee) { moveSpeed = 4.5f; attackRange = 1.6f; contactDamage = 12f; }
-        else if (role == EnemyKind.Elite) { moveSpeed = 3.1f; fireInterval = 1.8f; }
+        if (navigation != null) navigation.radius = GetComponent<E01SoldierMotion>()!=null?(role==EnemyKind.Elite?.95f:E01SoldierMotion.CombatRadius):(role==EnemyKind.Elite?.8f:.6f);
+        if (role == EnemyKind.Melee) { moveSpeed = 5.4f; attackRange = 2.1f; contactDamage = 12f; }
+        else if (role == EnemyKind.Elite) { moveSpeed = 3.72f; fireInterval = 1.8f; }
+        if(role==EnemyKind.Ranged)moveSpeed=3.5f;
         if(UsesDirectionalArmor && GetComponent<EliteArmorPresentation>()==null)gameObject.AddComponent<EliteArmorPresentation>();
     }
     public void InterruptForStagger()
     {
         CancelAttackWork();detonating=false;
         evasionUntil=recoveryUntil=0;
-        meleeStagger = .24f; meleePush = Vector3.zero;
+        hitReactionPriority=3;meleeStagger = .24f; meleePush = Vector3.zero;
         StopMoving();
         nextAttackTime = Mathf.Max(nextAttackTime, Time.time + .4f);
     }
@@ -151,10 +159,10 @@ public class EnemyBase : MonoBehaviour
         if(Armor!=null && Armor.Intact)return;
         if(guarded && GuardActive)return;
         evasionUntil=0;
-        meleeStagger=heavy?.24f:.14f;
+        hitReactionPriority=3;meleeStagger=heavy?.30f:.18f;
         pushDuration=meleeStagger;
         direction=Vector3.ProjectOnPlane(direction,Vector3.up).normalized;
-        meleePush=direction*(heavy?8f:3.8f);
+        meleePush=direction*(heavy?10f:5.6f);
         {
             if(kind==EnemyKind.Elite)meleePush*=.65f;
             ClearAttackWarning();StopMoving();
@@ -174,15 +182,19 @@ public class EnemyBase : MonoBehaviour
         }
         else
         {
-            if(Time.time<nextStaggerTime||meleeStagger>0)return false;
+            bool heavy=info.HeavyImpact||info.Kind==CombatHitKind.HeavyRifle;
+            if(Time.time<(heavy?nextHeavyStaggerTime:nextStaggerTime)||
+                meleeStagger>0&&!(heavy&&hitReactionPriority==1))return false;
             CancelAttackWork();StopMoving();
             // Gunfire rocks the chassis: a short triangular push away from the shooter.
             Vector3 away=transform.position-info.SourcePosition;away.y=0;
-            meleePush=away.sqrMagnitude>.01f?away.normalized*(info.HeavyImpact?2.4f:4.2f):Vector3.zero;
-            meleeStagger=info.HeavyImpact?.18f:.07f;pushDuration=meleeStagger;
+            meleePush=away.sqrMagnitude>.01f?away.normalized*(heavy?2.4f:4.2f):Vector3.zero;
+            hitReactionPriority=heavy?2:1;
+            meleeStagger=heavy?.18f:.07f;pushDuration=meleeStagger;
             nextAttackTime=Time.time+meleeStagger+.12f;
             // More than a complete rifle windup: continuous fire cannot indefinitely deny attacks.
             nextStaggerTime=Time.time+1.15f;
+            if(heavy)nextHeavyStaggerTime=nextStaggerTime;
         }
         return true;
     }
@@ -198,7 +210,7 @@ public class EnemyBase : MonoBehaviour
         navigation.radius = kind == EnemyKind.Elite ? 0.8f : 0.6f;
         navigation.height = rifleMuzzle != null ? 2.8f : 2.5f;
         navigation.updateRotation = false;
-        navigation.acceleration = 20f;
+        navigation.acceleration = 32f;
         navigation.angularSpeed = 540f;
         navigation.stoppingDistance = 0.15f;
         navigation.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
@@ -226,6 +238,7 @@ public class EnemyBase : MonoBehaviour
 
     public void Init(Transform targetTransform, StageManager ownerStage)
     {
+        EnemyArmorPalette.Apply(gameObject);
         target = targetTransform;
         // Reinforcements enter alerted to the player's last reported position.
         knownTarget = target != null ? target.position : transform.position;
@@ -243,6 +256,10 @@ public class EnemyBase : MonoBehaviour
     private void Update()
     {
         attackCycle.Tick(Time.time);
+        if(attacking && !attackCycle.CurrentActionValid)
+        {
+            CancelAttackWork();StopMoving();nextAttackTime=Mathf.Max(nextAttackTime,Time.time+.35f);
+        }
         if (navigation != null && navigation.enabled && navigation.isOnNavMesh)
             navigation.isStopped = target == null || damageable.IsDead || (Stability != null && Stability.IsBroken) || (GameManager.Instance != null && !GameManager.Instance.IsCombatActive);
         if (target == null || damageable == null || damageable.IsDead)
@@ -273,7 +290,8 @@ public class EnemyBase : MonoBehaviour
         if(evasionUntil>0){evasionUntil=0;StopMoving();}
         if(IsInRecovery)
         {
-            if(Time.time<repositionUntil)MoveToward(repositionGoal,.9f);
+            if(CombatBrain!=null)CombatBrain.RecoveryStep();
+            else if(Time.time<repositionUntil)MoveToward(repositionGoal,.9f);
             else StopMoving();
             return;
         }
@@ -290,6 +308,7 @@ public class EnemyBase : MonoBehaviour
             transform.rotation=Quaternion.RotateTowards(transform.rotation,facing,(UsesDirectionalArmor?CombatLoopV2.EliteTurnSpeed:540f)*Time.deltaTime);
         }
 
+        if(CombatBrain!=null){CombatBrain.Tick();return;}
         if (kind == EnemyKind.Ranged || kind == EnemyKind.Elite)
         {
             UpdateRanged(toTarget, distance);
@@ -302,6 +321,8 @@ public class EnemyBase : MonoBehaviour
 
     private void UpdateMelee(Vector3 toTarget, float distance)
     {
+        if(kind==EnemyKind.Melee&&GetComponent<EnemyArsenal>()!=null&&TargetVisible&&distance>7&&distance<17&&Time.time>=nextAttackTime&&EnemyTactics.TryAcquireAttackSlot(this))
+        {nextAttackTime=Time.time+3;StartCoroutine(RangedStrike());return;}
         if (kind == EnemyKind.Drone)
         {
             if (detonating)
@@ -327,6 +348,7 @@ public class EnemyBase : MonoBehaviour
             // Telegraphed gap closer when the player keeps basic melee out of reach.
             if (kind == EnemyKind.Melee && !EnemyTactics.HasAttackSlot(this)
                 && TargetVisible && distance <= CombatRules.Current.MeleeLungeRange
+                && Vector3.Dot(transform.forward,toTarget.normalized)>.88f
                 && HasClearLunge(toTarget.normalized)
                 && Time.time >= nextAttackTime && Time.time >= nextLungeTime
                 && EnemyTactics.TryAcquireAttackSlot(this))
@@ -394,7 +416,7 @@ public class EnemyBase : MonoBehaviour
         else { hasTacticalGoal=false; StopMoving(); }
 
         if (TargetVisible && distance <= 15f && Time.time >= nextAttackTime
-            && (!UsesDirectionalArmor || Vector3.Dot(transform.forward,toTarget.normalized)>.9f)
+            && Vector3.Dot(transform.forward,toTarget.normalized)>(UsesDirectionalArmor?.9f:.75f)
             && EnemyTactics.ClearSight(transform.position,target.position)
             && EnemyTactics.TryAcquireAttackSlot(this))
         {
@@ -428,6 +450,23 @@ public class EnemyBase : MonoBehaviour
         if (NavMesh.SamplePosition(destination, out var point, 3f, NavMesh.AllAreas)) navigation.SetDestination(point.position);
     }
 
+    public void TacticalMove(Vector3 destination,float speedScale)=>MoveToward(destination,speedScale);
+    public void TacticalStop()=>StopMoving();
+    public bool TryTacticalAttack(bool melee)
+    {
+        if(!TargetVisible||attacking||IsInRecovery||meleeStagger>0||Time.time<nextAttackTime||!EnemySquad.CanBegin)return false;
+        Vector3 delta=knownTarget-transform.position;delta.y=0;float distance=delta.magnitude;
+        if(distance<.01f||Vector3.Dot(transform.forward,delta.normalized)<(UsesDirectionalArmor?.9f:.78f))return false;
+        bool lunge=melee&&distance>attackRange;
+        if(melee&&(lunge&&(distance>CombatRules.Current.MeleeLungeRange||Time.time<nextLungeTime||!HasClearLunge(delta.normalized))))return false;
+        if(!EnemyTactics.ClearSight(transform.position,knownTarget)||!EnemyTactics.TryAcquireAttackSlot(this))return false;
+        CombatBrain?.AttackStarted();StopMoving();
+        nextAttackTime=Time.time+(melee?1.2f:Mathf.Max(1.6f,fireInterval));
+        if(lunge){nextLungeTime=Time.time+CombatRules.Current.MeleeLungeCooldown;StartCoroutine(MeleeLunge());}
+        else if(melee)StartCoroutine(MeleeStrike());else StartCoroutine(RangedStrike());
+        return true;
+    }
+
     private void TrackTargetMotion()
     {
         if (target == null || Time.time < nextSenseTime) return;
@@ -440,8 +479,8 @@ public class EnemyBase : MonoBehaviour
             float dt = Mathf.Max(.01f, Time.time - lastTargetSample);
             Vector3 delta = target.position - lastTargetPosition; delta.y=0;
             // Warps/restarts are observations, not velocities to extrapolate.
-            observedTargetVelocity = delta.magnitude > 12f * dt ? Vector3.zero
-                : Vector3.Lerp(observedTargetVelocity, Vector3.ClampMagnitude(delta / dt, 8f), .7f);
+            observedTargetVelocity = delta.magnitude > 110f * dt ? Vector3.zero
+                : Vector3.Lerp(observedTargetVelocity, Vector3.ClampMagnitude(delta / dt, 22f), .7f);
         }
         else observedTargetVelocity = Vector3.zero;
         knownTarget = lastTargetPosition = target.position;
@@ -456,7 +495,7 @@ public class EnemyBase : MonoBehaviour
         toTarget.y = 0f;
         Vector3 direction = toTarget.sqrMagnitude > 0.01f ? toTarget.normalized : transform.forward;
         float distance = toTarget.magnitude;
-        float shotSpeed = kind == EnemyKind.Elite ? 12f : 10f;
+        float shotSpeed = GetComponent<EnemyArsenal>()?.ShotSpeed??(kind == EnemyKind.Elite ? 12f : 10f);
         if (distance > 0.5f)
         {
             float flightTime = distance / shotSpeed;
@@ -472,6 +511,7 @@ public class EnemyBase : MonoBehaviour
 
     private void BeginReposition()
     {
+        if(CombatBrain!=null){CombatBrain.AttackCompleted();return;}
         if (navigation == null || !navigation.isOnNavMesh || target == null) return;
         if (hasContact && EnemyTactics.FindFiringPosition(this, knownTarget, 2f, out var point))
         {
@@ -541,6 +581,7 @@ public class EnemyBase : MonoBehaviour
         CombatEffects.Impact(transform.position, new Color(1f, 0.55f, 0.15f), 1.6f, true);
         attackCycle.Complete(Time.time, rules.MeleeRecovery);
         EnemyTactics.ReleaseAttackSlot(this);LungesCompleted++;
+        CombatBrain?.AttackCompleted();
     }
 
     private IEnumerator MeleeStrike()
@@ -554,6 +595,7 @@ public class EnemyBase : MonoBehaviour
         attackWarning=null;
         if(!CommitAttack(token))yield break;
         Vector3 delta = target.position - center;
+        strikePoseUntil=Time.time+.24f;
         delta.y = 0;
         if (!damageable.IsDead && delta.sqrMagnitude <= radius * radius
             && EnemyTactics.ClearSight(center,target.position))
@@ -561,6 +603,7 @@ public class EnemyBase : MonoBehaviour
         CombatEffects.Impact(center + transform.forward, new Color(1f, 0.6f, 0.2f), 0.45f);
         attackCycle.Complete(Time.time,CombatRules.Current.MeleeRecovery);
         EnemyTactics.ReleaseAttackSlot(this);MeleeStrikesCompleted++;
+        CombatBrain?.AttackCompleted();
     }
 
     private IEnumerator RangedStrike()
@@ -578,7 +621,8 @@ public class EnemyBase : MonoBehaviour
         CommittedShotDirection=direction.normalized;
         WeaponAimDirection=CommittedShotDirection;
         Color color = kind == EnemyKind.Elite ? new Color(1f, 0.25f, 0.42f) : new Color(1f, 0.35f, 0.08f);
-        int token=BeginWindup(UsesDirectionalArmor?rules.EliteWindup:rules.RangedWindup,CommittedShotDirection);
+        var arsenal=GetComponent<EnemyArsenal>();
+        int token=BeginWindup(arsenal?.Windup??(UsesDirectionalArmor?rules.EliteWindup:rules.RangedWindup),CommittedShotDirection);
         if(kind==EnemyKind.Elite)GameAudio.PlayAt(GameAudioCue.Warning,origin,.28f);
         TrackWarning(CombatEffects.Line(origin, direction, 18f, 0.24f, attackDuration, color));
         yield return new WaitForSeconds(attackDuration);
@@ -589,12 +633,12 @@ public class EnemyBase : MonoBehaviour
         direction=attackCycle.Direction;
         float damage = kind == EnemyKind.Elite ? 9f : 6f;
         var carrier = GetComponent<SalvageCarrier>();
-        bool scatter = carrier != null && carrier.gear.id == "scatter";
-        bool swarm = carrier != null && carrier.gear.id == "salvo";
+        bool scatter = carrier != null && carrier.gear != null && carrier.gear.id == "scatter";
+        bool swarm = carrier != null && carrier.gear != null && carrier.gear.id == "salvo";
         int shots = scatter ? 5 : swarm ? 4 : 1;
         // Salvaged multi-shot gear replaces the burst; base guns fire bursts instead.
-        int bursts = shots > 1 ? 1 : rules.RangedBurstShots;
-        int fired = 0;
+        int bursts = arsenal?.BurstCount??(shots > 1 ? 1 : rules.RangedBurstShots);
+        int fired=0;
         for (int burst = 0; burst < bursts; burst++)
         {
             if (burst > 0)
@@ -608,9 +652,11 @@ public class EnemyBase : MonoBehaviour
             }
             WeaponAimDirection=direction.normalized;
             var pose=GetComponent<E01SoldierMotion>();
-            pose?.SynchronizeForFire(WeaponAimDirection);
+            if(arsenal==null||arsenal.Model==null)pose?.SynchronizeForFire(WeaponAimDirection);
             if(rifleMuzzle!=null)origin=rifleMuzzle.position;
             pose?.Recoil();
+            if(arsenal!=null)
+            {arsenal.Fire(HeavyArsenal(arsenal)?CommittedShotDirection:direction);fired++;ShotsEmitted++;continue;}
             ProjectileVisuals.SpawnMuzzleFlash(origin,direction.normalized,color,.24f);
             GameAudio.PlayAt(GameAudioCue.EnemyShot,origin,kind==EnemyKind.Elite?.45f:.36f);
             for (int i = 0; i < shots; i++)
@@ -619,16 +665,17 @@ public class EnemyBase : MonoBehaviour
                 var projectile = ProjectilePool.Spawn(false, "EnemyProjectile", origin, color, .24f);
                 projectile.Init(1, damageable, Quaternion.AngleAxis(angle, Vector3.up) * direction.normalized,
                     damage * (shots > 1 ? .55f : 1f), kind == EnemyKind.Elite ? 12f : 10f, 3f, 0f, 0);
-                fired++;
-                ShotsCommitted++;
+                fired++;ShotsEmitted++;
             }
         }
         attackCycle.Complete(Time.time,UsesDirectionalArmor?rules.EliteRecovery:rules.RangedRecovery);
         EnemyTactics.ReleaseAttackSlot(this);
+        ShotsCommitted+=fired;
         WeaponAimDirection=Vector3.zero;
-        if (!UsesDirectionalArmor) BeginReposition();
+        if (CombatBrain!=null||!UsesDirectionalArmor) BeginReposition();
     }
 
+    static bool HeavyArsenal(EnemyArsenal a)=>a.Heavy||a.Spec.weapon==EnemyWeapon.M14;
     private int BeginWindup(float duration, Vector3 direction=default)
     {
         return attackCycle.Begin(Time.time,duration,direction);

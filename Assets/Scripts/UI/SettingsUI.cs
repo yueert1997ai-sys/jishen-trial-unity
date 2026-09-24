@@ -12,8 +12,8 @@ public class SettingsUI : MonoBehaviour
     private Toggle shake;
     private Button english, chinese, balanced, high, creditsButton;
     private Text masterValue, musicValue, effectsValue, title;
-    private static readonly Color selected = new Color(0.04f, 0.5f, 0.58f);
-    private static readonly Color unselected = new Color(0.13f, 0.19f, 0.21f);
+    private static readonly Color selected = GameUITheme.Accent;
+    private static readonly Color unselected = GameUITheme.Button;
 
     public void Show(GameManager gameManager)
     {
@@ -122,11 +122,10 @@ public class SettingsUI : MonoBehaviour
         RuntimeUIFactory.Place(rect, new Vector2(0, 1), new Vector2(403, y), new Vector2(290, 44));
         var track = RuntimeUIFactory.CreatePanel(rect, "Track", new Vector2(0, 0.5f), new Vector2(1, 0.5f), new Vector2(0, -3), new Vector2(0, 3), unselected);
         var fill = RuntimeUIFactory.CreatePanel(track, "Fill", Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, selected);
-        var thumb = new GameObject("Thumb", typeof(RectTransform), typeof(ControlRingGraphic)).GetComponent<RectTransform>();
+        var thumb = new GameObject("Thumb", typeof(RectTransform), typeof(Image)).GetComponent<RectTransform>();
         thumb.SetParent(rect, false);
-        RuntimeUIFactory.Place(thumb, Vector2.one * 0.5f, Vector2.zero, new Vector2(24, 24));
-        var graphic = thumb.GetComponent<ControlRingGraphic>();
-        graphic.thickness = 12;
+        RuntimeUIFactory.Place(thumb, Vector2.one * 0.5f, Vector2.zero, new Vector2(10, 24));
+        var graphic = thumb.GetComponent<Image>();
         graphic.color = new Color(0.92f, 0.97f, 0.97f);
         var slider = rect.gameObject.AddComponent<Slider>();
         slider.fillRect = fill;

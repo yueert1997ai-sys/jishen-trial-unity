@@ -33,12 +33,9 @@ public sealed class MinovskyBeam : MonoBehaviour
     Transform muzzleCorona, impactCorona;
     Light muzzleLight, impactLight;
     ParticleSystem motes;
-    readonly HashSet<Damageable> struck = new HashSet<Damageable>();
-    readonly HashSet<Damageable> directTargets = new HashSet<Damageable>();
-    readonly RaycastHit[] hits = new RaycastHit[128];
+    readonly BeamContactResolver contacts=new BeamContactResolver();
     readonly List<Vector3> impactPoints = new List<Vector3>();
     MaterialPropertyBlock tint;
-    static readonly IComparer<RaycastHit> NearFirst = Comparer<RaycastHit>.Create((a,b)=>a.distance.CompareTo(b.distance));
 
     public static MinovskyBeam Fire(Transform socket, Vector3 origin, Vector3 direction, Vector3 aim,
         int sourceTeam, Damageable source, float damage, int pierce, float blast)
@@ -49,6 +46,14 @@ public sealed class MinovskyBeam : MonoBehaviour
         beam.Damage=damage; beam.Penetration=pierce; beam.BlastRadius=blast;
         beam.BuildVisuals(); beam.Display();
         return beam;
+    }
+    bool NemesisOwner=>owner!=null&&owner.GetComponentInChildren<NemesisMotionRig>()!=null;
+    Color PaletteTint=>team==1?EnergyBoltVisual.EnemyRed:NemesisOwner?MechEnergyPalette.Nemesis:Pink;
+    Color PaletteCore=>team==1?new Color(1,.85f,.8f):NemesisOwner?MechEnergyPalette.NemesisCore:Core;
+    Color Palette(Color color)
+    {
+        if(team!=1&&!NemesisOwner)return color;
+        var value=color.r>.7f&&color.g>.7f&&color.b>.7f?PaletteCore:PaletteTint;value.a=color.a;return value;
     }
     void BuildVisuals()
     {
@@ -68,7 +73,7 @@ public sealed class MinovskyBeam : MonoBehaviour
         sheath=Line("Saturated pink particle sheath",2);
         core=Line("White-pink beam core",2);
         hotLine=Line("Overexposed white filament",2);
-        for(int i=0;i<ribbons.Length;i++) ribbons[i]=Line("Pink helix ribbon "+i,49);
+        for(int i=0;i<ribbons.Length;i++) ribbons[i]=Line("PaletteTint helix ribbon "+i,49);
         for(int i=0;i<packets.Length;i++) packets[i]=Line("Traveling energy packet "+i,2);
         muzzleRing=Line("Muzzle particle compression ring",49);
         impactRing=Line("Impact ion ring",49);
@@ -84,7 +89,7 @@ public sealed class MinovskyBeam : MonoBehaviour
         var emission=motes.emission;emission.enabled=false;
         var shape=motes.shape;shape.enabled=false;
         var color=motes.colorOverLifetime;color.enabled=true;
-        var gradient=new Gradient();gradient.SetKeys(new[]{new GradientColorKey(Color.white,0),new GradientColorKey(Pink,1)},
+        var gradient=new Gradient();gradient.SetKeys(new[]{new GradientColorKey(Color.white,0),new GradientColorKey(PaletteTint,1)},
             new[]{new GradientAlphaKey(.9f,0),new GradientAlphaKey(0,1)});color.color=gradient;
         var size=motes.sizeOverLifetime;size.enabled=true;size.size=new ParticleSystem.MinMaxCurve(1,AnimationCurve.Linear(0,1,1,0));
         var renderer=motes.GetComponent<ParticleSystemRenderer>();renderer.sharedMaterial=radialMaterial;
@@ -110,7 +115,7 @@ public sealed class MinovskyBeam : MonoBehaviour
     Light Light(string name,float range)
     {
         var go=new GameObject(name);go.transform.SetParent(transform,false);
-        var light=go.AddComponent<Light>();light.type=LightType.Point;light.color=Pink;light.range=range;
+        var light=go.AddComponent<Light>();light.type=LightType.Point;light.color=PaletteTint;light.range=range;
         light.shadows=LightShadows.None;return light;
     }
     void LateUpdate()
@@ -120,19 +125,19 @@ public sealed class MinovskyBeam : MonoBehaviour
         { Destroy(gameObject);return; }
         if (gm!=null && gm.IsPaused) return;
         Age+=Time.deltaTime;
-        Origin=muzzle.position;
+        if(!contacts.BarrelObstructed)Origin=muzzle.position;
         if (!HasFired)
         {
             Vector3 offset=UnityEngine.Random.onUnitSphere*UnityEngine.Random.Range(.22f,.46f);
-            Emit(Origin+offset,-offset*9,.12f,.055f,Core);
+            Emit(Origin+offset,-offset*9,.12f,.055f,PaletteCore);
             // Motes spiral inward around the bore: the charge reads as gathering
             // Minovsky particles instead of a plain twinkle.
-            BeamFxKit.ChargeConverge(Origin,fallbackDirection,Core,Pink,3,.55f);
+            BeamFxKit.ChargeConverge(Origin,fallbackDirection,PaletteCore,PaletteTint,3,.55f);
             if (Age>=ChargeDuration) Discharge();
         }
         // A connected beam follows the bore through turn, recoil and translation.
         // Damage remains a single discharge, never a sweeping damage tick.
-        if(HasFired) End=Origin+muzzle.forward*visibleLength;
+        if(HasFired && !contacts.BarrelObstructed) End=Origin+muzzle.forward*visibleLength;
         Display();
         if (Age>=ChargeDuration+BeamDuration+ResidualDuration) Destroy(gameObject);
     }
@@ -141,60 +146,28 @@ public sealed class MinovskyBeam : MonoBehaviour
         HasFired=true;
         Vector3 delta=aimPoint-Origin;
         Vector3 direction=muzzle!=null?muzzle.forward:PlanarCombat.Direction(delta,fallbackDirection);
-        // Match projectile collision height; the chest/hand socket is presentation only.
-        Vector3 collisionOrigin=PlanarCombat.Point(Origin);
-        End=Origin+direction*MaximumRange;
-        int count=Physics.SphereCastNonAlloc(collisionOrigin,.13f,direction,hits,MaximumRange,~0,QueryTriggerInteraction.Ignore);
-        Array.Sort(hits,0,count,NearFirst);
-        int remaining=Penetration+1;
-        // Collect the direct path first, so splash never consumes penetration or reduces a later direct hit.
-        for (int i=0;i<count;i++)
-        {
-            var target=hits[i].collider.GetComponentInParent<Damageable>();
-            if (target!=null && (target.team==team || target.IsDead || target==owner || directTargets.Contains(target))) continue;
-            Vector3 point=Origin+direction*hits[i].distance;
-            if (target==null) { End=point;impactPoints.Add(point);break; }
-            directTargets.Add(target);impactPoints.Add(point);
-            if (--remaining==0) { End=point;break; }
-        }
-        foreach (var target in directTargets)
-        {
-            struck.Add(target);
-            target.TakeDamage(Damage,new DamageInfo(gameObject,target.AimCenter,owner,Damage));
-        }
-        DirectHitCount=directTargets.Count;
+        DirectHitCount=contacts.Resolve(gameObject,owner,team,Origin,direction,MaximumRange,.13f,
+            Penetration,Damage,BlastRadius,CombatHitKind.Generic,false,impactPoints,out var resolvedEnd);
+        End=resolvedEnd;
+        if(contacts.BarrelObstructed)Origin=End;
         visibleLength=Vector3.Distance(Origin,End);
-        foreach (var point in impactPoints)
+        foreach(var point in impactPoints)
         {
-            if (BlastRadius>.05f)
-                for (int i=Damageable.Active.Count-1;i>=0;i--)
-                {
-                    var target=Damageable.Active[i];
-                    if (target==null || target.team==team || target.IsDead || struck.Contains(target)) continue;
-                    float distance=Vector3.Distance(point,target.AimCenter);
-                    if (distance>BlastRadius) continue;
-                    // Solid cover also shields targets from particle splash.
-                    Vector3 ray=target.AimCenter-point;
-                    if (ray.sqrMagnitude>.01f && Physics.Raycast(point+ray.normalized*.035f,ray.normalized,out var cover,ray.magnitude-.035f,~0,QueryTriggerInteraction.Ignore)
-                        && cover.collider.GetComponentInParent<Damageable>()==null) continue;
-                    struck.Add(target);
-                    float amount=Damage*(.45f+Mathf.Clamp01(1-distance/BlastRadius)*.55f);
-                    target.TakeDamage(amount,new DamageInfo(gameObject,point,owner,amount));
-                }
-            for (int i=0;i<14;i++) Emit(point,UnityEngine.Random.onUnitSphere*UnityEngine.Random.Range(1.8f,5),.30f,.07f,Core);
-            BeamFxKit.ImpactBurst(point,direction,Pink,.8f+BlastRadius*.15f);
+            for (int i=0;i<14;i++) Emit(point,UnityEngine.Random.onUnitSphere*UnityEngine.Random.Range(1.8f,5),.30f,.07f,PaletteCore);
+            BeamFxKit.ImpactBurst(point,direction,PaletteTint,.8f+BlastRadius*.15f);
         }
         for (int i=0;i<28;i++)
             Emit(Vector3.Lerp(Origin,End,UnityEngine.Random.value)+UnityEngine.Random.insideUnitSphere*.14f,
-                direction*UnityEngine.Random.Range(1,3)+UnityEngine.Random.onUnitSphere*.35f,.35f,UnityEngine.Random.Range(.025f,.07f),Pink);
-        BeamFxKit.MuzzleBlast(Origin,direction,Pink,1.25f);
-        BeamFxKit.StarGlare(Origin,Core,2.5f,.18f);
-        BeamFxKit.Twinkles(Origin,End,Pink,22);
+                direction*UnityEngine.Random.Range(1,3)+UnityEngine.Random.onUnitSphere*.35f,.35f,UnityEngine.Random.Range(.025f,.07f),PaletteTint);
+        BeamFxKit.MuzzleBlast(Origin,direction,PaletteTint,1.25f);
+        BeamFxKit.StarGlare(Origin,PaletteCore,2.5f,.18f);
+        BeamFxKit.Twinkles(Origin,End,PaletteTint,22);
         GameAudio.Play(GameAudioCue.Beam,.58f,.80f);
         if (Camera.main!=null) Camera.main.GetComponent<CameraFollow>()?.AddShake(.15f,.16f);
     }
     void Emit(Vector3 position,Vector3 velocity,float life,float size,Color color)
     {
+        color=Palette(color);
         motes.Emit(new ParticleSystem.EmitParams { position=position,velocity=velocity,startLifetime=life,startSize=size,startColor=color },1);
     }
     void Display()
@@ -223,7 +196,7 @@ public sealed class MinovskyBeam : MonoBehaviour
         impactLight.transform.position=End;impactLight.intensity=impactPoints.Count>0?glowFade*4.5f:0;
         if (HasFired)
         {
-            Vector3 axis=(End-Origin).normalized;
+            Vector3 axis=(End-Origin).sqrMagnitude>.0001f?(End-Origin).normalized:fallbackDirection;
             Quaternion rotation=Quaternion.LookRotation(axis,Vector3.up);
             float length=Vector3.Distance(Origin,End);
             // Counter-wound pink ribbons wrapping the white core: the entwined
@@ -233,7 +206,7 @@ public sealed class MinovskyBeam : MonoBehaviour
                 var line=ribbons[strand];line.enabled=glowFade>0;
                 line.startWidth=line.endWidth=.05f*glowFade;
                 Color ribbon=strand==1?new Color(.85f,.04f,.62f):strand==2?new Color(1,.75f,.92f):new Color(1,.10f,.55f);
-                line.startColor=line.endColor=new Color(ribbon.r,ribbon.g,ribbon.b,.85f*glowFade);
+                line.startColor=line.endColor=Palette(new Color(ribbon.r,ribbon.g,ribbon.b,.85f*glowFade));
                 float dir=strand==1?-1:1;
                 for(int i=0;i<49;i++)
                 {
@@ -250,28 +223,31 @@ public sealed class MinovskyBeam : MonoBehaviour
                 line.enabled=glowFade>0&&t<.92f;
                 if (!line.enabled) continue;
                 line.startWidth=line.endWidth=.11f*glowFade;
-                line.startColor=line.endColor=new Color(1,.95f,.99f,.95f*envelope);
+                line.startColor=line.endColor=Palette(new Color(1,.95f,.99f,.95f*envelope));
                 Vector3 from=Vector3.Lerp(Origin,End,t),to=Vector3.Lerp(Origin,End,Mathf.Min(t+.09f,1));
                 line.SetPosition(0,from);line.SetPosition(1,to);
             }
             if (envelope>.15f)
-                BeamFxKit.BeamStream(Origin,End,Core,Pink,new Color(1,.95f,.55f),.34f,5,2.4f);
+                BeamFxKit.BeamStream(Origin,End,PaletteCore,PaletteTint,NemesisOwner?PaletteCore:new Color(1,.95f,.55f),.34f,5,2.4f);
         }
     }
     void Beam(LineRenderer line,float width,Color color)
     {
+        color=Palette(color);
         line.enabled=HasFired && color.a>.001f;
         line.startWidth=line.endWidth=width;line.startColor=line.endColor=color;
         line.SetPosition(0,Origin);line.SetPosition(1,End);
     }
     void Billboard(Transform quad,Vector3 position,float size,Color color)
     {
+        color=Palette(color);
         quad.position=position;quad.localScale=Vector3.one*size;
         if (Camera.main!=null) quad.rotation=Camera.main.transform.rotation;
         tint.SetColor("_Color",color);quad.GetComponent<Renderer>().SetPropertyBlock(tint);
     }
     void Ring(LineRenderer line,Vector3 center,Vector3 axis,float radius,float width,Color color)
     {
+        color=Palette(color);
         if (axis.sqrMagnitude<.01f) axis=Vector3.forward;
         var rotation=Quaternion.LookRotation(axis,Vector3.up);
         line.startWidth=line.endWidth=width;line.startColor=line.endColor=color;

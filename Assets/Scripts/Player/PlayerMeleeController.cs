@@ -128,10 +128,9 @@ public sealed class PlayerMeleeController : MonoBehaviour
     {
         if(!CanSteer)return;
         Vector3 desired=Vector3.ProjectOnPlane(point-transform.position,Vector3.up);
-        if(desired.sqrMagnitude<.01f)return;
-        float rate=elapsed<CurrentStroke.contactStart?1440:900;
-        forward=Vector3.RotateTowards(transform.forward,desired.normalized,rate*Mathf.Deg2Rad*dt,0).normalized;
-        player.AimAt(transform.position+forward*15);
+        if(desired.sqrMagnitude<1.44f)return;
+        player.AimAt(point,dt,elapsed<CurrentStroke.contactStart?540:360);
+        forward=player.AimDirection;
     }
     // The sweep may discover contact between rendered frames. Hold that sampled pose, not the frame-end overshoot.
     public void LockContactPose(float time){if(ImpactHeld)elapsed=Mathf.Min(elapsed,Mathf.Max(CurrentStroke.contactStart,time));}

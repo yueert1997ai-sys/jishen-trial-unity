@@ -36,6 +36,7 @@ public class EnemyMotionAnimator : MonoBehaviour
 
     private void LateUpdate()
     {
+        if(GameManager.Instance!=null&&GameManager.Instance.IsPaused)return;
         if (visualRoot == null)
         {
             return;

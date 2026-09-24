@@ -83,8 +83,8 @@ public sealed class ArmorContactVfx : MonoBehaviour
     void Scar(Damageable target,DamageInfo info,Vector3 tangent,Vector3 normal)
     {
         Renderer nearest=null;float distance=float.MaxValue;
-        var actor=target.GetComponent<E01SoldierMotion>();if(actor==null)return;
-        foreach(var r in actor.ArmorRenderers)
+        var actor=target.GetComponent<E01SoldierMotion>();var imported=target.GetComponentInChildren<ImportedEnemyModel>();if(actor==null&&imported==null)return;
+        foreach(var r in imported!=null?imported.GetComponentsInChildren<Renderer>():actor.ArmorRenderers)
         {
             float d=(r.bounds.ClosestPoint(info.ContactPoint)-info.ContactPoint).sqrMagnitude;
             if(r.enabled&&d<distance){nearest=r;distance=d;}
@@ -112,7 +112,14 @@ public sealed class ArmorContactVfx : MonoBehaviour
     public void Death(Damageable target,DamageInfo info)
     {
         if(CombatLabSettings.MinimalFeedback)return;
-        var actor=target.GetComponent<E01SoldierMotion>();if(actor==null)return;
+        var actor=target.GetComponent<E01SoldierMotion>();var imported=target.GetComponentInChildren<ImportedEnemyModel>();
+        if(imported!=null)
+        {
+            Fracture(imported.Chest.position);
+            for(int i=0;i<18;i++)Emit(chips,imported.Chest.position,Random.onUnitSphere*Random.Range(3,7)+Vector3.up*2,Color.white,Random.Range(.12f,.30f),1.1f);
+            return;
+        }
+        if(actor==null)return;
         Vector3 force=info!=null&&info.MeleeStrike?info.ContactTangent:target.transform.forward;
         if(force.sqrMagnitude<.01f)force=target.transform.right;force.Normalize();
         string side=Vector3.Dot(force,target.transform.right)>0?"R":"L";

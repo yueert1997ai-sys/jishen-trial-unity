@@ -39,7 +39,7 @@ public static class P0AudioCadenceChecks
                 check(shots.Count>=9&&sounds.SequenceEqual(shots),$"{fps} FPS faster cadence has one sound per actual shot and no throttle losses");
             }
             Reset();GamePreferences.SetEffects(0);Tick(true);yield return null;
-            var rifle=GameAudio.Instance.GetComponents<AudioSource>().Where(s=>s.clip!=null&&(s.clip.name.StartsWith("m7_attack")||s.clip.name=="m7_tail")).ToArray();
+            var rifle=GameAudio.Instance.GetComponents<AudioSource>().Where(s=>s.clip!=null&&(GameAudio.Instance.SliceClips(GameAudioCue.RifleShot).Contains(s.clip)||s.clip.name=="m7_tail")).ToArray();
             check(rifle.Length==4&&rifle.All(s=>s.volume==0&&!s.loop),"effects mute covers both rifle body and tail; no independent audio loop exists");
         }
         finally

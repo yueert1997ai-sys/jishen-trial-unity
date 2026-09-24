@@ -15,7 +15,7 @@ public sealed class NemesisAfterimage : MonoBehaviour
     {
         public Transform root;public Transform[] joints;
         public SkinnedMeshRenderer body;public MeshRenderer weapon;
-        public MeshFilter weaponMesh;public float remaining;
+        public MeshFilter weaponMesh;public float remaining,opacity;
     }
     Ghost[] pool;
     SkinnedMeshRenderer source;
@@ -34,6 +34,17 @@ public sealed class NemesisAfterimage : MonoBehaviour
         loadout=GetComponent<LoadoutVisual>();blade=GetComponent<RaikenBladePresentation>();
         source=GetComponentsInChildren<SkinnedMeshRenderer>(true).Single(s=>s.name=="J01_Body_LOD2");
         sourceBones=source.bones;
+        // Ghosts capture the chassis only; deployed units have their own world-space shells.
+        bodyProxy=Instantiate(bodyProxy);
+        var droneBones=GetComponent<NemesisMotionRig>().Drones.Select(t=>Array.IndexOf(sourceBones,t)).ToArray();
+        var weights=bodyProxy.boneWeights;
+        for(int s=0;s<bodyProxy.subMeshCount;s++)
+        {
+            var tris=bodyProxy.GetTriangles(s);var keep=new System.Collections.Generic.List<int>();
+            for(int t=0;t<tris.Length;t+=3)
+                if(!droneBones.Contains(weights[tris[t]].boneIndex0))for(int k=0;k<3;k++)keep.Add(tris[t+k]);
+            bodyProxy.SetTriangles(keep,s);
+        }
         material=new Material(Resources.Load<Shader>("NemesisGhost"));
         pool=new Ghost[Capacity];int rootIndex=Array.IndexOf(sourceBones,source.rootBone);
         for(int i=0;i<Capacity;i++)
@@ -68,11 +79,11 @@ public sealed class NemesisAfterimage : MonoBehaviour
             ghost.root.gameObject.SetActive(ghost.remaining>0);
             if(ghost.remaining<=0)continue;
             ActiveCount++;
-            var color=NemesisMotionRig.Amethyst;color.a=.42f*Mathf.Pow(ghost.remaining/Life,1.25f);
+            var color=NemesisMotionRig.Amethyst;color.a=ghost.opacity*Mathf.Pow(ghost.remaining/Life,1.25f);
             block.SetColor("_Color",color);ghost.body.SetPropertyBlock(block);ghost.weapon.SetPropertyBlock(block);
         }
-        if((player.IsDashing||player.IsBoosting)&&Time.time>=nextCapture&&Vector3.Distance(lastPosition,player.transform.position)>.24f)
-        {Capture();nextCapture=Time.time+Interval;lastPosition=player.transform.position;}
+        if((player.IsDashing||player.IsBoosting||player.Velocity.magnitude>4)&&Time.time>=nextCapture&&Vector3.Distance(lastPosition,player.transform.position)>.24f)
+        {Capture();nextCapture=Time.time+(player.IsDashing||player.IsBoosting?Interval:.11f);lastPosition=player.transform.position;}
     }
     void Capture()
     {
@@ -94,8 +105,8 @@ public sealed class NemesisAfterimage : MonoBehaviour
             ghost.weapon.transform.SetPositionAndRotation(held.transform.position,held.transform.rotation);
             ghost.weapon.transform.localScale=held.transform.lossyScale/ghost.root.lossyScale.x;
         }
-        ghost.remaining=Life;ghost.root.gameObject.SetActive(true);Captures++;
-        var color=NemesisMotionRig.Amethyst;color.a=.42f;block.SetColor("_Color",color);
+        ghost.remaining=Life;ghost.opacity=player.IsDashing||player.IsBoosting?.42f:.16f;ghost.root.gameObject.SetActive(true);Captures++;
+        var color=NemesisMotionRig.Amethyst;color.a=ghost.opacity;block.SetColor("_Color",color);
         ghost.body.SetPropertyBlock(block);ghost.weapon.SetPropertyBlock(block);
         ActiveCount=pool.Count(g=>g.remaining>0);
     }
@@ -108,6 +119,6 @@ public sealed class NemesisAfterimage : MonoBehaviour
     void OnDestroy()
     {
         if(pool!=null)foreach(var ghost in pool)if(ghost.root!=null)Destroy(ghost.root.gameObject);
-        if(material!=null)Destroy(material);
+        if(material!=null)Destroy(material);if(bodyProxy!=null)Destroy(bodyProxy);
     }
 }

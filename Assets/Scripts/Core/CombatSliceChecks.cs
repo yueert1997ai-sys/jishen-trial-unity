@@ -76,7 +76,7 @@ public static class CombatSliceChecks
         for(int i=0;i<180;i++)yield return null;
         var boss=UnityEngine.Object.FindFirstObjectByType<BossController>();
         check(boss!=null,"existing liquid boss challenge remains available");
-        check(cam.orthographicSize>=CameraFollow.StandardCombatSize-.01f&&cam.orthographicSize<=13.51f,"boss framing stays inside the shared camera range");
+        check(Mathf.Abs(cam.orthographicSize-20)<.01f,"boss framing keeps the same requested camera 20");
         capture("boss_camera.png");
         gm.EnterHangar();for(int i=0;i<5;i++)yield return null;
         var demo=new GameObject("SliceDirectorCheck").AddComponent<P0CombatDemo>();
@@ -93,6 +93,8 @@ public static class CombatSliceChecks
             {
                 foreach(var e in UnityEngine.Object.FindObjectsByType<EnemyBase>(FindObjectsSortMode.None))
                     e.GetComponent<Damageable>().TakeDamage(10000,new DamageInfo(p.gameObject,p.transform.position,p.GetComponent<Damageable>(),10000));
+                if(demo.SliceBoss!=null&&!demo.SliceBoss.GetComponent<Damageable>().IsDead)
+                {check(demo.SliceBoss.GetComponent<FazzBossController>()!=null,"short battle ends with first-tier FAZZ");demo.SliceBoss.GetComponent<Damageable>().Kill(new DamageInfo(p.gameObject,p.transform.position,p.GetComponent<Damageable>(),99999));}
             }
             if(gm.stageManager.EnemiesAlive==0&&gm.equipmentLoop.Absorption.Offering)
                 check(gm.equipmentLoop.Absorption.CollectWithoutInstalling(),"structural replay explicitly continues after salvaging the offered weapon");

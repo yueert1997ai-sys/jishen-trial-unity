@@ -1,0 +1,419 @@
+{
+  "label": "GM",
+  "height": 4.5,
+  "scale": 2.381970789956324,
+  "bones": [
+    {
+      "name": "Pelvis",
+      "parent": -1,
+      "position": [
+        0.0,
+        2.9401116371154785,
+        0.010289155878126621
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_hip_400"
+    },
+    {
+      "name": "Thorax",
+      "parent": 0,
+      "position": [
+        0.0,
+        2.9401116371154785,
+        0.010289155878126621
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_chest_001"
+    },
+    {
+      "name": "Head",
+      "parent": 1,
+      "position": [
+        0.0,
+        4.027552604675293,
+        -0.03146713972091675
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_head_002"
+    },
+    {
+      "name": "UpperArm.R",
+      "parent": 1,
+      "position": [
+        0.6839828491210938,
+        3.744169235229492,
+        -0.06128929555416107
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_R_upArm_201"
+    },
+    {
+      "name": "Forearm.R",
+      "parent": 3,
+      "position": [
+        0.683982789516449,
+        3.0972862243652344,
+        -0.06472984701395035
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_R_foreArm_203"
+    },
+    {
+      "name": "Hand.R",
+      "parent": 4,
+      "position": [
+        0.6839827299118042,
+        2.494962215423584,
+        -0.04996447265148163
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_R_wrist_204"
+    },
+    {
+      "name": "Thigh.R",
+      "parent": 0,
+      "position": [
+        0.2862176299095154,
+        2.581005573272705,
+        0.00257168454118073
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_R_upLeg_420"
+    },
+    {
+      "name": "Shin.R",
+      "parent": 6,
+      "position": [
+        0.28621748089790344,
+        1.5443814992904663,
+        -0.03399217128753662
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_R_leg_422"
+    },
+    {
+      "name": "Foot.R",
+      "parent": 7,
+      "position": [
+        0.2862173616886139,
+        0.34749868512153625,
+        -0.09379930794239044
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_R_foot_423"
+    },
+    {
+      "name": "UpperArm.L",
+      "parent": 1,
+      "position": [
+        -0.6839828491210938,
+        3.744169235229492,
+        -0.06128929555416107
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_L_upArm_301"
+    },
+    {
+      "name": "Forearm.L",
+      "parent": 9,
+      "position": [
+        -0.6839829087257385,
+        3.0972862243652344,
+        -0.06472984701395035
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_L_foreArm_303"
+    },
+    {
+      "name": "Hand.L",
+      "parent": 10,
+      "position": [
+        -0.6839830279350281,
+        2.494962215423584,
+        -0.04996447265148163
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_L_wrist_304"
+    },
+    {
+      "name": "Thigh.L",
+      "parent": 0,
+      "position": [
+        -0.2862176299095154,
+        2.581005573272705,
+        0.00257168454118073
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_L_upLeg_430"
+    },
+    {
+      "name": "Shin.L",
+      "parent": 12,
+      "position": [
+        -0.28621774911880493,
+        1.5443814992904663,
+        -0.03399217128753662
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_L_leg_432"
+    },
+    {
+      "name": "Foot.L",
+      "parent": 13,
+      "position": [
+        -0.28621789813041687,
+        0.34749868512153625,
+        -0.09379930794239044
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_L_foot_433"
+    },
+    {
+      "name": "Backpack",
+      "parent": 1,
+      "position": [
+        0.0,
+        3.905905246734619,
+        -0.31573137640953064
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "source": "J_backpackConnect_500"
+    }
+  ],
+  "materials": [
+    {
+      "name": "HG_0151",
+      "albedo": "Textures/HG_0151_albedo.png",
+      "emission": "Textures/HG_0151_emission.png"
+    },
+    {
+      "name": "HG_0152",
+      "albedo": "Textures/HG_0152_albedo.png",
+      "emission": "Textures/HG_0152_emission.png"
+    },
+    {
+      "name": "HG_0153",
+      "albedo": "Textures/HG_0153_albedo.png",
+      "emission": "Textures/HG_0153_emission.png"
+    },
+    {
+      "name": "HG_0154",
+      "albedo": "Textures/HG_0154_albedo.png",
+      "emission": "Textures/HG_0154_emission.png"
+    },
+    {
+      "name": "HG_0155",
+      "albedo": "Textures/HG_0155_albedo.png",
+      "emission": "Textures/HG_0155_emission.png"
+    },
+    {
+      "name": "HG_0156",
+      "albedo": "Textures/HG_0156_albedo.png",
+      "emission": "Textures/HG_0156_emission.png"
+    }
+  ],
+  "markers": [
+    {
+      "name": "efLocator_head_001_J_head_002",
+      "bone": 2,
+      "position": [
+        0.12625814974308014,
+        4.336524963378906,
+        0.12253537774085999
+      ]
+    },
+    {
+      "name": "efLocator_head_002_J_head_002",
+      "bone": 2,
+      "position": [
+        -0.12626826763153076,
+        4.336517810821533,
+        0.1225392296910286
+      ]
+    },
+    {
+      "name": "efLocator_body_110_J_chest_001",
+      "bone": 1,
+      "position": [
+        0.0,
+        3.5553293228149414,
+        0.5980330109596252
+      ]
+    },
+    {
+      "name": "efLocator_shield_101_J_chest_001",
+      "bone": 1,
+      "position": [
+        0.0,
+        3.287719488143921,
+        -0.28720709681510925
+      ]
+    },
+    {
+      "name": "J_R_weapon_205",
+      "bone": 5,
+      "position": [
+        0.6037579774856567,
+        2.3048386573791504,
+        0.07498794794082642
+      ]
+    },
+    {
+      "name": "J_L_weapon_305",
+      "bone": 11,
+      "position": [
+        -0.6037583351135254,
+        2.3048386573791504,
+        0.07498792558908463
+      ]
+    },
+    {
+      "name": "efLocator_under_401_J_R_foot_423",
+      "bone": 8,
+      "position": [
+        0.2871522903442383,
+        -0.001201652572490275,
+        0.13566085696220398
+      ]
+    },
+    {
+      "name": "efLocator_under_402_J_R_foot_423",
+      "bone": 8,
+      "position": [
+        0.285077303647995,
+        -0.0012035418767482042,
+        -0.14414042234420776
+      ]
+    },
+    {
+      "name": "efLocator_under_403_J_L_foot_433",
+      "bone": 14,
+      "position": [
+        -0.28638187050819397,
+        -0.0012016226537525654,
+        0.13694904744625092
+      ]
+    },
+    {
+      "name": "efLocator_under_404_J_L_foot_433",
+      "bone": 14,
+      "position": [
+        -0.28548598289489746,
+        -0.0012035375693812966,
+        -0.14160136878490448
+      ]
+    },
+    {
+      "name": "efLocator_back_501_J_backpackConnect_500",
+      "bone": 15,
+      "position": [
+        0.19379711151123047,
+        3.161548614501953,
+        -0.44766783714294434
+      ]
+    },
+    {
+      "name": "efLocator_back_502_J_backpackConnect_500",
+      "bone": 15,
+      "position": [
+        -0.19380754232406616,
+        3.161548614501953,
+        -0.44766783714294434
+      ]
+    },
+    {
+      "name": "efLocator_shield_501_J_backpackConnect_500",
+      "bone": 15,
+      "position": [
+        0.0,
+        3.287874460220337,
+        -0.5304133892059326
+      ]
+    }
+  ],
+  "vertices": 23337,
+  "triangles": 7019,
+  "source": "E:\\SteamLibrary\\GameStudyExports\\GB4\\Converted\\Model\\MS",
+  "sourceSha256": "",
+  "rebuiltShells": 6
+}

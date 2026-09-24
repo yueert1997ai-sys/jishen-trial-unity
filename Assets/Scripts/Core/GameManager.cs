@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         && Difficulty == RunDifficulty.Cadet && checkpoint != null;
     public int CheckpointEncounter => checkpoint != null ? checkpoint.encounter : -1;
     private RunCheckpoint checkpoint;
+    RunCheckpoint roomRetry;Vector3 retryPosition;PrimaryWeapon retryWeapon;string retryGear;int retryRunSeed;GameObject retryBoss;
 
     public string DifficultyDisplayName
     {
@@ -203,7 +204,7 @@ public class GameManager : MonoBehaviour
         ArmorContactVfx.Get().Clear();
         playerStats.baseDashCooldown=.48f;playerStats.ResetStats();
         playerController.RestoreAt(arenaSector.PlayerEntry);
-        combatHUD.SetVisible(false);
+        combatHUD.SetVisible(true);
     }
     public void BeginRun(){BeginFullDemo();}
     public void BeginFullDemo()
@@ -230,6 +231,18 @@ public class GameManager : MonoBehaviour
     public void ReplayCurrentRun()
     {
         if(Phase!=GamePhase.Result)return;
+        var practice=FindFirstObjectByType<P0CombatDemo>();
+        if(practice!=null){practice.Restart(!LastResultVictory);return;}
+        if(!LastResultVictory&&roomRetry!=null)
+        {
+            var saved=roomRetry;EnterHangar();equipmentLoop.RestoreRetryWeapon(retryGear);playerController.Loadout.Select(retryWeapon);
+            CombatRuntime.BeginRun(retryRunSeed,CombatMode.FullDemo);UnityEngine.Random.InitState(retryRunSeed);
+            equipmentLoop.Absorption.ResetRun();upgradeSystem.Restore(saved.upgrades,saved.seed);
+            playerController.RestoreAt(retryPosition);playerStats.Restore(saved.player);
+            Kills=saved.kills;Coins=saved.coins;CompletedEncounters=saved.encounter;resultUI.Hide();runManager.ResumeRun();
+            Hangar.Hide();if(hangarUI!=null)hangarUI.Hide();
+            StartEncounter(saved.encounter,false,retryBoss);return;
+        }
         EnterHangar();playerController.Loadout.Select(PrimaryWeapon.M7);BeginFullDemo();
     }
 
@@ -257,7 +270,7 @@ public class GameManager : MonoBehaviour
         Kills = 0;LastKillPosition=Vector3.zero;
         CompletedEncounters = 0;
         ContinueUsed = false;
-        checkpoint = null;
+        checkpoint = null;roomRetry=null;
         if (runManager != null)
         {
             runManager.BeginRun();
@@ -316,6 +329,11 @@ public class GameManager : MonoBehaviour
                     seed = upgradeSystem.Seed, upgrades = new System.Collections.Generic.List<RunUpgradeKind>(upgradeSystem.Acquired).ToArray(),
                     player = playerStats.Capture() };
             }
+        }
+        if(saveCheckpoint)
+        {
+            roomRetry=new RunCheckpoint{encounter=index,kills=Kills,coins=Coins,seed=upgradeSystem.Seed,upgrades=new System.Collections.Generic.List<RunUpgradeKind>(upgradeSystem.Acquired).ToArray(),player=playerStats.Capture()};
+            retryPosition=playerController.transform.position;retryWeapon=playerController.Loadout.Selected;retryGear=equipmentLoop.ActiveRangedId;retryRunSeed=CombatRuntime.Run.Seed;retryBoss=bossOverride;
         }
         stageManager.StartEncounter(index, bossOverride);
         if(CombatRuntime.Run!=null)CombatRuntime.Run.Encounter=index;
@@ -584,7 +602,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartRun()
     {
-        CombatRuntime.EndRun();
+        CombatRuntime.RetryCurrentSeed();CombatRuntime.EndRun();
         IsPaused = false;
         Time.timeScale = 1f;
         AudioListener.pause = false;

@@ -84,7 +84,14 @@ public static class CombatTacticsChecks
                 check(!enemy.TryEvadeMissile(hp.AimCenter+enemy.transform.forward*4,-enemy.transform.forward),"missile behind solid cover cannot trigger evasion at "+fps);
                 UnityEngine.Object.Destroy(cover);cover=null;yield return null;
                 p.weaponController.ResetCooldowns();
-                check(p.weaponController.TryFireSkill(hp),"actual SALVO launches at "+fps);
+                // Missile evasion remains a projectile contract; E now deploys back cannons.
+                for(int shot=0;shot<4;shot++)
+                {
+                    var incoming=(MissileProjectile)ProjectilePool.Spawn(true,"Tactics legacy missile",p.transform.position+Vector3.up*2,Color.yellow);
+                    incoming.target=hp;incoming.Init(0,p.GetComponent<Damageable>(),(hp.AimCenter-incoming.transform.position).normalized,1,18,4,0,0);
+                    incoming.SetImpact(20,CombatHitKind.Missile);
+                }
+                check(UnityEngine.Object.FindObjectsByType<MissileProjectile>(FindObjectsSortMode.None).Length==4,"four real missile fixtures launch at "+fps);
                 for(int frame=0;frame<fps&&!enemy.IsEvading;frame++)yield return null;
                 check(enemy.IsEvading && enemy.EvasionsStarted==1 && enemy.GuardActive,"incoming SALVO forces one bounded sidestep at "+fps);
                 Vector3 evadeStart=enemy.transform.position;
@@ -125,3 +132,4 @@ public static class CombatTacticsChecks
         }
     }
 }
+

@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerStats stats;
     public WeaponController weaponController;
-    public float acceleration = 42f;
-    public float braking = 65f;
-    public float dashDuration = 0.2f;
+    public float acceleration = 90f;
+    public float braking = 125f;
+    public float dashDuration = 0.16f;
     public float DashStartedAt {get;private set;}=-10;
     // Retained for serialized compatibility only. All live beam input is manual.
     [HideInInspector] public bool automaticFire;
@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
             foreach (var oldCollider in GetComponentsInChildren<Collider>(true))
                 if (oldCollider.GetComponentInParent<Damageable>() == damageable) oldCollider.enabled = false;
             Motor = gameObject.AddComponent<CharacterController>();
-            Motor.height = 3.25f;
-            Motor.center = new Vector3(0f, 1.65f, 0f);
+            Motor.height = 4.45f;
+            Motor.center = new Vector3(0f, 2.25f, 0f);
             Motor.radius = 0.72f;
             Motor.stepOffset = 0.25f;
             Motor.skinWidth = 0.04f;
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         if(Melee.IsAttacking && command.HasAim)Melee.Steer(ResolveManualAim(command.AimPoint),deltaTime);
         if (IsBoosting) speed *= 1.6f;
         Vector3 desired = new Vector3(command.Move.x, 0f, command.Move.y) * speed * Melee.MovementScale;
-        planarVelocity = Vector3.MoveTowards(planarVelocity, desired, (desired.sqrMagnitude > 0f ? (Vector3.Dot(planarVelocity, desired) < 0 ? 85f : acceleration) : braking) * deltaTime);
+        planarVelocity = Vector3.MoveTowards(planarVelocity, desired, (desired.sqrMagnitude > 0f ? (Vector3.Dot(planarVelocity, desired) < 0 ? MechMovementProfile.For(GetComponent<PlayerMechLoader>().SelectedHero).reversal : acceleration) : braking) * deltaTime);
         if(Melee.IsAttacking && Melee.MovementScale==0) planarVelocity=Vector3.zero;
         float dashStep = Mathf.Min(dashRemaining, deltaTime);
         // Integrate the launch-heavy speed curve over the frame, preserving distance at any FPS.
@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
         Velocity = new Vector3(Velocity.x, 0f, Velocity.z);
         MoveDirection = Vector3.ClampMagnitude(Velocity / speed, 1f);
 
-        if (!Melee.IsAttacking && command.HasAim) AimAt(ResolveManualAim(command.AimPoint));
+        if (!Melee.IsAttacking && command.HasAim) AimAt(ResolveManualAim(command.AimPoint),deltaTime,command.Melee?720f:0);
         else if (!Melee.IsAttacking && HasAimPoint)
             AimAt(transform.position + AimDirection * 14f + Vector3.up * 1.1f);
         else if (!Melee.IsAttacking && !HasAimPoint && command.Move.sqrMagnitude > 0.02f)
@@ -168,13 +168,20 @@ public class PlayerController : MonoBehaviour
         GetComponent<CombatRecovery>().Observe(command.Move,before,deltaTime);
     }
 
-    public void AimAt(Vector3 worldPoint)
+    public void AimAt(Vector3 worldPoint,float dt=-1,float rate=0)
     {
         Vector3 direction = worldPoint - transform.position;
         direction.y = 0f;
-        if (direction.sqrMagnitude < 0.01f) return;
+        bool sword=rate>0||Stance!=null&&Stance.State!=WeaponStance.Ranged;
+        if(direction.sqrMagnitude<(sword?1.44f:.01f))return;
+        if(Melee!=null&&Melee.IsAttacking&&!Melee.CanSteer)return;
         AimPoint = worldPoint;
         HasAimPoint = true;
+        if(sword)
+        {
+            if(rate<=0)rate=Melee!=null&&Melee.IsAttacking?(Melee.AttackElapsed<Melee.CurrentStroke.contactStart?540:360):720;
+            direction=Vector3.RotateTowards(transform.forward,direction.normalized,rate*Mathf.Deg2Rad*Mathf.Max(0,dt<0?Time.deltaTime:dt),0);
+        }
         AimDirection = direction.normalized;
         transform.rotation = Quaternion.LookRotation(AimDirection, Vector3.up);
     }
@@ -227,6 +234,7 @@ public class PlayerController : MonoBehaviour
     public void RestoreAt(Vector3 position)
     {
         CancelMovement();
+        GetComponentInChildren<ValkyrBackCannon>()?.Cancel();
         nextDashTime = 0f;
         GetComponentInChildren<ValkyrMotionDriver>()?.ResetHitReaction();
         GetComponentInChildren<NemesisMotionRig>()?.ResetDeployment();

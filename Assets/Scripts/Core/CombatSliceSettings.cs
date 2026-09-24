@@ -8,8 +8,8 @@ public static class CombatSliceSettings
     public const int Seed = 9142026;
     public const float TimeLimit = 90f;
     public static int ViewIndex { get; private set; } = InitialView();
-    public static float Size => ViewIndex == 0 ? 9f : ViewIndex == 1 ? 10.35f : 11.25f;
-    public static string ViewLabel => ViewIndex == 0 ? "A · 当前视野" : ViewIndex == 1 ? "B · 视野 +15%" : "C · 视野 +25%";
+    public static float Size => ViewIndex == 0 ? 9f : ViewIndex == 1 ? 15f : 17f;
+    public static string ViewLabel => ViewIndex == 0 ? "A · 近景 9" : ViewIndex == 1 ? "B · 视野 15" : "C · 视野 17";
     static int InitialView()
     {
         var args = Environment.GetCommandLineArgs();

@@ -12,9 +12,12 @@ public static partial class LunarBasinBuild
     static void MakeMaterials()
     {
         var texture=MakeRegolithTexture();
-        dust=Mat("Regolith",new Color(.52f,.50f,.46f),0,.05f);dust.mainTexture=texture;dust.mainTextureScale=new Vector2(1,1);
+        dust=Mat("Regolith",new Color(.53f,.535f,.54f),0,.05f);dust.mainTexture=texture;dust.mainTextureScale=new Vector2(1,1);
         rock=Mat("Basalt",new Color(.36f,.38f,.40f),.05f,.12f);rock.mainTexture=texture;
         darkRock=Mat("CompactedDust",new Color(.32f,.32f,.32f),0,.04f);darkRock.mainTexture=texture;
+        var bump=AssetDatabase.LoadAssetAtPath<Texture2D>(Folder+"/Textures/RegolithNormal.png");
+        foreach(var surface in new[]{dust,rock,darkRock})
+        {surface.SetTexture("_BumpMap",bump);surface.SetFloat("_BumpScale",.38f);surface.EnableKeyword("_NORMALMAP");EditorUtility.SetDirty(surface);}
         metal=Mat("WornTitanium",new Color(.31f,.34f,.37f),.55f,.35f);
         ivory=Mat("CeramicArmor",new Color(.68f,.68f,.62f),.25f,.28f);
         graphite=Mat("Machinery",new Color(.12f,.15f,.19f),.45f,.28f);
@@ -34,34 +37,46 @@ public static partial class LunarBasinBuild
     static Texture2D MakeRegolithTexture()
     {
         const int size=512;var tex=new Texture2D(size,size,TextureFormat.RGB24,false);
-        var colors=new Color[size*size];
+        var colors=new Color[size*size];var heights=new float[size*size];
         for(int y=0;y<size;y++)for(int x=0;x<size;x++)
         {
             float u=x/(float)size,v=y/(float)size;
-            // Periodic cosine noise avoids visible tile seams. This is an
-            // original material texture, independent of reference-game art.
-            float grain=Hash(x,y)*.13f;
-            float n=.76f+grain;
-            for(int octave=0;octave<5;octave++)
-            {
-                float frequency=1<<octave;
-                n+=Mathf.Sin((u*frequency+v*(frequency+1))*Mathf.PI*2+.71f*octave)
-                    *Mathf.Cos((v*frequency-u*(frequency+2))*Mathf.PI*2+octave)*(.085f/(1+octave));
-            }
-            colors[y*size+x]=new Color(n,n*.98f,n*.95f,1);
+            // Periodic hashed lattice noise gives irregular mineral grains;
+            // there is no repeating directional weave or checkerboard pattern.
+            float n=.63f+Noise(u,v,4)*.14f+Noise(u,v,16)*.11f+Noise(u,v,64)*.07f+Hash(x,y)*.075f;
+            colors[y*size+x]=new Color(n,n,n,1);heights[y*size+x]=Noise(u,v,64)*.6f+Noise(u,v,128)*.25f+Hash(x,y)*.15f;
         }
         tex.SetPixels(colors);tex.Apply();string path=Folder+"/Textures/Regolith.png";
         File.WriteAllBytes(path,tex.EncodeToPNG());Object.DestroyImmediate(tex);AssetDatabase.ImportAsset(path);
         var importer=(TextureImporter)AssetImporter.GetAtPath(path);importer.wrapMode=TextureWrapMode.Repeat;importer.anisoLevel=4;
         importer.textureCompression=TextureImporterCompression.CompressedHQ;importer.SaveAndReimport();
+        var normals=new Color[size*size];
+        for(int y=0;y<size;y++)for(int x=0;x<size;x++)
+        {
+            float dx=heights[y*size+(x+1)%size]-heights[y*size+(x+size-1)%size];
+            float dy=heights[((y+1)%size)*size+x]-heights[((y+size-1)%size)*size+x];
+            Vector3 normal=new Vector3(-dx*2,-dy*2,1).normalized;
+            normals[y*size+x]=new Color(normal.x*.5f+.5f,normal.y*.5f+.5f,normal.z*.5f+.5f);
+        }
+        var normalTex=new Texture2D(size,size,TextureFormat.RGB24,false);normalTex.SetPixels(normals);normalTex.Apply();
+        string normalPath=Folder+"/Textures/RegolithNormal.png";File.WriteAllBytes(normalPath,normalTex.EncodeToPNG());Object.DestroyImmediate(normalTex);AssetDatabase.ImportAsset(normalPath);
+        var normalImporter=(TextureImporter)AssetImporter.GetAtPath(normalPath);normalImporter.textureType=TextureImporterType.NormalMap;
+        normalImporter.wrapMode=TextureWrapMode.Repeat;normalImporter.anisoLevel=4;normalImporter.SaveAndReimport();
         return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+    }
+    static float Noise(float u,float v,int frequency)
+    {
+        float px=u*frequency,pz=v*frequency;int x=Mathf.FloorToInt(px),z=Mathf.FloorToInt(pz);
+        float fx=px-x,fz=pz-z;fx=fx*fx*(3-2*fx);fz=fz*fz*(3-2*fz);
+        return Mathf.Lerp(Mathf.Lerp(Hash(x%frequency,z%frequency),Hash((x+1)%frequency,z%frequency),fx),
+            Mathf.Lerp(Hash(x%frequency,(z+1)%frequency),Hash((x+1)%frequency,(z+1)%frequency),fx),fz);
     }
     static float Hash(int x,int y)
     {unchecked{uint h=(uint)(x*374761393+y*668265263);h=(h^(h>>13))*1274126177;return(h&65535)/65535f;}}
     static float Height(float x,float z)
     {
         float radius=Mathf.Sqrt(x*x*.86f+z*z);
-        float outer=Mathf.SmoothStep(0,1,Mathf.InverseLerp(23,33,radius));
+        float outer=Mathf.SmoothStep(0,1,Mathf.InverseLerp(28.5f,36,radius));
         float h=(Mathf.PerlinNoise(x*.092f+41,z*.092f+87)*4.4f+Mathf.PerlinNoise(x*.21f+11,z*.21f+19)*1.5f-.9f)*outer;
         // A smooth compressed regolith floor retains just shallow relief in the
         // fight space. Tall/steep relief is outside the authored room boundary.
@@ -70,6 +85,8 @@ public static partial class LunarBasinBuild
         h+=CraterHeight(x,z,32,2,7.4f,8.2f,3.5f);
         h+=CraterHeight(x,z,5,35,10,7.4f,3.8f);
         h+=CraterHeight(x,z,-4,-31,6.5f,4.9f,1.9f);
+        h+=sectorIndex==1?CraterHeight(x,z,8.5f,-3.8f,3.4f,2.9f,1.8f)
+            :CraterHeight(x,z,9,5.8f,3.2f,3.4f,1.8f);
         for(int n=0;n<17;n++)
         {
             float a=n*2.399963f;float r=8+(n%5)*2.5f;
@@ -100,11 +117,16 @@ public static partial class LunarBasinBuild
             triangles[t++]=a;triangles[t++]=c;triangles[t++]=b;triangles[t++]=b;triangles[t++]=c;triangles[t++]=d;
         }
         var mesh=new Mesh{name="RegolithSurface",indexFormat=IndexFormat.UInt32};mesh.vertices=vertices;mesh.uv=uv;mesh.triangles=triangles;mesh.RecalculateNormals();mesh.RecalculateBounds();
-        var go=MeshObject("LunarRegolith",SaveMesh(mesh,"Regolith_"+sectorIndex),Vector3.zero,Vector3.one,dust);
+        mesh=SaveMesh(mesh,"Regolith_"+sectorIndex);
+        var go=MeshObject("LunarRegolith",mesh,Vector3.zero,Vector3.one,dust);
         go.AddComponent<MeshCollider>().sharedMesh=mesh;
         // Only the combat floor is walkable. The high-detail exterior is scenery;
         // one closed rock boundary prevents the player reaching navigation islands.
-        sources.Add(new NavMeshBuildSource{shape=NavMeshBuildSourceShape.Box,transform=Matrix4x4.TRS(new Vector3(0,-.16f,0),Quaternion.identity,Vector3.one),size=new Vector3(49,.30f,49),area=0});
+        var footprint=new[]{Vector3.zero,new Vector3(-24,0,-13),new Vector3(-17,0,-23),new Vector3(12,0,-23),new Vector3(24,0,-14),new Vector3(24,0,14),new Vector3(14,0,24),new Vector3(-13,0,24),new Vector3(-24,0,13)};
+        var floorTriangles=new int[24];for(int i=0;i<8;i++){floorTriangles[i*3]=0;floorTriangles[i*3+1]=(i+1)%8+1;floorTriangles[i*3+2]=i+1;}
+        var footprintMesh=new Mesh();footprintMesh.vertices=footprint;footprintMesh.triangles=floorTriangles;footprintMesh.RecalculateNormals();footprintMesh.RecalculateBounds();
+        footprintMesh=SaveMesh(footprintMesh,"WalkableFootprint_"+sectorIndex);
+        sources.Add(new NavMeshBuildSource{shape=NavMeshBuildSourceShape.Mesh,transform=Matrix4x4.identity,sourceObject=footprintMesh,area=0});
     }
     static Mesh RockMesh(int seed)
     {
@@ -134,6 +156,7 @@ public static partial class LunarBasinBuild
     }
     static Mesh SaveMesh(Mesh mesh,string name)
     {
+        if(mesh.uv.Length==mesh.vertexCount)mesh.RecalculateTangents();
         mesh.name=name;string path=Folder+"/Meshes/"+name+".asset";
         var existing=AssetDatabase.LoadAssetAtPath<Mesh>(path);
         if(existing!=null){EditorUtility.CopySerialized(mesh,existing);Object.DestroyImmediate(mesh);EditorUtility.SetDirty(existing);return existing;}
@@ -175,9 +198,44 @@ public static partial class LunarBasinBuild
             sources.Add(new NavMeshBuildSource{shape=NavMeshBuildSourceShape.Mesh,sourceObject=mesh,transform=go.transform.localToWorldMatrix,area=1});
         }
     }
+    static void RockBoundary(Vector3 pos,float length,float height,float yaw,int segment)
+    {
+        int slices=Mathf.CeilToInt(length/1.7f);
+        const int profile=5;
+        var vertices=new List<Vector3>();var triangles=new List<int>();
+        for(int n=0;n<=slices;n++)
+        {
+            float z=Mathf.Lerp(-length*.5f,length*.5f,n/(float)slices);
+            float h=height*(.83f+Rand()*.36f),shift=(Rand()-.5f)*.32f;
+            vertices.Add(new Vector3(-1.15f-shift,-.15f,z));
+            vertices.Add(new Vector3(-.95f-shift,h*(.48f+Rand()*.16f),z));
+            vertices.Add(new Vector3(-.22f+shift,h,z));
+            vertices.Add(new Vector3(.7f+shift,h*(.60f+Rand()*.22f),z));
+            vertices.Add(new Vector3(1.4f+shift,-.15f,z));
+        }
+        for(int n=0;n<slices;n++)for(int j=0;j<profile;j++)
+        {
+            int a=n*profile+j,b=a+profile,c=n*profile+(j+1)%profile,d=c+profile;
+            triangles.AddRange(new[]{a,b,c,c,b,d});
+        }
+        for(int j=1;j<profile-1;j++)
+        {
+            triangles.AddRange(new[]{0,j,j+1});
+            int end=slices*profile;triangles.AddRange(new[]{end,end+j+1,end+j});
+        }
+        var split=new Vector3[triangles.Count];var uv=new Vector2[split.Length];var ids=new int[split.Length];
+        for(int n=0;n<split.Length;n++)
+        {split[n]=vertices[triangles[n]];uv[n]=new Vector2(split[n].z,split[n].x+split[n].y)*.28f;ids[n]=n;}
+        var mesh=new Mesh();mesh.vertices=split;mesh.uv=uv;mesh.triangles=ids;mesh.RecalculateNormals();mesh.RecalculateBounds();
+        mesh=SaveMesh(mesh,"Boundary_"+sectorIndex+"_"+segment);
+        var go=MeshObject("BasaltEscarpment",mesh,pos,Vector3.one,rock,yaw);
+        go.AddComponent<MeshCollider>().sharedMesh=mesh;
+        sources.Add(new NavMeshBuildSource{shape=NavMeshBuildSourceShape.Mesh,sourceObject=mesh,transform=go.transform.localToWorldMatrix,area=1});
+    }
     static void Ridge(Vector3 pos,Vector3 size,float yaw)
     {
-        Box("RockCore",pos+Vector3.up*size.y*.42f,new Vector3(size.x*.72f,size.y*.84f,size.z*.72f),rock,true,yaw);
+        var core=Box("RockCore",pos+Vector3.up*size.y*.30f,new Vector3(size.x*.72f,size.y*.60f,size.z*.72f),rock,true,yaw);
+        core.GetComponent<MeshRenderer>().enabled=false;
         for(int i=0;i<4;i++)
         {
             Vector3 off=Quaternion.Euler(0,yaw,0)*new Vector3((i-1.5f)*size.x*.18f,0,(i%2==0?-.14f:.14f)*size.z);
@@ -188,7 +246,6 @@ public static partial class LunarBasinBuild
     {
         // Raised ejecta and exposed rock seal this non-traversable crater. Its
         // visible rim exceeds projectile height, so cover and collision agree.
-        Cylinder("ImpactBasin",pos+Vector3.up*.25f,Mathf.Min(radius.x,radius.y)*.85f,.5f,black);
         for(int i=0;i<10;i++)
         {
             float a=i*Mathf.PI*2/10;Vector3 offset=new Vector3(Mathf.Cos(a)*radius.x*.68f,0,Mathf.Sin(a)*radius.y*.68f);
@@ -197,7 +254,8 @@ public static partial class LunarBasinBuild
         }
         // Continuous core is contained inside the visible rim. It prevents a
         // dodge or knockback from slipping into the decorative depression.
-        Cylinder("CraterBedrock",pos+Vector3.up*.8f,Mathf.Min(radius.x,radius.y)*.68f,1.6f,darkRock,true);
+        var core=Cylinder("CraterBedrock",pos+Vector3.up*.8f,Mathf.Min(radius.x,radius.y)*.68f,1.6f,darkRock,true);
+        core.GetComponent<MeshRenderer>().enabled=false;
     }
     static void Cable(Vector3[] points,float radius,Material mat)
     {

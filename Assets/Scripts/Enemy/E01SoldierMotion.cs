@@ -7,6 +7,9 @@ public sealed class E01SoldierMotion : MonoBehaviour
 {
     public Transform visual, rifle, muzzle, support;
     public float sourceScale = .84f;
+    public const float CombatHeight=4.5f;
+    public const float CombatRadius=.82f;
+    public const float VisualScale=CombatHeight/2.8f;
     public int ShotsFired { get; private set; }
     public float RunBlend { get; private set; }
     public float GripError { get; private set; }
@@ -26,7 +29,7 @@ public sealed class E01SoldierMotion : MonoBehaviour
     private Vector3 hitDirection=Vector3.back;
     private Color hitTint;
     private bool armorFlashed;
-    public float ReactionWeight => hitStrength*(1-Mathf.Exp(-hitAge*150))*Mathf.Pow(Mathf.Clamp01(1-hitAge/hitDuration),2);
+    public float ReactionWeight => hitStrength*(1-Mathf.Exp(-hitAge*150))*Mathf.Pow(Mathf.Clamp01(1-hitAge/hitDuration),.8f);
     public Vector3 HitDirection => hitDirection;
     public Renderer[] ArmorRenderers => armor;
     public float DeathProgress => death;
@@ -56,6 +59,12 @@ public sealed class E01SoldierMotion : MonoBehaviour
     private void Awake()
     {
         enemy=GetComponent<EnemyBase>();health=GetComponent<Damageable>();
+        // Scale the complete hierarchy: armor, hands, carried gun and real muzzle.
+        visual.localScale=Vector3.one*VisualScale;
+        var capsule=GetComponent<CapsuleCollider>();
+        if(capsule!=null){capsule.height=CombatHeight;capsule.radius=CombatRadius;capsule.center=Vector3.up*(CombatHeight*.5f);}
+        var nav=GetComponent<UnityEngine.AI.NavMeshAgent>();
+        if(nav!=null){nav.height=CombatHeight;nav.radius=CombatRadius;}
         waist=Find("E01_WAIST");chest=Find("E01_CHEST");head=Find("E01_HEAD");
         for(int i=0;i<2;i++)
         {
@@ -79,8 +88,8 @@ public sealed class E01SoldierMotion : MonoBehaviour
         if(info.MeleeStrike&&info.ContactTangent.sqrMagnitude>.01f)hitDirection=Vector3.ProjectOnPlane(info.ContactTangent,Vector3.up).normalized;
         if(hitDirection.sqrMagnitude<.01f)hitDirection=-transform.forward;
         bool slash=info.SourceObject!=null&&info.SourceObject.GetComponent<PlayerMeleeController>()!=null;
-        hitStrength=info.HeavyImpact?1.85f:slash?1.15f:.42f;
-        hitDuration=info.HeavyImpact?.30f:slash?.21f:.13f;hitAge=0;
+        hitStrength=info.HeavyImpact?2.05f:slash?1.35f:.72f;
+        hitDuration=info.HeavyImpact?.30f:slash?.18f:.11f;hitAge=0;
         if((info.FrontGuarded||info.ArmorDamage>0) && !info.BrokeArmor){hitStrength=info.HeavyImpact?.55f:.30f;hitDuration=.11f;}
         if(info.BrokeArmor){hitStrength=3.1f;hitDuration=.44f;}
         hitTwist=slash?Mathf.Clamp(Vector3.Dot(hitDirection,transform.right)*14,-14,14):0;
@@ -100,7 +109,7 @@ public sealed class E01SoldierMotion : MonoBehaviour
         Vector3 velocity=(transform.position-lastPosition)/Mathf.Max(.001f,dt);lastPosition=transform.position;
         float speed=velocity.magnitude;
         RunBlend=Mathf.MoveTowards(RunBlend,Mathf.Clamp01(speed/2.4f),dt*9);
-        if(speed<12)cycle+=speed*dt/1.9f;
+        if(speed<12)cycle+=speed*dt/(1.9f*VisualScale);
         recoil=Mathf.MoveTowards(recoil,0,dt*6);hit=Mathf.Max(0,hit-dt);
         foreach(var pair in positions)
             if(pair.Key!=null && pair.Key.IsChildOf(visual))pair.Key.SetLocalPositionAndRotation(pair.Value,rotations[pair.Key]);
@@ -138,8 +147,14 @@ public sealed class E01SoldierMotion : MonoBehaviour
         BreakPoseWeight=Mathf.MoveTowards(BreakPoseWeight,broken?1:0,dt*(broken?14:7));
         visual.localPosition=Vector3.down*(.32f*BreakPoseWeight);
         float wave=Mathf.Sin(cycle*Mathf.PI*2),run=RunBlend;
+        bool melee=enemy!=null&&enemy.kind==EnemyKind.Melee;
+        float anticipation=melee?enemy.AttackWindup:0;
+        float strike=melee?enemy.StrikePose:0;
+        float lunge=melee&&enemy.AttackPhase==EnemyAttackPhase.Commit?1:0;
         waist.localPosition+=new Vector3(-wave*.055f,-.07f*run+Mathf.Abs(wave)*.035f*run,0);
-        waist.localRotation=Quaternion.Euler(run*9,-wave*8*run,wave*2*run);
+        Vector3 travelDirection=transform.InverseTransformDirection(Vector3.ClampMagnitude(velocity,6));
+        waist.localRotation=Quaternion.Euler(run*9-anticipation*12+lunge*19,-wave*8*run,wave*2*run-travelDirection.x*1.4f);
+        waist.localPosition+=Vector3.down*(anticipation*.13f);
         chest.localRotation=Quaternion.Euler(recoil*-6+hit*40, wave*5*run, hit*25);
         head.rotation=transform.rotation;
         {
@@ -166,6 +181,7 @@ public sealed class E01SoldierMotion : MonoBehaviour
         }
         if(rifle==null)return; // The detached mesh may already be travelling to the warehouse.
         Vector3 grip=visual.TransformPoint(new Vector3(.34f,1.89f-run*.06f,.28f-recoil*.055f));
+        grip+=transform.forward*(strike*.38f-anticipation*.13f)+Vector3.up*(anticipation*.18f-lunge*.1f);
         grip+=Vector3.down*(.52f*BreakPoseWeight);
         float contactWeight=ReactionWeight;
         grip+=hitDirection*(.14f*contactWeight)+Vector3.down*(.035f*contactWeight);
@@ -174,6 +190,7 @@ public sealed class E01SoldierMotion : MonoBehaviour
         Quaternion orientation=Quaternion.LookRotation(aim.normalized,transform.up);
         orientation=Quaternion.LookRotation(PlanarCombat.Direction(aim,transform.forward),Vector3.up);
         orientation*=Quaternion.Euler(28*BreakPoseWeight,0,-15*BreakPoseWeight);
+        if(melee)orientation*=Quaternion.Euler(-anticipation*22+strike*14,0,anticipation*8);
         orientation=Quaternion.AngleAxis(9*contactWeight,Vector3.Cross(Vector3.up,hitDirection))*orientation;
         orientation=Quaternion.AngleAxis(hitTwist*contactWeight*.65f,Vector3.up)*orientation;
         rifle.SetPositionAndRotation(grip,orientation);
@@ -183,7 +200,7 @@ public sealed class E01SoldierMotion : MonoBehaviour
             Vector3 palm=new Vector3(side*.006f,-.110f,.019f)*sourceScale;
             Vector3 target=i==1?grip:support.position;
             Quaternion hand=transform.rotation*Quaternion.Euler(-80,i==1?0:-15,0);
-            Solve(arms[i],forearms[i],hands[i],target-hand*palm,visual.TransformPoint(new Vector3(side*.83f,1.61f,.05f)),hand);
+            Solve(arms[i],forearms[i],hands[i],target-hand*Vector3.Scale(hands[i].lossyScale,palm),visual.TransformPoint(new Vector3(side*.83f,1.61f,.05f)),hand);
             if(i==1)GripError=Vector3.Distance(hands[i].TransformPoint(palm),grip);
         }
         // Keep the real muzzle attached to the carried receiver after arm posing.

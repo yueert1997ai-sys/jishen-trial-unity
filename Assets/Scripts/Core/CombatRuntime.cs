@@ -19,6 +19,8 @@ public static class CombatRuntime
     public static CombatRunState Run { get; private set; }
     public static int Generation { get; private set; }
     public static int ActionGeneration { get; private set; }
+    static int? retrySeed;
+    public static void RetryCurrentSeed(){if(Run!=null)retrySeed=Run.Seed;}
     public static float SimulationTime => Time.time;
     public static float PresentationTime => Time.unscaledTime;
     public static CombatMode RequestedMode => HasArgument("-combatSlice") || HasArgument("-combatLab")
@@ -27,6 +29,7 @@ public static class CombatRuntime
     public static void BeginRun(int seed=0,CombatMode? mode=null)
     {
         InvalidateActions();
+        if(seed==0&&retrySeed.HasValue)seed=retrySeed.Value;retrySeed=null;
         if(seed==0)
         {
             var args=Environment.GetCommandLineArgs();int at=Array.IndexOf(args,"-combatSeed");
@@ -39,5 +42,5 @@ public static class CombatRuntime
     { if(Run!=null)Run.Finished=true;InvalidateActions(); }
     public static bool Owns(int generation) => Run!=null&&!Run.Finished&&Run.Generation==generation;
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    static void Reset() { Run=null;Generation=ActionGeneration=0; }
+    static void Reset() { Run=null;Generation=ActionGeneration=0;retrySeed=null; }
 }

@@ -8,7 +8,7 @@ public enum EncounterStep { None, SpawnGroup, SpawnBoss, Victory, Defeat, Clear 
 public sealed class EncounterFlow
 {
     readonly CombatRules rules;
-    readonly bool lab;
+    readonly bool lab;readonly bool roomBoss;bool bossStarted;
     readonly IReadOnlyList<CombatRules.Beat> beats;
     public bool RoomMode {get;}
     public bool BossOnly {get;}
@@ -21,8 +21,8 @@ public sealed class EncounterFlow
     public bool Finished => Phase==EncounterPhase.Victory || Phase==EncounterPhase.Defeat || Phase==EncounterPhase.RoomComplete;
     public bool Won => Phase==EncounterPhase.Victory;
     public event Action<EncounterPhase,EncounterPhase> Changed;
-    public EncounterFlow(CombatRules rules, bool lab,IReadOnlyList<CombatRules.Beat> beats=null,bool bossOnly=false)
-    { this.rules=rules; this.lab=lab;RoomMode=beats!=null;this.beats=beats??rules.Encounters;BossOnly=bossOnly; }
+    public EncounterFlow(CombatRules rules, bool lab,IReadOnlyList<CombatRules.Beat> beats=null,bool bossOnly=false,bool roomBoss=false)
+    { this.rules=rules; this.lab=lab;RoomMode=beats!=null;this.beats=beats??rules.Encounters;BossOnly=bossOnly;this.roomBoss=roomBoss; }
     public bool ContinueRoom(){if(!RoomMode||Phase!=EncounterPhase.RewardHold)return false;SetPhase(EncounterPhase.RewardChoice);return true;}
     public bool CompleteReward(){if(Phase!=EncounterPhase.RewardChoice)return false;SetPhase(EncounterPhase.RoomComplete);return true;}
     void SetPhase(EncounterPhase phase)
@@ -40,15 +40,17 @@ public sealed class EncounterFlow
         if(Phase==EncounterPhase.BossDefeat)
         {
             defeatAge+=dt;
-            if(defeatAge>=defeatWait){SetPhase(EncounterPhase.Victory);return EncounterStep.Victory;}
+            if(defeatAge>=defeatWait){if(RoomMode&&roomBoss){SetPhase(EncounterPhase.RewardHold);return EncounterStep.Clear;}SetPhase(EncounterPhase.Victory);return EncounterStep.Victory;}
             return EncounterStep.None;
         }
         if(Elapsed>=limit){Fail();return EncounterStep.Defeat;}
         if(RoomMode && (Phase==EncounterPhase.RewardHold||Phase==EncounterPhase.RewardChoice))return EncounterStep.None;
-        if(Phase==EncounterPhase.Boss || Phase==EncounterPhase.BossReady)return EncounterStep.None;
-        if(!RoomMode && occupied==0 && rewardPending){SetPhase(EncounterPhase.RewardHold);return EncounterStep.None;}
+        if(Phase==EncounterPhase.BossReady)return EncounterStep.SpawnBoss;
+        if(Phase==EncounterPhase.Boss)return EncounterStep.None;
+        if(!RoomMode && !roomBoss && occupied==0 && rewardPending){SetPhase(EncounterPhase.RewardHold);return EncounterStep.None;}
         if(!lab && Groups>=beats.Count && occupied==0)
         {
+            if(roomBoss&&!bossStarted){SetPhase(EncounterPhase.BossReady);return EncounterStep.SpawnBoss;}
             if(RoomMode){SetPhase(EncounterPhase.RewardHold);return EncounterStep.Clear;}
             SetPhase(EncounterPhase.Victory);return EncounterStep.Victory;
         }
@@ -66,7 +68,7 @@ public sealed class EncounterFlow
     public bool BeginBoss()
     {
         if(lab || Finished || Phase==EncounterPhase.Boss || Phase==EncounterPhase.BossDefeat)return false;
-        Groups=rules.Encounters.Count;SetPhase(EncounterPhase.Boss);return true;
+        bossStarted=true;Groups=beats.Count;SetPhase(EncounterPhase.Boss);return true;
     }
     public void BossDefeated(float delay)
     {if(Phase!=EncounterPhase.Boss)return;defeatWait=Math.Max(1,delay);defeatAge=0;SetPhase(EncounterPhase.BossDefeat);}

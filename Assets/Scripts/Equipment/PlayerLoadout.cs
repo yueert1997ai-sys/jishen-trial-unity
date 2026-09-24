@@ -7,8 +7,9 @@ public sealed class PlayerLoadout : MonoBehaviour
     public PrimaryWeapon Selected { get; private set; }
     public HangarArmory Armory { get; private set; }
     public bool IsNemesis=>GetComponent<PlayerMechLoader>().SelectedHero==HeroMech.Nemesis;
-    public HangarArmory.Entry Equipped => Armory==null?null:!IsNemesis&&Selected==PrimaryWeapon.M7?Armory.valkyrRifle:Armory.Find(Selected);
-    public bool IsRifle => Selected == PrimaryWeapon.M7 || Selected == PrimaryWeapon.M14 || Selected == PrimaryWeapon.Type08 || Selected == PrimaryWeapon.Halbreaker || Selected == PrimaryWeapon.NemesisLauncher;
+    public PrimaryWeapon EffectiveWeapon=>Selected==PrimaryWeapon.Collection?GameManager.Instance?.equipmentLoop?.Weapon?.primaryWeapon??PrimaryWeapon.Collection:Selected;
+    public HangarArmory.Entry Equipped => Selected==PrimaryWeapon.Collection?GameManager.Instance?.equipmentLoop?.Weapon?.PrimaryEntry:Armory==null?null:!IsNemesis&&Selected==PrimaryWeapon.M7?Armory.valkyrRifle:Armory.Find(Selected);
+    public bool IsRifle => Selected==PrimaryWeapon.Collection&&Equipped!=null || Selected == PrimaryWeapon.M7 || Selected == PrimaryWeapon.M14 || Selected == PrimaryWeapon.Type08 || Selected == PrimaryWeapon.Halbreaker || Selected == PrimaryWeapon.NemesisLauncher;
     public bool CanUseSword => CanDeploy;
     public bool CanUseRifle => IsRifle || Selected == PrimaryWeapon.Collection;
     public bool CanDeploy => !GetComponent<PlayerMechLoader>().SelectionBusy&&(Selected == PrimaryWeapon.Collection || (Selected != PrimaryWeapon.None && Equipped != null && Equipped.prefab != null));
